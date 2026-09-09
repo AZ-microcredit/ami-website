@@ -1,5 +1,11 @@
 ---
 import Base from '../layouts/Base.astro';
+import CalendlyWidget from '../components/CalendlyWidget.astro';
+
+// ── CALENDLY CONFIG ──────────────────────────────────────────────────────────
+// Update this URL to the AMI Calendly account + event type for loan meetings.
+const CALENDLY_URL = 'https://calendly.com/azmicrocredit/loans';
+// ─────────────────────────────────────────────────────────────────────────────
 ---
 
 <Base
@@ -11,12 +17,7 @@ import Base from '../layouts/Base.astro';
     <h2 class="sched-sub">to learn how we can help fund your dreams&nbsp;</h2>
     <p class="sched-note">If no available times work for you, please contact <a href="mailto:info@azmicrocredit.org">info@azmicrocredit.org</a> so we can coordinate a time!</p>
 
-    <!-- INTEGRATION: Wix Bookings / Calendly embed — the live site renders the Wix Bookings
-         calendar widget ("Loan Interest Meeting") in this 644px-tall area. Replace this
-         placeholder with the scheduling embed (e.g. a Calendly inline widget). -->
-    <div class="calendar-placeholder" role="region" aria-label="Scheduling calendar">
-      <span>Scheduling calendar</span>
-    </div>
+    <CalendlyWidget url={CALENDLY_URL} height={600} />
   </section>
 </Base>
 
@@ -27,18 +28,16 @@ import Base from '../layouts/Base.astro';
   .sched-note { margin-top: 66px; text-align: center; font-family: var(--font-body); font-size: 20px; line-height: 1.4; }
   .sched-note a { color: inherit; }
 
-  .calendar-placeholder { margin: 22px 0 0; height: 600px; border: 1px solid #e3e3e3; background: #fcfcfc; display: flex; align-items: center; justify-content: center; font-family: var(--font-avenir-light); font-size: 18px; letter-spacing: 0.08em; color: #9a9a9a; text-transform: uppercase; }
+  .calendly-inline-widget { margin: 22px 0 0; }
 
   @media (max-width: 900px) {
     .sched-title { margin-left: 0; font-size: 36px; }
     .sched-sub { margin-left: 0; font-size: 26px; white-space: normal; width: auto; }
     .sched-note { margin-top: 36px; font-size: 18px; }
-    .calendar-placeholder { height: 480px; }
   }
   @media (max-width: 600px) {
     .sched-title { font-size: 28px; }
     .sched-sub { font-size: 20px; }
     .sched-note { font-size: 16px; }
-    .calendar-placeholder { height: 400px; }
   }
 </style>

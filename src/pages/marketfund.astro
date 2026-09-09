@@ -1,6 +1,12 @@
 ---
 import Base from '../layouts/Base.astro';
 import Hero from '../components/Hero.astro';
+import CalendlyWidget from '../components/CalendlyWidget.astro';
+
+// ── CALENDLY CONFIG ──────────────────────────────────────────────────────────
+// Update this URL to the AMI Calendly account + event type for the Market Fund call.
+const CALENDLY_URL = 'https://calendly.com/azmicrocredit/loans';
+// ─────────────────────────────────────────────────────────────────────────────
 
 // Displayed 1 → 2 → 3 left to right (the Wix DOM order is 1, 3, 2).
 const steps = [
@@ -42,12 +48,7 @@ const arrow = '/media/760f7c_b3f12180f264444f9d634b8c8a9a1bfc.png';
 
       <p class="mf-note">If no available times work for you, please contact <a href="mailto:info@azmicrocredit.org">info@azmicrocredit.org</a> so we can coordinate a time!</p>
 
-      <!-- INTEGRATION: Wix Bookings / Calendly embed — the live site renders the Wix Bookings
-           calendar widget (Market Fund initial call) in this ~790px area. Replace this
-           placeholder with the scheduling embed. -->
-      <div class="calendar-placeholder" role="region" aria-label="Scheduling calendar">
-        <span>Scheduling calendar</span>
-      </div>
+      <CalendlyWidget url={CALENDLY_URL} height={790} />
 
       <div class="questions">
         <p class="q-title">Have any questions?</p>

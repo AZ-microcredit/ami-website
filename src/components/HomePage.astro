@@ -2,6 +2,9 @@
 import Base from '../layouts/Base.astro';
 import Slideshow from '../components/Slideshow.astro';
 import EventsWidget from '../components/EventsWidget.astro';
+import CalendlyWidget from '../components/CalendlyWidget.astro';
+
+const CALENDLY_URL = 'https://calendly.com/azmicrocredit';
 
 const { testimonials = false } = Astro.props;
 
@@ -96,6 +99,13 @@ const partners = [
 
   )}
 
+  <section class="home-schedule">
+    <h2 class="sched-title">SCHEDULE A TIME&nbsp;</h2>
+    <h2 class="sched-sub">to learn how we can help you&nbsp;</h2>
+    <p class="sched-note">If no available times work for you, please contact <a href="mailto:info@azmicrocredit.org">info@azmicrocredit.org</a> so we can coordinate a time!</p>
+    <CalendlyWidget url={CALENDLY_URL} height={700} />
+  </section>
+
   <section class="partners">
     <h2 class="spaced-title left">OUR<br />PARTNERS</h2>
     <div class="logos">
@@ -139,6 +149,13 @@ const partners = [
   .register { margin-top: auto; padding-top: 40px; text-align: center; }
   .register .btn { padding: 8px 60px; font-size: 14px; margin-left: 40%; }
 
+  .home-schedule { max-width: var(--content-width); margin: 0 auto; padding: 12px 20px 60px; }
+  .home-schedule .sched-title { display: inline-block; margin-left: -5px; background: #68b04d; color: var(--white); font-family: var(--font-bold); font-size: 50px; line-height: 1.1; padding: 0 0 0 2px; }
+  .home-schedule .sched-sub { display: block; width: max-content; max-width: 100%; margin: 4px 0 0 42px; background: #68b04d; color: var(--white); font-family: var(--font-body); font-weight: bold; font-size: 40px; line-height: 1.15; padding: 0 0 0 4px; }
+  .home-schedule .sched-note { margin-top: 62px; text-align: center; font-family: var(--font-body); font-size: 20px; line-height: 1.4; }
+  .home-schedule .sched-note a { color: inherit; }
+  .home-schedule .calendly-inline-widget { margin: 22px 0 0; }
+
   .partners { max-width: var(--content-width); margin: 0 auto; padding: 40px 20px 60px; display: flex; align-items: center; gap: 40px; min-height: 900px; align-items: flex-start; }
   .partners .spaced-title.left { text-align: left; letter-spacing: 0.4em; font-size: 40px; line-height: 1.2; flex: 0 0 330px; }
   .logos { display: flex; gap: 32px; flex-wrap: wrap; align-items: center; }
@@ -150,6 +167,9 @@ const partners = [
     .partners { flex-direction: column; min-height: 0; }
     .partners .spaced-title.left { flex: none; }
     .register .btn { margin-left: 0; }
+    .home-schedule .sched-title { margin-left: 0; font-size: 36px; }
+    .home-schedule .sched-sub { margin-left: 0; font-size: 26px; white-space: normal; width: auto; }
+    .home-schedule .sched-note { margin-top: 36px; font-size: 18px; }
   }
   @media (max-width: 520px) {
     .cards { grid-template-columns: 1fr; }
@@ -157,5 +177,8 @@ const partners = [
     .stats { grid-template-columns: 1fr; }
     .mission { padding: 24px 20px 30px; }
     .mission p { font-size: 17px; }
+    .home-schedule .sched-title { font-size: 28px; }
+    .home-schedule .sched-sub { font-size: 20px; }
+    .home-schedule .sched-note { font-size: 16px; }
   }
 </style>
