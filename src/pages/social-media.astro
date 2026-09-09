@@ -1,0 +1,23 @@
+---
+import TutorialPage from '../components/TutorialPage.astro';
+---
+
+<!-- The live page has no title band: it is just three Wix "PDF File Viewer" apps (416x758, 416x758, 416x625) above the "Can't find what you need?" note. -->
+<TutorialPage pageTitle="Social Media | az-microcredit">
+  <!-- INTEGRATION: Wix "PDF File Viewer" apps; the documents are loaded by the Wix TPA at runtime and are not in the page HTML. Put the PDFs in public/ and replace each block with an <iframe>/<object>. -->
+  <div class="docs">
+    <div class="tut-pdf doc-a" role="img" aria-label="PDF File Viewer"><span>PDF File Viewer</span></div>
+    <div class="tut-pdf doc-b" role="img" aria-label="PDF File Viewer"><span>PDF File Viewer</span></div>
+    <div class="tut-pdf doc-c" role="img" aria-label="PDF File Viewer"><span>PDF File Viewer</span></div>
+  </div>
+</TutorialPage>
+
+<style>
+  .docs { display: flex; flex-wrap: wrap; gap: 40px; margin-left: 55px; width: 872px; max-width: 100%; }
+  .doc-a, .doc-b { width: 416px; height: 758px; }
+  .doc-c { width: 416px; height: 625px; }
+  @media (max-width: 900px) {
+    .docs { margin-left: 0; gap: 24px; flex-direction: column; }
+    .doc-a, .doc-b, .doc-c { height: 420px; }
+  }
+</style>

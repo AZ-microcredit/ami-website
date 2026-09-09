@@ -1,0 +1,67 @@
+---
+import TutorialPage from '../components/TutorialPage.astro';
+
+const breakEvenXlsx = 'https://www.azmicrocredit.org/_files/ugd/760f7c_ca8f3e1736174d1681111cd1a5a75736.xlsx?dn=AMI%20Breakeven%20Template.xlsx';
+const grantXlsx = 'https://www.azmicrocredit.org/_files/ugd/760f7c_f3a84ca6c69f4e02aa145f2b6ba73192.xlsx?dn=How%20to%20Approach%20Grant%20Applications.xlsx';
+---
+
+<TutorialPage
+  pageTitle="Budgeting | az-microcredit"
+  title="CREATE A BUDGET"
+  subtitle="Learn how to take control of your business's finances"
+  lead="In this video tutorial, our staff walks you through how to do a break-even analysis for your business."
+  leadWidth={909}
+  leadOffset={55}
+>
+  <div class="row row1" slot="embed">
+    <div class="yt">
+      <iframe
+        src="https://www.youtube.com/embed/Lg81oagdQxI"
+        title="Break-Even Analysis - Full Walk Through"
+        width="496" height="279" loading="lazy"
+        allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
+        allowfullscreen
+      ></iframe>
+    </div>
+    <div class="side side1">
+      <p>Click the Button below to do your own Break-Even Analysis.</p>
+      <a class="tut-btn" href={breakEvenXlsx} target="_blank" rel="noopener" aria-label="Break Even Template">Break Even Template</a>
+    </div>
+  </div>
+
+  <div class="row row2">
+    <img class="infographic" src="/media/760f7c_439aa4c6d7244ae4953156ecf6de1c25.jpg" alt="Finance Infographic_edited.jpg" width="388" height="966" loading="lazy" />
+    <div class="side side2">
+      <!-- INTEGRATION: Wix "PDF File Viewer" app (465x758). The document is loaded by the Wix TPA at runtime and is not present in the page HTML; drop the PDF into public/ and replace this block with <iframe src="/files/<name>.pdf"> or an <object> tag. -->
+      <div class="tut-pdf" role="img" aria-label="PDF File Viewer"><span>PDF File Viewer</span></div>
+      <div class="grant">
+        <p>Click the Button below to do your track your own Grant Applications.</p>
+        <a class="tut-btn" href={grantXlsx} target="_blank" rel="noopener" aria-label="Grant Applications Template">Grant Applications Template</a>
+      </div>
+    </div>
+  </div>
+</TutorialPage>
+
+<style>
+  .row { display: flex; align-items: flex-start; }
+  .row1 { margin: 18px 0 0 118px; }
+  .yt { width: 496px; max-width: 100%; flex: none; }
+  .yt iframe { display: block; width: 100%; aspect-ratio: 496 / 279; height: auto; border: 0; }
+  .side { font-family: var(--font-avenir-light); font-size: 20px; line-height: 1.2; text-align: center; }
+  .side1 { width: 240px; margin-left: 44px; padding-top: 62px; }
+  .side1 .tut-btn { width: 240px; height: 40px; margin-top: 20px; }
+
+  .row2 { margin: 24px 0 0 53px; }
+  .infographic { width: 388px; flex: none; }
+  .side2 { width: 465px; margin-left: 64px; }
+  .side2 .tut-pdf { height: 758px; }
+  .grant { width: 282px; margin: 27px auto 0; }
+  .grant .tut-btn { width: 282px; height: 49px; margin-top: 18px; }
+
+  @media (max-width: 900px) {
+    .row { flex-direction: column; align-items: center; margin-left: 0; gap: 24px; }
+    .side1 { margin-left: 0; padding-top: 0; }
+    .side2 { margin-left: 0; max-width: 100%; }
+    .side2 .tut-pdf { height: 500px; }
+  }
+</style>

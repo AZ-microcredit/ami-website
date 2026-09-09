@@ -1,0 +1,64 @@
+---
+import Base from '../layouts/Base.astro';
+---
+
+<Base title="Arizona Microcredit Initiative | PRIVACY POLICY" mainClass="privacy-main">
+  <section class="policy-band">
+    <div class="policy-band-inner">
+      <img src="/icons/plus.svg" alt="" width="45" height="45" />
+      <h1>PRIVACY POLICY</h1>
+    </div>
+  </section>
+
+  <section class="policy">
+    <div class="rich policy-text">
+      <h2>Arizona Microcredit Initative’s Privacy Policy</h2>
+      <p>The following privacy policy discloses the privacy practices for <a href="/">azmicrocredit.org</a>. This information solely applies to the information collected from this website. It will notify you of the following:</p>
+      <ol>
+        <li>What personal information is collected from you through the website and how it is used.</li>
+        <li>What choices are available to you regarding the use of your information collected.</li>
+        <li>The security procedures in place to protect the misuse of your information.</li>
+        <li>How you can correct any inaccuracies in the information.</li>
+      </ol>
+      <h3>Information Collection, Usage, and Sharing</h3>
+      <p>We are the sole owners of the information collected on this website. We only have access to collect information that you voluntarily give us through email or other direct contact from you. We will not sell or rent this information to anyone.</p>
+      <p>We will use this information to contact you regarding the reason you contacted us. We will not share this information with any third party outside of this organization. Unless you ask us to, we may contact you via email in the future to tell you about new procedures, services, or changes to this privacy policy.</p>
+
+      <h2>Our Cookie Policy</h2>
+      <p>This Cookie Policy explains how Arizona Microcredit Initiative uses cookies and similar technologies to recognize when you visit our website at <a href="/">azmicrocredit.org</a>. It explains what the technologies we use are, why we use them, and what your rights are to control the use of them.</p>
+      <p>In some cases we may use cookies to collect personal information, or information that becomes personal when combined with other information.</p>
+      <h3>What Are Cookies?</h3>
+      <p>Cookies are small data files placed on your computer or mobile device when you visit a website. Cookies are widely used by website owners in order to make their websites work, or to work more efficiently, as well as provide reporting information.</p>
+      <p>Cookies set by the website owner (in this case Arizona Microcredit Initiative) are called “first party cookies”. Cookies set by parties other than the website owner are called “third party cookies”. Third party cookies enable third party features or functionality to be provided on or through the website (advertising, interactive content, or analytics). The parties that set these third party cookies can recognize your computer both when it visits the website in question and when you visit other websites.</p>
+    </div>
+  </section>
+</Base>
+
+<style>
+  :global(.privacy-main) { background: var(--grey-bg); }
+
+  .policy-band { background: var(--green); }
+  .policy-band-inner { max-width: var(--content-width); margin: 0 auto; padding: 22px 20px 26px; display: flex; align-items: center; gap: 14px; }
+  .policy-band-inner img { width: 43px; height: 41px; margin-top: 2px; }
+  .policy-band h1 { font-family: var(--font-avenir-heavy); font-size: 50px; line-height: 1.2; color: var(--white); }
+
+  .policy { max-width: var(--content-width); margin: 0 auto; padding: 32px 20px 44px; }
+  .policy-text { transform: translateX(-13px); }
+  .policy-text { max-width: 840px; margin: 0 auto; }
+  .policy-text h2 { font-size: 22px; text-align: center; margin: 0 0 30px; line-height: 1.3; }
+  .policy-text h2 + p, .policy-text h3 + p { margin-top: 0; }
+  .policy-text h3 { font-size: 16px; margin: 1.8em 0 1.7em; line-height: 1.4; }
+  .policy-text p { margin: 0 0 1.5em; line-height: 1.4; }
+  .policy-text ol { margin: 0 0 1.5em 1.8em; line-height: 1.4; }
+  .policy-text a { color: inherit; }
+  .policy-text h2:not(:first-child) { margin-top: 2em; }
+
+  @media (max-width: 900px) {
+    .policy-band h1 { font-size: 34px; }
+    .policy-text { transform: none; }
+    .policy-band-inner img { width: 30px; height: 30px; }
+  }
+  @media (max-width: 600px) {
+    .policy-band h1 { font-size: 26px; }
+  }
+</style>

@@ -1,0 +1,17 @@
+---
+import PlaybookPage from '../components/PlaybookPage.astro';
+import { elevate } from '../data/playbookGalleries.js';
+---
+
+<PlaybookPage
+  pageTitle="Arizona Microcredit Initiative |  BUSINESS EDUCATION"
+  description="Elevate your business with AMI's free business resources."
+  title="ELEVATE YOUR BUSINESS"
+  subtitle="A playbook to bring your business to the next level"
+  items={elevate}
+  faqs={['Key Goals of Part I: Build', 'Key Outcomes of Part I: Build', 'How to use this playbook']}
+>
+  <div class="pb-intro small">
+    <p>Now that you have your basic business concepts mastered, it's time to bring your business to the next level.</p>
+  </div>
+</PlaybookPage>

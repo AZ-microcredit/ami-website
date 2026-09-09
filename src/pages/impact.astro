@@ -1,0 +1,99 @@
+---
+import Base from '../layouts/Base.astro';
+import PlusBand from '../components/PlusBand.astro';
+
+const facts = [
+  { value: '1 in 10', html: 'entrepreneurial ventures are <span class="g">created out of necessity</span>' },
+  { value: '27%', html: 'of small businesses are <span class="g">not able to receive the funding they required</span>' },
+  { value: '20%', html: 'of small businesses loans are <span class="g">denied due to business credit</span>' },
+];
+
+const stats = [
+  { value: '75+', label: 'Consulting engagements with entrepreneurs', green: false },
+  { value: '$70,000', label: 'Distributed in low-interest rate microloans', green: true },
+  { value: '40+', label: 'Educational business topics', green: false },
+  { value: '300+', label: 'Strategic plans delivered to small business owners', green: true },
+  { value: '85%', label: 'Repayment rate on our loans', green: false },
+  { value: '100+', label: 'Small businesses impacted through our resources', green: true },
+];
+---
+
+<Base title="Arizona Microcredit Initiative | ABOUT US" description="Arizona Microcredit Initiative's mission to serve small businesses in the local Phoenix area has made a huge impact on such a close-knit community. Curious to see how the businesses we've worked with have grown? Read all about our impact here!">
+  <PlusBand title="OUR IMPACT" subtitle="Serving communities in greater Phoenix since 2011" />
+
+  <div class="photo-strip">
+    <img src="/media/760f7c_5e0b4762dac64f80b9b77cb6634767d9.jpg" alt="DSC_0441.jpg" loading="eager" />
+  </div>
+
+  <section class="facts">
+    {facts.map((f) => (
+      <div class="fact">
+        <h2>{f.value}</h2>
+        <p set:html={f.html} />
+      </div>
+    ))}
+  </section>
+
+  <section class="history">
+    <p>Founded in 2011, Arizona Microcredit Initiative has quickly grown to become a leading microfinance institution in Phoenix.</p>
+    <p>AMI was created with the vision for an organization that could help entrepreneurs become financially self-sufficient and contribute to their local economies.</p>
+    <p>As a 501(c)(3) nonprofit, we are dedicated to that original vision by providing underserved entrepreneurs with access to business instruction and capital.</p>
+  </section>
+
+  <section class="stats">
+    <div class="stat-grid">
+      {stats.map((s) => (
+        <div class:list={['stat', { green: s.green }]}>
+          <h3>{s.value}</h3>
+          <p>{s.label}</p>
+        </div>
+      ))}
+    </div>
+    <div class="hear">
+      <p>Hear what our clients have to say</p>
+      <a class="testi-btn" href="/client-testimonials" aria-label="Testimonials">Testimonials</a>
+    </div>
+  </section>
+</Base>
+
+<style>
+  .photo-strip { height: 405px; overflow: hidden; background: #172838; }
+  .photo-strip img { width: 100%; height: 100%; object-fit: cover; object-position: center 30%; }
+
+  .facts { background: var(--grey-bg); min-height: 371px; padding: 74px 0 40px; display: grid; grid-template-columns: repeat(3, 1fr); gap: 20px; text-align: center; }
+  .fact h2 { font-family: var(--font-avenir-heavy); font-size: 100px; line-height: 1; color: var(--black); margin-bottom: 30px; }
+  .fact p { font-family: var(--font-avenir-light); font-size: 22px; line-height: 1.4; color: var(--black); max-width: 360px; margin: 0 auto; }
+  .fact .g { color: var(--green); }
+
+  .history { background: #242323; color: var(--white); min-height: 362px; padding: 64px 20px 50px; text-align: center; }
+  .history p { max-width: 890px; margin: 0 auto; font-family: var(--font-avenir-light); font-size: 22px; line-height: 1.25; }
+  .history p + p { margin-top: 26px; }
+
+  .stats { background: var(--grey-bg); min-height: 858px; padding: 90px 0 80px; }
+  .stat-grid { display: grid; grid-template-columns: repeat(3, 1fr); row-gap: 58px; text-align: center; }
+  .stat h3 { font-family: var(--font-avenir-heavy); font-size: 85px; line-height: 1.05; color: var(--black); margin-bottom: 8px; }
+  .stat p { font-family: var(--font-avenir-light); font-size: 22px; line-height: 1.4; color: var(--black); max-width: 330px; margin: 0 auto; }
+  .stat.green h3, .stat.green p { color: var(--green); }
+  .hear { text-align: center; margin-top: 80px; }
+  .hear p { font-family: var(--font-avenir-heavy); font-size: 30px; color: var(--black); margin-bottom: 26px; }
+  .testi-btn { display: inline-flex; align-items: center; justify-content: center; width: 371px; max-width: 100%; height: 84px; background: var(--green); color: var(--white); text-decoration: none; font-family: var(--font-avenir-heavy); font-size: 26px; transition: background .2s; }
+  .testi-btn:hover { background: var(--green-dark); }
+
+  @media (max-width: 900px) {
+    .photo-strip { height: 50vw; min-height: 220px; }
+    .facts { grid-template-columns: 1fr; padding: 40px 20px; min-height: 0; }
+    .fact h2 { font-size: 64px; margin-bottom: 12px; }
+    .history { padding: 40px 20px; min-height: 0; }
+    .history p { font-size: 19px; }
+    .stats { min-height: 0; padding: 50px 20px; }
+    .stat-grid { grid-template-columns: repeat(2, 1fr); row-gap: 36px; }
+    .stat h3 { font-size: 56px; }
+    .stat p { font-size: 18px; }
+    .hear { margin-top: 50px; }
+    .testi-btn { height: 64px; font-size: 22px; }
+  }
+  @media (max-width: 600px) {
+    .stat-grid { grid-template-columns: 1fr; }
+    .hear p { font-size: 24px; }
+  }
+</style>

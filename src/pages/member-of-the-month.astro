@@ -1,0 +1,35 @@
+---
+import Base from '../layouts/Base.astro';
+import PlusBand from '../components/PlusBand.astro';
+import AdvisorGrid from '../components/AdvisorGrid.astro';
+
+// Lines are broken exactly as on the live page (all lines bold here).
+const advisors = [
+  { name: 'Farhan Khera', lines: ['Senior Product', 'Manager', 'Huge', 'ASU Alumnus'], image: '/media/760f7c_0c083e3332214985bd13dd367cb616cc.png' },
+  { name: 'Mikkaela Salamatin', lines: ['Associate', 'Norton Rose Fulbright', 'ASU Alumnus'], image: '/media/760f7c_72e0086c21ea4fcdb703bdde41dbfdb1.png' },
+  { name: 'Gabriel A. Gasca', lines: ['SBA Loan Officer,', 'Midwest Regional', 'Bank Community', 'Partner'], image: '/media/760f7c_5b6647f3a06b4e8b95ea5adafa17cd0b.jpg' },
+  { name: 'Greg Russo', lines: ['Central Regional', 'President', 'OneAZ Credit Union', 'Community Partner'], image: '/media/760f7c_4e0d9e8f599948da88f6915ceabb61f1.png' },
+  { name: 'Marissa Romero', lines: ['Coordinator, W.P. Carey', 'ASU Advisor'], image: '/media/760f7c_f1b9125bb3ec4a18bebdc256f9422d85.png' },
+  { name: 'Michael Barger', lines: ['Senior Business Analyst,', 'McKinsey & Co.', 'AMI Alumnus'], image: '/media/760f7c_8b28568b48b347f18e4fa6e44dc5e0f4.png' },
+  { name: 'Courtney Klein', lines: ['Co-Founder & Advisor,', 'Seed Spot', 'Community Partner'], image: '/media/760f7c_85a3f1e2d05941fcafd716d057fcf735.png' },
+  { name: 'TJ Radigan', lines: ['Senior Associate', 'McKinsey & Co.', 'AMI Alumnus'], image: '/media/760f7c_8a5e5b0b202242de9150f2226a8f1b45.jpg' },
+  { name: 'Dr. Phil Lamoreaux', lines: ['Professor, W.P. Carey', 'ASU Advisor'], image: '/media/760f7c_f70794db56064f438f465937be8cb40d.jpg' },
+];
+---
+
+<Base title="Arizona Microcredit Initiative | MEMBER OF THE MONTH" description="AMI is filled with extremely hardworking members some of whom have gone above and beyond. See who is currently taking the initiative!">
+  <PlusBand title="Member of Month" subtitle="Showcasing our newest M" />
+
+  <section class="strip"><h2>THE BOARD OF ADVISORS</h2></section>
+
+  <section class="advisors">
+    <AdvisorGrid people={advisors} boldLines />
+  </section>
+</Base>
+
+<style>
+  .strip { background: #ccc; height: 58px; display: flex; align-items: center; justify-content: center; }
+  .strip h2 { font-family: var(--font-avenir-heavy); font-size: 30px; color: var(--white); text-align: center; }
+  .advisors { max-width: var(--content-width); margin: 0 auto; padding: 25px 20px 65px; min-height: 1079px; }
+  @media (max-width: 900px) { .advisors { min-height: 0; padding: 30px 20px 50px; } .strip h2 { font-size: 22px; } }
+</style>

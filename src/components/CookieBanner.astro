@@ -1,0 +1,40 @@
+---
+// Mirrors the Wix cookie consent bar at the bottom of every page.
+---
+<div class="cookie-banner" id="cookie-banner" hidden>
+  <p>We use cookies on our website to see how you interact with it. By accepting, you agree to our use of such cookies.</p>
+  <div class="actions">
+    <a class="settings" href="/privacy-policy">Settings</a>
+    <button class="accept" type="button">Accept</button>
+    <button class="close" type="button" aria-label="Close">×</button>
+  </div>
+</div>
+
+<script>
+  const banner = document.getElementById('cookie-banner');
+  const KEY = 'ami-cookie-consent';
+  try {
+    if (banner && !localStorage.getItem(KEY)) banner.hidden = false;
+  } catch { if (banner) banner.hidden = false; }
+  const dismiss = (v: string) => {
+    try { localStorage.setItem(KEY, v); } catch {}
+    if (banner) banner.hidden = true;
+  };
+  banner?.querySelector('.accept')?.addEventListener('click', () => dismiss('accepted'));
+  banner?.querySelector('.close')?.addEventListener('click', () => dismiss('dismissed'));
+</script>
+
+<style>
+  .cookie-banner {
+    position: fixed; left: 0; right: 0; bottom: 0; z-index: 100;
+    background: #fff; box-shadow: 0 -1px 6px rgba(0,0,0,.15);
+    display: flex; align-items: center; justify-content: space-between; gap: 20px;
+    padding: 14px 24px; font-family: var(--font-body); font-size: 13px; color: #000;
+  }
+  .cookie-banner[hidden] { display: none; }
+  .actions { display: flex; align-items: center; gap: 12px; }
+  .settings { color: #000; text-decoration: none; border: 1px solid #000; padding: 6px 14px; font-size: 13px; }
+  .accept { background: #000; color: #fff; border: 1px solid #000; padding: 6px 16px; cursor: pointer; font-size: 13px; }
+  .close { background: none; border: 0; font-size: 20px; line-height: 1; cursor: pointer; padding: 0 4px; }
+  @media (max-width: 600px) { .cookie-banner { flex-direction: column; align-items: flex-start; } }
+</style>

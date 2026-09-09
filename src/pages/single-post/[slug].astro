@@ -1,0 +1,19 @@
+---
+import Base from '../../layouts/Base.astro';
+import BlogShell from '../../components/BlogShell.astro';
+import PostArticle from '../../components/PostArticle.astro';
+import { posts, excerpt } from '../../lib/blog';
+
+export function getStaticPaths() {
+  return posts.map((p) => ({ params: { slug: p.slug }, props: { post: p } }));
+}
+const { post } = Astro.props;
+---
+
+<Base title={post.title} description={excerpt(post, 160)}>
+  <meta slot="head" property="og:image" content={post.cover} />
+  <meta slot="head" property="article:published_time" content={post.datePublished} />
+  <BlogShell mode="post">
+    <PostArticle post={post} />
+  </BlogShell>
+</Base>

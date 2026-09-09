@@ -1,0 +1,99 @@
+---
+/**
+ * "Small Business Guide" checklist page (copy-of-resource-index-1 and
+ * copy-of-small-business-guide share it): faded photo hero with a white "+"
+ * and a green "Small Business Guide" title, then five green-headed sections of
+ * checkbox topics separated by green rules, and a "See Results" button.
+ *
+ *  - legal   topics of the first section ("Legal and Financial Setup") — the
+ *            two live pages differ only here.
+ */
+import Base from '../layouts/Base.astro';
+import Hero from './Hero.astro';
+
+interface Props { legal: string[] }
+const { legal } = Astro.props;
+
+const sections = [
+  { title: 'Legal and Financial Setup', items: legal },
+  { title: 'Revenue & Pricing', items: ['Pricing Strategy', 'Funding Resources', 'Financial Projecting', 'Startup Costs', 'Tracking Cash Flow'] },
+  { title: 'Marketing & Sales', items: ['Marketing Effectively', 'Building a Website', 'SEO Basics', 'First Customer Acquisition', 'Building Customer Relationships', 'EIN Creation'] },
+  { title: 'Running Operations', items: ['Handling Customer Complaints', 'Tools and Systems', 'Hiring Employees', 'Managing Time and Being Organized'] },
+  { title: 'Growing and Scaling', items: ['Improving Business Processes', 'Networking', 'Small Business Upskilling', 'Considering Expansion'] },
+];
+---
+
+<Base title="Arizona Microcredit Initiative | BUSINESS EDUCATION" description="Designed for startups or established businesses, our education services cover all the business basics.">
+  <Hero image="/media/760f7c_f5f530daa35147bb85b5459071d65ccf.png" height={308} align="left" position="center 40%" class="sbg-hero">
+    <div class="sbg-title-wrap">
+      <span class="sbg-plus" aria-hidden="true">+</span>
+      <h1 class="hero-title sbg-title">Small Business Guide</h1>
+    </div>
+  </Hero>
+
+  <!-- INTEGRATION: on the live site this checklist is a Wix Form (checkbox groups) whose
+       "See Results" button submits the form and opens /events. The checkboxes here are
+       plain inputs (nothing is stored); wire them to a form backend if needed. -->
+  <form class="sbg" action="/events" method="get">
+    {sections.map((s, i) => (
+      <>
+        {i > 0 && <hr class="sbg-rule" />}
+        <fieldset class="sbg-section">
+          <legend class="sbg-heading">{s.title}</legend>
+          <ul class="sbg-list">
+            {s.items.map((label, j) => (
+              <li>
+                <label class="sbg-check">
+                  <input type="checkbox" name={`s${i}`} value={label} />
+                  <span class="box" aria-hidden="true"></span>
+                  <span class="txt">{label}</span>
+                </label>
+              </li>
+            ))}
+          </ul>
+        </fieldset>
+      </>
+    ))}
+    <div class="sbg-actions"><a class="sbg-btn" href="/events" aria-label="See Results">See Results</a></div>
+  </form>
+</Base>
+
+<style>
+  /* hero: photo at 50% over white, white "+" tucked above-left of the title */
+  :global(.sbg-hero) { background: #fff; }
+  :global(.sbg-hero .hero-bg) { opacity: .5; }
+  :global(.sbg-hero .hero-content) { padding-bottom: 30px; padding-left: 30px; }
+  .sbg-title-wrap { position: relative; }
+  .sbg-plus { position: absolute; left: -40px; top: -52px; color: #fff; font-family: var(--font-bold); font-size: 78px; line-height: 1; }
+  :global(.sbg-hero .sbg-title) { font-size: 58px; line-height: 1.1; letter-spacing: -.02em; padding: 0 12px 2px 10px; text-transform: none; }
+
+  .sbg { max-width: var(--content-width); margin: 0 auto; padding: 46px 20px 40px 48px; }
+  .sbg-section { border: 0; margin: 0; padding: 0 0 0 50px; min-width: 0; }
+  .sbg-heading { font-family: var(--font-bold); font-size: 36px; line-height: 1.2; letter-spacing: .06em; color: var(--green); padding: 0; margin-bottom: 22px; }
+  .sbg-list { display: flex; flex-direction: column; gap: 14px; padding-left: 27px; }
+  .sbg-check { display: flex; align-items: center; gap: 12px; cursor: pointer; font-family: var(--font-avenir-light); font-size: 15px; line-height: 1.1; max-width: 300px; }
+  .sbg-check input { position: absolute; opacity: 0; width: 0; height: 0; }
+  .sbg-check .box { flex: none; width: 26px; height: 26px; border: 1px solid #000; background: #fff; box-sizing: border-box; }
+  .sbg-check input:checked + .box { background: var(--green) url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24'%3E%3Cpath d='M5 12l5 5 9-10' fill='none' stroke='%23fff' stroke-width='3'/%3E%3C/svg%3E") center/18px no-repeat; border-color: var(--green); }
+  .sbg-check input:focus-visible + .box { outline: 2px solid var(--green-dark); outline-offset: 2px; }
+  .sbg-rule { width: 880px; max-width: 100%; margin: 34px 0 30px; border: 0; border-top: 2px solid var(--green); }
+  .sbg-actions { width: 880px; max-width: 100%; margin-top: 30px; display: flex; justify-content: flex-end; }
+  .sbg-btn { display: inline-flex; align-items: center; justify-content: center; width: 233px; height: 44px; background: var(--green); color: #fff; font-family: var(--font-body); font-size: 18px; text-decoration: none; transition: background .2s; }
+  .sbg-btn:hover { background: var(--green-dark); }
+
+  @media (max-width: 900px) {
+    :global(.sbg-hero .hero-content) { padding-left: 40px; padding-bottom: 24px; }
+    :global(.sbg-hero .sbg-title) { font-size: 40px; }
+    .sbg-plus { font-size: 56px; left: -30px; top: -40px; }
+    .sbg { padding: 30px 20px; }
+    .sbg-section { padding-left: 0; }
+    .sbg-heading { font-size: 28px; }
+    .sbg-list { padding-left: 10px; }
+    .sbg-actions { justify-content: center; }
+  }
+  @media (max-width: 600px) {
+    :global(.sbg-hero .sbg-title) { font-size: 30px; }
+    .sbg-plus { font-size: 44px; left: -22px; top: -32px; }
+    .sbg-heading { font-size: 24px; }
+  }
+</style>

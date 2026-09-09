@@ -1,0 +1,41 @@
+---
+import Base from '../layouts/Base.astro';
+---
+
+<Base title="Schedule Consultation Call | Arizona Microcredit Initiative">
+  <section class="schedule">
+    <h1 class="sched-title">SCHEDULE A TIME&nbsp;</h1>
+    <h2 class="sched-sub">to learn how we can advise your strategy&nbsp;</h2>
+    <p class="sched-note">If no available times work for you, please contact <a href="mailto:info@azmicrocredit.org">info@azmicrocredit.org</a> so we can coordinate a time!</p>
+
+    <!-- INTEGRATION: Wix Bookings / Calendly embed — the live site renders the Wix Bookings
+         calendar widget ("Consultation Call") in this area. Replace this placeholder with the
+         scheduling embed (e.g. a Calendly inline widget). -->
+    <div class="calendar-placeholder" role="region" aria-label="Scheduling calendar">
+      <span>Scheduling calendar</span>
+    </div>
+  </section>
+</Base>
+
+<style>
+  .schedule { max-width: var(--content-width); margin: 0 auto; padding: 12px 20px 0; }
+  .sched-title { display: inline-block; margin-left: -5px; background: #68b04d; color: var(--white); font-family: var(--font-bold); font-size: 50px; line-height: 1.1; padding: 0 0 0 2px; }
+  .sched-sub { display: block; width: max-content; max-width: 100%; margin: 4px 0 0 42px; background: #68b04d; color: var(--white); font-family: var(--font-body); font-weight: bold; font-size: 40px; line-height: 1.15; padding: 0 0 0 4px; }
+  .sched-note { margin-top: 62px; text-align: center; font-family: var(--font-body); font-size: 20px; line-height: 1.4; }
+  .sched-note a { color: inherit; }
+
+  .calendar-placeholder { margin: 22px 0 0; height: 640px; border: 1px solid #e3e3e3; background: #fcfcfc; display: flex; align-items: center; justify-content: center; font-family: var(--font-avenir-light); font-size: 18px; letter-spacing: 0.08em; color: #9a9a9a; text-transform: uppercase; }
+
+  @media (max-width: 900px) {
+    .sched-title { margin-left: 0; font-size: 36px; }
+    .sched-sub { margin-left: 0; font-size: 26px; white-space: normal; width: auto; }
+    .sched-note { margin-top: 36px; font-size: 18px; }
+    .calendar-placeholder { height: 480px; }
+  }
+  @media (max-width: 600px) {
+    .sched-title { font-size: 28px; }
+    .sched-sub { font-size: 20px; }
+    .sched-note { font-size: 16px; }
+    .calendar-placeholder { height: 400px; }
+  }
+</style>

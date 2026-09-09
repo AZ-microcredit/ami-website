@@ -1,0 +1,102 @@
+---
+/**
+ * White article card for a blog post: meta line, title, "Updated" line, rich HTML body,
+ * then tags, category links and share buttons. Used by /single-post/<slug> and legacy /posts/<slug>.
+ */
+import type { Post } from '../lib/blog';
+import { formatDate, categoryUrl, tagUrl } from '../lib/blog';
+
+interface Props { post: Post }
+const { post } = Astro.props;
+const site = (Astro.site?.toString() ?? 'https://www.azmicrocredit.org/').replace(/\/$/, '');
+const url = `${site}/single-post/${post.slug}`;
+const enc = encodeURIComponent;
+const share = {
+  facebook: `https://www.facebook.com/sharer/sharer.php?u=${enc(url)}`,
+  x: `https://twitter.com/intent/tweet?url=${enc(url)}&text=${enc(post.title)}`,
+  linkedin: `https://www.linkedin.com/sharing/share-offsite/?url=${enc(url)}`,
+};
+const updated = post.dateModified && post.dateModified.slice(0, 10) !== post.datePublished.slice(0, 10);
+---
+
+<article class="post">
+  <header class="post-header">
+    <p class="meta">
+      <span>{post.author}</span>
+      <span class="dot" aria-hidden="true">·</span>
+      <time datetime={post.datePublished}>{formatDate(post.datePublished)}</time>
+      <span class="dot" aria-hidden="true">·</span>
+      <span>{post.readTime}</span>
+    </p>
+    <h1>{post.title}</h1>
+    {updated && <p class="updated">Updated: {formatDate(post.dateModified)}</p>}
+  </header>
+
+  <div class="rich post-body" set:html={post.html} />
+
+  <footer class="post-footer">
+    {post.tags.length > 0 && (
+      <div class="tags">
+        <p class="label">Tags:</p>
+        <ul>{post.tags.map((t) => <li><a href={tagUrl(t)}>{t}</a></li>)}</ul>
+      </div>
+    )}
+    {post.categories.length > 0 && (
+      <ul class="cats">{post.categories.map((c) => <li><a href={categoryUrl(c.slug)}>{c.name}</a></li>)}</ul>
+    )}
+    <div class="share">
+      <a href={share.facebook} target="_blank" rel="noopener" aria-label="Share via Facebook" title="Share via Facebook">
+        <svg viewBox="0 0 24 24" width="20" height="20"><path fill="currentColor" d="M13.5 22v-8h2.7l.4-3.2h-3.1V8.8c0-.9.3-1.6 1.6-1.6h1.7V4.4c-.3 0-1.3-.1-2.4-.1-2.4 0-4 1.5-4 4.1v2.4H7.7V14h2.7v8h3.1z"/></svg>
+      </a>
+      <a href={share.x} target="_blank" rel="noopener" aria-label="Share via X (Twitter)" title="Share via X (Twitter)">
+        <svg viewBox="0 0 24 24" width="20" height="20"><path fill="currentColor" d="M17.5 3h3l-6.8 7.8L21.7 21h-6.2l-4.9-6.4L5 21H2l7.3-8.3L1.7 3h6.4l4.4 5.8L17.5 3zm-1.1 16.2h1.7L7 4.7H5.2l11.2 14.5z"/></svg>
+      </a>
+      <a href={share.linkedin} target="_blank" rel="noopener" aria-label="Share via LinkedIn" title="Share via LinkedIn">
+        <svg viewBox="0 0 24 24" width="20" height="20"><path fill="currentColor" d="M6.4 21H2.7V8.6h3.7V21zM4.5 6.9C3.3 6.9 2.4 6 2.4 4.8s.9-2.1 2.1-2.1 2.1.9 2.1 2.1-.9 2.1-2.1 2.1zM21.6 21h-3.7v-6c0-1.4 0-3.3-2-3.3s-2.3 1.6-2.3 3.2V21H9.9V8.6h3.6v1.7h.1c.5-.9 1.7-1.9 3.5-1.9 3.8 0 4.5 2.5 4.5 5.7V21z"/></svg>
+      </a>
+    </div>
+  </footer>
+</article>
+
+<style>
+  .post { background: var(--white); padding: 50px 38px 30px; }
+  .meta { font-family: var(--font-body); font-size: 13px; color: #555; display: flex; gap: 8px; margin-bottom: 14px; flex-wrap: wrap; }
+  .post h1 { font-family: var(--font-bold); font-size: 28px; line-height: 1.25; margin-bottom: 10px; }
+  .updated { font-family: var(--font-body); font-size: 13px; color: #555; margin-bottom: 20px; }
+
+  /* Wix post body: Georgia 16px, Helvetica bold headings */
+  .post-body { font-family: georgia, 'Times New Roman', serif; font-size: 16px; line-height: 1.4; }
+  .post-body :global(p) { margin: 0 0 22px; }
+  .post-body :global(h1), .post-body :global(h2), .post-body :global(h3), .post-body :global(h4), .post-body :global(h5), .post-body :global(h6) {
+    font-family: var(--font-bold); line-height: 1.3; margin: 30px 0 12px;
+  }
+  .post-body :global(h1) { font-size: 28px; } .post-body :global(h2) { font-size: 26px; }
+  .post-body :global(h3) { font-size: 22px; } .post-body :global(h4) { font-size: 20px; }
+  .post-body :global(h5) { font-size: 18px; } .post-body :global(h6) { font-size: 16px; }
+  .post-body :global(ul), .post-body :global(ol) { margin: 0 0 22px 2em; }
+  .post-body :global(li) { margin-bottom: 4px; }
+  .post-body :global(a) { color: inherit; text-decoration: underline; }
+  .post-body :global(a:hover) { color: var(--green-dark); }
+  .post-body :global(figure) { margin: 24px 0; text-align: center; }
+  .post-body :global(figure img), .post-body :global(img) { max-width: 100%; height: auto; margin: 0 auto; }
+  .post-body :global(figcaption) { font-family: var(--font-body); font-size: 13px; color: #6d6d6d; margin-top: 8px; }
+  .post-body :global(hr) { border: 0; border-top: 1px solid #808080; margin: 44px 0; }
+  .post-body :global(iframe) { max-width: 100%; }
+  .post-body :global(blockquote) { border-left: 3px solid var(--green); margin: 1em 0; padding-left: 1em; color: #444; }
+
+  .post-footer { margin-top: 40px; }
+  .tags .label { font-family: var(--font-avenir-light); font-size: 16px; margin-bottom: 12px; }
+  .tags ul { display: flex; flex-wrap: wrap; gap: 10px 24px; margin-bottom: 20px; }
+  .tags a { font-family: var(--font-avenir-light); font-size: 16px; text-decoration: none; }
+  .tags a:hover { text-decoration: underline; }
+  .cats { display: flex; flex-wrap: wrap; gap: 10px 20px; margin-bottom: 20px; }
+  .cats a { font-family: georgia, serif; font-size: 16px; text-decoration: underline; }
+  .share { display: flex; gap: 26px; padding: 18px 0; border-top: 1px solid #ccc; border-bottom: 1px solid #ccc; }
+  .share a { color: #444; display: inline-flex; }
+  .share a:hover { color: var(--green-dark); }
+
+  @media (max-width: 600px) {
+    .post { padding: 30px 20px 24px; }
+    .post h1 { font-size: 24px; }
+  }
+</style>

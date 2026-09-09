@@ -1,0 +1,33 @@
+---
+// Legacy Wix CMS post pages (/posts/<title-slug>). Same article layout as /single-post/<slug>.
+import Base from '../../layouts/Base.astro';
+import BlogShell from '../../components/BlogShell.astro';
+import PostArticle from '../../components/PostArticle.astro';
+import { posts, legacyPostSlugs, excerpt } from '../../lib/blog';
+
+export function getStaticPaths() {
+  const seen = new Set<string>();
+  const paths = [];
+  for (const p of posts) {
+    for (const slug of legacyPostSlugs(p)) {
+      if (seen.has(slug)) continue;
+      seen.add(slug);
+      paths.push({ params: { slug }, props: { post: p } });
+    }
+  }
+  return paths;
+}
+const { post } = Astro.props;
+---
+
+<Base title={post.title} description={excerpt(post, 160)}>
+  <link slot="head" rel="canonical" href={`/single-post/${post.slug}`} />
+  <div class="cms-rule" aria-hidden="true"></div>
+  <BlogShell mode="post">
+    <PostArticle post={post} />
+  </BlogShell>
+</Base>
+
+<style>
+  .cms-rule { max-width: var(--content-width); margin: 0 auto; height: 6px; background: #fcd307; }
+</style>

@@ -1,0 +1,92 @@
+---
+import Base from '../layouts/Base.astro';
+import Hero from '../components/Hero.astro';
+import WhyRow from '../components/WhyRow.astro';
+import ScheduleCTA from '../components/ScheduleCTA.astro';
+import ClientSlider from '../components/ClientSlider.astro';
+
+const docs = [
+  'Personal tax returns of the past 2 years',
+  'Personal bank statements of the past 12 months',
+  'Business bank statements of the past 12 months',
+  'Utility bill of the most recent month',
+  'EIN and Tax ID',
+  'Planned loan budget for a revenue generating asset',
+  'Professional references',
+  'Collateral or Co-signer',
+  'Personal Resume',
+  'Business Vision/Plan',
+];
+// Rendered column-first (01-05 left, 06-10 right) like the live site.
+const left = docs.slice(0, 5), right = docs.slice(5);
+
+const clients = [
+  { name: 'Un Petit Merlot', image: '/media/760f7c_34589fbe015b4fc5a16ca548c06d15dd.png', href: 'https://www.facebook.com/100063561103904/posts/1682151951937887/' },
+  { name: 'Dust Seasonings and Rubs', image: '/media/760f7c_3182a2ef6c8b485385fd9d1124e95e76.jpg', href: 'https://www.azultimatetransport.com/about' },
+  { name: 'The Move LLC', image: '/media/760f7c_d8d70a70b9ef46fdaab2ce9b8af09cd6.jpg', href: 'https://api.us.nextdoor.com/pages/the-move-phoenix-chandler-az/' },
+];
+---
+
+<Base title="Arizona Microcredit Initiative | LOANS">
+  <Hero image="/media/760f7c_341b24391a4a4db094f7e53ad88a8d3a.png" height={640} align="top-left" class="loans-hero">
+    <h1 class="hero-title">MICROLOANS</h1>
+    <p class="hero-subtitle">JUST FOR YOU</p>
+    <a class="btn btn-green hero-cta" href="/copy-of-apply-for-a-loan" aria-label="SCHEDULE NOW">SCHEDULE NOW</a>
+  </Hero>
+
+  <WhyRow
+    title="WHY OUR<br />MICROLOANS"
+    html="With AMI, access microloans with <span class='g'>lower credit requirements</span> than traditional banks. As <span class='g'>small business specialists</span>, we offer <span class='g'>targeted financial solutions</span> for your company."
+  />
+
+  <section class="loan-stats">
+    <div><h3>$7500</h3><p>STARTING AT $500 FOR YOUR BUSINESS NEEDS</p></div>
+    <div><h3>6 - 24</h3><p>MONTHS FOR YOUR REPAYMENT TERMS</p></div>
+    <div><h3>1%</h3><p>FIXED INTEREST RATES</p></div>
+  </section>
+
+  <section class="docs">
+    <h2 class="spaced-title">REQUIRED DOCUMENTS</h2>
+    <div class="doc-cols">
+      <ol class="doc-list">
+        {left.map((d, i) => <li><span class="num">{String(i + 1).padStart(2, '0')}</span><span class="txt">{d}</span></li>)}
+      </ol>
+      <ol class="doc-list" start="6">
+        {right.map((d, i) => <li><span class="num">{String(i + 6).padStart(2, '0')}</span><span class="txt">{d}</span></li>)}
+      </ol>
+    </div>
+  </section>
+
+  <ClientSlider items={clients} />
+
+  <ScheduleCTA title="SCHEDULE A<br />CALL" text="FIND THE RIGHT PLAN FOR YOU" label="SCHEDULE NOW" href="/copy-of-apply-for-a-loan" />
+</Base>
+
+<style>
+  /* Hero: title block top-left, button lower-left (matches the Wix layout) */
+  :global(.loans-hero .hero-inner) { align-items: flex-start !important; }
+  :global(.loans-hero .hero-content) { padding-top: 40px; height: 100%; }
+  :global(.loans-hero .hero-subtitle) { margin-top: 34px; }
+  :global(.loans-hero .hero-cta) { margin-top: auto; margin-bottom: 120px; min-width: 270px; }
+
+  .loan-stats { max-width: var(--content-width); margin: 0 auto; padding: 40px 20px 60px; display: grid; grid-template-columns: repeat(3, 1fr); gap: 20px; text-align: center; }
+  .loan-stats h3 { font-family: var(--font-bold); font-size: 80px; line-height: 1; color: var(--green); margin-bottom: 8px; }
+  .loan-stats p { font-family: var(--font-bold); font-size: 14px; line-height: 1.3; max-width: 230px; margin: 0 auto; }
+
+  .docs { max-width: var(--content-width); margin: 0 auto; padding: 20px 20px 40px; }
+  .docs .spaced-title { margin-bottom: 30px; }
+  .doc-cols { display: grid; grid-template-columns: 1fr 1fr; gap: 20px; }
+  .doc-list { list-style: none; display: flex; flex-direction: column; gap: 20px; }
+  .doc-list li { background: #e6e6e6; display: flex; align-items: center; gap: 30px; padding: 40px 30px; min-height: 150px; }
+  .doc-list .num { font-family: var(--font-bold); font-size: 67px; line-height: 1; color: var(--green); min-width: 90px; }
+  .doc-list .txt { font-family: var(--font-bold); font-size: 20px; line-height: 1.2; }
+
+  @media (max-width: 800px) {
+    .loan-stats { grid-template-columns: 1fr; }
+    .loan-stats h3 { font-size: 60px; }
+    .doc-cols { grid-template-columns: 1fr; }
+    .doc-list li { padding: 24px 20px; min-height: 0; }
+    .doc-list .num { font-size: 44px; min-width: 60px; }
+    :global(.loans-hero .hero-cta) { margin-bottom: 30px; }
+  }
+</style>

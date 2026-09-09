@@ -1,0 +1,28 @@
+---
+/**
+ * 3-column grid of circular portraits with a name and role lines beneath
+ * (Board of Advisors / Member of the Month pages).
+ */
+interface Person { name: string; lines: string[]; image: string }
+interface Props { people: Person[]; boldLines?: boolean; class?: string }
+const { people, boldLines = false, class: cls = '' } = Astro.props;
+---
+<div class:list={['advisor-grid', cls, { 'bold-lines': boldLines }]}>
+  {people.map((p) => (
+    <div class="advisor">
+      <img src={p.image} alt={p.name} width="200" height="200" loading="lazy" />
+      <h3>{p.name}<br />{p.lines.map((l, i) => <><span class="role">{l}</span>{i < p.lines.length - 1 && <br />}</>)}</h3>
+    </div>
+  ))}
+</div>
+
+<style>
+  .advisor-grid { display: grid; grid-template-columns: repeat(3, 245px); justify-content: center; row-gap: 44px; }
+  .advisor { text-align: center; }
+  .advisor img { width: 200px; height: 200px; border-radius: 50%; object-fit: cover; margin: 0 auto 12px; }
+  .advisor h3 { font-family: var(--font-bold); font-size: 17px; line-height: 1.2; }
+  .advisor .role { font-family: var(--font-body); }
+  .bold-lines .advisor .role { font-family: var(--font-bold); }
+  @media (max-width: 900px) { .advisor-grid { grid-template-columns: repeat(2, 1fr); gap: 36px 16px; } }
+  @media (max-width: 600px) { .advisor-grid { grid-template-columns: 1fr; } }
+</style>

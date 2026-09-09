@@ -1,0 +1,13 @@
+---
+import Base from '../layouts/Base.astro';
+---
+
+<!-- Empty Wix page ("Resource"): a blank grey section is all the live page shows. -->
+<Base title="Resource | az-microcredit">
+  <section class="empty-page" aria-hidden="true"></section>
+</Base>
+
+<style>
+  .empty-page { background: var(--grey-bg); height: 500px; }
+  @media (max-width: 900px) { .empty-page { height: 300px; } }
+</style>

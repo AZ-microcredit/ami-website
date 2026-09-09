@@ -1,0 +1,76 @@
+---
+import Base from '../layouts/Base.astro';
+
+// Team cards shown in the grey panel under the contact form (visible text on the live page).
+const team = [
+  { name: 'Rashi Duttagupta', title: 'Executive Director', email: 'rashi@azmicrocredit.org', image: '/media/760f7c_1e49e2e69abe4f54b08cf7ac0acdfd0d.jpg' },
+  { name: 'Siddharth Mehta', title: 'Director of Education', email: 'siddharth@azmicrocredit.org', image: '/media/760f7c_1337c4cc5ca743abbe0c24d8dc2b1877.jpg' },
+  { name: 'Dunya Mostaghimi', title: 'Director of Finance', email: 'dunya@azmicrocredit.org', image: '/media/760f7c_1819f4e2f010481f94ea9339262c136c.jpeg' },
+  { name: 'Emily Wong', title: 'Director of Consulting', email: 'emily@azmicrocredit.org', image: '/media/760f7c_db54ac51a9a7430b984e3285bd3b433b.jpg' },
+  { name: 'Annie Qin', title: 'Director of Operations', email: 'annie@azmicrocredit.org', image: '/media/760f7c_735ba1e071a9418fa39cd1e15851792a.jpg' },
+];
+---
+
+<Base title="Arizona Microcredit Initiative | CONTACT" mainClass="contact-main">
+  <section class="contact-form-wrap">
+    <!-- INTEGRATION: wire form to email/Formspree (the live site uses a Wix Form here). Replace action="#" with the endpoint. -->
+    <form class="contact-form" action="#" method="post">
+      <h1>CONTACT US</h1>
+      <div class="row">
+        <label><span>Name</span><input type="text" name="name" required autocomplete="name" /></label>
+        <label><span>Email</span><input type="email" name="email" required autocomplete="email" /></label>
+      </div>
+      <label><span>Subject</span><input type="text" name="subject" /></label>
+      <label><span>Message</span><textarea name="message" rows="5" required></textarea></label>
+      <button type="submit" class="btn btn-green">SUBMIT</button>
+    </form>
+  </section>
+
+  <section class="team-panel">
+    <div class="team-cards">
+      {team.map((p) => (
+        <div class="card">
+          <img src={p.image} alt={p.name} width="165" height="165" loading="lazy" />
+          <h3>{p.name}<br /><span class="role">{p.title}</span><br /><a href={`mailto:${p.email}`}>{p.email}</a></h3>
+        </div>
+      ))}
+    </div>
+  </section>
+</Base>
+
+<style>
+  :global(.contact-main) { background: var(--grey-bg); }
+
+  .contact-form-wrap { min-height: 590px; display: flex; align-items: center; justify-content: center; padding: 40px 20px; }
+  .contact-form { width: 100%; max-width: 640px; display: flex; flex-direction: column; gap: 16px; }
+  .contact-form h1 { font-family: var(--font-bold); font-size: 30px; letter-spacing: 0.3em; text-align: center; margin-bottom: 8px; }
+  .contact-form .row { display: grid; grid-template-columns: 1fr 1fr; gap: 16px; }
+  .contact-form label { display: flex; flex-direction: column; gap: 6px; font-family: var(--font-body); font-size: 14px; }
+  .contact-form input, .contact-form textarea { font: inherit; font-family: var(--font-body); font-size: 15px; padding: 10px 12px; border: 1px solid #8f8f8f; background: var(--white); color: var(--black); border-radius: 0; width: 100%; }
+  .contact-form input:focus, .contact-form textarea:focus { outline: 2px solid var(--green); outline-offset: 0; border-color: var(--green); }
+  .contact-form textarea { resize: vertical; min-height: 120px; }
+  .contact-form .btn { align-self: flex-end; min-width: 160px; }
+
+  .team-panel { max-width: var(--content-width); margin: 0 auto; padding: 0 0 47px; }
+  .team-cards { background: #d9d9d9; padding: 37px 0 8px; display: grid; grid-template-columns: repeat(5, 1fr); gap: 0; }
+  .card { text-align: center; }
+  .card img { width: 165px; height: 165px; border-radius: 50%; object-fit: cover; margin: 0 auto 44px; }
+  .card h3 { font-family: var(--font-bold); font-size: 22px; line-height: 1.25; white-space: nowrap; }
+  .card .role { font-family: var(--font-body); font-size: 17px; }
+  .card h3 a { font-family: var(--font-body); font-size: 14px; color: inherit; }
+
+  @media (max-width: 900px) {
+    .contact-form-wrap { min-height: 0; }
+    .team-panel { padding: 0 20px 40px; }
+    .team-cards { grid-template-columns: repeat(2, 1fr); gap: 30px 10px; padding: 30px 10px 20px; }
+    .card img { margin-bottom: 16px; }
+    .card h3 { font-size: 20px; white-space: normal; }
+  }
+  @media (max-width: 600px) {
+    .contact-form .row { grid-template-columns: 1fr; }
+    .contact-form h1 { font-size: 22px; }
+    .team-cards { grid-template-columns: 1fr; }
+    .card .role { font-size: 15px; }
+    .card h3 a { font-size: 13px; word-break: break-all; }
+  }
+</style>

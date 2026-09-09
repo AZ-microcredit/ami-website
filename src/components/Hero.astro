@@ -1,0 +1,49 @@
+---
+/**
+ * Full-bleed hero banner used on the Loans / Consulting / Education / Donate pages.
+ * Title and subtitle sit in green highlight boxes over the photo (Wix "strip" look).
+ */
+interface Props {
+  image: string;            // background image (public path)
+  title?: string;           // big uppercase line (80px)
+  subtitle?: string;        // smaller uppercase line (40px)
+  cta?: { label: string; href: string; class?: string; target?: string };
+  height?: number;          // px on desktop
+  align?: 'left' | 'center' | 'bottom-left';
+  position?: string;       // background-position
+  blur?: boolean;
+  class?: string;
+}
+const { image, title, subtitle, cta, height = 640, align = 'left', position = 'center', blur = false, class: cls = '' } = Astro.props;
+---
+
+<section class:list={['hero', `align-${align}`, { blur }, cls]} style={`--h:${height}px; --pos:${position}`}>
+  <img class="hero-bg" src={image} alt="" loading="eager" />
+  <div class="hero-inner">
+    <div class="hero-content">
+      {title && <h1 class="hero-title" set:html={title} />}
+      {subtitle && <p class="hero-subtitle" set:html={subtitle} />}
+      <slot />
+      {cta && <a class:list={['btn', cta.class ?? 'btn-green', 'hero-cta']} href={cta.href} target={cta.target} rel={cta.target ? 'noopener' : undefined}>{cta.label}</a>}
+    </div>
+  </div>
+</section>
+
+<style>
+  .hero { position: relative; width: 100%; height: var(--h); overflow: hidden; background: #ccc; }
+  .hero-bg { position: absolute; inset: 0; width: 100%; height: 100%; object-fit: cover; object-position: var(--pos); }
+  .hero.blur .hero-bg { filter: blur(6px); transform: scale(1.05); }
+  .hero-inner { position: relative; max-width: var(--content-width); margin: 0 auto; height: 100%; padding: 0 20px; display: flex; }
+  .hero-content { display: flex; flex-direction: column; align-items: flex-start; gap: 6px; }
+  .align-left .hero-inner { align-items: flex-end; }
+  .align-left .hero-content { padding-bottom: 36px; }
+  .align-bottom-left .hero-inner { align-items: flex-end; }
+  .align-bottom-left .hero-content { padding-bottom: 60px; }
+  .align-center .hero-inner { align-items: center; justify-content: center; }
+  .align-center .hero-content { align-items: center; text-align: center; }
+  .hero-title { display: inline-block; background: var(--green); color: var(--white); font-family: var(--font-bold); font-size: 80px; line-height: 1.05; padding: 0 12px 4px; text-transform: uppercase; }
+  .hero-subtitle { display: inline-block; background: var(--green); color: var(--white); font-family: var(--font-body); font-size: 40px; line-height: 1.15; padding: 2px 12px 4px; text-transform: uppercase; }
+  .hero-cta { margin-top: 16px; min-width: 200px; padding: 12px 40px; font-size: 15px; }
+  @media (max-width: 900px) { .hero { height: min(var(--h), 70vw); min-height: 320px; } .hero-title { font-size: 48px; } .hero-subtitle { font-size: 24px; } }
+  @media (max-width: 520px) { .hero-title { font-size: 34px; } .hero-subtitle { font-size: 18px; } .hero-cta { min-width: 0; padding: 10px 24px; } }
+</style>

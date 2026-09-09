@@ -1,0 +1,109 @@
+---
+import Base from '../layouts/Base.astro';
+
+const steps = [
+  {
+    label: 'STEP ONE',
+    title: 'DEFINE THE CURRENT STATE',
+    text: 'We understand where you and your business are right now, and where you want to go.',
+    image: '/media/760f7c_7ec659024dc34b548a492fd8745e45c4.png',
+    bg: '#dff0da',
+  },
+  {
+    label: 'STEP TWO',
+    title: 'IDENTIFY IMPROVEMENT OPPORTUNITIES',
+    text: 'We figure out which areas need to be worked on to resolve your business problems and advance your business.',
+    image: '/media/760f7c_04ce42294d714870b565a2d1960a55df.png',
+    bg: '#bfe1b5',
+  },
+  {
+    label: 'STEP THREE',
+    title: 'CONDUCT RESEARCH',
+    text: 'We delve deeper to gain context and more knowledge into the business landscape you are part of.',
+    image: '/media/760f7c_616522eab6b145ed94c50f3d8b1a9746.jpeg',
+    bg: '#9ed190',
+  },
+  {
+    label: 'STEP FOUR',
+    title: 'DESIGN & IMPLEMENT SOLUTION',
+    text: 'We create and implement a custom solution, teaching you how it works along the way.',
+    image: '/media/760f7c_9932111217e0426ea97071099b9d68ca.jpeg',
+    bg: '#7ec26b',
+    spaced: true, // the live site letter-spaces this one label
+  },
+  {
+    label: 'STEP FIVE',
+    title: 'MEASURE RESULTS',
+    text: 'We measure the success of the solution, gauge its effectiveness, and help you adjust accordingly.',
+    image: '/media/760f7c_0b187ddce70846798d49d87f1025bdd7.jpeg',
+    bg: '#5eb346',
+  },
+];
+---
+
+<Base
+  title="Our Methodology | az-microcredit"
+  description="AMI finds success in our one-on-one consulting by following a specific consulting mthodology. Read exactly how we will structure your engagement here!"
+>
+  <section class="process-hero">
+    <img class="bg" src="/media/760f7c_4234157d1858403a9fd83fb0612c3179.jpg" alt="" loading="eager" />
+    <div class="inner">
+      <span class="plus" aria-hidden="true">+</span>
+      <h1>OUR FIVE-STEP PROCESS</h1>
+    </div>
+  </section>
+
+  <section class="band intro">
+    <p>We follow this five-step framework to help you tackle any business problem you're facing.</p>
+  </section>
+
+  <section class="steps">
+    {steps.map((s) => (
+      <div class="step">
+        <div class="card" style={`background:${s.bg}`}>
+          <p class:list={['label', { spaced: s.spaced }]}>{s.label}</p>
+          <h2>{s.title}</h2>
+          <p class="text">{s.text}</p>
+        </div>
+        <img src={s.image} alt={s.title} />
+      </div>
+    ))}
+  </section>
+</Base>
+
+<style>
+  .process-hero { position: relative; height: 215px; overflow: hidden; background: #ccc; }
+  .process-hero .bg { position: absolute; inset: 0; width: 100%; height: 100%; object-fit: cover; object-position: center 35%; }
+  .process-hero .inner { position: relative; max-width: var(--content-width); margin: 0 auto; height: 100%; padding: 0 20px; }
+  .process-hero .plus { position: absolute; left: 12px; top: 2px; color: var(--white); font-family: var(--font-bold); font-size: 120px; line-height: 1; }
+  .process-hero h1 {
+    position: absolute; left: 65px; top: 80px;
+    display: inline-block; background: var(--green); color: var(--white);
+    font-family: var(--font-bold); font-size: 56px; line-height: 1.25; padding: 0 5px; white-space: nowrap;
+  }
+
+  .intro { padding: 20px 20px; text-align: center; }
+  .intro p { font-family: var(--font-bold); font-size: 20px; line-height: 1.4; }
+
+  .steps { max-width: var(--content-width); margin: 0 auto; padding: 22px 20px 44px; display: flex; flex-direction: column; gap: 28px; }
+  .step { display: grid; grid-template-columns: 1fr 320px; gap: 23px; height: 215px; }
+  .card { display: flex; flex-direction: column; align-items: center; justify-content: center; text-align: center; padding: 20px 40px; }
+  .card .label { font-family: var(--font-body); font-size: 20px; line-height: 1.2; margin-bottom: 16px; }
+  .card .label.spaced { letter-spacing: 0.4em; margin-left: 0.4em; }
+  .card h2 { font-family: var(--font-bold); font-size: 28px; line-height: 1.4; text-transform: uppercase; margin-bottom: 14px; max-width: 460px; }
+  .card .text { font-family: var(--font-body); font-size: 16px; line-height: 1.4; max-width: 440px; }
+  .step img { width: 100%; height: 100%; object-fit: cover; }
+
+  @media (max-width: 900px) {
+    .process-hero h1 { font-size: 36px; left: 50px; top: 90px; white-space: normal; }
+    .process-hero .plus { font-size: 72px; }
+    .step { grid-template-columns: 1fr; height: auto; }
+    .step img { height: 260px; }
+    .card { padding: 30px 20px; }
+  }
+  @media (max-width: 600px) {
+    .process-hero h1 { font-size: 26px; top: 100px; right: 20px; }
+    .card h2 { font-size: 22px; }
+    .step img { height: 200px; }
+  }
+</style>

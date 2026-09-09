@@ -1,0 +1,13 @@
+---
+const target = '/blog-feed.xml';
+---
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <title>Blog feed</title>
+    <meta http-equiv="refresh" content={`0; url=${target}`} />
+    <link rel="alternate" type="application/rss+xml" href={target} />
+  </head>
+  <body><p>The blog RSS feed is at <a href={target}>/blog-feed.xml</a>.</p></body>
+</html>

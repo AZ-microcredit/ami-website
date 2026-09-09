@@ -1,0 +1,37 @@
+---
+import Base from '../layouts/Base.astro';
+import PlusBand from '../components/PlusBand.astro';
+import PartnerBox from '../components/PartnerBox.astro';
+import CollaborateForm from '../components/CollaborateForm.astro';
+
+const partners = [
+  { name: 'FABRIC Tempe', image: '/media/760f7c_01992304a85546a9b96fe3cd88986473.png', href: 'https://www.fabrictempe.com/' },
+  { name: 'Local First Arizona', image: '/media/760f7c_3763d8cb0b95499cbe85fd64ef77c762.png', href: 'https://www.localfirstaz.com/' },
+  { name: 'Seed Spot', image: '/media/760f7c_d156c5a31c9a4299a4fea382218f3e32.png', href: 'https://seedspot.org/who-we-are/' },
+  { name: 'Arizona Small Business Association', image: '/media/760f7c_81db59b8eccc44ada4eb4463545a66fd.png', href: 'https://www.asba.com/default.aspx' },
+  { name: 'Prestamos CDFI', image: '/media/760f7c_c623c60ec92745dc87c30dd1e5134621.png', href: 'https://prestamoscdfi.org/' },
+  { name: 'State Forty Eight Foundation', image: '/media/760f7c_da29cd80329b4b1986cd6b3a081d094c.png', href: 'https://statefortyeight.com/pages/foundation' },
+];
+---
+
+<Base title="Arizona Microcredit Initiative | ABOUT US" description="Arizona Microcredit Initiative partners with like-minded businesses to empower as many entrepreneurs in the local Phoenix area as possible. Read all about our partners here!">
+  <div class="grey-strip"></div>
+  <PlusBand title="PARTNERSHIPS" subtitle="Helping us expand our impact on the local community" />
+
+  <section class="community">
+    <div class="community-inner">
+      <CollaborateForm />
+      <PartnerBox logos={partners} />
+    </div>
+  </section>
+</Base>
+
+<style>
+  .grey-strip { height: 19px; background: var(--grey-bg); }
+  .community { background: #fafafa; min-height: 1032px; padding: 27px 20px 60px; }
+  .community-inner { max-width: var(--content-width); margin: 0 auto; display: grid; grid-template-columns: 525px 387px; justify-content: space-between; align-items: start; }
+  @media (max-width: 900px) {
+    .community { min-height: 0; padding: 30px 20px 50px; }
+    .community-inner { grid-template-columns: 1fr; gap: 40px; justify-items: center; }
+  }
+</style>

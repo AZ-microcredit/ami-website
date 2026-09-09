@@ -1,0 +1,97 @@
+---
+import Base from '../layouts/Base.astro';
+import Hero from '../components/Hero.astro';
+---
+
+<Base
+  title="Arizona Microcredit Initiative | ABOUT US"
+  description="Our mission is to empower local entrepreneurs through education and small loans and with your help, we can accomplish it together."
+>
+  <Hero image="/media/760f7c_d3ee80b0dc704ef18c86e278f6c9dfd7.jpg" height={640} align="center" class="donate-hero">
+    <h1 class="hero-title support">SUPPORT US</h1>
+    <a class="donate-btn" href="#donate" aria-label="DONATE">DONATE</a>
+  </Hero>
+
+  <section class="tagline">
+    <p>Together we can empower entrepreneurs in Phoenix (WIP)</p>
+    <hr />
+  </section>
+
+  <section class="letter">
+    <div class="letter-text">
+      <h2>A Letter from the Executive Director</h2>
+      <hr />
+      <p>Arizona Microcredit Initiative works to empower entrepreneurs in the greater Phoenix area and we could not do so without the help of our partners and our donors. Donations allow us to continue to offer our educational resources and consulting services free of charge while maintaining minimal fees on our loan program. We at AMI hope that you can help us continue to fulfill our mission with your donation. Your funding will not only make an immediate impact, but will also continue to support the aspirations of entrepreneurs in Phoenix for years to come.</p>
+      <p>Thank you again for your support!</p>
+      <p>- Catherine Jiang</p>
+      <a class="btn btn-outline donate-outline" href="#donate" aria-label="DONATE">DONATE</a>
+    </div>
+    <div class="letter-photo">
+      <img src="/media/760f7c_280c7e735eb44230a18fc15218fca05b.jpeg" alt="Audience seated at an AMI event" loading="lazy" />
+    </div>
+  </section>
+
+  <!-- INTEGRATION: donation checkout — the live site renders a Wix "donation-page" custom
+       element (865x267) here that opens the Wix/PayPal donation checkout. Replace this
+       placeholder with the donation widget/embed. Both DONATE buttons anchor to #donate. -->
+  <section class="donation" id="donate">
+    <div class="donation-placeholder" role="region" aria-label="Donation checkout">
+      <span>Donation checkout</span>
+    </div>
+  </section>
+
+  <section class="tax band">
+    <p>Donations made to AMI qualify for the 2025-2026 individual income tax credit. The maximum QCO (Qualified Charitable Organization) credit donation amount for 2025: $495 single, married filing separate or head of household; $987 married filing joint. The maximum QCO credit donation amount for 2026: $506 single, married filing separate or head of household; $1,009 married filing joint. Please Note: Arizona law allows QCO donations made during 2025 or donations made from January 1, 2026 through April 15, 2026 to be claimed on the 2025 Arizona income tax return. Filing for credit requires filling out Arizona Form 321, please discuss with your tax advisor about filing for tax credit.</p>
+  </section>
+</Base>
+
+<style>
+  /* Hero: centered "SUPPORT US" box + solid green DONATE button */
+  :global(.donate-hero .hero-content) { padding-top: 26px; gap: 0; }
+  :global(.donate-hero .hero-content .hero-title.support) { background: #68b04d; color: #fafafa; font-size: 80px; line-height: 1.15; letter-spacing: -0.02em; padding: 0 6px 0 8px; }
+  .donate-btn { display: inline-flex; align-items: center; justify-content: center; width: 235px; height: 47px; margin-top: 23px; background: var(--green); color: var(--white); font-family: var(--font-body); font-size: 19px; text-decoration: none; transition: background .4s; }
+  .donate-btn:hover { background: var(--green-dark); }
+
+  .tagline { max-width: var(--content-width); margin: 0 auto; padding: 22px 20px 0; text-align: center; }
+  .tagline p { font-family: Georgia, Palatino, 'Book Antiqua', 'Palatino Linotype', serif; font-style: italic; font-size: 20px; line-height: normal; color: #000; }
+  .tagline hr { width: 608px; max-width: 100%; margin: 2px auto 0; border: 0; border-top: 2px solid var(--green); }
+
+  /* Full-bleed two-column strip: letter (left) | photo (right) */
+  .letter { display: grid; grid-template-columns: 1fr 1fr; margin-top: 30px; min-height: 567px; }
+  .letter-text { padding: 20px 60px 40px 74px; }
+  .letter-text h2 { font-family: var(--font-avenir-heavy); font-size: 28px; line-height: 1.4; text-align: center; max-width: 489px; }
+  .letter-text hr { width: 302px; margin: 4px 0 20px; border: 0; border-top: 4px solid var(--black); }
+  .letter-text p { max-width: 488px; font-family: var(--font-body); font-size: 20px; line-height: normal; }
+  .letter-text p + p { margin-top: 23px; }
+  .donate-outline { display: inline-flex; align-items: center; justify-content: center; width: 230px; height: 46px; margin: 56px 0 0 100px; padding: 0; border: 1px solid var(--green-dark); background: transparent; color: var(--black); font-size: 14px; letter-spacing: 0.12em; transition: background .2s, color .2s; }
+  .donate-outline:hover { background: var(--green-dark); color: var(--white); border-color: transparent; }
+  .letter-photo { position: relative; min-height: 567px; }
+  .letter-photo img { position: absolute; inset: 0; width: 100%; height: 100%; object-fit: cover; object-position: center; }
+
+  .donation { padding: 20px 20px; }
+  .donation-placeholder { width: 865px; max-width: 100%; height: 267px; margin: 0 auto; border: 1px solid #e3e3e3; background: #fcfcfc; display: flex; align-items: center; justify-content: center; font-family: var(--font-avenir-light); font-size: 18px; letter-spacing: 0.08em; color: #9a9a9a; text-transform: uppercase; }
+
+  .tax { padding: 30px 20px 24px; }
+  .tax p { max-width: 900px; margin: 0 auto; text-align: center; font-family: var(--font-avenir-light); font-size: 20px; line-height: 1.4; color: var(--white); }
+
+  @media (max-width: 900px) {
+    :global(.donate-hero .hero-content .hero-title.support) { font-size: 48px; }
+    .donate-btn { width: 200px; height: 44px; font-size: 17px; }
+    .letter { grid-template-columns: 1fr; min-height: 0; }
+    .letter-text { padding: 20px 20px 30px; }
+    .letter-text h2 { text-align: left; font-size: 24px; }
+    .letter-text p { font-size: 18px; }
+    .donate-outline { margin: 32px 0 0; }
+    .letter-photo { min-height: 0; height: 60vw; max-height: 480px; }
+    .donation-placeholder { height: 220px; }
+    .tax p { font-size: 17px; }
+  }
+  @media (max-width: 600px) {
+    :global(.donate-hero .hero-content .hero-title.support) { font-size: 34px; }
+    .tagline p { font-size: 17px; }
+    .letter-text h2 { font-size: 21px; }
+    .letter-text hr { width: 200px; }
+    .letter-text p { font-size: 16px; }
+    .tax p { font-size: 15px; }
+  }
+</style>

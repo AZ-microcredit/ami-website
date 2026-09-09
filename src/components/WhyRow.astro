@@ -1,0 +1,9 @@
+---
+/** "WHY OUR X" | text-with-green-highlights row (Loans / Consulting / Education). */
+interface Props { title: string; html: string }
+const { title, html } = Astro.props;
+---
+<section class="why-row">
+  <h2 class="why-title" set:html={title} />
+  <p class="why-text" set:html={html} />
+</section>

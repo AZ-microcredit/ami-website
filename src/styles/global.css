@@ -1,0 +1,130 @@
+/* ---- Fonts (same Wix-hosted font files the live site uses) ---- */
+@font-face { font-family: 'HelveticaW01-Roman'; font-weight: 400; font-style: normal; font-display: swap;
+  src: url('https://static.parastorage.com/fonts/v2/2af1bf48-e783-4da8-9fa0-599dde29f2d5/v1/helvetica-w01-roman.woff2') format('woff2'); }
+@font-face { font-family: 'HelveticaW01-Bold'; font-weight: 400; font-style: normal; font-display: swap;
+  src: url('https://static.parastorage.com/fonts/v2/2f12de04-5ca4-4ada-9e66-a958673b12b5/v1/helvetica-w01-bold.woff2') format('woff2'); }
+@font-face { font-family: 'AvenirLight'; font-weight: 400; font-style: normal; font-display: swap;
+  src: url('https://static.parastorage.com/fonts/v2/af36905f-3c92-4ef9-b0c1-f91432f16ac1/v1/avenir-lt-w01_35-light1475496.woff2') format('woff2'); }
+@font-face { font-family: 'AvenirHeavy'; font-weight: 400; font-style: normal; font-display: swap;
+  src: url('https://static.parastorage.com/fonts/v2/74290729-59ae-4129-87d0-2eec3974dce1/v1/avenir-lt-w01_85-heavy1475544.woff2') format('woff2'); }
+@font-face { font-family: 'DINNextLight'; font-weight: 400; font-style: normal; font-display: swap;
+  src: url('https://static.parastorage.com/fonts/v2/eca8b0cd-45d8-43cf-aee7-ca462bc5497c/v1/din-next-w01-light.woff2') format('woff2'); }
+
+:root {
+  --green: #5eb346;        /* brand green (bands, cards, footer) */
+  --green-dark: #289e19;   /* active nav, buttons */
+  --navy: #070d3a;         /* icon accents */
+  --black: #000;
+  --white: #fff;
+  --grey-bg: #bfbfbf;
+  --grey-text: #727272;
+
+  --font-body: 'HelveticaW01-Roman', Helvetica, Arial, sans-serif;
+  --font-bold: 'HelveticaW01-Bold', Helvetica, Arial, sans-serif;
+  --font-avenir-light: 'AvenirLight', 'Avenir Next', 'Nunito Sans', Helvetica, Arial, sans-serif;
+  --font-avenir-heavy: 'AvenirHeavy', 'Avenir Next', 'Nunito Sans', Helvetica, Arial, sans-serif;
+  --font-din: 'DINNextLight', 'DIN', Helvetica, Arial, sans-serif;
+
+  --content-width: 980px;   /* Wix classic site grid width */
+  --header-height: 118px;
+}
+
+*, *::before, *::after { box-sizing: border-box; }
+html { -webkit-text-size-adjust: 100%; scroll-behavior: smooth; }
+body {
+  margin: 0;
+  font-family: var(--font-body);
+  font-size: 14px;
+  line-height: 1.4;
+  color: var(--black);
+  background: var(--white);
+  -webkit-font-smoothing: antialiased;
+}
+img { max-width: 100%; height: auto; display: block; }
+a { color: inherit; }
+h1, h2, h3, h4, h5, h6 { margin: 0; font-weight: 400; font-family: var(--font-bold); }
+p { margin: 0; }
+ul { margin: 0; padding: 0; list-style: none; }
+button { font: inherit; }
+
+/* ---- Shared layout helpers ---- */
+.container { width: 100%; max-width: var(--content-width); margin: 0 auto; padding: 0 20px; }
+.wide { width: 100%; max-width: 1280px; margin: 0 auto; }
+.sr-only { position: absolute; width: 1px; height: 1px; overflow: hidden; clip: rect(0 0 0 0); white-space: nowrap; }
+
+/* Big letter-spaced section titles ("M I S S I O N", "O U R   I M P A C T") */
+.spaced-title {
+  font-family: var(--font-bold);
+  text-transform: uppercase;
+  letter-spacing: 0.45em;
+  text-align: center;
+  font-size: 36px;
+  line-height: 1.3;
+}
+.spaced-title.small { font-size: 26px; }
+
+/* Green band with white spaced title */
+.band { background: var(--green); color: var(--white); padding: 22px 20px; }
+
+/* Buttons */
+.btn {
+  display: inline-block;
+  font-family: var(--font-bold);
+  text-transform: uppercase;
+  text-decoration: none;
+  text-align: center;
+  font-size: 14px;
+  letter-spacing: 0.02em;
+  padding: 12px 40px;
+  border: 1px solid transparent;
+  cursor: pointer;
+  transition: background .2s, color .2s;
+}
+.btn-green { background: var(--green); color: var(--white); border-color: var(--green); }
+.btn-green:hover { background: var(--green-dark); border-color: var(--green-dark); }
+.btn-dark-green { background: var(--green-dark); color: var(--white); border-color: var(--green-dark); text-transform: none; }
+.btn-dark-green:hover { background: var(--green); }
+.btn-outline { background: var(--white); color: var(--black); border-color: var(--green); }
+.btn-outline:hover { background: var(--green); color: var(--white); }
+.btn-outline-black { background: var(--white); color: var(--black); border-color: var(--black); }
+.btn-outline-black:hover { background: var(--black); color: var(--white); }
+
+/* Hero with full-bleed background image */
+.hero { position: relative; width: 100%; background-size: cover; background-position: center; overflow: hidden; }
+.hero .hero-inner { position: relative; max-width: 1280px; margin: 0 auto; height: 100%; }
+.hero-title { display: inline-block; background: var(--green); color: var(--white); font-family: var(--font-bold); font-size: 80px; line-height: 1.1; padding: 0 12px; text-transform: uppercase; }
+.hero-subtitle { display: inline-block; background: var(--green); color: var(--white); font-family: var(--font-body); font-size: 40px; line-height: 1.15; padding: 0 12px; text-transform: uppercase; }
+
+/* "Why our ..." two-column intro with vertical rule */
+.why-row { display: grid; grid-template-columns: 1fr 1.5fr; gap: 40px; align-items: center; padding: 50px 20px 30px; max-width: var(--content-width); margin: 0 auto; }
+.why-row .why-title { font-family: var(--font-bold); font-size: 32px; letter-spacing: 0.4em; text-transform: uppercase; line-height: 1.3; }
+.why-row .why-text { border-left: 3px solid var(--black); padding-left: 24px; font-family: var(--font-bold); font-size: 19px; line-height: 1.3; }
+.why-row .why-text .g { color: var(--green); }
+
+/* Green square tile grid (Our Expertise, Our Impact) */
+.tile-grid { display: grid; gap: 14px; }
+.tile { background: var(--green); color: var(--white); display: flex; align-items: center; justify-content: center; text-align: center; padding: 24px; }
+
+/* Rich text styles (blog posts, policy pages) */
+.rich { font-family: var(--font-body); font-size: 16px; line-height: 1.6; }
+.rich h1, .rich h2, .rich h3 { font-family: var(--font-bold); margin: 1.2em 0 .5em; }
+.rich h1 { font-size: 32px; } .rich h2 { font-size: 26px; } .rich h3 { font-size: 20px; }
+.rich p { margin: 0 0 1em; }
+.rich ul, .rich ol { margin: 0 0 1em 1.5em; }
+.rich ul { list-style: disc; } .rich ol { list-style: decimal; }
+.rich a { color: var(--green-dark); }
+.rich img { margin: 1em auto; }
+.rich blockquote { border-left: 3px solid var(--green); margin: 1em 0; padding-left: 1em; color: #444; }
+
+@media (max-width: 900px) {
+  .why-row { grid-template-columns: 1fr; gap: 20px; }
+  .hero-title { font-size: 52px; }
+  .hero-subtitle { font-size: 26px; }
+  .spaced-title { font-size: 26px; letter-spacing: 0.3em; }
+}
+@media (max-width: 600px) {
+  .hero-title { font-size: 40px; }
+  .hero-subtitle { font-size: 20px; }
+  .spaced-title { font-size: 22px; letter-spacing: 0.25em; }
+  .why-row .why-title { font-size: 24px; letter-spacing: 0.3em; }
+}

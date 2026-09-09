@@ -1,0 +1,60 @@
+---
+/**
+ * Green title band used at the top of the old "Education / Resources" pages:
+ * black "+" mark, big white Avenir Heavy title and an italic Noticia Text subtitle.
+ *
+ * Props
+ *  - title      band title (e.g. "RESOURCE INDEX"); may contain HTML
+ *  - subtitle   italic sentence under the title (optional)
+ *  - align      'left' (default, "+ TITLE" at the left of the 980 grid) or 'center'
+ *  - plus       show the "+" mark (default true for left, false for center)
+ *  - light      white subtitle (used on the centered variant)
+ */
+interface Props {
+  title: string;
+  subtitle?: string;
+  align?: 'left' | 'center';
+  plus?: boolean;
+  light?: boolean;
+  class?: string;
+}
+const { title, subtitle, align = 'left', plus = align === 'left', light = false, class: cls = '' } = Astro.props;
+---
+
+<!-- Noticia Text (Google font Wix serves for the italic subtitle / serif card text) -->
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Noticia+Text:ital@0;1&display=swap" />
+
+<section class:list={['rband', `rband-${align}`, { light }, cls]}>
+  <div class="rband-inner">
+    {plus && (
+      <svg class="rband-plus" viewBox="0 0 45 45" aria-hidden="true"><path d="M22.5 1v43M1 22.5h43" stroke="#000" stroke-width="11" fill="none" /></svg>
+    )}
+    <h1 class="rband-title" set:html={title} />
+    {subtitle && <p class="rband-sub" set:html={subtitle} />}
+  </div>
+</section>
+
+<style>
+  .rband { background: var(--green); color: var(--white); }
+  .rband-inner { position: relative; max-width: var(--content-width); margin: 0 auto; padding: 8px 20px 10px 50px; }
+  .rband-plus { position: absolute; left: 0; top: 18px; width: 45px; height: 45px; }
+  .rband-title { font-family: var(--font-avenir-heavy); font-size: 55px; line-height: 1.15; color: var(--white); text-transform: uppercase; }
+  .rband-sub { font-family: 'Noticia Text', Georgia, serif; font-style: italic; font-size: 20px; line-height: 1.3; color: var(--black); margin: 0 0 0 6px; }
+  .rband.light .rband-sub { color: var(--white); }
+
+  .rband-center .rband-inner { text-align: center; max-width: 1120px; padding: 12px 20px 26px; }
+  .rband-center .rband-title { text-transform: none; }
+  .rband-center .rband-sub { font-style: normal; font-size: 26px; line-height: 1.2; margin: 4px 0 0; }
+
+  @media (max-width: 900px) {
+    .rband-inner { padding-left: 56px; }
+    .rband-plus { left: 14px; top: 14px; width: 34px; height: 34px; }
+    .rband-title { font-size: 36px; }
+    .rband-center .rband-inner { padding: 18px 20px; }
+    .rband-center .rband-sub { font-size: 20px; }
+  }
+  @media (max-width: 600px) {
+    .rband-title { font-size: 28px; }
+    .rband-sub { font-size: 16px; }
+  }
+</style>

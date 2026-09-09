@@ -1,0 +1,17 @@
+---
+import Base from '../../../layouts/Base.astro';
+import BlogShell from '../../../components/BlogShell.astro';
+import BlogList from '../../../components/BlogList.astro';
+import { tags, postsWithTag } from '../../../lib/blog';
+
+export function getStaticPaths() {
+  return tags.map((t) => ({ params: { slug: t.slug }, props: { tag: t, posts: postsWithTag(t.slug) } }));
+}
+const { tag, posts } = Astro.props;
+---
+
+<Base title={`Arizona Microcredit Initiative | ${tag.name}`} description={`Blog posts tagged "${tag.name}".`}>
+  <BlogShell>
+    <BlogList posts={posts} emptyText="No posts with this tag yet." />
+  </BlogShell>
+</Base>

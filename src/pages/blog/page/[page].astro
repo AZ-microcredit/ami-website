@@ -1,0 +1,18 @@
+---
+import Base from '../../../layouts/Base.astro';
+import BlogShell from '../../../components/BlogShell.astro';
+import BlogList from '../../../components/BlogList.astro';
+import { posts, POSTS_PER_PAGE } from '../../../lib/blog';
+
+// Page 1 is served by /blog (src/pages/blog.astro); this route only emits /blog/page/2, /blog/page/3, ...
+export async function getStaticPaths({ paginate }) {
+  return paginate(posts, { pageSize: POSTS_PER_PAGE }).filter((p) => p.props.page.currentPage !== 1);
+}
+const { page } = Astro.props;
+---
+
+<Base title={`Arizona Microcredit Initiative | BLOG | Page ${page.currentPage}`} description="Read the latest news about what our organization is doing in the community!">
+  <BlogShell>
+    <BlogList posts={page.data} current={page.currentPage} totalPages={page.lastPage} basePath="/blog" />
+  </BlogShell>
+</Base>

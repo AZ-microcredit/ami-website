@@ -1,0 +1,18 @@
+---
+/** Letter-spaced title with black rules on both sides ("—— ABOUT US ——"), used on the draft homepage. */
+interface Props { title: string; tag?: 'h1' | 'h2' }
+const { title, tag = 'h2' } = Astro.props;
+const Tag = tag;
+---
+<div class="title-lines">
+  <span class="rule" aria-hidden="true"></span>
+  <Tag class="title" set:html={title} />
+  <span class="rule" aria-hidden="true"></span>
+</div>
+
+<style>
+  .title-lines { display: flex; align-items: center; gap: 24px; max-width: 940px; margin: 0 auto; padding: 0 20px; }
+  .rule { flex: 1; height: 3px; background: var(--black); }
+  .title { flex: 0 0 auto; font-family: var(--font-bold); font-size: 29px; letter-spacing: 0.5em; text-transform: uppercase; line-height: 1.4; text-align: center; white-space: nowrap; }
+  @media (max-width: 600px) { .title { font-size: 20px; letter-spacing: 0.3em; white-space: normal; } .title-lines { gap: 12px; } }
+</style>

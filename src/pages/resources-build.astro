@@ -1,0 +1,20 @@
+---
+import PlaybookPage from '../components/PlaybookPage.astro';
+import { build } from '../data/playbookGalleries.js';
+---
+
+<PlaybookPage
+  pageTitle="Arizona Microcredit Initiative |  BUSINESS EDUCATION"
+  description="Start your business plan today with a comprehensive playbook--take advantage of AMI's free business resources."
+  title="BUILD YOUR BUSINESS"
+  subtitle="A playbook to help start your busness plan"
+  items={build}
+  gap={15}
+  boxColor="#68b04d"
+  faqs={['Key Goals of Part I: Build', 'Key Outcomes of Part I: Build', 'How to use this playbook']}
+>
+  <div class="pb-intro">
+    <p>Welcome to AMI's Resources and Education series, and congratulations on your business idea!&nbsp; We know just how daunting it may be to transform your ideas into a tangible plan to bring it to life for others to enjoy.</p>
+    <p>Through <em>Build</em>, you will learn what all entrepreneurs and small businesses need to consider when <strong>building a business plan</strong>. These topics are based off of the Business Model Canvas, which you can learn more about here.</p>
+  </div>
+</PlaybookPage>

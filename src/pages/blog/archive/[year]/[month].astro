@@ -1,0 +1,17 @@
+---
+import Base from '../../../../layouts/Base.astro';
+import BlogShell from '../../../../components/BlogShell.astro';
+import BlogList from '../../../../components/BlogList.astro';
+import { archive, postsInMonth } from '../../../../lib/blog';
+
+export function getStaticPaths() {
+  return archive.map((a) => ({ params: { year: a.year, month: a.month }, props: { label: a.label, posts: postsInMonth(a.year, a.month) } }));
+}
+const { label, posts } = Astro.props;
+---
+
+<Base title={`Arizona Microcredit Initiative | ${label}`} description={`Blog posts published in ${label}.`}>
+  <BlogShell>
+    <BlogList posts={posts} emptyText="No posts published this month." />
+  </BlogShell>
+</Base>

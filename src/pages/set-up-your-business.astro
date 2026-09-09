@@ -1,0 +1,160 @@
+---
+import TutorialPage from '../components/TutorialPage.astro';
+
+/**
+ * Business Model Canvas. Each segment is a Wix "hover box": the default face
+ * shows the definition, hovering swaps to the LinkedIn example plus a link to
+ * an explainer video. Geometry (left/top/width/height inside the 826px canvas)
+ * mirrors the live desktop layout.
+ */
+const boxes = [
+  {
+    id: 'key-partnerships', title: 'Key Partnerships', l: 0, t: 0, w: 165, h: 454,
+    desc: 'The companies or suppliers you work with in order to deliver your product or service.',
+    question: 'Who do you need to work with to access key resources and execute key activities?',
+    examples: ['Equinix (for data center facilities)', 'Content Providers'],
+    more: 'to learn more about Key Partnerships', video: 'https://www.youtube.com/watch?v=4VV9eUZfAt0',
+  },
+  {
+    id: 'key-activities', title: 'Key Activities', l: 156, t: 0, w: 165, h: 302, serif: true,
+    desc: 'Actions a business performs to achieve their value proposition',
+    examples: ['Platform Development'],
+    more: 'to learn more about Key Activities', video: 'https://www.youtube.com/watch?v=62Cr8F5i5gk', small: true,
+  },
+  {
+    id: 'key-resources', title: 'Key Resources', l: 156, t: 372, w: 165, h: 290, serif: true,
+    desc: "The items essential for implementing a business's key activities such as a register, vehicle, or employee.",
+    examples: ['LinkedIn Platform'],
+    more: 'to learn more about Key Resources', video: 'https://www.youtube.com/watch?v=qVT1l66R_yE', small: true,
+  },
+  {
+    id: 'value-proposition', title: 'Value Proposition', l: 314, t: 0, w: 165, h: 454,
+    desc: 'The value that your business creates for its customers.',
+    question: 'What problem is my business solving?',
+    examples: ['Manage Professional Identity & Build Professional Network', 'Identify and Reach Talent', 'Reach the Target Audience', 'Access to LinkedIn Database and Content '],
+    boldExamples: true,
+    more: 'to learn more about Value Proposition', video: 'https://www.youtube.com/watch?v=fYjgYdX_3zc',
+  },
+  {
+    id: 'customer-relationships', title: 'Customer Relationships', l: 472, t: 0, w: 165, h: 292,
+    desc: 'The methods used to interact with and retain customers.',
+    examples: ['Same-side Network Effects', 'Cross-side Network Effects'],
+    more: 'to learn more on Cust. Relationships', video: 'https://www.youtube.com/watch?v=KXoU4p8mmnE', small: true,
+  },
+  {
+    id: 'channels', title: 'Channels', l: 472, t: 372, w: 165, h: 247,
+    desc: 'Means of communication a business uses to interact with customers including a brick and mortar store or social media',
+    examples: ['Field Sales', 'LinkedIn Website Mobile Apps'],
+    more: 'to learn more about Channels', video: 'https://www.youtube.com/watch?v=7qAZwVBW2lg', small: true,
+  },
+  {
+    id: 'customer-segments', title: 'Customer Segments', l: 628, t: 0, w: 165, h: 454,
+    desc: 'Using shared characteristics to determine the target audience for a business.',
+    question: 'Who is the target audience or market the business is solving the problem for?',
+    examples: ['Advertisers and Marketers', 'Internet Users', 'Developers', 'Recruiters'],
+    more: 'to learn more about Customer Segments', video: 'https://www.youtube.com/watch?v=s58YM-dUTCQ',
+  },
+  {
+    id: 'cost-structure', title: 'Cost Structure', l: 0, t: 691, w: 412, h: 183, wide: true,
+    desc: 'All costs a business has, even if it is not tied directly to product creation (insurance, legal, rent, wages, etc.)',
+    examples: ['General and Administrative', 'Web Hosting Costs', 'Marketing and Sales', 'Product Development'],
+  },
+  {
+    id: 'revenue-streams', title: 'Revenue Streams', l: 394, t: 691, w: 412, h: 215, wide: true, indent: true,
+    desc: 'How the product or service creates financial gain, outline your monetary collection methods and pricing.',
+    examples: ['Free Offerings & Premium Subscriptions', 'Marketing Solutions', 'Hiring Solutions'],
+  },
+];
+---
+
+<TutorialPage
+  pageTitle="Set Up Your Business - BMC | az-microcredit"
+  title="SET UP YOUR BUSINESS"
+  subtitle="Learn how to set up your business with the Interactive BMC"
+  contactHref="/contact"
+>
+  <div class="intro">
+    <p class="tut-lead">The <b>Business Model Canvas</b> is a simple, effective tool to create a plan for your business, no matter which stage you are in. It will help you <b>describe</b>, <b>design</b>, <b>assess</b>, and <b>change</b> your business model.</p>
+    <p class="tut-lead">&#8203;</p>
+    <p class="tut-lead"><b>Hover over each segment</b> to see the BMC in action! In this example, we applied the BMC to LinkedIn! Then, <b>scroll down to find educational resources</b> to help build each section of your Business Model Canvas.</p>
+  </div>
+
+  <div class="bmc" aria-label="Business Model Canvas">
+    {boxes.map((b) => (
+      <div
+        class:list={['bmc-box', { serif: b.serif, wide: b.wide, indent: b.indent, small: b.small }]}
+        style={`--l:${b.l}px;--t:${b.t}px;--w:${b.w}px;--h:${b.h}px`}
+        tabindex="0"
+      >
+        <div class="face default">
+          <h2>{b.title}</h2>
+          <p class="desc">{b.desc}</p>
+          {b.question && <p class="question">{b.question}</p>}
+        </div>
+        <div class="face hover">
+          <h2>{b.title}</h2>
+          <ul class:list={['examples', { bold: b.boldExamples }]}>
+            {b.examples.map((e) => <li>{e}</li>)}
+          </ul>
+          {b.video && (
+            <p class="more">Click <a href={b.video} target="_blank" rel="noopener">here</a> {b.more}</p>
+          )}
+          <p class="desc">{b.desc}</p>
+          {b.question && <p class="question">{b.question}</p>}
+        </div>
+      </div>
+    ))}
+  </div>
+
+  <!-- INTEGRATION: Wix "PDF File Viewer" app (500x374) with the BMC educational resources; the document is loaded by the Wix TPA at runtime and is not in the page HTML. -->
+  <div class="tut-pdf resources" role="img" aria-label="PDF File Viewer"><span>PDF File Viewer</span></div>
+</TutorialPage>
+
+<style>
+  .intro { width: 848px; max-width: 100%; margin-left: 64px; }
+
+  /* canvas: absolutely positioned boxes that overlap by a border width, like the Wix mesh */
+  .bmc { position: relative; width: 826px; max-width: 100%; height: 906px; margin: 30px 0 0 64px; }
+  .bmc-box { position: absolute; left: var(--l); top: var(--t); width: var(--w); height: var(--h); background: var(--white); border: 2px solid var(--black); padding: 14px 6px; text-align: center; overflow: hidden; font-family: var(--font-body); color: var(--black); }
+  .bmc-box h2 { font-family: var(--font-body); font-size: 20px; line-height: 1.2; }
+  .bmc-box p, .bmc-box li { font-size: 16px; line-height: 1.25; }
+  .bmc-box .desc { margin-top: 70px; }
+  .bmc-box.small .desc { margin-top: 50px; }
+  .bmc-box .question { margin-top: 30px; }
+  .bmc-box.serif .desc { font-family: Georgia, Palatino, 'Book Antiqua', 'Palatino Linotype', serif; }
+  .bmc-box .hover { display: none; }
+  .bmc-box .hover .examples { margin-top: 14px; display: flex; flex-direction: column; gap: 8px; }
+  .bmc-box .hover .examples.bold { font-family: var(--font-bold); }
+  .bmc-box .hover .examples.bold li { font-size: 14px; }
+  .bmc-box .hover .more { margin-top: 14px; }
+  .bmc-box.small .hover .more { font-size: 14px; }
+  .bmc-box .hover .more a { color: inherit; text-decoration: underline; }
+  .bmc-box .hover .desc { margin-top: 18px; }
+  .bmc-box .hover .question { margin-top: 12px; }
+  .bmc-box:hover .default, .bmc-box:focus-within .default { display: none; }
+  .bmc-box:hover .hover, .bmc-box:focus-within .hover { display: block; }
+  /* a hovered box may grow past its slot (and over its neighbours) so the example list is never clipped */
+  .bmc-box:hover, .bmc-box:focus-within { height: auto; min-height: var(--h); z-index: 2; }
+
+  /* bottom row: left-aligned text like the live layout */
+  .bmc-box.wide { text-align: left; padding: 22px 18px 14px 14px; }
+  .bmc-box.wide h2 { padding-left: 4px; }
+  .bmc-box.wide.indent h2 { padding-left: 42px; width: 120px; }
+  .bmc-box.wide .desc { margin-top: 4px; padding-left: 4px; }
+  .bmc-box.wide.indent .desc { margin-top: 12px; padding-left: 22px; }
+  .bmc-box.wide .hover .examples { margin-top: 6px; padding-left: 4px; gap: 4px; }
+  .bmc-box.wide .hover .desc { margin-top: 10px; }
+
+  .resources { width: 500px; height: 374px; margin: 30px auto 0; }
+
+  @media (max-width: 900px) {
+    .intro { margin-left: 0; }
+    .bmc { position: static; width: auto; height: auto; margin: 24px 0 0; display: flex; flex-direction: column; gap: 12px; }
+    .bmc-box { position: static; width: auto; height: auto; min-height: 0 !important; }
+    .bmc-box .desc, .bmc-box.small .desc { margin-top: 12px; }
+    .bmc-box .question { margin-top: 10px; }
+    .bmc-box.wide.indent h2 { padding-left: 4px; width: auto; }
+    .bmc-box.wide.indent .desc { padding-left: 4px; }
+    .resources { height: 300px; }
+  }
+</style>

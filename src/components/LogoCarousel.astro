@@ -1,0 +1,50 @@
+---
+/**
+ * Simple horizontal logo strip / carousel (stand-in for the Wix "Carousel" iframe
+ * used on the Consulting page's OUR CLIENTS section). Shows several logos side by
+ * side; prev/next arrows scroll the strip by one slide.
+ */
+interface Item { name: string; image: string; href?: string }
+interface Props { items: Item[]; height?: number; class?: string }
+const { items, height = 300, class: cls = '' } = Astro.props;
+---
+<div class:list={['logo-carousel', cls]} style={`--h:${height}px`}>
+  <button class="arrow prev" type="button" aria-label="Previous">
+    <svg viewBox="0 0 24 44" width="16" height="30"><path d="M22 2 3 22l19 20" fill="none" stroke="currentColor" stroke-width="2.5"/></svg>
+  </button>
+  <div class="track">
+    {items.map((it) => (
+      <figure class="slide">
+        {it.href
+          ? <a href={it.href} target="_blank" rel="noopener"><img src={it.image} alt={it.name} /></a>
+          : <img src={it.image} alt={it.name} />}
+        <figcaption>{it.name}</figcaption>
+      </figure>
+    ))}
+  </div>
+  <button class="arrow next" type="button" aria-label="Next">
+    <svg viewBox="0 0 24 44" width="16" height="30"><path d="M2 2l19 20L2 42" fill="none" stroke="currentColor" stroke-width="2.5"/></svg>
+  </button>
+</div>
+
+<script>
+  document.querySelectorAll<HTMLElement>('.logo-carousel').forEach((root) => {
+    const track = root.querySelector<HTMLElement>('.track');
+    if (!track) return;
+    const step = () => (track.querySelector<HTMLElement>('.slide')?.offsetWidth ?? 300) + 30;
+    root.querySelector('.prev')?.addEventListener('click', () => track.scrollBy({ left: -step(), behavior: 'smooth' }));
+    root.querySelector('.next')?.addEventListener('click', () => track.scrollBy({ left: step(), behavior: 'smooth' }));
+  });
+</script>
+
+<style>
+  .logo-carousel { display: flex; align-items: center; gap: 10px; }
+  .track { flex: 1; display: flex; justify-content: safe center; gap: 30px; overflow-x: auto; scroll-snap-type: x mandatory; scrollbar-width: none; padding: 4px 0; }
+  .track::-webkit-scrollbar { display: none; }
+  .slide { --s: min(var(--h), 75vw); flex: 0 0 var(--s); scroll-snap-align: start; margin: 0; text-align: center; }
+  .slide a { display: block; }
+  .slide img { width: var(--s); height: var(--s); object-fit: contain; background: var(--white); }
+  .slide figcaption { margin-top: 12px; font-family: var(--font-bold); font-size: 16px; }
+  .arrow { flex: 0 0 auto; background: none; border: 0; color: var(--black); cursor: pointer; padding: 8px; }
+  .arrow:hover { color: var(--green); }
+</style>

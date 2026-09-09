@@ -1,0 +1,40 @@
+---
+import Base from '../layouts/Base.astro';
+const services = [
+  { label: 'LOANS', href: '/loans', image: 'a38016_fd00a530c28c4050be549656fc31fae3.png' },
+  { label: 'CONSULTING', href: '/consulting', image: 'a38016_82beaebca0b6424db16e3c0537bdc20e.png' },
+  { label: 'EDUCATION', href: '/education', image: 'a38016_10163871fbdc484994120ad3806850ad.png' },
+];
+---
+<Base title="Arizona Microcredit Initiative | HOME">
+  <section class="legacy-hero">
+    <img src="/media/760f7c_ac4af18760ed4e4f9daa23e983914ffc.jpeg" alt="AMI presenting a business workshop" />
+    <h1><strong>TAKE</strong><span>the initiative.</span></h1>
+  </section>
+  <nav class="services" aria-label="Our services">
+    {services.map(service => <a href={service.href}><img src={`/media/${service.image}`} alt="" /><span>{service.label}</span></a>)}
+  </nav>
+  <section class="intro">
+    <h2>Arizona Microcredit Initiative is a 501(c)(3) nonprofit that empowers small business owners to start or expand businesses through free consulting services, low interest microloans and free business instruction.</h2>
+    <a class="btn btn-green" href="/about-us">Learn more</a>
+  </section>
+  <div class="legacy-band" aria-hidden="true"></div>
+  <div class="legacy-space" aria-hidden="true"></div>
+</Base>
+<style>
+  .legacy-hero { height: 332px; position: relative; display: grid; place-items: center; }
+  .legacy-hero > img { position: absolute; inset: 0; width: 100%; height: 100%; object-fit: cover; }
+  h1 { position: relative; text-align: center; color: white; line-height: 1; }
+  h1 strong { display: block; color: var(--green); letter-spacing: .25em; font: bold 90px var(--font-bold); }
+  h1 span { font: 60px Georgia, serif; }
+  .services { background: var(--green); display: flex; justify-content: center; gap: 200px; padding: 14px 20px 20px; }
+  .services a { color: white; text-align: center; text-decoration: none; font: 20px var(--font-bold); letter-spacing: .15em; }
+  .services img { width: 94px; height: 94px; padding: 20px; background: white; border-radius: 50%; margin: 0 auto 8px; }
+  .intro { max-width: 940px; margin: auto; text-align: center; padding: 44px 20px 40px; }
+  .intro h2 { font: 34px/1.25 var(--font-bold); margin-bottom: 28px; }
+  .intro .btn { font: 30px var(--font-avenir-light); border-radius: 4px; padding: 14px 50px; }
+  .legacy-band { height: 57px; background: var(--green); }
+  .legacy-space { height: 940px; }
+  @media (max-width: 900px) { .services { gap: 60px; } .intro h2 { font-size: 28px; } .legacy-space { height: 300px; } }
+  @media (max-width: 600px) { .legacy-hero { height: 280px; } h1 strong { font-size: 58px; } h1 span { font-size: 38px; } .services { gap: 18px; } .services a { font-size: 12px; } .services img { width: 72px; height: 72px; padding: 15px; } .intro h2 { font-size: 22px; } .legacy-space { height: 100px; } }
+</style>

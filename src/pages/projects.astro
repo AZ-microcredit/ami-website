@@ -1,0 +1,26 @@
+---
+import Base from '../layouts/Base.astro';
+---
+
+<Base title="Projects (All) | az-microcredit">
+  <section class="projects">
+    <div class="inner">
+      <h1>Check out the Initiative in Action</h1>
+      <p>Real people, real businesses, and real results. Check out our work with our clients below.</p>
+
+      <!-- INTEGRATION: Wix "Projects (All)" dynamic list. The live page binds a repeater to the
+           Projects collection, which is empty, so only its yellow container strip (980x64) renders.
+           Replace this block with the project gallery once the collection has content. -->
+      <div class="projects-list" role="list" aria-label="Projects"></div>
+    </div>
+  </section>
+</Base>
+
+<style>
+  .projects { min-height: 500px; padding: 22px 20px 0; }
+  .inner { max-width: var(--content-width); margin: 0 auto; }
+  .inner h1 { font-family: var(--font-bold); font-size: 29px; line-height: 1.4; margin-left: 5px; }
+  .inner p { font-family: var(--font-body); font-size: 16px; line-height: 1.4; margin-left: 5px; }
+  .projects-list { margin-top: 366px; height: 64px; background: #fcd307; }
+  @media (max-width: 900px) { .projects { min-height: 0; } .projects-list { margin-top: 120px; } }
+</style>

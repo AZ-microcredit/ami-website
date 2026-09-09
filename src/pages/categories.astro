@@ -1,0 +1,39 @@
+---
+// Legacy Wix CMS "My Items" listing of blog categories (live site: /categories).
+import Base from '../layouts/Base.astro';
+import { categories, postsInCategory } from '../lib/blog';
+const legacyHref = (slug: string) => `/categories/${slug}`;
+---
+
+<Base title="Arizona Microcredit Initiative | Categories" description="Blog categories of the Arizona Microcredit Initiative.">
+  <section class="cms-list">
+    <h1>My Items</h1>
+    <p class="sub">I'm a title. Click here to edit me.</p>
+    <ul class="items">
+      {categories.map((c) => (
+        <li class="item">
+          <h2><a href={legacyHref(c.slug)}>{c.name}</a></h2>
+          <p class="count">{postsInCategory(c.slug).length} {postsInCategory(c.slug).length === 1 ? 'post' : 'posts'}</p>
+          <a class="more" href={legacyHref(c.slug)} aria-label={`More: ${c.name}`}>More</a>
+        </li>
+      ))}
+    </ul>
+  </section>
+</Base>
+
+<style>
+  .cms-list { max-width: 796px; margin: 0 auto; padding: 50px 20px 60px; }
+  h1 { font-family: var(--font-bold); font-size: 32px; text-align: center; margin-bottom: 14px; }
+  .sub { font-family: var(--font-body); font-size: 16px; text-align: center; margin-bottom: 50px; }
+  .items { display: flex; flex-direction: column; gap: 50px; }
+  .item { border: 1px solid #e6e6e6; min-height: 262px; padding: 34px 40px 30px 304px; display: flex; flex-direction: column; }
+  h2 { font-family: var(--font-bold); font-size: 22px; line-height: 1.3; margin-bottom: 12px; }
+  h2 a { text-decoration: none; }
+  h2 a:hover { text-decoration: underline; }
+  .count { font-family: var(--font-body); font-size: 14px; color: #666; }
+  .more { margin-top: auto; font-family: var(--font-avenir-light); font-size: 16px; color: #deb512; text-decoration: none; }
+  .more:hover { text-decoration: underline; }
+  @media (max-width: 700px) {
+    .item { padding: 24px 20px; min-height: 0; gap: 16px; }
+  }
+</style>

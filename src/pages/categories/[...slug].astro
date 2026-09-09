@@ -1,0 +1,33 @@
+---
+// Legacy Wix CMS category pages (/categories/<slug>, including "finance/accounting").
+import Base from '../../layouts/Base.astro';
+import BlogShell from '../../components/BlogShell.astro';
+import BlogList from '../../components/BlogList.astro';
+import { categories, postsInCategory } from '../../lib/blog';
+
+export function getStaticPaths() {
+  const paths = [];
+  for (const c of categories) {
+    const slugs = new Set([c.slug, c.name.toLowerCase().replace(/ /g, '-')]);
+    for (const slug of slugs) paths.push({ params: { slug }, props: { category: c, posts: postsInCategory(c.slug) } });
+  }
+  return paths;
+}
+const { category, posts } = Astro.props;
+---
+
+<Base title={`Arizona Microcredit Initiative | ${category.name}`} description={`Blog posts in the ${category.name} category.`}>
+  <link slot="head" rel="canonical" href={`/blog/categories/${category.slug}`} />
+  <div class="cms-rule" aria-hidden="true"></div>
+  <section class="cms-head"><h1>{category.name}</h1></section>
+  <BlogShell>
+    <BlogList posts={posts} emptyText="No posts published in this category yet." />
+  </BlogShell>
+</Base>
+
+<style>
+  .cms-rule { max-width: var(--content-width); margin: 0 auto; height: 6px; background: #fcd307; }
+  .cms-head { max-width: var(--content-width); margin: 0 auto; padding: 60px 20px 40px 150px; }
+  .cms-head h1 { font-family: var(--font-bold); font-size: 28px; }
+  @media (max-width: 900px) { .cms-head { padding: 30px 20px 20px; } }
+</style>

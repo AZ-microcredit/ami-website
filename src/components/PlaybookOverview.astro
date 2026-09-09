@@ -1,0 +1,127 @@
+---
+/**
+ * "RESOURCES" / "START HERE" overview page: green band, full-bleed photo, grey
+ * body with three intro paragraphs, "Start learning by viewing our playbooks
+ * here:" and the BUILD / ELEVATE / EXPAND columns.
+ *
+ * Props
+ *  - pageTitle / description   <head>
+ *  - title / subtitle           band
+ *  - image / imagePosition      photo under the band (390px tall)
+ *  - columns                    [{ name, tagline, icon, iconSize, href?, head, body, size, spaced,
+ *                                  items: [{ text, href? }] | rendered via slot "expand" }]
+ *  - bodyHeight                 min height of the column bodies (px)
+ * Slots: "after" (content between the columns and the note) and "note"
+ *        (replaces the default "Can't find what you need?" sentence).
+ */
+import Base from '../layouts/Base.astro';
+import ResourceBand from './ResourceBand.astro';
+import CantFind from './CantFind.astro';
+
+interface Item { text: string; href?: string }
+interface Column {
+  name: string; tagline: string; icon: string; iconSize?: number; href?: string;
+  head: string; body: string; size?: number; spaced?: boolean; items?: Item[]; slot?: string;
+}
+interface Props {
+  pageTitle: string; description?: string; title: string; subtitle: string;
+  image: string; imagePosition?: string; columns: Column[]; bodyHeight?: number; headingSpaced?: boolean;
+}
+const { pageTitle, description, title, subtitle, image, imagePosition = 'center', columns, bodyHeight = 470, headingSpaced = false } = Astro.props;
+const isLink = (c: Column, it: Item) => Boolean(it.href);
+---
+
+<Base title={pageTitle} description={description}>
+  <ResourceBand title={title} subtitle={subtitle} />
+  <img class="po-photo" src={image} alt="" style={`object-position:${imagePosition}`} loading="eager" />
+
+  <div class="po-body">
+    <div class="po-inner">
+      <div class="po-intro">
+        <p>We know that being a small business owner is a daunting task, which is why we created three playbooks to help walk you through the journey.</p>
+        <p>These playbooks consist of individual topics that we suggest you learn about depending on which stage of your journey you are in. Each play/topic has been constructed based off of key business questions that we suggest based on what has worked for entrepreneurs and small business owners in the past.</p>
+        <p>Viewing each of these plays will help you understand what it will take to accomplish your goals.</p>
+      </div>
+
+      <h2 class:list={['po-heading', { spaced: headingSpaced }]}>Start learning by viewing <span>our playbooks</span> here:</h2>
+
+      <div class="po-cols" style={`--body-h:${bodyHeight}px`}>
+        {columns.map((c) => (
+          <div class="po-col" style={`--head:${c.head}; --cbody:${c.body}`}>
+            <div class="po-head">
+              <div class="po-head-top">
+                {c.href ? <a class="po-name" href={c.href}>{c.name}</a> : <span class="po-name">{c.name}</span>}
+                {c.href
+                  ? <a class="po-icon" href={c.href}><img src={c.icon} alt={`${c.name}.png`} width={c.iconSize ?? 64} height={c.iconSize ?? 64} /></a>
+                  : <img class="po-icon" src={c.icon} alt={`${c.name}.png`} width={c.iconSize ?? 64} height={c.iconSize ?? 64} />}
+              </div>
+              {c.href ? <a class="po-tag" href={c.href} set:html={c.tagline} /> : <p class="po-tag" set:html={c.tagline} />}
+            </div>
+            <div class:list={['po-list', { spaced: c.spaced }]} style={`font-size:${c.size ?? 15}px`}>
+              {c.slot === 'expand' ? (
+                <slot name="expand" />
+              ) : (
+                c.items?.map((it) => (
+                  <p>{isLink(c, it) ? <a href={it.href}>{it.text}</a> : it.text}</p>
+                ))
+              )}
+            </div>
+          </div>
+        ))}
+      </div>
+
+      <slot name="after" />
+    </div>
+
+    <div class="po-note">
+      {Astro.slots.has('note') ? <CantFind><slot name="note" /></CantFind> : <CantFind />}
+    </div>
+  </div>
+</Base>
+
+<style>
+  .po-photo { width: 100%; height: 390px; object-fit: cover; display: block; }
+  .po-body { background: var(--grey-bg); padding-bottom: 20px; }
+  .po-inner { max-width: var(--content-width); margin: 0 auto; padding: 0 20px; }
+
+  .po-intro { width: 888px; max-width: 100%; margin: 26px 0 0 24px; font-family: var(--font-avenir-light); font-size: 21px; line-height: 1.2; }
+  .po-intro p + p { margin-top: 24px; }
+
+  .po-heading { margin: 50px 0 30px 24px; font-family: var(--font-avenir-heavy); font-size: 32px; line-height: 1; color: #292929; }
+  .po-heading.spaced { letter-spacing: .1em; }
+  .po-heading span { color: var(--green-dark); }
+
+  .po-cols { display: grid; grid-template-columns: repeat(3, 287px); gap: 0 15px; margin-left: 24px; }
+  .po-col { display: flex; flex-direction: column; }
+  .po-head { background: var(--head); color: #fff; height: 168px; padding: 18px 14px 16px; display: flex; flex-direction: column; }
+  .po-head-top { display: flex; justify-content: space-between; align-items: flex-start; }
+  .po-name { font-family: var(--font-avenir-light); font-size: 40px; line-height: 1.1; color: #fff; text-decoration: none; }
+  .po-icon { display: block; flex: none; margin: 4px 6px 0 0; }
+  .po-icon img, img.po-icon { height: auto; }
+  .po-tag { margin-top: auto; font-family: var(--font-body); font-size: 23px; line-height: 1.3; letter-spacing: .03em; color: #fff; text-decoration: none; }
+  .po-list { background: var(--cbody); min-height: var(--body-h); padding: 26px 12px 20px; font-family: var(--font-avenir-light); line-height: 1.5; color: #000; }
+  .po-list.spaced { line-height: 1.2; }
+  .po-list.spaced p + p { margin-top: 15px; }
+  .po-list a { color: inherit; text-decoration: underline; }
+  .po-list :global(a) { color: inherit; }
+
+  .po-note { padding: 50px 0 16px; }
+
+  @media (max-width: 1000px) {
+    .po-cols { grid-template-columns: repeat(3, 1fr); margin-left: 0; }
+    .po-intro, .po-heading { margin-left: 0; width: auto; }
+  }
+  @media (max-width: 900px) {
+    .po-photo { height: 260px; }
+    .po-cols { grid-template-columns: 1fr; gap: 24px; }
+    .po-list { min-height: 0; }
+    .po-heading { font-size: 26px; line-height: 1.2; }
+    .po-intro { font-size: 18px; }
+    .po-note { padding: 36px 0 12px; }
+  }
+  @media (max-width: 600px) {
+    .po-photo { height: 200px; }
+    .po-name { font-size: 32px; }
+    .po-tag { font-size: 19px; width: auto; }
+  }
+</style>

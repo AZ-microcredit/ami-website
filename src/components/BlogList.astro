@@ -1,0 +1,95 @@
+---
+/**
+ * Post cards (cover left, title + excerpt right) plus the numbered pager.
+ * `current`/`totalPages` drive the pager; page 1 lives at `basePath`, later pages at `${basePath}/page/N`.
+ */
+import type { Post } from '../lib/blog';
+import { postUrl, excerpt } from '../lib/blog';
+
+interface Props {
+  posts: Post[];
+  current?: number;
+  totalPages?: number;
+  basePath?: string;
+  emptyText?: string;
+  heading?: string;
+}
+const { posts, current = 1, totalPages = 1, basePath = '/blog', emptyText = 'No posts published in this category yet.', heading } = Astro.props;
+const pageHref = (n: number) => (n === 1 ? basePath : `${basePath}/page/${n}`);
+const pages = Array.from({ length: totalPages }, (_, i) => i + 1);
+---
+
+{heading && <h1 class="list-heading">{heading}</h1>}
+
+{posts.length === 0 ? (
+  <p class="empty">{emptyText}</p>
+) : (
+  <div class="cards">
+    {posts.map((p) => (
+      <article class="card">
+        <a class="thumb" href={postUrl(p)} tabindex="-1" aria-hidden="true"><img src={p.cover} alt={p.title} loading="lazy" /></a>
+        <div class="body">
+          <h2><a href={postUrl(p)}>{p.title}</a></h2>
+          <p class="excerpt">{excerpt(p)}</p>
+        </div>
+      </article>
+    ))}
+  </div>
+)}
+
+{totalPages > 1 && (
+  <nav class="pager" aria-label="Blog pagination">
+    {current > 1 ? (
+      <a class="arrow" href={pageHref(current - 1)} aria-label="Previous page"><svg viewBox="0 0 8 14" width="8" height="14"><path d="M7 1 1 7l6 6" fill="none" stroke="currentColor" stroke-width="1.5"/></svg></a>
+    ) : (
+      <span class="arrow disabled" aria-hidden="true"><svg viewBox="0 0 8 14" width="8" height="14"><path d="M7 1 1 7l6 6" fill="none" stroke="currentColor" stroke-width="1.5"/></svg></span>
+    )}
+    {pages.map((n) => n === current
+      ? <span class="num current" aria-current="page">{n}</span>
+      : <a class="num" href={pageHref(n)} aria-label={`Page ${n}`}>{n}</a>)}
+    {current < totalPages ? (
+      <a class="arrow" href={pageHref(current + 1)} aria-label="Next page"><svg viewBox="0 0 8 14" width="8" height="14"><path d="m1 1 6 6-6 6" fill="none" stroke="currentColor" stroke-width="1.5"/></svg></a>
+    ) : (
+      <span class="arrow disabled" aria-hidden="true"><svg viewBox="0 0 8 14" width="8" height="14"><path d="m1 1 6 6-6 6" fill="none" stroke="currentColor" stroke-width="1.5"/></svg></span>
+    )}
+  </nav>
+)}
+
+<style>
+  .list-heading { font-family: var(--font-bold); font-size: 28px; margin: 4px 0 20px; }
+  .empty { background: var(--white); padding: 40px 24px; font-family: var(--font-avenir-light); font-size: 18px; text-align: center; }
+
+  .cards { display: flex; flex-direction: column; gap: 32px; }
+  .card { background: var(--white); display: grid; grid-template-columns: 319px 1fr; min-height: 239px; }
+  .thumb { display: block; position: relative; overflow: hidden; min-height: 239px; }
+  .thumb img { position: absolute; inset: 0; width: 100%; height: 100%; object-fit: cover; }
+  .body { padding: 26px 24px 22px; min-width: 0; }
+  .card h2 {
+    font-family: var(--font-avenir-heavy); font-size: 27px; line-height: 1.25; margin: 0 0 14px;
+    display: -webkit-box; -webkit-line-clamp: 3; -webkit-box-orient: vertical; overflow: hidden;
+  }
+  .card h2 a { text-decoration: none; }
+  .card h2 a:hover { text-decoration: underline; }
+  .excerpt {
+    font-family: var(--font-avenir-light); font-size: 16px; line-height: 1.5; color: #1a1a1a;
+    display: -webkit-box; -webkit-line-clamp: 3; -webkit-box-orient: vertical; overflow: hidden;
+  }
+
+  .pager { display: flex; justify-content: center; align-items: center; gap: 22px; margin-top: 26px; font-family: var(--font-avenir-light); font-size: 17px; }
+  .pager .num { text-decoration: none; color: var(--black); padding: 4px 6px; }
+  .pager .num:hover { text-decoration: underline; }
+  .pager .current { color: #d9a900; }
+  .pager .arrow { display: inline-flex; color: var(--black); padding: 4px; }
+  .pager .arrow.disabled { color: #8a8a8a; }
+
+  @media (max-width: 900px) {
+    .card { grid-template-columns: 220px 1fr; min-height: 0; }
+    .thumb { min-height: 200px; }
+    .card h2 { font-size: 22px; }
+  }
+  @media (max-width: 600px) {
+    .card { grid-template-columns: 1fr; }
+    .thumb { height: 220px; min-height: 0; }
+    .body { padding: 20px; }
+  }
+</style>

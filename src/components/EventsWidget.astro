@@ -1,0 +1,55 @@
+---
+/**
+ * Wix Events "upcoming events" widget equivalent.
+ * Reads upcoming events from src/data/events.js (see that file for the shape) and renders
+ * either the cards or the "No events at the moment" message the live site shows.
+ * Events without a start date (Wix "date TBD" events, start: null) count as upcoming and
+ * show their shortDate / shortLocation text instead of a formatted date.
+ */
+import { events } from '../data/events.js';
+
+interface Props { category?: string; limit?: number; showEmpty?: boolean }
+const { category, limit = 6, showEmpty = true } = Astro.props;
+
+const now = new Date();
+const time = (e: any) => (e.start ? new Date(e.start).getTime() : Number.POSITIVE_INFINITY);
+const isUpcoming = (e: any) => !e.start || new Date(e.end ?? e.start) >= now;
+
+const upcoming = events
+  .filter((e) => (!category || e.categories?.includes(category)) && isUpcoming(e))
+  .sort((a, b) => time(a) - time(b)) // dated events first, TBD events last
+  .slice(0, limit);
+
+const fmt = (d: string) =>
+  new Date(d).toLocaleDateString('en-US', { month: 'short', day: 'numeric', year: 'numeric' });
+const dateText = (e: any) => (e.start ? fmt(e.start) : e.shortDate ?? e.fullDate ?? 'Date TBD');
+const locationText = (e: any) => e.shortLocation ?? e.locationName ?? e.location ?? '';
+---
+
+{upcoming.length === 0 && showEmpty && <p class="no-events">No events at the moment</p>}
+
+{upcoming.length > 0 && (
+  <div class="event-cards">
+    {upcoming.map((e) => (
+      <article class="event-card">
+        {e.image && <a href={`/event-details-registration/${e.slug}`}><img src={e.image} alt={e.title} loading="lazy" /></a>}
+        <h3><a href={`/event-details-registration/${e.slug}`}>{e.title}</a></h3>
+        <p class="meta">{dateText(e)}{locationText(e) ? `  |  ${locationText(e)}` : ''}</p>
+        <a class="more" href={`/event-details-registration/${e.slug}`}>More info</a>
+        <a class="btn btn-dark-green rsvp" href={e.registrationUrl ?? `/event-details-registration/${e.slug}`}>Register</a>
+      </article>
+    ))}
+  </div>
+)}
+
+<style>
+  .no-events { font-family: var(--font-bold); font-size: 17px; text-align: center; }
+  .event-cards { display: grid; grid-template-columns: repeat(auto-fit, minmax(280px, 1fr)); gap: 30px; }
+  .event-card { text-align: center; max-width: 660px; margin: 0 auto; }
+  .event-card img { width: 100%; aspect-ratio: 1; object-fit: cover; margin-bottom: 26px; }
+  .event-card h3 { font-family: var(--font-avenir-heavy); font-size: 24px; margin-bottom: 8px; }
+  .event-card h3 a { text-decoration: none; }
+  .event-card .meta { font-family: var(--font-avenir-light); font-size: 16px; margin-bottom: 18px; white-space: pre-wrap; }
+  .event-card .more { display: table; margin: 0 auto 26px; font-family: var(--font-avenir-light); font-size: 14px; }
+  .event-card .rsvp { text-transform: none; font-family: var(--font-avenir-light); font-size: 16px; padding: 8px 46px; }
+</style>
