@@ -1,0 +1,63 @@
+---
+/** Full-width auto-advancing hero slideshow with prev/next arrows (Wix "SlideShowContainer" equivalent). */
+interface Slide { src: string; alt?: string }
+interface Props { slides: Slide[]; height?: number; interval?: number }
+const { slides, height = 725, interval = 5000 } = Astro.props;
+---
+
+<div class="slideshow" style={`--h:${height}px`} data-interval={interval} aria-roledescription="carousel" aria-label="Slideshow">
+  <div class="track">
+    {slides.map((s, i) => (
+      <div class:list={['slide', { current: i === 0 }]} role="group" aria-roledescription="slide" aria-label={`${i + 1} of ${slides.length}`}>
+        <img src={s.src} alt={s.alt ?? ''} loading={i === 0 ? 'eager' : 'lazy'} />
+      </div>
+    ))}
+  </div>
+  {slides.length > 1 && (
+    <>
+      <button class="arrow prev" type="button" aria-label="Previous">
+        <svg viewBox="0 0 24 44" width="24" height="44"><path d="M22 2 3 22l19 20" fill="none" stroke="currentColor" stroke-width="2"/></svg>
+      </button>
+      <button class="arrow next" type="button" aria-label="Next">
+        <svg viewBox="0 0 24 44" width="24" height="44"><path d="M2 2l19 20L2 42" fill="none" stroke="currentColor" stroke-width="2"/></svg>
+      </button>
+    </>
+  )}
+</div>
+
+<script>
+  document.querySelectorAll<HTMLElement>('.slideshow').forEach((root) => {
+    const slides = Array.from(root.querySelectorAll<HTMLElement>('.slide'));
+    if (slides.length < 2) return;
+    let i = 0;
+    let timer: number | undefined;
+    const show = (n: number) => {
+      slides[i].classList.remove('current');
+      i = (n + slides.length) % slides.length;
+      slides[i].classList.add('current');
+    };
+    const start = () => { stop(); timer = window.setInterval(() => show(i + 1), Number(root.dataset.interval) || 5000); };
+    const stop = () => { if (timer) window.clearInterval(timer); };
+    root.querySelector('.prev')?.addEventListener('click', () => { show(i - 1); start(); });
+    root.querySelector('.next')?.addEventListener('click', () => { show(i + 1); start(); });
+    root.addEventListener('mouseenter', stop);
+    root.addEventListener('mouseleave', start);
+    start();
+  });
+</script>
+
+<style>
+  .slideshow { position: relative; width: 100%; height: var(--h); overflow: hidden; background: #ddd; }
+  .track, .slide { position: absolute; inset: 0; }
+  .slide { opacity: 0; transition: opacity .8s ease; }
+  .slide.current { opacity: 1; }
+  .slide img { width: 100%; height: 100%; object-fit: cover; object-position: center; }
+  .arrow {
+    position: absolute; top: 50%; transform: translateY(-50%);
+    background: none; border: 0; color: #fff; cursor: pointer; padding: 10px;
+    opacity: .9; transition: opacity .2s;
+  }
+  .arrow:hover { opacity: 1; }
+  .prev { left: 28px; } .next { right: 28px; }
+  @media (max-width: 900px) { .slideshow { height: min(var(--h), 60vw); } .arrow svg { width: 16px; height: 30px; } .prev { left: 8px; } .next { right: 8px; } }
+</style>

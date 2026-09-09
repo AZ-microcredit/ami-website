@@ -1,0 +1,20 @@
+---
+/** "Interested in a loan?" heading + underline + rounded green "Schedule a Call" button (older Loans pages). */
+interface Props { title?: string; label?: string; href: string; spaced?: boolean }
+const { title = 'Interested in a loan?', label = 'Schedule a Call', href, spaced = false } = Astro.props;
+---
+<div class:list={['interested', { spaced }]}>
+  <h4 set:html={title} />
+  <hr />
+  <a class="pill" href={href} aria-label={label}>{label}</a>
+</div>
+
+<style>
+  .interested { text-align: center; }
+  h4 { display: inline-block; font-family: var(--font-avenir-heavy); font-size: 30px; line-height: 1.4; color: #000; }
+  .spaced h4 { font-family: var(--font-bold); font-size: 29px; letter-spacing: 0.5em; margin-left: 0.5em; }
+  hr { width: 396px; max-width: 100%; margin: -4px auto 0; border: 0; border-top: 2px solid #000; }
+  .pill { display: inline-flex; align-items: center; justify-content: center; width: 255px; height: 54px; margin-top: 28px; border-radius: 5px; background: rgba(40, 158, 25, 0.9); color: var(--white); font-family: var(--font-avenir-light); font-size: 25px; line-height: 1.4; text-decoration: none; transition: background-color .4s ease; }
+  .pill:hover { background: var(--green); }
+  @media (max-width: 600px) { h4 { font-size: 24px; } .spaced h4 { font-size: 20px; letter-spacing: 0.3em; } .pill { width: 220px; height: 48px; font-size: 21px; } }
+</style>

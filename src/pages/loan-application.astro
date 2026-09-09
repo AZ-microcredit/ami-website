@@ -1,0 +1,27 @@
+---
+/** "Loan Application" Wix page: the only content is a Typeform embed (954×594). */
+import Base from '../layouts/Base.astro';
+---
+
+<Base title="Loan Application | az-microcredit">
+  <section class="application">
+    <!-- INTEGRATION: Typeform loan-application embed. The live page renders a 954×594 Wix
+         HTML/iframe component that only shows "powered by Typeform" while loading; the form
+         URL is not present in the page source. Replace this placeholder with
+         <iframe src="https://form.typeform.com/to/<FORM_ID>" width="954" height="594" title="Loan Application"></iframe> -->
+    <div class="typeform-placeholder" role="region" aria-label="Loan application form">
+      <span class="powered">powered by</span>
+      <span class="brand">Typeform</span>
+      <span class="bar" aria-hidden="true"></span>
+    </div>
+  </section>
+</Base>
+
+<style>
+  .application { min-height: 860px; display: flex; align-items: center; justify-content: center; padding: 20px; background: #fff; }
+  .typeform-placeholder { width: 954px; max-width: 100%; height: 594px; display: flex; flex-direction: column; align-items: center; justify-content: center; gap: 2px; }
+  .powered { font-family: var(--font-body); font-size: 12px; color: #7a9c72; }
+  .brand { font-family: var(--font-bold); font-size: 22px; color: var(--green); }
+  .bar { width: 160px; height: 4px; margin-top: 14px; background: linear-gradient(90deg, var(--green) 0 38%, #cfe6c8 38% 100%); border-radius: 2px; }
+  @media (max-width: 900px) { .application { min-height: 520px; } .typeform-placeholder { height: 420px; } }
+</style>

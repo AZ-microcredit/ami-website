@@ -1,0 +1,94 @@
+---
+import Base from '../layouts/Base.astro';
+import Hero from '../components/Hero.astro';
+
+const faqs = [
+  { q: 'What is a microloan?', a: 'A microloan is a small loan aimed at supporting the growth of small businesses.' },
+  { q: 'Who can apply for a microloan?', a: 'Small business entrepreneurs in the Phoenix area seeking financial support for their businesses are encouraged to apply.' },
+  { q: 'How can I apply for a microloan?', a: 'You can schedule a Loan Interest Meeting through the AMI website to meet with experts who will guide you through the application process.' },
+  { q: 'Why choose AMI?', a: 'AMI offers lower credit score requirements compared to traditional banks and specializes in supporting small businesses, making us well-equipped to meet your needs.' },
+  { q: 'What loan terms does AMI offer?', a: 'We offer loans up to $7,500 with terms of 6–24 months and a fixed interest rate of 1%.' },
+  { q: 'How can I use the loan funds?', a: 'Loan funds should be invested in revenue-generating assets, such as equipment, and can also be invested in inventory.' },
+  { q: 'What is the loan process?', a: 'The process begins with an initial consultation call to understand your business and loan purpose. After approval, funds are disbursed, and repayment follows the agreed plan. Once fully repaid, your business can continue to grow.' },
+  { q: 'What documents are required?', a: 'The required documents for a loan include personal tax returns from the last two years, personal and business bank statements from the last six months, an EIN and tax ID, a utility bill, a personal resume, a business plan, and a planned loan budget outlining how the funds will be used. Additionally, professional references are required.' },
+  { q: 'Can I apply for more than one loan?', a: 'Yes, after fully repaying your first loan, you may apply for additional funding.' },
+  { q: 'What does a “holistic review” mean?', a: 'AMI assesses loan applicants using the five C’s: Capacity, Capital, Collateral, Conditions, and Character. Each factor is considered to ensure a fair evaluation.' },
+];
+---
+
+<Base
+  title="Microloan FAQ's | Arizona Microcredit Initiative"
+  description="Interested In Funding Your Small Business, But Not Sure How To Get Started? Here At AMI, We Want To Make The Loan Application Process As Simple As Possible. Read All Our Our Most-Asked Microloan FAQ's Here!"
+>
+  <Hero image="/media/760f7c_8dbe533962034f3e8a4d36caf40876d4.jpg" height={332} align="left" class="faq-hero">
+    <div class="title-wrap">
+      <svg class="plus" viewBox="0 0 252.492 252.492" aria-hidden="true" role="presentation">
+        <path vector-effect="non-scaling-stroke" d="M252.492 117.246H135.246V0h-18v117.246H0v18h117.246v117.246h18V135.246h117.246v-18z" />
+      </svg>
+      <h1 class="hero-title">MICROLOAN FAQ's</h1>
+    </div>
+  </Hero>
+
+  <section class="faq">
+    <dl class="faq-list">
+      {faqs.map((f) => (
+        <div class="faq-item">
+          <dt>{f.q}</dt>
+          <dd>{f.a}</dd>
+        </div>
+      ))}
+    </dl>
+  </section>
+
+  <section class="still">
+    <hr />
+    <h2 class="still-title">STILL HAVE QUESTIONS?</h2>
+    <p class="still-text">
+      Reach out to us directly at: <a class="mail" href="mailto:info@azmicrocredit.org">info@azmicrocredit.org</a><br />
+      or <a class="call" href="/copy-of-apply-for-a-loan">schedule an initial loan call</a>!
+    </p>
+  </section>
+</Base>
+
+<style>
+  /* Hero: photo at 50% opacity over white, white "+" mark tucked into the title's top-left corner */
+  :global(.faq-hero .hero-bg) { opacity: 0.5; }
+  :global(.faq-hero) { background: #fff; min-height: 0; }
+  :global(.faq-hero .hero-content) { padding-bottom: 96px; padding-left: 46px; }
+  :global(.faq-hero .hero-content .hero-title) { font-size: 60px; line-height: 1.1; padding: 0 12px 2px; text-transform: none; }
+  .title-wrap { position: relative; }
+  .plus { position: absolute; left: -44px; top: -42px; width: 72px; height: 60px; fill: #fff; stroke: #fff; stroke-width: 9px; overflow: visible; }
+
+  .faq { max-width: var(--content-width); margin: 0 auto; padding: 32px 20px 30px 57px; }
+  .faq-list { margin: 0; max-width: 841px; }
+  .faq-item { margin-bottom: 27px; }
+  .faq-item dt { font-family: var(--font-bold); font-size: 32px; line-height: 1.6; color: var(--green); }
+  .faq-item dd { margin: 0 0 0 40px; font-family: var(--font-body); font-size: 20px; line-height: 1.4; }
+
+  .still { max-width: var(--content-width); margin: 0 auto; padding: 8px 20px 44px; }
+  .still hr { border: 0; border-top: 2px solid var(--black); margin: 0 -20px 20px; }
+  .still-title { display: inline-block; margin-left: 24px; background: var(--green); color: var(--white); font-family: var(--font-bold); font-size: 32px; line-height: normal; letter-spacing: 0.1em; padding: 0 0.35em; }
+  .still-text { margin: 14px 0 0 37px; font-family: var(--font-body); font-size: 20px; line-height: normal; letter-spacing: 0.01em; color: #242323; }
+  .still-text .mail { font-family: var(--font-bold); color: var(--green); text-decoration: none; }
+  .still-text .mail:hover { text-decoration: underline; }
+  .still-text .call { color: inherit; text-decoration: none; }
+  .still-text .call:hover { text-decoration: underline; }
+
+  @media (max-width: 900px) {
+    :global(.faq-hero .hero-content) { padding-left: 40px; padding-bottom: 40px; }
+    :global(.faq-hero .hero-content .hero-title) { font-size: 40px; }
+    .plus { width: 48px; height: 40px; left: -30px; top: -28px; }
+    .faq { padding-left: 20px; }
+    .faq-item dt { font-size: 26px; line-height: 1.4; margin-bottom: 6px; }
+    .faq-item dd { margin-left: 20px; font-size: 18px; }
+    .still-title, .still-text { margin-left: 0; }
+    .still-title { font-size: 24px; }
+  }
+  @media (max-width: 600px) {
+    :global(.faq-hero .hero-content .hero-title) { font-size: 30px; }
+    .faq-item dt { font-size: 22px; }
+    .faq-item dd { margin-left: 0; font-size: 16px; }
+    .still-title { font-size: 18px; letter-spacing: 0.06em; }
+    .still-text { font-size: 17px; }
+  }
+</style>

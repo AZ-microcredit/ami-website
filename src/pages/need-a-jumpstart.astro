@@ -1,0 +1,102 @@
+---
+import Base from '../layouts/Base.astro';
+import ResourceBand from '../components/ResourceBand.astro';
+
+// Wix Video channel widget: Strategyzer's Business Model Canvas playlist (YouTube ids from the live page).
+const videos = [
+  { id: 'QoAOzMTLP5s', title: 'Business Model Canvas Explained' },
+  { id: 'wwShFsSFb-Y', title: 'Ep 1 - Getting From Business Idea to Business Model' },
+  { id: 'wlKP-BaC0jA', title: 'Ep 2 - Visualizing Your Business Model' },
+  { id: 'iA5MVUNkSkM', title: 'Ep 3 - Prototyping' },
+];
+---
+
+<Base title="Need a jumpstart? | az-microcredit">
+  <ResourceBand align="center" light title="Start Learning Today!" subtitle="Click the link below for a short video on our favorite way to map out a business." />
+
+  <!-- Wix Video "channel" widget rendered statically: poster + overlay; "Play Video" swaps in the
+       YouTube embed, "All Videos" reveals the playlist. -->
+  <section class="vch" id="vch">
+    <img class="vch-poster" src="/media/yt-QoAOzMTLP5s.jpg" alt="Business Model Canvas Explained" />
+    <div class="vch-overlay">
+      <p class="vch-channel">Strategyzer</p>
+      <h3 class="vch-title" id="vch-title">Business Model Canvas Explained</h3>
+      <button class="vch-play" type="button" id="vch-play" aria-label="Play Video">
+        <span class="vch-play-icon" aria-hidden="true"></span><span class="vch-play-text">Play Video</span>
+      </button>
+      <button class="vch-all" type="button" id="vch-all" aria-expanded="false" aria-controls="vch-list">All Videos <span aria-hidden="true">+</span></button>
+    </div>
+    <div class="vch-frame" id="vch-frame" hidden></div>
+    <ul class="vch-list" id="vch-list" hidden>
+      {videos.map((v) => (
+        <li><button type="button" data-id={v.id} data-title={v.title}><img src={`https://i.ytimg.com/vi/${v.id}/mqdefault.jpg`} alt="" loading="lazy" /><span>{v.title}</span></button></li>
+      ))}
+    </ul>
+  </section>
+
+  <script>
+    const root = document.getElementById('vch')!;
+    const frame = document.getElementById('vch-frame')!;
+    const titleEl = document.getElementById('vch-title')!;
+    const list = document.getElementById('vch-list')!;
+    const allBtn = document.getElementById('vch-all')!;
+    let current = 'QoAOzMTLP5s';
+    const play = (id: string) => {
+      current = id;
+      frame.innerHTML = `<iframe src="https://www.youtube.com/embed/${id}?autoplay=1&rel=0" title="${titleEl.textContent}" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>`;
+      frame.hidden = false;
+      root.classList.add('playing');
+    };
+    document.getElementById('vch-play')!.addEventListener('click', () => play(current));
+    allBtn.addEventListener('click', () => {
+      const open = list.hidden;
+      list.hidden = !open;
+      allBtn.setAttribute('aria-expanded', String(open));
+    });
+    list.querySelectorAll('button').forEach((b) =>
+      b.addEventListener('click', () => {
+        titleEl.textContent = b.dataset.title || '';
+        list.hidden = true;
+        allBtn.setAttribute('aria-expanded', 'false');
+        play(b.dataset.id!);
+      }),
+    );
+  </script>
+</Base>
+
+<style>
+  .vch { position: relative; height: 536px; background: #000; overflow: hidden; color: #fff; }
+  .vch-poster { position: absolute; inset: 0; width: 100%; height: 100%; object-fit: cover; }
+  .vch-overlay { position: absolute; inset: 0; background: rgba(0, 0, 0, .55); display: flex; flex-direction: column; align-items: center; justify-content: center; text-align: center; padding: 20px; }
+  .vch.playing .vch-overlay, .vch.playing .vch-poster { display: none; }
+  .vch-channel { font-family: var(--font-avenir-light); font-size: 18px; margin-bottom: 24px; }
+  .vch-title { font-family: var(--font-avenir-heavy); font-size: 55px; line-height: 1.15; max-width: 720px; }
+  .vch-play { display: inline-flex; align-items: center; gap: 12px; margin-top: 44px; background: none; border: 0; color: #fff; cursor: pointer; padding: 0; }
+  .vch-play-icon { width: 38px; height: 38px; border-radius: 50%; background: #fff; position: relative; }
+  .vch-play-icon::after { content: ''; position: absolute; left: 15px; top: 11px; border-left: 12px solid #000; border-top: 8px solid transparent; border-bottom: 8px solid transparent; }
+  .vch-play-text { font-family: var(--font-avenir-light); font-size: 20px; text-decoration: underline; }
+  .vch-all { margin-top: 84px; width: 148px; height: 50px; border-radius: 25px; border: 1px solid rgba(255, 255, 255, .5); background: rgba(255, 255, 255, .06); color: #fff; font-family: var(--font-avenir-light); font-size: 17px; cursor: pointer; }
+  .vch-all span { font-size: 22px; margin-left: 6px; vertical-align: -2px; }
+  .vch-all:hover { background: rgba(255, 255, 255, .15); }
+  .vch-frame { position: absolute; inset: 0; }
+  .vch-frame :global(iframe) { width: 100%; height: 100%; border: 0; }
+  .vch-list[hidden] { display: none; }
+  .vch-list { position: absolute; left: 0; right: 0; bottom: 0; display: flex; gap: 12px; justify-content: center; padding: 12px; background: rgba(0, 0, 0, .75); z-index: 2; }
+  .vch-list button { background: none; border: 0; color: #fff; cursor: pointer; width: 200px; text-align: left; font-family: var(--font-avenir-light); font-size: 14px; padding: 0; }
+  .vch-list img { width: 100%; height: auto; margin-bottom: 6px; }
+  .vch-list button:hover span { text-decoration: underline; }
+
+  @media (max-width: 900px) {
+    .vch { height: 420px; }
+    .vch-title { font-size: 34px; }
+    .vch-all { margin-top: 40px; }
+    .vch-list { flex-wrap: wrap; }
+    .vch-list button { width: 44%; }
+  }
+  @media (max-width: 600px) {
+    .vch { height: 360px; }
+    .vch-title { font-size: 26px; }
+    .vch-play { margin-top: 24px; }
+    .vch-list button span { display: none; }
+  }
+</style>

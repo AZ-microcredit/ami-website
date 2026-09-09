@@ -1,0 +1,67 @@
+---
+import Base from '../layouts/Base.astro';
+
+const interestForm = 'https://docs.google.com/forms/d/e/1FAIpQLSe3yKuwghb_4vDhnkWaAV3TcLVChW5ldf4Z4--RuzP33gYPkg/viewform?fbclid=PAZXh0bgNhZW0CMTEAAafWJsB_HZ8XTXWzhb7m3OhDtqGdwGv1XKH1xgTX4cu8RclSJ1DSZb7VTqDYpA_aem_Pp99XCqXOReAZSK8T8OmMA';
+const application = 'https://form.jotform.com/252378373939169?fbclid=PAZXh0bgNhZW0CMTEAAadP4bp2Nv7rnR6sQjLCfiMeQAYkWGvTag-u0sLXxPUCatblbfRNZFO15x6gxw_aem_ZyrWoE5TzEFJfTyKSjxaDg';
+---
+
+<Base title="Join the Team | az-microcredit">
+  <div class="grey-strip"></div>
+  <div class="photo-strip">
+    <img src="/media/a1a2f8_8f99a0f47bf34c33a7a2ec7005055503.jpg" alt="AMI stock photo.jpg" loading="eager" />
+  </div>
+
+  <section class="join">
+    <div class="inner">
+      <h1>AMI is seeking qualified individuals to join our staff.</h1>
+      <p>Thank you for your interest. The Fall 2025 Application is now open!</p>
+      <p>If you are interested in learning more, please fill out our <a href={interestForm} target="_blank" rel="noopener">Interest Form</a>.</p>
+      <p>The <a href={application} target="_blank" rel="noopener">Application</a> is due <b>Sunday, September 21st, 2025 by 11:59 PM.</b> We look forward to reading your application.</p>
+
+      <h2>Timeline:</h2>
+      <p class="tight">Information Sessions:<br />Wednesday 9/17&nbsp; @ 5:30-6:30 PM @ Cottonwood 101<br />Friday 9/19 @ 6-7 pm over <a href="https://meet.google.com/tei-zwmh-ozi" target="_blank" rel="noopener">Google Meets</a></p>
+      <p class="tight">Application Deadline:<br />Sunday 9/21 @ 11:59 PM</p>
+      <p class="tight">Interviews:<br />Saturday 9/27 &amp; Sunday 9/28 via invitation</p>
+
+      <p class="more">For more information, please contact <a href="mailto:annie@azmicrocredit.org">agustin@azmicrocredit.org</a> and follow our <a href="http://facebook.com/azmicrocredit" target="_blank" rel="noopener">Facebook,</a> <a href="http://instagram.com/azmicrocredit" target="_blank" rel="noopener">Instagram</a>, and <a href="https://www.linkedin.com/company/2532813/admin/" target="_blank" rel="noopener">Linkedin</a>.</p>
+
+      <p class="apply-wrap"><a class="apply" href={application} target="_blank" rel="noopener" aria-label="APPLY">APPLY</a></p>
+
+      <h2 class="faq-title">AMI FAQs</h2>
+      <div class="faqs">
+        <p><b>What is AMI?</b> A student-run nonprofit that empowers underserved entrepreneurs in the greater Phoenix area to start or expand businesses through consulting services, micro-loans, and business instruction.</p>
+        <p><b>Why join?</b> Gain hands-on experience working with small business owners, solve ambiguous problems, serve the local community and join a culture of high-achieving students.</p>
+        <p><b>Who can apply?</b> Any undergraduate student at ASU with a passion for helping others and an interest in the mechanics of businesses.</p>
+      </div>
+    </div>
+  </section>
+</Base>
+
+<style>
+  .grey-strip { height: 15px; background: var(--grey-bg); }
+  .photo-strip { height: 413px; overflow: hidden; background: #5280be; }
+  .photo-strip img { width: 100%; height: 100%; object-fit: cover; object-position: center 40%; filter: blur(14px); transform: scale(1.06); }
+
+  .join { background: var(--grey-bg); min-height: 1219px; padding: 44px 20px 60px; }
+  .inner { max-width: 640px; margin: 0 auto; text-align: center; font-family: var(--font-avenir-light); font-size: 20px; line-height: 1.2; color: var(--black); }
+  .inner h1 { font-family: var(--font-avenir-heavy); font-size: 29px; line-height: 1.2; max-width: 420px; margin: 0 auto 28px; }
+  .inner h2 { font-family: var(--font-avenir-heavy); font-size: 22px; margin: 26px 0 14px; }
+  .inner p { margin: 0 0 24px; }
+  .inner p.tight { margin-bottom: 30px; line-height: 1.4; }
+  .inner a { color: inherit; }
+  .inner b { font-family: var(--font-avenir-heavy); font-weight: normal; }
+  .more { margin-top: 40px !important; }
+  .apply-wrap { margin: 36px 0 60px !important; }
+  .apply { display: inline-flex; align-items: center; justify-content: center; width: 138px; height: 38px; background: #2ca01e; color: var(--white) !important; text-decoration: none; font-family: var(--font-avenir-light); font-size: 22px; letter-spacing: 0.12em; transition: background .2s; }
+  .apply:hover { background: var(--green); }
+  .faq-title { font-size: 29px !important; margin-bottom: 20px !important; }
+  .faqs { max-width: 650px; margin: 0 auto; text-align: left; }
+  .faqs p { margin-bottom: 20px; line-height: 1.25; }
+
+  @media (max-width: 900px) {
+    .photo-strip { height: 50vw; min-height: 220px; }
+    .join { min-height: 0; padding: 30px 20px 50px; }
+    .inner { font-size: 18px; }
+  }
+  @media (max-width: 600px) { .inner { font-size: 16px; } .inner h1 { font-size: 24px; } }
+</style>

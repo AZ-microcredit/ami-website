@@ -1,0 +1,94 @@
+---
+/**
+ * Body of the older "MICROLOANS – loan details" page. Shared by
+ * /loan-plans and /copy-of-loan-plans (identical Wix pages).
+ */
+import PlusBand from './PlusBand.astro';
+import InterestedCTA from './InterestedCTA.astro';
+
+const details = [
+  { icon: '/media/18b6c6_ab09905524774ba788aa72ac7bc5b95b.png', alt: 'money.png', text: 'Up to $7500', extra: true },
+  { icon: '/media/18b6c6_5eeff8c3143f41b8b820f890055df20d.png', alt: 'time.png', text: '6 - 24 month term', big: true },
+  { icon: '/media/18b6c6_c1dcfce95a8f4d4b9df6f1dc908b2cf4.png', alt: 'Document.png', text: '5-8% simple interest rate' },
+];
+const docs = [
+  'Personal Tax Returns (last two years)',
+  'Personal Bank Statements (last six months)',
+  'Business Bank Statements (last six months)',
+  'Utility Bill (most recent month)',
+  'EIN and Tax ID',
+  'Planned Loan Budget (i.e. what are you planning to use the loan for?)',
+  'Professional References',
+];
+---
+
+<PlusBand title="MICROLOANS" subtitle="We offer loans up to $7,500 at low interest rates" subtitleWidth={549} />
+
+<div class="photo-strip">
+  <img src="/media/a1a2f8_041507f5ccdd47b892dcbd6be40ad177.jpg" alt="website image_3.JPG" loading="eager" />
+</div>
+
+<section class="grey">
+  <div class="inner">
+    <h4 class="succeed">We work with you to help your business <span class="g">SUCCEED.</span></h4>
+    <p class="tailored">Our loans are tailored to fit your business needs. Let us help your business reach its full potential.</p>
+
+    <div class="plan">
+      <div class="bar">Loan Details</div>
+      <ul class="details">
+        {details.map((d) => (
+          <li>
+            <span class="circle"><img src={d.icon} alt={d.alt} width={d.big ? 40 : 35} height={d.big ? 40 : 34} loading="lazy" /></span>
+            <span class:list={['txt', { extra: d.extra }]}>{d.text}</span>
+          </li>
+        ))}
+      </ul>
+
+      <div class="bar">Required Documents</div>
+      <ul class="docs">
+        {docs.map((d) => <li>{d}</li>)}
+      </ul>
+    </div>
+
+    <InterestedCTA href="/schedule-a-consultation" />
+  </div>
+</section>
+
+<style>
+  .photo-strip { height: 400px; overflow: hidden; background: #fafafa; }
+  .photo-strip img { width: 100%; height: 100%; object-fit: cover; object-position: center 40%; }
+
+  .grey { background: var(--grey-bg); }
+  .inner { max-width: var(--content-width); margin: 0 auto; padding: 46px 20px 77px; }
+  .succeed { max-width: 865px; margin: 0 auto; text-align: center; font-family: var(--font-avenir-heavy); font-size: 45px; line-height: 1.2; color: #000; }
+  .succeed .g { color: var(--green); }
+  .tailored { max-width: 511px; margin: 60px auto 0; text-align: center; font-family: var(--font-avenir-light); font-size: 30px; line-height: 1.5; }
+
+  .plan { width: 641px; max-width: 100%; margin: 80px auto 0; }
+  .bar { height: 54px; border-radius: 5px; background: rgba(40, 158, 25, 0.9); color: var(--white); display: flex; align-items: center; justify-content: center; font-family: var(--font-avenir-light); font-size: 24px; }
+  .details { margin: 19px 0 0 16px; display: flex; flex-direction: column; gap: 6px; }
+  .details li { display: flex; align-items: center; gap: 22px; height: 44px; }
+  .circle { flex: none; width: 44px; height: 44px; border-radius: 50%; background: #000; display: flex; align-items: center; justify-content: center; }
+  .circle img { width: 35px; height: auto; }
+  .details .txt { font-family: var(--font-avenir-light); font-size: 20px; line-height: 1.5; }
+  .details .txt.extra { padding-left: 14px; }
+  .details + .bar { margin-top: 50px; }
+  .docs { margin: 23px 0 0 36px; list-style: disc; padding: 0; }
+  .docs li { font-family: var(--font-avenir-light); font-size: 20px; line-height: 1.5; padding-left: 0; }
+  .docs li::marker { font-size: 20px; }
+
+  .inner :global(.interested) { margin-top: 178px; }
+
+  @media (max-width: 900px) {
+    .photo-strip { height: 52vw; min-height: 220px; }
+    .inner { padding-bottom: 60px; }
+    .succeed { font-size: 32px; }
+    .tailored { font-size: 22px; margin-top: 32px; }
+    .plan { margin-top: 40px; }
+    .bar { font-size: 20px; }
+    .details { margin-left: 4px; }
+    .docs { margin-left: 24px; }
+    .docs li, .details .txt { font-size: 18px; }
+    .inner :global(.interested) { margin-top: 70px; }
+  }
+</style>

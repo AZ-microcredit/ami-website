@@ -1,0 +1,42 @@
+---
+import TutorialPage from '../components/TutorialPage.astro';
+
+// The live page is a single unfinished Wix checkbox group on a white page.
+const choices = [
+  { label: 'Monday', checked: true },
+  { label: 'Tuesday' },
+  { label: 'Wednesday', checked: true },
+  { label: 'Choice 1' }, { label: 'Choice 2' }, { label: 'Choice 3' },
+  { label: 'Choice 4' }, { label: 'Choice 5' }, { label: 'Choice 6' },
+];
+---
+
+<TutorialPage pageTitle="Business Startup Guide | az-microcredit" note={false} background="#fff">
+  <!-- INTEGRATION: Wix checkbox-group form element (not wired to any form submission on the live site). -->
+  <fieldset class="checks">
+    <legend>Legal and Financial Setup</legend>
+    {choices.map((c) => (
+      <label class="check">
+        <input type="checkbox" name="legal-financial-setup" value={c.label} checked={c.checked} />
+        <span class="box" aria-hidden="true">
+          <svg viewBox="0 0 7.40011 5.68606"><path d="M2.55016,5.68606a.7.7,0,0,1-.5684-.29151L.1317,2.82326a.7.7,0,0,1,1.1367-.81738L2.6236,3.87049,6.1327.28189a.7.7,0,0,1,1.0034.97656L3.05016,5.47536A.7.7,0,0,1,2.55016,5.68606Z" fill="currentColor" /></svg>
+        </span>
+        <span class="txt">{c.label}</span>
+      </label>
+    ))}
+  </fieldset>
+</TutorialPage>
+
+<style>
+  .checks { border: 0; margin: 106px 0 0 269px; padding: 0 0 106px; width: 292px; max-width: 100%; font-family: var(--font-body); font-size: 16px; line-height: 1.4; color: var(--black); }
+  .checks legend { padding: 0; margin: 0 0 10px; font-size: 16px; }
+  .check { display: flex; align-items: center; gap: 11px; height: 30px; cursor: pointer; }
+  .check input { position: absolute; opacity: 0; width: 0; height: 0; }
+  .check .box { width: 20px; height: 20px; flex: none; border: 1px solid var(--black); background: var(--white); display: flex; align-items: center; justify-content: center; color: var(--black); }
+  .check .box svg { width: 12px; height: 9px; display: none; }
+  .check input:checked + .box svg { display: block; }
+  .check input:focus-visible + .box { outline: 2px solid var(--green-dark); outline-offset: 1px; }
+  @media (max-width: 900px) {
+    .checks { margin: 40px 0 0; padding-bottom: 40px; }
+  }
+</style>

@@ -1,0 +1,50 @@
+---
+/**
+ * Green title band used on the older "About" family of pages
+ * (About Us, Our Impact, Partnerships, Testimonials, Client Success Stories,
+ * COVID-19 Update, Member of the Month): black "+" icon, white Avenir Heavy
+ * title and an italic Noticia Text subtitle.
+ */
+interface Props {
+  title: string;
+  subtitle?: string;
+  /** max-width of the subtitle in px (default 790) */
+  subtitleWidth?: number;
+  /** left indent of the subtitle in px, measured from the title's left edge (default 42) */
+  indent?: number;
+  class?: string;
+  tag?: 'h1' | 'h2';
+}
+const { title, subtitle, subtitleWidth = 790, indent = 42, class: cls = '', tag = 'h1' } = Astro.props;
+const Tag = tag;
+---
+<section class:list={['plus-band', cls]} style={`--sub-w:${subtitleWidth}px; --sub-indent:${indent}px`}>
+  <div class="plus-band-inner">
+    <div class="title-row">
+      <svg class="plus" viewBox="0 0 45 45" aria-hidden="true" role="presentation"><path d="M22.5 1v43M1 22.5h43" stroke="#000" stroke-width="11" fill="none" /></svg>
+      <Tag class="plus-title" set:html={title} />
+    </div>
+    {subtitle && <p class="plus-subtitle" set:html={subtitle} />}
+  </div>
+</section>
+
+<style>
+  @import url('https://fonts.googleapis.com/css2?family=Noticia+Text:ital@1&display=swap');
+  .plus-band { background: var(--green); color: var(--white); padding: 10px 0 9px; }
+  .plus-band-inner { max-width: var(--content-width); margin: 0 auto; padding: 0 20px 0 16px; }
+  .title-row { display: flex; align-items: center; gap: 14px; }
+  .plus { flex: 0 0 auto; width: 46px; height: 46px; margin-left: -18px; }
+  .plus-title { font-family: var(--font-avenir-heavy); font-size: 50px; line-height: 1.2; color: var(--white); }
+  .plus-subtitle { margin: -2px 0 0 var(--sub-indent); font-family: 'Noticia Text', Georgia, serif; font-style: italic; font-size: 20px; line-height: 1.4; color: var(--black); max-width: var(--sub-w); }
+  @media (max-width: 900px) {
+    .plus-band-inner { padding: 0 20px; }
+    .plus { width: 34px; height: 34px; margin-left: 0; }
+    .plus-title { font-size: 36px; }
+    .plus-subtitle { margin-left: 48px; font-size: 17px; }
+  }
+  @media (max-width: 600px) {
+    .plus { width: 26px; height: 26px; }
+    .plus-title { font-size: 27px; }
+    .plus-subtitle { margin-left: 0; font-size: 15px; }
+  }
+</style>

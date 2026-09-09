@@ -1,0 +1,53 @@
+---
+/**
+ * Static stand-in for the 123FormBuilder "Collaborate with Us" iframe that sits next to
+ * the partner-logo box on the About Us and Partnerships pages.
+ */
+interface Props { blank?: boolean }
+const { blank = false } = Astro.props;
+---
+<!-- INTEGRATION: 123FormBuilder "Collaborate with Us" form. The live page embeds
+     <iframe title="123 Form Builder & Payments"> (525x748) here. Replace this block with the
+     123FormBuilder embed code; the fields below only mirror its layout and do not submit. -->
+<div class="collab-form" aria-label="Collaborate with Us form">
+  {!blank && (
+    <form class="cf" onsubmit="return false">
+      <h3>Collaborate with Us</h3>
+      <p class="cf-intro">Our community partners are other community organizations in greater Phoenix with the common mission to serve small business entrepreneurs. If you are interested in collaborating with us please complete the form and we will contact you shortly!</p>
+      <div class="cf-row"><label for="cf-name">Name <span class="req">*</span></label><input id="cf-name" type="text" class="wide" /></div>
+      <div class="cf-row"><label for="cf-email">Email <span class="req">*</span></label><input id="cf-email" type="email" class="short" /></div>
+      <div class="cf-row"><label for="cf-org">Organization name <span class="req">*</span></label><input id="cf-org" type="text" class="wide" /></div>
+      <div class="cf-row"><label for="cf-site">Organization website <span class="req">*</span></label><input id="cf-site" type="text" class="short" /></div>
+      <div class="cf-row"><label for="cf-msg">Message <span class="req">*</span></label><textarea id="cf-msg" rows="3" class="wide"></textarea></div>
+      <div class="cf-row"><label for="cf-how">How did you find us?</label><input id="cf-how" type="text" class="short" /></div>
+      <div class="cf-row"><label>Verification <span class="req">*</span></label><span></span></div>
+      <div class="cf-submit"><button type="submit">Submit</button></div>
+      <div class="cf-footer"><span class="brand"><b>123</b> Powered by 123FormBuilder</span><span>Report abuse</span></div>
+    </form>
+  )}
+</div>
+
+<style>
+  .collab-form { width: 525px; max-width: 100%; min-height: 748px; background: #fefefe; }
+  .cf { padding: 46px 40px 0; font-family: Arial, Helvetica, sans-serif; color: #333; }
+  .cf h3 { font-family: Arial, Helvetica, sans-serif; font-weight: 700; font-size: 26px; margin: 0 0 6px; color: #222; }
+  .cf-intro { font-size: 12px; font-weight: 700; line-height: 1.3; margin-bottom: 56px; }
+  .cf-row { display: grid; grid-template-columns: 120px 1fr; column-gap: 0; align-items: start; margin-bottom: 22px; }
+  .cf-row label { font-size: 12px; font-weight: 700; line-height: 1.3; padding-top: 4px; }
+  .req { color: #e00; }
+  .cf input, .cf textarea { font: inherit; font-size: 13px; border: 1px solid #9a9a9a; background: #fff; padding: 4px 6px; border-radius: 0; height: 28px; }
+  .cf textarea { height: 78px; resize: none; }
+  .cf .wide { width: 282px; max-width: 100%; }
+  .cf .short { width: 152px; max-width: 100%; }
+  .cf-submit { padding: 30px 0 22px 120px; }
+  .cf-submit button { background: #1ea0d8; color: #fff; border: 0; border-radius: 3px; font: inherit; font-size: 15px; padding: 9px 26px; cursor: pointer; }
+  .cf-footer { display: flex; justify-content: space-between; align-items: center; background: #ddd; color: #666; font-size: 11px; margin: 0 -40px; padding: 14px 16px; }
+  .cf-footer .brand b { font-size: 16px; color: #888; letter-spacing: -0.03em; margin-right: 6px; }
+  @media (max-width: 600px) {
+    .collab-form { min-height: 0; }
+    .cf { padding: 30px 20px 0; }
+    .cf-row { grid-template-columns: 1fr; row-gap: 4px; }
+    .cf-submit { padding-left: 0; }
+    .cf-footer { margin: 0 -20px; }
+  }
+</style>

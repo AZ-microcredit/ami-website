@@ -1,0 +1,40 @@
+---
+/**
+ * Grey page shell for the blog: a 980px grid with the main column (slot) on the left and the
+ * BlogSidebar on the right. mode="list" mirrors the live Wix layout where "Featured Posts" sits
+ * beside the post list and the other widgets start below the list; mode="post" stacks the sidebar.
+ */
+import BlogSidebar from './BlogSidebar.astro';
+interface Props { mode?: 'list' | 'post' }
+const { mode = 'list' } = Astro.props;
+---
+
+<div class="blog-bg">
+  <div class:list={['blog-grid', mode]}>
+    <div class="blog-main"><slot /></div>
+    <BlogSidebar mode={mode} />
+  </div>
+</div>
+
+<style>
+  .blog-bg { background: var(--grey-bg); padding: 25px 0 60px; }
+  .blog-grid {
+    max-width: var(--content-width); margin: 0 auto; padding: 0 25px 0 26px;
+    display: grid; grid-template-columns: 670px 224px; column-gap: 34px; align-items: start;
+    grid-template-areas: 'main featured' 'main .' '. rest';
+  }
+  .blog-grid.post { grid-template-columns: 698px 224px; column-gap: 2px; padding: 10px 25px 0 31px; grid-template-areas: 'main featured' 'main rest'; }
+  .blog-main { grid-area: main; min-width: 0; }
+  .blog-grid :global(.sb-featured) { grid-area: featured; }
+  .blog-grid :global(.sb-rest) { grid-area: rest; margin-top: 40px; }
+  .blog-grid.post :global(.sb-rest) { margin-top: 0; }
+
+  @media (max-width: 1000px) {
+    .blog-grid, .blog-grid.post { grid-template-columns: minmax(0, 1fr) 224px; column-gap: 24px; padding: 0 20px; }
+  }
+  @media (max-width: 900px) {
+    .blog-grid, .blog-grid.post { grid-template-columns: 1fr; grid-template-areas: 'featured' 'main' 'rest'; }
+    .blog-grid :global(.sb-featured) { max-width: 420px; }
+    .blog-grid :global(.sb-rest) { margin-top: 20px; }
+  }
+</style>

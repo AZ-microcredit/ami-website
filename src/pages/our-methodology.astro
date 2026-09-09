@@ -1,0 +1,76 @@
+---
+/** Older "Our Five-Step Initiative" page (grey grid of numbered photos + tinted cards). */
+import Base from '../layouts/Base.astro';
+
+const steps = [
+  { label: 'STEP ONE', title: 'DEFINE THE CURRENT STATE', html: 'We understand where you and your business are right now,<br />and where you want to go.', image: '/media/760f7c_1d43393d51a5464fa7c76b02ac9d44c1.png', alt: '1.png', alpha: 0.2, tw: 234 },
+  { label: 'STEP TWO', title: 'IDENTIFY IMPROVEMENT OPPORTUNITIES', html: 'We figure out which areas need to be worked on to resolve your business problems and advance your business.', image: '/media/760f7c_a15e516a1cad404aa0f9c62819797ca2.png', alt: '2.png', alpha: 0.4, tw: 270 },
+  { label: 'STEP THREE', title: 'CONDUCT RESEARCH', html: 'We delve deeper to gain context and more knowledge into the business landscape you are part of.', image: '/media/760f7c_fd83017f26304f0880b04dc2955f6423.png', alt: '3.png', alpha: 0.6, tw: 256 },
+  { label: 'STEP FOUR', title: 'DESIGN & IMPLEMENT SOLUTION', html: 'We create and implement a custom solution, teaching you how it works along the way.', image: '/media/760f7c_d70e048695eb48a9bfc945cd8e66014c.png', alt: '4.png', alpha: 0.8, tw: 248 },
+  { label: 'STEP FIVE', title: 'MEASURE RESULTS', html: 'We measure the success of the solution, gauge its effectiveness, and help you adjust accordingly.', image: '/media/760f7c_ddddc70e29b24aef88dda15f3bd6f4bd.png', alt: '5.png', alpha: 1, tw: 259 },
+];
+---
+
+<Base
+  title="Our Methodology | az-microcredit"
+  description="AMI finds success in our one-on-one consulting by following a specific consulting mthodology. Read exactly how we will structure your engagement here!"
+>
+  <section class="grey">
+    <div class="inner">
+      <h2 class="title">Our Five-Step Initiative</h2>
+      <h2 class="lead">Curious as to what it would look like if you reached out to us?</h2>
+      <h2 class="lead">We follow this five-step framework to help you tackle any business problem you're facing.</h2>
+
+      <div class="grid">
+        {steps.map((s) => (
+          <div class="step">
+            <img src={s.image} alt={s.alt} width="317" height="202" loading="lazy" />
+            <div class="card" style={`background: rgba(94, 179, 70, ${s.alpha})`}>
+              <h2 class="label">{s.label}</h2>
+              <h2 class="step-title">{s.title}</h2>
+              <h2 class="text" style={`max-width:${s.tw}px`} set:html={s.html} />
+            </div>
+          </div>
+        ))}
+        <div class="action">
+          <img src="/media/760f7c_3308c1765cf24491ba4560f90dbd0147.jpg" alt="Serving Glamour.JPG" width="318" height="378" loading="lazy" />
+          <div class="overlay"><h2>CHECK OUT THE INITIATIVE IN ACTION</h2></div>
+        </div>
+      </div>
+    </div>
+  </section>
+</Base>
+
+<style>
+  .grey { background: var(--grey-bg); }
+  .inner { max-width: var(--content-width); margin: 0 auto; padding: 42px 20px 26px 24px; }
+  .title { text-align: center; font-family: var(--font-avenir-heavy); font-size: 44px; line-height: 1.2; color: #292929; }
+  .lead { text-align: center; font-family: var(--font-avenir-light); font-size: 20px; line-height: 1.25; color: #292929; }
+  .title + .lead { margin-top: 26px; }
+
+  .grid { display: grid; grid-template-columns: repeat(3, 317px); column-gap: 9px; row-gap: 28px; margin-top: 50px; }
+  .step img { display: block; width: 317px; height: 202px; object-fit: cover; }
+  .card { width: 316px; height: 174px; margin-top: 8px; padding: 14px 16px 0; text-align: center; }
+  .label { font-family: var(--font-body); font-size: 12px; letter-spacing: 0.35em; margin-left: 0.35em; line-height: 1.4; }
+  .step-title { margin: 14px auto 0; max-width: 286px; font-family: var(--font-bold); font-size: 19px; line-height: 1.2; letter-spacing: -0.05em; text-transform: uppercase; }
+  .text { margin: 22px auto 0; font-family: Georgia, Palatino, 'Book Antiqua', 'Palatino Linotype', serif; font-size: 14px; line-height: 1.2; }
+
+  .action { position: relative; width: 318px; height: 378px; margin-left: -4px; }
+  .action img { width: 318px; height: 378px; object-fit: cover; }
+  .overlay { position: absolute; left: 0; bottom: 0; width: 318px; height: 180px; background: rgba(255, 255, 255, 0.56); display: flex; align-items: center; justify-content: center; padding: 0 12px; }
+  .overlay h2 { text-align: center; font-family: var(--font-bold); font-size: 37px; line-height: 1.05; letter-spacing: -0.05em; text-transform: uppercase; }
+
+  @media (max-width: 1020px) {
+    .inner { padding-left: 20px; }
+    .grid { grid-template-columns: repeat(auto-fit, 317px); justify-content: center; }
+    .action { margin-left: 0; }
+  }
+  @media (max-width: 900px) {
+    .title { font-size: 32px; }
+    .lead { font-size: 18px; }
+  }
+  @media (max-width: 360px) {
+    .grid { grid-template-columns: 1fr; }
+    .step img, .card, .action, .action img, .overlay { width: 100%; }
+  }
+</style>

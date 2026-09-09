@@ -1,0 +1,94 @@
+---
+import Base from '../layouts/Base.astro';
+import Hero from '../components/Hero.astro';
+import posts from '../data/posts.json';
+
+// Older "Small Business Guide" Resource Index: two interview videos + an 18-tile
+// Wix Pro Gallery of blog posts (matched by title, order as on the live page).
+const titles = [
+  'Business Pricing Strategy',
+  'SEO The Basics | Small Business SEO Tips',
+  'Creating Financial Statements | Template For Financial Statement',
+  'A/B Testing',
+  'The Key to Acquiring Small Business Investors | Finding and Retaining Investors',
+  'Instagram for Small Businesses',
+  'A Key to Business Expansion: Small Business Upskilling',
+  'Building Customer Relationships - Promotion Strategies',
+  'Business Mission Statement and Vision Statement',
+  'Supplier Scorecard',
+  'How To: Website Building With Wix',
+  'Why Conduct Market Research?',
+  '5 Ps of Marketing Explained',
+  'Social Media Advertising | Using Social Media Marketing Tools',
+  'Achieving Nonprofit Status',
+  'Small Business Accounting 101',
+  'How Do I Construct Professional Emails',
+  'Small Business Insurance',
+];
+const norm = (s: string) => s.replace(/\s+/g, ' ').trim().toLowerCase();
+const tiles = titles.map((t) => {
+  // "A/B Testing" exists twice in the blog; the live tile links to a-b-testing-5
+  const p = t === 'A/B Testing' ? posts.find((x) => x.slug === 'a-b-testing-5') : posts.find((x) => norm(x.title) === norm(t));
+  if (!p) throw new Error(`copy-of-education-f: no post titled "${t}"`);
+  return { title: t, href: `/single-post/${p.slug}`, image: p.cover };
+});
+---
+
+<Base title="Arizona Microcredit Initiative |  BUSINESS EDUCATION" description="Designed for startups or established businesses, our education services cover all the business basics.">
+  <Hero image="/media/760f7c_7ec659024dc34b548a492fd8745e45c4.png" height={636} align="left" position="center 50%" class="sbg-hero">
+    <p class="sbg-title">Small Business Guide</p>
+  </Hero>
+
+  <section class="ri">
+    <h2 class="spaced-title ri-heading">RESOURCE INDEX</h2>
+
+    <!-- Two Wix VideoPlayer widgets (YouTube) -->
+    <div class="ri-videos">
+      <iframe src="https://www.youtube.com/embed/x6lUgPoOlG4" title="AMI Interviews Fair Trade Cafe" loading="lazy" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
+      <iframe src="https://www.youtube.com/embed/jXy_6qYDf_Y" title="AMI Interviews Justice Java" loading="lazy" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
+    </div>
+
+    <h1 class="ri-intro">AMI’s interview series features conversations with local Arizona small business owners, offering insights into their entrepreneurial journeys as part of our ongoing effort to provide meaningful educational resources</h1>
+
+    <!-- Wix Pro Gallery (3 columns, grey tiles, title overlaid) -->
+    <ul class="ri-gallery">
+      {tiles.map((t) => (
+        <li>
+          <a class="ri-tile" href={t.href} aria-label={t.title}>
+            <img src={t.image} alt={t.title} />
+            <span class="ri-tile-title">{t.title}</span>
+          </a>
+        </li>
+      ))}
+    </ul>
+  </section>
+</Base>
+
+<style>
+  :global(.sbg-hero .hero-content) { padding-bottom: 63px; }
+  .sbg-title { display: inline-block; background: #68b04d; color: #fafafa; font-family: var(--font-bold); font-size: 80px; line-height: 1.1; letter-spacing: -.02em; padding: 0 10px 2px 8px; margin-left: -20px; }
+
+  .ri { max-width: var(--content-width); margin: 0 auto; padding: 44px 20px 40px; }
+  .ri-heading { font-size: 40px; letter-spacing: .5em; text-indent: .5em; }
+  .ri-videos { display: flex; justify-content: center; gap: 24px; margin-top: 40px; }
+  .ri-videos iframe { width: 414px; height: 246px; border: 0; background: #000; display: block; }
+  .ri-intro { width: 848px; max-width: 100%; margin: 36px auto 0; text-align: center; font-family: var(--font-bold); font-size: 20px; line-height: 1.35; }
+  .ri-gallery { width: 810px; max-width: 100%; margin: 36px auto 0; display: grid; grid-template-columns: repeat(3, 1fr); gap: 5px; }
+  .ri-tile { position: relative; display: block; aspect-ratio: 1; background: #737373; overflow: hidden; color: #fff; text-decoration: none; }
+  .ri-tile img { width: 100%; height: 100%; object-fit: cover; transition: transform .3s; }
+  .ri-tile:hover img { transform: scale(1.04); }
+  .ri-tile-title { position: absolute; left: 14px; right: 14px; bottom: 26px; text-align: center; font-family: var(--font-bold); font-size: 22px; line-height: 1.1; display: -webkit-box; -webkit-line-clamp: 4; -webkit-box-orient: vertical; overflow: hidden; text-shadow: 0 0 6px rgba(0,0,0,.35); }
+
+  @media (max-width: 900px) {
+    .sbg-title { font-size: 48px; margin-left: 0; }
+    .ri-heading { font-size: 28px; letter-spacing: .3em; }
+    .ri-videos { flex-direction: column; align-items: center; }
+    .ri-videos iframe { width: 100%; max-width: 560px; aspect-ratio: 16 / 9; height: auto; }
+  }
+  @media (max-width: 600px) {
+    .sbg-title { font-size: 34px; }
+    .ri-gallery { grid-template-columns: repeat(2, 1fr); }
+    .ri-tile-title { font-size: 18px; }
+    .ri-intro { font-size: 17px; }
+  }
+</style>

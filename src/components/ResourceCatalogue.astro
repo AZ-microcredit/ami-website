@@ -1,0 +1,56 @@
+---
+/**
+ * "RESOURCE INDEX — A catalogue of all AMI educational resources" page body
+ * (resource-index and copy-of-resource-index): the Wix Blog "post list" widget
+ * showing 9 posts as 4-column cards (cover on grey, serif title + excerpt on green).
+ *
+ *  - showCategory   render the yellow "Build" category label above each title
+ *                   (copy-of-resource-index shows it, resource-index does not)
+ */
+import posts from '../data/posts.json';
+import { excerpt } from '../lib/blog';
+
+interface Props { showCategory?: boolean }
+const { showCategory = false } = Astro.props;
+
+const slugs = [
+  'loan-resources', 'problem-solving-101', 'networking-101', 'customer-feedback',
+  'business-registration', 'business-process-improvement-bpi', 'grant-funding', 'business-model-canvas',
+  'value-proposition',
+];
+const cards = slugs.map((s) => {
+  const p = posts.find((x) => x.slug === s);
+  if (!p) throw new Error(`ResourceCatalogue: unknown post slug ${s}`);
+  return { ...p, href: `/single-post/${s}`, text: excerpt(p as any, 160) };
+});
+---
+
+<ul class="rc-grid">
+  {cards.map((c) => (
+    <li class="rc-card">
+      <a class="rc-thumb" href={c.href} tabindex="-1" aria-hidden="true"><img src={c.cover} alt="" loading="lazy" /></a>
+      <div class="rc-body">
+        {showCategory && <a class="rc-cat" href="/blog/categories/build">Build</a>}
+        <h2 class="rc-title"><a href={c.href}>{c.title}</a></h2>
+        <p class="rc-text">{c.text}</p>
+      </div>
+    </li>
+  ))}
+</ul>
+
+<style>
+  .rc-grid { display: grid; grid-template-columns: repeat(4, 1fr); gap: 12px 11px; max-width: 980px; margin: 0 auto; font-family: 'Noticia Text', Georgia, serif; }
+  .rc-card { background: #77be6e; color: var(--white); display: flex; flex-direction: column; height: 375px; }
+  .rc-thumb { display: block; height: 176px; flex: none; background: #c8c8c8; overflow: hidden; }
+  .rc-thumb img { width: 100%; height: 100%; object-fit: cover; }
+  .rc-body { padding: 28px 10px 20px; text-align: center; overflow: hidden; }
+  .rc-cat { display: block; font-size: 14px; line-height: 1.4; color: #ddb40d; text-decoration: none; margin-bottom: 8px; }
+  .rc-cat:hover { text-decoration: underline; }
+  .rc-title { font-family: inherit; font-size: 22px; line-height: 1.3; margin: 0 0 10px; }
+  .rc-title a { text-decoration: none; }
+  .rc-title a:hover { text-decoration: underline; }
+  .rc-text { font-size: 14px; line-height: 1.5; display: -webkit-box; -webkit-line-clamp: 2; -webkit-box-orient: vertical; overflow: hidden; }
+
+  @media (max-width: 900px) { .rc-grid { grid-template-columns: repeat(2, 1fr); } .rc-card { height: auto; min-height: 340px; } }
+  @media (max-width: 480px) { .rc-grid { grid-template-columns: 1fr; } }
+</style>

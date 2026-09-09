@@ -1,0 +1,136 @@
+---
+/**
+ * Shell for the BUILD / ELEVATE / EXPAND playbook pages (resources-build,
+ * resources-elevate, resources-expand, copy-of-expand).
+ *
+ * green "+ TITLE" band → grey body: optional intro (default slot), optional
+ * "Build FAQs" accordion, the Wix Masonry gallery of topic tiles (4 columns,
+ * green caption box), then the "Can't find what you need?" note.
+ *
+ * Props
+ *  - pageTitle / description   <head>
+ *  - title / subtitle           band text
+ *  - items                      gallery tiles [{ title, description, image, href }]
+ *  - gap                        gallery gutter in px (13 or 15 on the live site)
+ *  - boxColor                   caption box colour (#5eb346 or #68b04d)
+ *  - faqs                       accordion row labels (omit → no accordion)
+ *  - note                       show the closing note (default true)
+ */
+import Base from '../layouts/Base.astro';
+import ResourceBand from './ResourceBand.astro';
+import CantFind from './CantFind.astro';
+
+interface Item { title: string; description: string; image: string; href: string }
+interface Props {
+  pageTitle: string;
+  description?: string;
+  title: string;
+  subtitle: string;
+  items: Item[];
+  gap?: number;
+  boxColor?: string;
+  faqs?: string[];
+  note?: boolean;
+}
+const { pageTitle, description, title, subtitle, items, gap = 13, boxColor = '#5eb346', faqs, note = true } = Astro.props;
+---
+
+<Base title={pageTitle} description={description}>
+  <ResourceBand title={title} subtitle={subtitle} />
+
+  <div class="pb-body">
+    <div class="pb-inner">
+      <slot />
+
+      {faqs && (
+        <div class="pb-faq">
+          <!-- INTEGRATION: Wix FAQ app ("Build FAQs"). Only the question rows are in the crawled
+               page; the collapsed answers are loaded by the Wix app at runtime and are not
+               available offline. Add the answer text inside each <details> when known. -->
+          <span class="pb-tab">Build FAQs</span>
+          <div class="pb-acc">
+            {faqs.map((q) => (
+              <details class="pb-acc-item">
+                <summary>
+                  <span>{q}</span>
+                  <svg viewBox="0 0 16 10" width="16" height="10" aria-hidden="true"><path d="M1 1l7 7 7-7" fill="none" stroke="currentColor" stroke-width="1.5" /></svg>
+                </summary>
+                <div class="pb-acc-body"></div>
+              </details>
+            ))}
+          </div>
+        </div>
+      )}
+
+      <!-- Wix Masonry gallery (comp Masonry.html iframe on the live site), rendered statically -->
+      <ul class="pb-gallery" style={`--gap:${gap}px; --box:${boxColor}`}>
+        {items.map((it) => (
+          <li>
+            <a class="pb-tile" href={it.href}>
+              <img src={it.image} alt={it.title} loading="lazy" />
+              <span class="pb-cap">
+                <span class="pb-cap-title">{it.title}</span>
+                <span class="pb-cap-desc">{it.description}</span>
+              </span>
+            </a>
+          </li>
+        ))}
+      </ul>
+    </div>
+
+    {note && <div class="pb-note"><CantFind conj="or" /></div>}
+  </div>
+</Base>
+
+<style>
+  .pb-body { background: var(--grey-bg); padding-bottom: 20px; }
+  .pb-inner { max-width: var(--content-width); margin: 0 auto; padding: 0 20px; }
+
+  /* intro paragraphs passed through the slot */
+  .pb-inner :global(.pb-intro) { width: 866px; max-width: 100%; margin: 34px 0 0 46px; font-family: var(--font-avenir-light); font-size: 20px; line-height: 1.4; }
+  .pb-inner :global(.pb-intro p + p) { margin-top: 24px; }
+  .pb-inner :global(.pb-intro em) { font-style: italic; }
+  .pb-inner :global(.pb-intro strong) { font-family: var(--font-avenir-heavy); font-weight: 400; }
+  .pb-inner :global(.pb-intro.small) { font-size: 18px; margin-left: 44px; margin-top: 30px; }
+
+  /* "Build FAQs" tab + accordion */
+  .pb-faq { margin: 60px 0 0 74px; width: 828px; max-width: 100%; }
+  .pb-tab { display: inline-block; min-width: 118px; text-align: center; font-family: var(--font-avenir-light); font-size: 15px; color: #ddb40d; padding: 8px 10px; border-bottom: 2px solid #ddb40d; }
+  .pb-acc { margin-top: 28px; }
+  .pb-acc-item { border-bottom: 1px solid var(--green); }
+  .pb-acc-item summary { list-style: none; cursor: pointer; display: flex; justify-content: space-between; align-items: center; padding: 37px 12px 37px 0; font-family: var(--font-avenir-light); font-size: 18px; line-height: 1.4; }
+  .pb-acc-item summary::-webkit-details-marker { display: none; }
+  .pb-acc-item svg { flex: none; transition: transform .2s; }
+  .pb-acc-item[open] svg { transform: rotate(180deg); }
+  .pb-acc-body { min-height: 24px; padding: 0 0 24px; font-family: var(--font-avenir-light); font-size: 16px; }
+
+  /* gallery */
+  .pb-gallery { width: 903px; max-width: 100%; margin: 48px 0 0 26px; display: grid; grid-template-columns: repeat(4, minmax(0, 1fr)); gap: var(--gap); align-items: start; }
+  .pb-gallery li { min-width: 0; }
+  .pb-faq + .pb-gallery { margin-top: 100px; }
+  .pb-tile { display: block; text-decoration: none; color: var(--white); box-shadow: 0 1px 4px rgba(0, 0, 0, .35); background: var(--box); transition: background .3s; }
+  .pb-tile:hover { background: #a7dea0; }
+  .pb-tile img { width: 100%; max-width: 100%; height: auto; display: block; }
+  .pb-cap { display: block; padding: 20px 20px 20px; }
+  .pb-cap-title { display: block; font-family: Arial, Helvetica, sans-serif; font-size: 20px; line-height: 1.2; white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
+  .pb-cap-desc { display: block; margin-top: 8px; font-family: Arial, Helvetica, sans-serif; font-weight: 700; font-size: 13px; line-height: 1.3; }
+
+  .pb-note { padding: 30px 0 22px; }
+
+  @media (max-width: 1000px) {
+    .pb-gallery { width: auto; margin-left: 0; }
+    .pb-faq { margin-left: 0; width: auto; }
+    .pb-inner :global(.pb-intro) { width: auto; margin-left: 0 !important; }
+  }
+  @media (max-width: 900px) {
+    .pb-gallery { grid-template-columns: repeat(3, minmax(0, 1fr)); }
+    .pb-faq + .pb-gallery { margin-top: 60px; }
+    .pb-acc-item summary { padding: 24px 8px 24px 0; }
+  }
+  @media (max-width: 600px) {
+    .pb-gallery { grid-template-columns: repeat(2, minmax(0, 1fr)); }
+    .pb-cap { padding: 14px; }
+    .pb-cap-title { font-size: 17px; white-space: normal; }
+    .pb-inner :global(.pb-intro) { font-size: 17px; }
+  }
+</style>

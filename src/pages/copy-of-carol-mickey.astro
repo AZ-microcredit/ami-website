@@ -1,0 +1,48 @@
+---
+import Base from '../layouts/Base.astro';
+import StoryBody from '../components/StoryBody.astro';
+
+const steps = [
+  { label: 'STEP 1', title: 'Define the current state', paras: [
+    'Carol is a retired interior designer and long-time “fabric junky”. Carol turned this passion for fabrics and clothing into a business when she created Milos Designs – a women’s clothing company.',
+    'Under her business, Milos Designs, Carol is able to create various women’s clothing pieces and distribute across the valley and state.',
+  ] },
+  { label: 'STEP 2', title: 'Identify Improvement Opportunities', paras: [
+    'AMI’s consulting team met with Carol to gain a greater understanding of her business and goals.',
+    'After identifying Carol’s primary goal as gaining more traction and increasing sales, the consulting team established a few tactics to further research.',
+  ] },
+  { label: 'STEP 3', title: 'Conduct Research', paras: [
+    'The AMI team gathered historical data on Carol’s past sales across her various selling locations and channels.',
+    'The team then analyzed top selling locations, finding the common threads amongst top performing locations and channels, and identified key characteristics of successful selling points.',
+  ] },
+  { label: 'STEP 4', title: 'Design Solution', paras: [
+    'AMI’s team then identified a handful of locations for Carol to contact and try to get Milos Designs’ products placed within. These store locations were provided based off of the analysis of Carol’s previous successes.',
+  ] },
+  { label: 'STEP 5', title: 'Measure Results', paras: [
+    'As Carol continues to work through the process of breaking into new locations, AMI’s team is continuing to be at Carol’s side and assist with process.',
+    'AMI looks forward to seeing Carol’s great success in breaking into many stores in the upcoming months!',
+  ] },
+];
+---
+
+<Base title="Eboni Lacey | az-microcredit">
+  <div class="story-hero">
+    <img src="/media/760f7c_a5b52b2b0de5463eade5efe632e76623.png" alt="Screen Shot 2022-10-24 at 2.57.47 PM.png" loading="eager" />
+  </div>
+
+  <StoryBody
+    title="THE IDENTITY OF SHE"
+    intro={[
+      'Eboni is an entrepreneur with  runs a small business that promotes body positivity through feel good, inclusive clothing to ensure women of all backgrounds feel confident in themselves. Her business also offers a variety of self-care resources such as podcasts, self-love quizzes, open-forum blogs, and more!',
+      'Under her business, The Identity of She, Eboni designs and distributes her clothing all across the country through her website and at local farmers markets.',
+    ]}
+    heading="How AMI's Five-Step Initiative worked for The Identity of She:"
+    steps={steps}
+  />
+</Base>
+
+<style>
+  .story-hero { background: var(--grey-bg); height: 345px; display: flex; justify-content: center; }
+  .story-hero img { width: 374px; height: 345px; object-fit: cover; object-position: center 20%; }
+  @media (max-width: 600px) { .story-hero { height: auto; } .story-hero img { width: 100%; height: auto; } }
+</style>

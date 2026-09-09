@@ -1,0 +1,30 @@
+---
+import TutorialPage from '../components/TutorialPage.astro';
+---
+
+<TutorialPage
+  pageTitle="Make a Website | az-microcredit"
+  title="MAKE A WEBSITE"
+  subtitle="Learn from our staff on how to build a professional website"
+  lead="In this video tutorial, our staff walks you through how to build a WIX website, step by step (2019 edition)."
+  leadWidth={751}
+  leadOffset={115}
+>
+  <!-- INTEGRATION: Wix Video box (751x422). Source: https://video.wixstatic.com/video/760f7c_5f3cbbfd8c8244268c22ee6695498ea1/1080p/mp4/file.mp4 — served behind a signed Wix token (403 without it). Download the MP4 from the Wix media manager into public/media/ and replace this block with <video controls poster=…><source src=…></video>. -->
+  <div class="tut-video video" slot="embed">
+    <img src="/media/760f7c_5f3cbbfd8c8244268c22ee6695498ea1f002.jpg" alt="How to Build a Website" width="751" height="422" loading="lazy" />
+    <div class="tut-video-overlay">
+      <h3>How to Build a Website</h3>
+      <button type="button" aria-label="Play Video">
+        <svg viewBox="0 0 56 56" aria-hidden="true"><circle cx="28" cy="28" r="26" fill="none" stroke="#fff" stroke-width="2" /><path d="M23 18l15 10-15 10z" fill="#fff" /></svg>
+      </button>
+    </div>
+  </div>
+</TutorialPage>
+
+<style>
+  .video { width: 751px; height: 422px; margin: 30px 0 0 115px; }
+  @media (max-width: 900px) {
+    .video { margin-left: 0; height: auto; aspect-ratio: 751 / 422; }
+  }
+</style>

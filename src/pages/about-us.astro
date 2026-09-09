@@ -1,0 +1,111 @@
+---
+import Base from '../layouts/Base.astro';
+import PlusBand from '../components/PlusBand.astro';
+import PartnerBox from '../components/PartnerBox.astro';
+import CollaborateForm from '../components/CollaborateForm.astro';
+
+const partners = [
+  { name: 'FABRIC Tempe', image: '/media/760f7c_01992304a85546a9b96fe3cd88986473.png', href: 'https://www.fabrictempe.com/' },
+  { name: 'Local First Arizona', image: '/media/760f7c_3763d8cb0b95499cbe85fd64ef77c762.png', href: 'https://www.localfirstaz.com/' },
+  { name: 'Seed Spot', image: '/media/760f7c_4b2485edd8aa427283030d2b7ef90c53.png', href: 'https://seedspot.org/who-we-are/' },
+  { name: 'Arizona Small Business Association', image: '/media/760f7c_89aea0e9619841c0b88ff09869245437.png', href: 'https://www.asba.com/default.aspx' },
+  { name: 'Prestamos CDFI', image: '/media/760f7c_09e64b5af79048769941d91f09b07307.png', href: 'https://prestamoscdfi.org/' },
+  { name: 'State Forty Eight Foundation', image: '/media/760f7c_2ee9e1246efa4954976cb3529d44eba0.png', href: 'https://statefortyeight.com/pages/foundation' },
+];
+---
+
+<Base title="Arizona Microcredit Initiative | ABOUT US" description="Our mission is to empower local entrepreneurs through education, consulting, and competitive small business loans.">
+  <PlusBand title="ABOUT US" subtitle="Serving communities in Greater Phoenix since 2011" />
+
+  <div class="photo-strip blur">
+    <img src="/media/760f7c_5e0b4762dac64f80b9b77cb6634767d9.jpg" alt="DSC_0441.jpg" loading="eager" />
+  </div>
+
+  <section class="about">
+    <div class="about-inner">
+      <div class="about-text">
+        <p>Founded in 2011, Arizona Microcredit Initiative has quickly grown to become a leading microfinance institute in Phoenix.</p>
+        <p>AMI was created with the vision for an organization that could help entrepreneurs become financially self-sufficient and contribute to their local economies.</p>
+        <p>As a 501(c)(3) nonprofit, we are dedicated to that original vision by providing underserved entrepreneurs with access to business instruction and capital.</p>
+      </div>
+
+      <!-- INTEGRATION: Wix Forms "Contact Us" form (name/email/subject/message → "Thanks! Message sent.").
+           Wire this form up to a form handler / email service; it currently does not submit. -->
+      <form class="contact-form" onsubmit="return false" aria-label="Contact Us">
+        <div class="form-head"><h2>Contact Us</h2><span class="fold" aria-hidden="true"></span></div>
+        <input type="text" name="name" placeholder="Name *" aria-label="Name" required />
+        <input type="email" name="email" placeholder="Email *" aria-label="Email" required />
+        <input type="text" name="subject" placeholder="Subject" aria-label="Subject" />
+        <textarea name="message" placeholder="Message" aria-label="Message"></textarea>
+        <p class="sent" hidden>Thanks! Message sent.</p>
+        <button type="submit">Send</button>
+      </form>
+    </div>
+  </section>
+
+  <PlusBand tag="h2" title="SUPPORT OUR MISSION" subtitle="Together we can empower entrepreneurs in Phoenix" />
+
+  <section class="letter">
+    <h3>A Letter from the Executive Director</h3>
+    <hr />
+    <p>Arizona Microcredit Initiative works to empower entrepreneurs in the greater Phoenix area and we could not do so without the help of our partners and our donors. Donations allow us to continue to offer our workshop and consulting services free of charge while maintaining minimal fees on our loan program. We at AMI hope that you can help us continue to fulfill our mission with your donation. We can assure you without a doubt that your funding will not only make an immediate impact, but will also continue to support the aspirations of entrepreneurs in Phoenix for years to come.</p>
+    <p>Thank you again for your support!</p>
+    <p>Rashi Duttagupta</p>
+  </section>
+
+  <PlusBand tag="h2" title="JOIN THE COMMUNITY" subtitle="Helping us expand our impact on the local community" />
+
+  <section class="community">
+    <div class="community-inner">
+      <CollaborateForm />
+      <PartnerBox logos={partners} />
+    </div>
+  </section>
+</Base>
+
+<style>
+  .photo-strip { height: 370px; overflow: hidden; background: #1a2c40; }
+  .photo-strip img { width: 100%; height: 100%; object-fit: cover; object-position: center 40%; }
+  .photo-strip.blur img { filter: blur(14px); transform: scale(1.06); }
+
+  .about { background: var(--grey-bg); min-height: 490px; padding: 24px 20px 30px; }
+  .about-inner { max-width: var(--content-width); margin: 0 auto; display: grid; grid-template-columns: 1fr 500px; gap: 28px; align-items: start; }
+  .about-text { padding-top: 6px; text-align: right; font-family: var(--font-avenir-light); font-size: 19px; line-height: 1.6; color: var(--black); }
+  .about-text p + p { margin-top: 30px; }
+
+  .contact-form { display: flex; flex-direction: column; }
+  .form-head { position: relative; background: var(--green); color: var(--white); height: 71px; display: flex; align-items: center; padding-left: 10px; margin-bottom: 14px; }
+  .form-head h2 { font-family: var(--font-avenir-heavy); font-size: 30px; color: var(--white); }
+  .form-head .fold { position: absolute; right: 0; bottom: -14px; width: 0; height: 0; border-top: 14px solid #3f8a2c; border-right: 14px solid transparent; }
+  .contact-form input, .contact-form textarea { width: 480px; max-width: 100%; height: 32px; margin-bottom: 11px; border: 2px solid var(--green); background: transparent; font-family: var(--font-avenir-light); font-size: 14px; padding: 4px 8px; color: var(--black); border-radius: 0; }
+  .contact-form textarea { height: 120px; margin-top: 4px; resize: none; }
+  .contact-form input::placeholder, .contact-form textarea::placeholder { color: #333; opacity: 1; }
+  .contact-form button { align-self: flex-end; margin-right: 20px; background: var(--green); color: var(--white); border: 0; font-family: var(--font-avenir-light); font-size: 14px; padding: 6px 8px; cursor: pointer; }
+  .contact-form button:hover { background: var(--green-dark); }
+  .sent { font-family: var(--font-body); font-size: 14px; color: #68b04d; }
+
+  .letter { background: #fafafa; min-height: 489px; padding: 82px 20px 40px; text-align: center; }
+  .letter h3 { font-family: var(--font-avenir-heavy); font-size: 28px; line-height: 1.4; }
+  .letter hr { width: 302px; max-width: 100%; margin: 2px auto 20px; border: 0; border-top: 4px solid var(--black); }
+  .letter p { max-width: 880px; margin: 0 auto; font-family: var(--font-avenir-light); font-size: 20px; line-height: 1.2; }
+  .letter p + p { margin-top: 24px; }
+
+  .community { background: #fafafa; min-height: 1063px; padding: 53px 20px 70px; }
+  .community-inner { max-width: var(--content-width); margin: 0 auto; display: grid; grid-template-columns: 525px 387px; justify-content: space-between; align-items: start; }
+
+  @media (max-width: 900px) {
+    .photo-strip { height: 50vw; min-height: 220px; }
+    .about-inner, .community-inner { grid-template-columns: 1fr; }
+    .about-text { text-align: left; }
+    .contact-form input, .contact-form textarea { width: 100%; }
+    .letter { padding: 50px 20px 40px; }
+    .letter p { font-size: 18px; }
+    .community { min-height: 0; padding: 30px 20px 50px; }
+    .community-inner { gap: 40px; justify-items: center; }
+  }
+  @media (max-width: 600px) {
+    .about-text { font-size: 17px; }
+    .letter h3 { font-size: 22px; }
+    .letter p { font-size: 16px; }
+  }
+</style>

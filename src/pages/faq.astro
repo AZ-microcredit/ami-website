@@ -1,0 +1,14 @@
+---
+/** "FAQ" Wix page: a single empty grey section (no content or widget is placed on the live page). */
+import Base from '../layouts/Base.astro';
+---
+
+<Base title="FAQ | az-microcredit">
+  <!-- The live Wix section (comp-lnqcbj8l) is empty: 500px of the site grey with nothing inside. -->
+  <section class="empty" aria-hidden="true"></section>
+</Base>
+
+<style>
+  .empty { height: 500px; background: var(--grey-bg); }
+  @media (max-width: 900px) { .empty { height: 300px; } }
+</style>

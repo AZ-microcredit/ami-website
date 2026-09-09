@@ -1,0 +1,43 @@
+---
+/**
+ * "Who We Serve" page body (three consulting-persona graphics). The Wix site publishes
+ * it twice: /copy-of-consulting and /who-we-serve are identical.
+ */
+import PlusBand from './PlusBand.astro';
+
+const personas = [
+  { src: '/media/760f7c_1a9a78c144844e3d89f2c34e3f11bac4.png', alt: 'consulting_persona_1.png' },
+  { src: '/media/760f7c_5a66e6df484040899b9931da33685a58.png', alt: 'consulting_persona_2.png' },
+  { src: '/media/760f7c_8085be46bae64c4c85805bf7acc515e4.png', alt: 'consulting_persona_3.png' },
+];
+---
+
+<PlusBand
+  title="WHO WE SERVE"
+  subtitle="Are you unsure if AMI's services are right for your business? We've created a few example consulting personas to help! Each scenario is based on previous client demographics to illustrate how AMI can best provide value to you."
+  titleSize={55}
+  subtitleWidth={856}
+  indent={55}
+/>
+
+<section class="grey">
+  <div class="inner">
+    {personas.map((p, i) => (
+      <img class="persona" src={p.src} alt={p.alt} width="978" height="563" loading={i === 0 ? 'eager' : 'lazy'} />
+    ))}
+    <p class="still">
+      Still not sure if AMI is right for your business? Read all about our <a href="/our-methodology">consulting methodology</a>&nbsp;or <a href="/schedule-a-consultation-1">schedule an initial consultation</a> with our knowledgable staff!
+    </p>
+  </div>
+</section>
+
+<style>
+  .grey { background: var(--grey-bg); }
+  .inner { max-width: var(--content-width); margin: 0 auto; padding: 45px 0 75px 1px; }
+  .persona { display: block; width: 978px; max-width: 100%; height: auto; }
+  .persona + .persona { margin-top: 53px; }
+  .still { max-width: 600px; margin: 64px auto 0; padding: 0 20px; text-align: center; font-family: var(--font-avenir-light); font-size: 20px; line-height: normal; }
+  .still a { color: inherit; text-decoration: underline; }
+  @media (max-width: 1000px) { .inner { padding-left: 20px; padding-right: 20px; } }
+  @media (max-width: 900px) { .inner { padding: 30px 16px 50px; } .persona + .persona { margin-top: 30px; } .still { font-size: 18px; margin-top: 40px; } }
+</style>

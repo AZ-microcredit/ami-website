@@ -1,0 +1,59 @@
+---
+import Base from '../layouts/Base.astro';
+import PlusBand from '../components/PlusBand.astro';
+---
+
+<Base title="Arizona Microcredit Initiative | ABOUT US" description="Arizona Microcredit Initiative is  501(c)3 nonprofit whose mission is to empower local entrepreneurs through free consulting, free education services, and competitive microloans.">
+  <PlusBand title="COVID-19 UPDATE" subtitle="We are committed to serving our community in this time of need" />
+
+  <section class="letter">
+    <div class="inner">
+      <h2>A Letter from the Executive Director</h2>
+      <hr />
+      <p class="center">Consulting Services, Expedited Microloans</p>
+      <p class="center">Available for Small Businesses Affected by COVID-19</p>
+
+      <p class="gap">Amidst the current global Novel Coronavirus (COVID-19) outbreak, governments of all levels have encouraged social distancing, isolation, and quarantine in order to the mitigate the spread of the disease, a situation with negative implications for healthcare professionals, government authorities, and even businesses.</p>
+      <p>The outbreak, labeled a pandemic by the World Health Organization, has led to a stay-at-home status for all people involved with non-essential businesses, leaving many businesses scrambling to survive. Many Arizona Small Businesses, a keystone of the community, may be adversely affected by this large-scale slowdown; some outcomes of this thus far have been temporary closings, employee layoffs, unmet capital needs and, in the most extreme circumstances, business closures. While many communities are rallying around their favorite small businesses, and the federal government is working to pass stimulus packages for the unemployed, many small businesses continue to struggle.</p>
+      <p>If you or someone you know is a small business owner affected by the current situation, please be aware of Arizona Microcredit Initiative (AMI), a local 501(c)(3) non-profit organization dedicated to serving small businesses.</p>
+
+      <p class="center resource"><a class="pill" href="https://www.azmicrocredit.org/_files/ugd/760f7c_8cbc10d7503a4023965bb75e0a08eba8.pdf" target="_blank" rel="noopener" aria-label="Small Business Resource List">Small Business Resource List</a></p>
+
+      <p>We support entrepreneurs and their businesses through free <a href="/copy-2-of-consulting">consulting services</a>, <a href="/">microloans</a>, and <a href="/copy-of-education">business instruction</a>. Due to the circumstances, AMI will offer disaster-recovery consulting services and expedited reviews of loan applications received during the outbreak to help ease the strain on small businesses in Arizona. To receive consulting services or apply for a microloan, begin by meeting with a member of our team <a href="/contact">here</a>.</p>
+
+      <p class="tight">Other Information and Resources</p>
+      <ul>
+        <li>For comprehensive and up-to-date information regarding the coronavirus outbreak from the Centers for Disease Control and Prevention: <a href="https://www.cdc.gov/coronavirus/2019-ncov/index.html" target="_blank" rel="noopener">https://www.cdc.gov/coronavirus/2019-ncov/index.html</a></li>
+        <li>For small-business-specific information and for disaster loans through the Small Business Association: <a href="https://www.azmicrocredit.org/_files/ugd/760f7c_6719037cec3f4839b67ebcf2b1a701eb.pdf" target="_blank" rel="noopener">Small Business Guidance and Loan Resources</a></li>
+      </ul>
+
+      <p class="center sig gap">Rashi Duttagupta</p>
+      <p class="center">Executive Director</p>
+    </div>
+  </section>
+</Base>
+
+<style>
+  .letter { background: #fafafa; min-height: 1111px; padding: 34px 20px 70px; }
+  .inner { max-width: 916px; margin: 0 auto; font-family: var(--font-avenir-light); font-size: 20px; line-height: 1.2; color: var(--black); }
+  .inner h2 { font-family: var(--font-avenir-heavy); font-size: 28px; line-height: 1.4; text-align: center; }
+  .inner hr { width: 300px; max-width: 100%; margin: 2px auto 14px; border: 0; border-top: 4px solid var(--black); }
+  .inner p { margin: 0 0 24px; }
+  .inner p.center { text-align: center; margin-bottom: 0; }
+  .inner p.gap { margin-top: 30px; }
+  .inner p.tight { margin-bottom: 0; }
+  .inner a { color: inherit; }
+  .inner ul { list-style: disc; margin: 0 0 24px 40px; }
+  .inner li { margin: 0; }
+  .resource { padding: 6px 0 22px; }
+  .pill { display: inline-flex; align-items: center; justify-content: center; width: 316px; max-width: 100%; height: 81px; border-radius: 41px; background: var(--green); color: var(--white) !important; text-decoration: none; font-size: 20px; transition: background .2s; }
+  .pill:hover { background: var(--green-dark); }
+  .sig { font-family: var(--font-bold); font-size: 18px; }
+  .sig + p { font-family: var(--font-body); font-size: 18px; }
+  @media (max-width: 900px) {
+    .letter { min-height: 0; padding: 24px 20px 50px; }
+    .inner { font-size: 18px; }
+    .pill { height: 64px; font-size: 18px; }
+  }
+  @media (max-width: 600px) { .inner { font-size: 16px; } .inner h2 { font-size: 22px; } .inner ul { margin-left: 22px; } }
+</style>

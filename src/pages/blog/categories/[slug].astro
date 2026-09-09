@@ -1,0 +1,17 @@
+---
+import Base from '../../../layouts/Base.astro';
+import BlogShell from '../../../components/BlogShell.astro';
+import BlogList from '../../../components/BlogList.astro';
+import { categories, postsInCategory } from '../../../lib/blog';
+
+export function getStaticPaths() {
+  return categories.map((c) => ({ params: { slug: c.slug }, props: { category: c, posts: postsInCategory(c.slug) } }));
+}
+const { category, posts } = Astro.props;
+---
+
+<Base title={`Arizona Microcredit Initiative | ${category.name}`} description={`Blog posts in the ${category.name} category.`}>
+  <BlogShell>
+    <BlogList posts={posts} emptyText="No posts published in this category yet." />
+  </BlogShell>
+</Base>

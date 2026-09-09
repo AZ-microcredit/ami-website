@@ -1,0 +1,51 @@
+---
+import PlaybookOverview from '../components/PlaybookOverview.astro';
+
+const post = (text: string, slug?: string) => ({ text, href: slug ? `/single-post/${slug}` : undefined });
+const columns = [
+  { name: 'BUILD', tagline: 'to start your<br />business plan', icon: '/media/760f7c_52ae679ecce44fee9ecace63a7124e1b.png', iconSize: 53, href: '/resources-build', head: '#999999', body: '#d3d3d3',
+    items: [
+      post('Why do I want to start a business?', 'business-model-canvas'),
+      post('How do I start planning?', 'business-plan-writing'),
+      post('What does my business offer?', 'value-proposition'),
+      post('What will my business do?', 'what-will-your-business-do'),
+      post('Who will my business serve?', 'market-research'),
+      post('How will I reach customers?', '5-ps-of-marketing-explained'),
+      post('How will I get returning customer?', 'promotion-strategies'),
+      post('How can I connect with professionals?', 'networking-101'),
+      post('How do I solve my business problems?', 'problem-solving-101'),
+      post('How do I connect with suppliers?'),
+      post('How will I track my money and what will all this cost?', 'accounting-101'),
+      post('How do I make my operation official?', 'achieving-nonprofit-status'),
+      post('I need money – can I still do this?', 'grant-funding'),
+    ] },
+  { name: 'ELEVATE', tagline: 'to bring your business<br />to next level', icon: '/media/760f7c_fe3e5d7a5655483eab186e919c54f8a4.png', iconSize: 53, href: '/resources-elevate', head: '#5eb346', body: '#badfb0',
+    items: [
+      post('How can I raise money?', 'grant-funding'),
+      post('How can I protect my business?', 'small-business-insurance'),
+      post('How can I grow as a business owner?', 'small-business-upskilling'),
+      post('How do I work with partners?', 'partnership-building'),
+      post('How can I elevate my online presence?', 'social-media-101'),
+      post('How do I appropriately budget and price?', 'pricing'),
+      post('What’s going on in my industry?', 'industry-analysis'),
+    ] },
+  { name: 'EXPAND', tagline: 'to scale and grow<br />your business', icon: '/media/760f7c_16b43ac6b248475da6f999838a0df3ef.png', iconSize: 53, href: '/resources-expand', head: '#000000', body: '#a8a8a8',
+    items: [
+      post('How can I reach a larger market to find my business’s niche?', 'a-b-testing-2'),
+      post('How can I find investors for my business?', 'finding-and-retaining-investors'),
+      post('Am I using all of my employees effectively?', 'operational-analysis-and-measuring-employee-effectiveness'),
+      post('How can I take track where my profits and costs are coming from?', 'creating-financial-statements'),
+    ] },
+];
+---
+
+<PlaybookOverview
+  pageTitle="Arizona Microcredit Initiative |  BUSINESS EDUCATION"
+  description="Looking to start, elevate, and expand your Arizona small business? AMI has three comprehensive playbooks to help with your journey."
+  title="START HERE"
+  subtitle="Digital programming and playbooks to help you Build, Elevate, and Expand your business"
+  image="/media/760f7c_7c4897a5dd42476ab13fadad9cad3d92.jpg"
+  imagePosition="center 30%"
+  columns={columns}
+  bodyHeight={468}
+/>

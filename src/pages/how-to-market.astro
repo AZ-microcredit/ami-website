@@ -1,0 +1,35 @@
+---
+import TutorialPage from '../components/TutorialPage.astro';
+---
+
+<TutorialPage
+  pageTitle="Marketing | az-microcredit"
+  title="HOW TO MARKET"
+  subtitle="Learn how to take advertise your business"
+  lead="In this video tutorial, our staff walks you through the 5 P's of Marketing so that you can effectively advertise your business."
+  leadWidth={754}
+  leadOffset={113}
+>
+  <!-- INTEGRATION: Wix Video box (629x354). Source: https://video.wixstatic.com/video/760f7c_97113b26112741b7a3f7550dff366e51/720p/mp4/file.mp4 — the file is served behind a signed Wix token (403 without it). Download the MP4 from the Wix media manager into public/media/ and replace this block with <video controls poster=…><source src=…></video>. -->
+  <div class="tut-video video" slot="embed">
+    <img src="/media/760f7c_97113b26112741b7a3f7550dff366e51f002.jpg" alt="5 P's of Marketing" width="629" height="354" loading="lazy" />
+    <div class="tut-video-overlay">
+      <h3>5 P's of Marketing</h3>
+      <button type="button" aria-label="Play Video">
+        <svg viewBox="0 0 56 56" aria-hidden="true"><circle cx="28" cy="28" r="26" fill="none" stroke="#fff" stroke-width="2" /><path d="M23 18l15 10-15 10z" fill="#fff" /></svg>
+      </button>
+    </div>
+  </div>
+
+  <!-- INTEGRATION: Wix "PDF File Viewer" app (629x479); the document is loaded by the Wix TPA at runtime and is not in the page HTML. -->
+  <div class="tut-pdf pdf" role="img" aria-label="PDF File Viewer"><span>PDF File Viewer</span></div>
+</TutorialPage>
+
+<style>
+  .video { width: 629px; height: 354px; margin: 24px 0 0 175px; }
+  .pdf { width: 629px; height: 479px; margin: 20px 0 0 175px; }
+  @media (max-width: 900px) {
+    .video { margin-left: 0; height: auto; aspect-ratio: 629 / 354; }
+    .pdf { margin-left: 0; height: 400px; }
+  }
+</style>

@@ -1,0 +1,22 @@
+---
+import Base from '../layouts/Base.astro';
+import ResourceBand from '../components/ResourceBand.astro';
+import ResourceCatalogue from '../components/ResourceCatalogue.astro';
+import CantFind from '../components/CantFind.astro';
+---
+
+<Base title="Arizona Microcredit Initiative |  BUSINESS EDUCATION" description="Elevate your business with AMI's free business resources.">
+  <ResourceBand title="RESOURCE INDEX" subtitle="A catalogue of all AMI educational resources" />
+  <div class="ri-body">
+    <div class="ri-inner"><ResourceCatalogue showCategory={false} /></div>
+    <div class="ri-note"><CantFind /></div>
+  </div>
+</Base>
+
+<style>
+  .ri-body { background: var(--grey-bg); padding: 129px 0 10px; }
+  .ri-inner { max-width: var(--content-width); margin: 0 auto; }
+  @media (max-width: 1020px) { .ri-inner { padding: 0 20px; } }
+  .ri-note { padding: 16px 0 12px; }
+  @media (max-width: 900px) { .ri-body { padding-top: 40px; } }
+</style>

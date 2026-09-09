@@ -1,0 +1,68 @@
+---
+/**
+ * Client story body (Eboni Lacey / Carol Mickey pages): black intro strip with a green
+ * title + white paragraphs, then the green "How AMI's Five-Step Initiative worked for X"
+ * heading and five graduated-green step rows.
+ */
+interface Step { label: string; title: string; paras: string[] }
+interface Props { title: string; intro: string[]; heading: string; steps: Step[]; serifIntro?: boolean }
+const { title, intro, heading, steps, serifIntro = false } = Astro.props;
+const colors = ['#aebca8', '#9db992', '#8ab67a', '#79b364', '#68b04d'];
+---
+<section class:list={['story-intro', { serif: serifIntro }]}>
+  <div class="inner">
+    <h1 set:html={title} />
+    <hr />
+    {intro.map((p) => <p>{p}</p>)}
+  </div>
+</section>
+
+<section class="story-steps">
+  <h2 class="steps-heading">{heading}</h2>
+  <ol class="steps">
+    {steps.map((s, i) => (
+      <li class="step" style={`background:${colors[i % colors.length]}`}>
+        <div class="step-left">
+          <p class="label">{s.label}</p>
+          <p class="title">{s.title}</p>
+        </div>
+        <div class="step-text">
+          {s.paras.map((p) => <p>{p}</p>)}
+        </div>
+      </li>
+    ))}
+  </ol>
+</section>
+
+<style>
+  @import url('https://fonts.googleapis.com/css2?family=Noticia+Text&display=swap');
+  .story-intro { background: var(--black); color: var(--white); min-height: 308px; padding: 30px 20px 30px; text-align: center; }
+  .story-intro .inner { max-width: 640px; margin: 0 auto; }
+  .story-intro h1 { font-family: var(--font-avenir-heavy); font-size: 57px; line-height: normal; letter-spacing: 0.05em; color: #68b04d; }
+  .story-intro hr { width: 40px; margin: 6px auto 20px; border: 0; border-top: 3px solid var(--white); }
+  .story-intro p { font-family: var(--font-body); font-size: 16px; line-height: 1.25; }
+  .story-intro p + p { margin-top: 20px; }
+  .story-intro.serif p { font-family: 'Noticia Text', Georgia, serif; font-size: 16px; }
+
+  .story-steps { background: var(--grey-bg); padding: 60px 20px 60px; }
+  .steps-heading { max-width: 840px; margin: 0 auto 55px; text-align: center; font-family: var(--font-avenir-light); font-size: 30px; line-height: 1.3; color: #68b04d; }
+  .steps { list-style: none; max-width: var(--content-width); margin: 0 auto; padding: 0; }
+  .step { display: grid; grid-template-columns: 156px 1fr; min-height: 219px; padding: 32px 120px 30px 57px; }
+  .step-left { border-right: 2px solid var(--black); padding-right: 12px; }
+  .step .label { font-family: var(--font-avenir-heavy); font-size: 27px; line-height: 1.6; letter-spacing: 0.2em; color: var(--black); }
+  .step .title { font-family: var(--font-avenir-heavy); font-size: 18px; line-height: 0.95; color: var(--black); margin-top: 2px; }
+  .step-text { padding: 4px 0 0 28px; font-family: 'Noticia Text', Georgia, serif; font-size: 14px; line-height: 1.4; color: var(--black); }
+  .step-text p + p { margin-top: 16px; }
+
+  @media (max-width: 900px) {
+    .story-intro h1 { font-size: 40px; }
+    .steps-heading { font-size: 24px; margin-bottom: 30px; }
+    .step { grid-template-columns: 1fr; padding: 24px 24px; min-height: 0; }
+    .step-left { border-right: 0; border-bottom: 2px solid var(--black); padding: 0 0 10px; margin-bottom: 14px; }
+    .step-text { padding: 0; }
+  }
+  @media (max-width: 600px) {
+    .story-intro h1 { font-size: 30px; }
+    .step .label { font-size: 22px; }
+  }
+</style>

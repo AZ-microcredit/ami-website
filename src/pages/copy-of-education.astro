@@ -1,0 +1,41 @@
+---
+import Base from '../layouts/Base.astro';
+import Hero from '../components/Hero.astro';
+import WhyRow from '../components/WhyRow.astro';
+import EventsWidget from '../components/EventsWidget.astro';
+---
+
+<Base
+  title="Arizona Microcredit Initiative |  BUSINESS EDUCATION"
+  description="Designed for startups or established businesses, our education services cover all the business basics."
+>
+  <Hero image="/media/760f7c_7ec659024dc34b548a492fd8745e45c4.png" height={635} align="top-left" position="center 30%" class="edu-hero">
+    <h1 class="hero-title">EDUCATION</h1>
+    <p class="hero-subtitle">FREE BUSINESS EDUCATION</p>
+    <a class="btn btn-green hero-cta" href="/events" aria-label="EVENTS">EVENTS</a>
+  </Hero>
+
+  <WhyRow
+    title="WHY OUR<br />EDUCATION"
+    html="AMI is committed to empowering entrepreneurs by providing <span class='g'>free business education workshops</span> and maintaining a <span class='g'>comprehensive resource index</span> to support their growth and success"
+  />
+
+  <section class="edu-events">
+    <EventsWidget />
+  </section>
+</Base>
+
+<style>
+  /* Hero: title block top-left, button bottom-left (matches the Wix layout) */
+  :global(.edu-hero .hero-inner) { align-items: flex-start !important; }
+  :global(.edu-hero .hero-content) { padding-top: 20px; height: 100%; }
+  :global(.edu-hero .hero-subtitle) { margin-top: 4px; }
+  :global(.edu-hero .hero-cta) { margin-top: auto; margin-bottom: 30px; min-width: 238px; padding: 13px 40px; }
+
+  .edu-events { max-width: var(--content-width); margin: 0 auto; padding: 50px 20px 60px; }
+
+  @media (max-width: 900px) {
+    :global(.edu-hero .hero-cta) { margin-bottom: 24px; }
+    .edu-events { padding: 30px 20px 40px; }
+  }
+</style>

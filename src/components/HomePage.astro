@@ -1,0 +1,161 @@
+---
+import Base from '../layouts/Base.astro';
+import Slideshow from '../components/Slideshow.astro';
+import EventsWidget from '../components/EventsWidget.astro';
+
+const { testimonials = false } = Astro.props;
+
+const slides = [
+  { src: '/media/760f7c_2b965e37efd045569ecc896f53cd1ee1.jpg', alt: 'AMI team members at an outreach event' },
+  { src: '/media/760f7c_6ca28189de8c4da9bd7a8a6d3b4be85e.jpg', alt: 'AMI consultants working on laptops' },
+  { src: '/media/760f7c_3243ce9663724659b3c69c2d31ebf224.jpg', alt: 'AMI team' },
+];
+
+const impact = [
+  { title: 'MICROLOANS', href: '/copy-of-loans', html: 'Access funding with AMI, microloans made simple with <b>lower credit barriers and a holistic review process</b>' },
+  { title: 'CONSULTING', href: '/copy-2-of-consulting', html: 'Receive <b>tailored, one-on-one business consulting</b>, from startup to expansion, by our expert team' },
+  { title: 'EDUCATION', href: '/copy-of-education', html: 'Access <b>free expert-led workshops</b> designed for small businesses. Discover our resources today' },
+  { title: 'MARKET FUND', href: '/marketfund', html: 'Receive <b>a microgrant designed to support small business</b> owners who are new to local markets' },
+];
+
+const stats = [
+  { icon: 'globe', value: '75+', label: 'Entrepreneurs empowered' },
+  { icon: 'tag', value: '$70,000', label: 'Distributed in low-interest loans' },
+  { icon: 'mail', value: '40+', label: 'Impacted through business education' },
+  { icon: 'chart', value: '100+', label: 'Businesses impacted through our services' },
+];
+
+const partners = [
+  { src: '/media/760f7c_cec1a284171e4ef5a76233fd8f20363d.png', alt: 'HUUB' },
+  { src: '/media/760f7c_33bbe4d0fb4e434485d2f778a5750068.png', alt: 'Partner logo' },
+  { src: '/media/760f7c_13af0323c83045f19b6719aac223561c.png', alt: 'City of Phoenix' },
+  { src: '/media/760f7c_c0b6bfcaf17b46969834a36c57743203.png', alt: 'Partner logo' },
+];
+---
+
+<Base title="Arizona Microcredit Initiative | HOME">
+  <Slideshow slides={slides} height={725} />
+
+  <section class="band">
+    <h2 class="spaced-title">MISSION</h2>
+  </section>
+
+  <section class="mission">
+    <p>Arizona Microcredit Initiative is a 501(c)(3) nonprofit that empowers entrepreneurs to start or expand businesses through free consulting services, low-interest microloans, and free business instruction.</p>
+  </section>
+
+  <section class="impact">
+    <h2 class="spaced-title">OUR IMPACT</h2>
+    <div class="cards">
+      {impact.map((c) => (
+        <a class="card" href={c.href}>
+          <h3>{c.title}</h3>
+          <p set:html={c.html} />
+        </a>
+      ))}
+    </div>
+  </section>
+
+  <section class="stats">
+    {stats.map((s) => (
+      <div class="stat">
+        <img class="icon" src={`/icons/${s.icon}.svg`} alt="" width="26" height="26" />
+        <p class="value">{s.value}</p>
+        <p class="label">{s.label}</p>
+      </div>
+    ))}
+  </section>
+
+  {testimonials ? (
+    <section class="testimonials">
+      <h2 class="spaced-title">TESTIMONIALS</h2>
+      <div class="quotes">
+        {[
+          { name: 'Clayton Pinkins', image: '760f7c_448859c23f31420782c1ebf79bdd5e20.jpg', quote: 'Each presentation was put together well. I learned something new in each one. This is an outstanding resource for startups, I wish I would have found out about AMI earlier.' },
+          { name: 'Kat Carlson', image: '760f7c_2ef53e3e5e144ef899d471198cf2a062.jpg', quote: 'The team asked smart questions and seemed very prepared. They were able to explain things to me very clearly.' },
+          { name: 'Jonel Onaga', image: '760f7c_2a849ce037904e6ea6f4ef5c803f2277.jpg', quote: 'The team was focused and fun to work with! They answered questions on the spot cohesively and provided valuable market insights.' },
+        ].map(person => (
+          <article class="quote" style={`background-image:linear-gradient(#0009,#0009),url(/media/${person.image})`}>
+            <h3>{person.name}</h3>
+            <blockquote>{person.quote}</blockquote>
+          </article>
+        ))}
+      </div>
+    </section>
+  ) : (
+  <section class="band">
+    <h2 class="spaced-title">BUSINESS BUILDERS<br />PROGRAM</h2>
+  </section>
+
+  <section class="bbp">
+    <EventsWidget category="business-builders-program" />
+    <div class="register">
+      <a class="btn btn-dark-green" href="https://docs.google.com/forms/d/e/1FAIpQLSdK8SRmBVGnlJF_q9aoxZdgLBKELwWKNIvHa4yZ0W62HSITIg/viewform" target="_blank" rel="noopener" aria-label="Register">Register</a>
+    </div>
+  </section>
+
+  )}
+
+  <section class="partners">
+    <h2 class="spaced-title left">OUR<br />PARTNERS</h2>
+    <div class="logos">
+      {partners.map((p) => <img src={p.src} alt={p.alt} loading="lazy" />)}
+    </div>
+  </section>
+</Base>
+
+<style>
+  .testimonials { max-width: var(--content-width); margin: 0 auto; padding: 20px 20px 130px; }
+  .testimonials h2 { margin-bottom: 32px; }
+  .quotes { display: grid; grid-template-columns: repeat(3, 1fr); gap: 24px; }
+  .quote { min-height: 548px; background-size: cover; background-position: center; color: white; padding: 40px 22px; display: flex; flex-direction: column; }
+  .quote h3 { color: var(--green); font: 32px var(--font-bold); text-align: center; }
+  .quote blockquote { margin: auto 0 0; font-size: 16px; font-style: italic; line-height: 1.8; text-align: center; }
+  .quote blockquote::before, .quote blockquote::after { display: block; color: var(--green); font: bold 64px Georgia, serif; line-height: .7; text-align: left; }
+  .quote blockquote::before { content: '“'; }
+  .quote blockquote::after { content: '”'; text-align: right; margin-top: 16px; }
+  @media (max-width: 600px) { .quotes { grid-template-columns: 1fr; } .testimonials { padding-bottom: 40px; } }
+  .mission { max-width: 1000px; margin: 0 auto; padding: 30px 20px 40px; text-align: center; }
+  .mission p { font-family: var(--font-bold); font-size: 20px; line-height: 1.6; }
+
+  .impact { max-width: var(--content-width); margin: 0 auto; padding: 20px 20px 0; }
+  .impact .spaced-title { margin-bottom: 24px; }
+  .cards { display: grid; grid-template-columns: repeat(4, 1fr); gap: 10px; }
+  .card {
+    background: var(--green); color: var(--white); text-decoration: none;
+    min-height: 320px; padding: 60px 18px 30px; text-align: center;
+    transition: background .2s;
+  }
+  .card:hover { background: var(--green-dark); }
+  .card h3 { font-family: var(--font-bold); font-size: 26px; margin-bottom: 26px; line-height: 1.2; }
+  .card p { font-size: 15px; line-height: 1.45; }
+
+  .stats { max-width: var(--content-width); margin: 0 auto; padding: 36px 20px 60px; display: grid; grid-template-columns: repeat(4, 1fr); gap: 10px; text-align: center; }
+  .stat .icon { width: 26px; height: 26px; margin: 0 auto 30px; }
+  .stat .value { font-family: var(--font-bold); font-size: 55px; line-height: 1; color: var(--green); margin-bottom: 26px; }
+  .stat .label { font-family: var(--font-bold); font-size: 17px; line-height: 1.25; padding: 0 20px; }
+
+  .bbp { max-width: var(--content-width); margin: 0 auto; padding: 60px 20px 40px; min-height: 480px; display: flex; flex-direction: column; }
+  .register { margin-top: auto; padding-top: 40px; text-align: center; }
+  .register .btn { padding: 8px 60px; font-size: 14px; margin-left: 40%; }
+
+  .partners { max-width: var(--content-width); margin: 0 auto; padding: 40px 20px 60px; display: flex; align-items: center; gap: 40px; min-height: 900px; align-items: flex-start; }
+  .partners .spaced-title.left { text-align: left; letter-spacing: 0.4em; font-size: 40px; line-height: 1.2; flex: 0 0 330px; }
+  .logos { display: flex; gap: 32px; flex-wrap: wrap; align-items: center; }
+  .logos img { width: 130px; height: 130px; object-fit: contain; }
+
+  @media (max-width: 900px) {
+    .cards { grid-template-columns: repeat(2, 1fr); }
+    .stats { grid-template-columns: repeat(2, 1fr); gap: 30px 10px; }
+    .partners { flex-direction: column; min-height: 0; }
+    .partners .spaced-title.left { flex: none; }
+    .register .btn { margin-left: 0; }
+  }
+  @media (max-width: 520px) {
+    .cards { grid-template-columns: 1fr; }
+    .card { min-height: 0; padding: 40px 18px; }
+    .stats { grid-template-columns: 1fr; }
+    .mission { padding: 24px 20px 30px; }
+    .mission p { font-size: 17px; }
+  }
+</style>

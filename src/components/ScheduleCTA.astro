@@ -1,0 +1,23 @@
+---
+/** "SCHEDULE A CALL" | subtitle + button block at the bottom of Loans / Consulting pages. */
+interface Props { title?: string; text: string; label: string; href: string; buttonClass?: string }
+const { title = 'SCHEDULE<br />A CALL', text, label, href, buttonClass = 'btn-green' } = Astro.props;
+---
+<section class="schedule-cta">
+  <h2 set:html={title} />
+  <div class="right">
+    <p>{text}</p>
+    <a class:list={['btn', buttonClass]} href={href}>{label}</a>
+  </div>
+</section>
+
+<style>
+  .schedule-cta { max-width: var(--content-width); margin: 0 auto; padding: 50px 20px 60px; display: grid; grid-template-columns: 1fr 1.4fr; gap: 50px; align-items: center; }
+  .schedule-cta h2 { font-family: var(--font-bold); font-size: 60px; line-height: 1.05; border-right: 3px solid var(--black); padding: 30px 0; text-align: left; }
+  .right p { font-family: var(--font-bold); font-size: 20px; margin-bottom: 20px; }
+  .right .btn { min-width: 220px; }
+  @media (max-width: 800px) {
+    .schedule-cta { grid-template-columns: 1fr; gap: 24px; }
+    .schedule-cta h2 { border-right: 0; border-bottom: 3px solid var(--black); font-size: 40px; padding: 0 0 16px; }
+  }
+</style>

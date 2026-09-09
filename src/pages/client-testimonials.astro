@@ -1,0 +1,89 @@
+---
+import Base from '../layouts/Base.astro';
+import PlusBand from '../components/PlusBand.astro';
+
+// The seven slides of the Wix slideshow (four quote cards, three image cards).
+const slides = [
+  { quote: '"AMI and my team of Joelle, Ian, Jarred, and others has been my lifeline to information that has made it possible for me to back up my position with facts. As a solo entrepreneur, I lack the time and resources to find the information needed to put together a great pitch or presentation; AMI has made that possible for me. They are always helpful, supportive, understanding, and considerate. I recently was part of a large event and six AMI volunteers came and donated many hours to make sure that it was a huge success. In the two years that I have worked with them, Joelle has been by my side, a valuable asset and team member. I consider myself lucky to have found such a great resource in Arizona."', author: ['—  Jennifer Walter,', 'Founder of Serving Glamour'] },
+  { quote: '“AMI explained the entire process of obtaining 501(c)(3) status. They provided us with all the information in neat and organized ways, empowering us. We are extremely grateful to AMI, and would recommend them to all other entrepreneurs.”', author: ['—  Nisha Rehman,', 'Founder of Hands for Henna'], big: true },
+  { quote: '"I really like the direction that the information AMI provided gives me. It makes me feel like I am on a mission!"', author: ['—  Suzette Smith,', 'Garden Goddess Ferments'], big: true },
+  { quote: '"The AMI team was a great help in training my team on social media. I would highly recommend their talents for any entrepreneur looking to improve their social media skills."', author: ['—  Susan Hansen'], big: true },
+  { image: '/media/760f7c_bcc6e75d307b442ca3d76f5b103e2a09.png', alt: 'Client testimonial: Meet Rodney, Grow Spaces LLC' },
+  { image: '/media/760f7c_70887a5da308415e9ac1ac3d3a3cb839.png', alt: 'Client testimonial quotes' },
+  { image: '/media/760f7c_2a10aaefb371445582436d726326b1a0.png', alt: 'Client testimonial from @e.villstylesyou' },
+];
+---
+
+<Base title="Arizona Microcredit Initiative | TESTIMONIALS" description="Hear about our impact through our clients' perspectives. We will help strengthen your business basics.">
+  <PlusBand title="TESTIMONIALS" subtitle="Delivering on clients' visions since 2011" />
+
+  <section class="testi" aria-roledescription="carousel" aria-label="Client testimonials">
+    <img class="bg" src="/media/760f7c_3a0ca66205c147678eed0e1211bc9734.jpg" alt="website image_6.jpg" loading="eager" />
+    <div class="slides">
+      {slides.map((s, i) => (
+        <div class:list={['slide', { current: i === 0, big: s.big, image: !!s.image }]} role="group" aria-roledescription="slide" aria-label={`${i + 1} of ${slides.length}`}>
+          {s.image ? (
+            <img src={s.image} alt={s.alt} loading={i === 4 ? 'eager' : 'lazy'} />
+          ) : (
+            <div class="card">
+              <h2>WHAT OUR CLIENTS SAY</h2>
+              <p class="quote">{s.quote}</p>
+              <p class="author">{s.author!.map((a, j) => <>{a}{j < s.author!.length - 1 && <br />}</>)}</p>
+            </div>
+          )}
+        </div>
+      ))}
+    </div>
+    <button class="arrow prev" type="button" aria-label="Previous"><svg viewBox="0 0 24 44" width="22" height="40"><path d="M22 2 3 22l19 20" fill="none" stroke="currentColor" stroke-width="2.5"/></svg></button>
+    <button class="arrow next" type="button" aria-label="Next"><svg viewBox="0 0 24 44" width="22" height="40"><path d="M2 2l19 20L2 42" fill="none" stroke="currentColor" stroke-width="2.5"/></svg></button>
+    <div class="dots" role="tablist">
+      {slides.map((_, i) => <button type="button" role="tab" class:list={['dot', { current: i === 0 }]} aria-label={`Go to slide ${i + 1}`} aria-selected={i === 0 ? 'true' : 'false'} />)}
+    </div>
+  </section>
+</Base>
+
+<script>
+  document.querySelectorAll<HTMLElement>('.testi').forEach((root) => {
+    const slides = Array.from(root.querySelectorAll<HTMLElement>('.slide'));
+    const dots = Array.from(root.querySelectorAll<HTMLElement>('.dot'));
+    let i = 0;
+    const show = (n: number) => {
+      slides[i].classList.remove('current'); dots[i].classList.remove('current'); dots[i].setAttribute('aria-selected', 'false');
+      i = (n + slides.length) % slides.length;
+      slides[i].classList.add('current'); dots[i].classList.add('current'); dots[i].setAttribute('aria-selected', 'true');
+    };
+    root.querySelector('.prev')?.addEventListener('click', () => show(i - 1));
+    root.querySelector('.next')?.addEventListener('click', () => show(i + 1));
+    dots.forEach((d, n) => d.addEventListener('click', () => show(n)));
+  });
+</script>
+
+<style>
+  .testi { position: relative; height: 505px; overflow: hidden; background: #333; }
+  .testi .bg { position: absolute; inset: 0; width: 100%; height: 100%; object-fit: cover; object-position: center; }
+  .slides { position: absolute; inset: 0; }
+  .slide { position: absolute; inset: 0; display: flex; align-items: flex-start; justify-content: center; padding-top: 32px; opacity: 0; transition: opacity .6s; pointer-events: none; }
+  .slide.current { opacity: 1; pointer-events: auto; }
+  .slide.image { align-items: center; padding-top: 0; }
+  .slide.image img { width: 440px; height: 440px; object-fit: contain; }
+  .card { width: 613px; max-width: calc(100% - 40px); min-height: 425px; background: rgba(191,191,191,.96); padding: 32px 30px 28px; text-align: center; display: flex; flex-direction: column; align-items: center; }
+  .card h2 { font-family: var(--font-avenir-heavy); font-size: 14px; letter-spacing: 0.3em; color: var(--black); padding-bottom: 8px; border-bottom: 2px solid var(--black); margin-bottom: 26px; }
+  .card .quote { font-family: var(--font-avenir-light); font-size: 18px; line-height: 1.3; color: var(--black); max-width: 560px; }
+  .slide.big .card .quote { font-size: 24px; line-height: 1.35; margin-top: 30px; }
+  .card .author { margin-top: auto; padding-top: 24px; font-family: var(--font-avenir-heavy); font-style: italic; font-size: 16px; letter-spacing: 0.1em; line-height: 1.3; color: var(--black); }
+  .arrow { position: absolute; top: 50%; transform: translateY(-50%); background: none; border: 0; color: var(--green); cursor: pointer; padding: 10px; }
+  .prev { left: 96px; } .next { right: 96px; }
+  .dots { position: absolute; left: 0; right: 0; bottom: 14px; display: flex; justify-content: center; gap: 10px; }
+  .dot { width: 8px; height: 8px; border-radius: 50%; border: 0; padding: 0; background: rgba(255,255,255,.55); cursor: pointer; }
+  .dot.current { background: var(--white); }
+  @media (max-width: 900px) {
+    .testi { height: auto; min-height: 420px; }
+    .slides { position: relative; }
+    .slide { position: relative; padding: 40px 20px 50px; }
+    .slide:not(.current) { display: none; }
+    .card { min-height: 0; padding: 24px 20px; }
+    .slide.big .card .quote { font-size: 20px; }
+    .prev { left: 6px; } .next { right: 6px; }
+    .slide.image img { width: min(440px, 80vw); height: auto; }
+  }
+</style>

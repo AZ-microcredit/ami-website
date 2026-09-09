@@ -1,0 +1,85 @@
+---
+import Base from '../layouts/Base.astro';
+import PlusBand from '../components/PlusBand.astro';
+import posts from '../data/posts.json';
+import { postUrl } from '../lib/blog';
+
+const quotes = [
+  { name: 'Crypt Music', text: '“The team over at AMI were game changers in the way we think about my company’s business strategy. AMI has given me the opportunity to improve my business beyond what I ever could have imagined!”', loose: true },
+  { name: 'HerRights', text: '“AMI was beyond helpful for a small, starting nonprofit like ours,” she said. “They are like guiding stars who will do the research for you, which a small, zero-overhead organization did not have bandwidth to do. Their material was always high quality, accurate and targeted.”', loose: true },
+  { name: 'E. Vill Image Consulting', text: '"I cannot thank you and your team enough! This has been an amazing opportunity and I am truly grateful for all of your help. I truly appreciate you guys so much. I have learned so much and am extremely excited for my business to continue growing thanks to AMI. We will definitely stay in touch!"', loose: false },
+];
+
+// Wix blog "post list" widget showing the two AMI Success Story posts.
+const storySlugs = [
+  'herrights-building-nonprofit-programs-for-women-s-rights-in-arizona-and-abroad-ami-success-story',
+  'crypt-music-how-local-friends-converted-their-hobby-into-a-business-ami-success-story',
+];
+const stories = storySlugs.map((s) => (posts as any[]).find((p) => p.slug === s)).filter(Boolean);
+const excerpts: Record<string, string> = {
+  [storySlugs[0]]: 'In 2012 after the brutal assault of a woman in New Dehli, Tanu Ghosh an Indian native and Arizonan knew she had to something. Her...',
+  [storySlugs[1]]: 'Crypt Music is a local DJ Collective that consists of four friends who have come together to share their love for music. They are working...',
+};
+---
+
+<Base title="Client Success Stories | az-microcredit" description="Here at AMI, we pride ourselves on client work that makes a difference. Read all about our client success stories and testimonials here!">
+  <PlusBand title="CLIENT SUCCESS STORIES" subtitle="Here at AMI, we pride ourselves on client work that makes a difference. Read all about our client success stories and testimonials here!" />
+
+  <section class="quotes">
+    {quotes.map((q) => (
+      <div class="quote">
+        <span class="mark" aria-hidden="true">“</span>
+        <h2>{q.name}</h2>
+        <blockquote class:list={{ loose: q.loose }}>{q.text}</blockquote>
+      </div>
+    ))}
+  </section>
+
+  <section class="posts">
+    <div class="post-list">
+      {stories.map((p) => (
+        <article class="post-card">
+          <a class="cover" href={postUrl(p)} tabindex="-1" aria-hidden="true"><img src={p.cover} alt={p.title} loading="lazy" /></a>
+          <div class="body">
+            <a class="author" href="/profile/login/profile"><span class="avatar" aria-hidden="true"></span>The AMI Team</a>
+            <h3><a href={postUrl(p)}>{p.title}</a></h3>
+            <p>{excerpts[p.slug]}</p>
+          </div>
+        </article>
+      ))}
+    </div>
+  </section>
+</Base>
+
+<style>
+  .quotes { display: grid; grid-template-columns: repeat(3, 1fr); border-top: 1px solid var(--black); border-bottom: 1px solid var(--black); min-height: 648px; }
+  .quote { border-left: 1px solid var(--black); padding: 78px 50px 40px; text-align: center; }
+  .quote:first-child { border-left: 0; }
+  .mark { display: block; font-family: var(--font-avenir-heavy); font-size: 120px; line-height: 0.75; color: var(--green); height: 90px; }
+  .quote h2 { font-family: var(--font-bold); font-size: 26px; line-height: normal; margin: 40px 0 16px; }
+  .quote blockquote { margin: 0; font-family: var(--font-body); font-size: 20px; line-height: 1.4; }
+  .quote blockquote.loose { line-height: 1.8; }
+
+  .posts { background: var(--grey-bg); min-height: 842px; padding: 41px 20px 70px; }
+  .post-list { max-width: 937px; margin: 0 auto; display: flex; flex-direction: column; gap: 38px; }
+  .post-card { display: grid; grid-template-columns: 450px 1fr; background: var(--white); min-height: 337px; }
+  .post-card .cover { display: block; }
+  .post-card .cover img { width: 100%; height: 337px; object-fit: cover; }
+  .post-card .body { padding: 34px 40px 30px 36px; font-family: var(--font-avenir-light); }
+  .author { display: inline-flex; align-items: center; gap: 8px; font-size: 12px; color: #444; text-decoration: none; margin-bottom: 18px; }
+  .avatar { width: 26px; height: 26px; border-radius: 50%; background: #c9c9c9; display: inline-block; }
+  .post-card h3 { font-family: var(--font-avenir-heavy); font-size: 22px; line-height: 1.3; margin-bottom: 14px; display: -webkit-box; -webkit-line-clamp: 3; -webkit-box-orient: vertical; overflow: hidden; }
+  .post-card h3 a { text-decoration: none; }
+  .post-card p { font-size: 14px; line-height: 1.5; }
+
+  @media (max-width: 900px) {
+    .quotes { grid-template-columns: 1fr; min-height: 0; }
+    .quote { border-left: 0; border-top: 1px solid var(--black); padding: 40px 24px; }
+    .quote:first-child { border-top: 0; }
+    .mark { font-size: 80px; height: 60px; }
+    .posts { min-height: 0; padding: 30px 16px 50px; }
+    .post-card { grid-template-columns: 1fr; }
+    .post-card .cover img { height: 240px; }
+    .post-card .body { padding: 24px; }
+  }
+</style>

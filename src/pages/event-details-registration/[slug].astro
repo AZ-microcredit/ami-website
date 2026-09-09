@@ -1,0 +1,160 @@
+---
+import Base from '../../layouts/Base.astro';
+import { events } from '../../data/events.js';
+
+export function getStaticPaths() {
+  return events.filter((e) => !e.slug.endsWith('__form')).map((e) => ({ params: { slug: e.slug }, props: { event: e } }));
+}
+const { event: e } = Astro.props;
+
+// Registration state (mirrors the Wix Events widget):
+//  closed       -> "Registration is closed" + See other events
+//  notOnSale    -> "Tickets are not on sale" + See other events (dated events with the default RSVP link)
+//  open         -> Register button (external registration URL / RSVP link / local RSVP form)
+const state = e.registrationClosed ? 'closed' : e.rsvpLabel === 'See other events' ? 'notOnSale' : 'open';
+const registerHref = e.registrationUrl ?? (e.rsvpHref && !/azmicrocredit\.org\/?$/.test(e.rsvpHref) ? e.rsvpHref : `/event-details-registration/${e.slug}/form`);
+const isExternal = /^https?:/.test(registerHref);
+
+const pageUrl = new URL(Astro.url.pathname, Astro.site ?? 'https://www.azmicrocredit.org').toString();
+const shareText = encodeURIComponent('Check out this event. Hope to see you there!');
+const share = {
+  facebook: `https://www.facebook.com/sharer/sharer.php?u=${encodeURIComponent(pageUrl)}&quote=${shareText}`,
+  x: `https://twitter.com/intent/tweet?url=${encodeURIComponent(pageUrl)}&text=${shareText}`,
+  linkedin: `https://www.linkedin.com/shareArticle?mini=true&url=${encodeURIComponent(pageUrl)}`,
+};
+const description = e.tagline ?? e.description?.[0] ?? `${e.title} — an Arizona Microcredit Initiative event.`;
+---
+
+<Base title={`${e.title} | Arizona Microcredit Initiative`} description={description}>
+  <article class="event" itemscope itemtype="https://schema.org/Event">
+    <header class="ev-hero">
+      <div class="ev-media">
+        {e.image && <img src={e.image} alt={e.title} loading="eager" itemprop="image" />}
+      </div>
+      <div class="ev-head">
+        <p class="ev-short"><span>{e.shortDate}</span><span class="sep">|</span><span>{e.shortLocation}</span></p>
+        <h1 itemprop="name">{e.title}</h1>
+        {state === 'open' && e.tagline && <p class="ev-tagline">{e.tagline}</p>}
+        {state !== 'open' && <hr class="ev-divider" />}
+        {state === 'closed' && <p class="ev-state">Registration is closed<br /><a href="/events">See other events</a></p>}
+        {state === 'notOnSale' && <p class="ev-state">Tickets are not on sale<br /><a href="/events">See other events</a></p>}
+        {state === 'open' && <a class="ev-register" href={registerHref} target={isExternal ? '_blank' : undefined} rel={isExternal ? 'noopener' : undefined}>Register</a>}
+      </div>
+    </header>
+
+    <div class="ev-body">
+      <section class="ev-section">
+        <h2>Time &amp; Location</h2>
+        <p class="ev-lines"><span itemprop="startDate" content={e.start ?? undefined}>{e.fullDate}</span><br />{e.fullLocation}</p>
+      </section>
+
+      {(e.description?.length > 0 || e.links?.length > 0) && (
+        <section class="ev-section">
+          <h2>About the event</h2>
+          <div class="ev-about" itemprop="description">
+            {e.description.map((p) => <p>{p}</p>)}
+            {e.links?.length > 0 && (
+              <ul class="ev-links">
+                {e.links.map((l) => <li><a href={l.href ?? l.url ?? l} target="_blank" rel="noopener">{l.label ?? l.text ?? l.href ?? l.url ?? l}</a></li>)}
+              </ul>
+            )}
+          </div>
+        </section>
+      )}
+
+      {!e.online && e.address && (
+        <section class="ev-section ev-map-wrap">
+          <!-- INTEGRATION: Google Maps embed for the event address (e.address). The live site loads a Google Map here
+               (blocked until analytics/functional cookies are accepted). Replace this placeholder with an
+               <iframe src="https://www.google.com/maps/embed/v1/place?key=<API_KEY>&q=<encoded address>"> -->
+          <div class="ev-map" role="img" aria-label={`Map: ${e.address}`}>
+            <span class="pin" aria-hidden="true"></span>
+            <span>{e.address}</span>
+          </div>
+        </section>
+      )}
+
+      {state === 'open' && !isExternal && (
+        <section class="ev-section ev-tickets">
+          <!-- INTEGRATION: Wix Events ticket picker / checkout. Static stand-in that links to the RSVP form. -->
+          <h2>Tickets</h2>
+          <div class="ticket-row ticket-head"><span>Ticket type</span><span>Price</span><span>Quantity</span></div>
+          <div class="ticket-row"><span class="tt">General Admission</span><span class="tp">$0.00</span><span class="tq"><select aria-label="Quantity"><option>0</option><option>1</option><option>2</option><option>3</option><option>4</option><option>5</option></select></span></div>
+          <div class="ticket-total"><span>Total</span><span>$0.00</span></div>
+          <a class="ev-checkout" href={registerHref}>Checkout</a>
+        </section>
+      )}
+
+      <section class="ev-section ev-share">
+        <h2>Share this event</h2>
+        <ul class="share-links">
+          <li><a href={share.facebook} target="_blank" rel="noopener" aria-label="Share event on Facebook"><svg viewBox="0 0 24 24" width="18" height="18" aria-hidden="true"><path fill="currentColor" d="M13.5 22v-8h2.7l.4-3.2h-3.1V8.8c0-.9.3-1.6 1.6-1.6h1.7V4.4c-.3 0-1.3-.1-2.5-.1-2.5 0-4.1 1.5-4.1 4.2v2.3H7.4V14h2.8v8h3.3z"/></svg></a></li>
+          <li><a href={share.x} target="_blank" rel="noopener" aria-label="Share event on X"><svg viewBox="0 0 24 24" width="18" height="18" aria-hidden="true"><path fill="currentColor" d="M17.5 3h3l-6.7 7.7L21.7 21h-6.2l-4.8-6.3L5.1 21h-3l7.2-8.2L1.8 3h6.3l4.4 5.8L17.5 3zm-1.1 16.2h1.7L7 4.7H5.2l11.2 14.5z"/></svg></a></li>
+          <li><a href={share.linkedin} target="_blank" rel="noopener" aria-label="Share event on LinkedIn"><svg viewBox="0 0 24 24" width="18" height="18" aria-hidden="true"><path fill="currentColor" d="M6.4 8.6H3.1V21h3.3V8.6zM4.8 3a1.9 1.9 0 1 0 0 3.9 1.9 1.9 0 0 0 0-3.9zM21 13.4c0-3.3-1.8-5-4.4-5-1.9 0-2.9 1-3.4 1.8V8.6H9.9V21h3.3v-6.6c0-1.7.6-2.8 2.1-2.8s2.1 1.1 2.1 2.8V21H21v-7.6z"/></svg></a></li>
+        </ul>
+      </section>
+    </div>
+  </article>
+</Base>
+
+<style>
+  .event { max-width: 1126px; margin: 0 auto; padding-top: 12px; }
+  /* Hero: yellow image panel + cream title panel (Wix Events widget look) */
+  .ev-hero { display: grid; grid-template-columns: 1fr 1fr; min-height: 560px; }
+  .ev-media { background: #fcd307; display: flex; align-items: center; justify-content: center; overflow: hidden; }
+  .ev-media img { width: 100%; height: auto; max-height: 100%; object-fit: cover; }
+  .ev-head { background: #fcf7e6; display: flex; flex-direction: column; align-items: center; justify-content: center; text-align: center; padding: 50px 40px; }
+  .ev-short { font-family: var(--font-body); font-size: 18px; line-height: 1.3; }
+  .ev-short .sep { margin: 0 10px; }
+  .ev-head h1 { font-family: var(--font-bold); font-size: 64px; line-height: 1.1; margin: 8px 0 0; word-wrap: break-word; max-width: 100%; }
+  .ev-tagline { font-family: var(--font-body); font-size: 16px; line-height: 1.5; margin-top: 30px; }
+  .ev-divider { width: 100%; max-width: 484px; border: 0; border-top: 1px solid #cfcac0; margin: 44px 0 46px; }
+  .ev-state { font-family: var(--font-body); font-size: 16px; line-height: 1.5; }
+  .ev-state a { color: inherit; }
+  .ev-register, .ev-checkout { display: inline-block; background: #ddb40d; color: #fff; font-family: var(--font-body); font-size: 16px; text-decoration: none; padding: 14px 60px; margin-top: 30px; transition: background .2s; }
+  .ev-register:hover, .ev-checkout:hover { background: #c9a30a; }
+
+  .ev-body { max-width: 843px; margin: 0 auto; padding: 58px 20px 30px; }
+  .ev-section { margin-bottom: 56px; }
+  .ev-section h2 { font-family: var(--font-bold); font-size: 32px; line-height: 1.2; margin-bottom: 14px; }
+  .ev-lines, .ev-about { font-family: var(--font-body); font-size: 16px; line-height: 1.5; }
+  .ev-about p { margin-bottom: 0; }
+  .ev-about p + p { margin-top: 0; }
+  .ev-links { margin-top: 10px; }
+  .ev-links a { color: var(--green-dark); }
+  .ev-map { height: 300px; background: #f1f1f1; border: 1px solid #e3e3e3; display: flex; flex-direction: column; align-items: center; justify-content: center; gap: 10px; color: #666; font-family: var(--font-body); font-size: 14px; text-align: center; padding: 20px; }
+  .ev-map .pin { width: 22px; height: 22px; border-radius: 50% 50% 50% 0; background: #ddb40d; transform: rotate(-45deg); }
+
+  .ev-tickets h2 { border-bottom: 1px solid #ccc; padding-bottom: 16px; }
+  .ticket-row { display: grid; grid-template-columns: 1fr 1fr 1fr; font-family: var(--font-body); }
+  .ticket-head { font-size: 14px; padding: 10px 0 4px; }
+  .ticket-head span:nth-child(2), .ticket-row .tp { padding-left: 32px; border-left: 1px solid #ccc; }
+  .ticket-row .tt, .ticket-row .tp { font-size: 20px; }
+  .ticket-row .tq { text-align: right; }
+  .ticket-row select { font: inherit; font-size: 16px; padding: 8px 14px; min-width: 100px; border: 1px solid #333; background: #fff; }
+  .ticket-row:not(.ticket-head) { padding: 4px 0 16px; border-bottom: 1px solid #ccc; }
+  .ticket-total { display: flex; justify-content: flex-end; gap: 220px; font-family: var(--font-body); font-size: 22px; padding: 22px 0 12px; }
+  .ev-checkout { display: block; width: 340px; max-width: 100%; margin-left: auto; text-align: center; margin-top: 0; padding: 14px 20px; }
+
+  .share-links { display: flex; gap: 30px; align-items: center; padding-top: 4px; }
+  .share-links a { color: #000; display: block; }
+  .share-links a:hover { color: var(--green-dark); }
+
+  @media (max-width: 900px) {
+    .event { padding-top: 0; }
+    .ev-hero { grid-template-columns: 1fr; min-height: 0; }
+    .ev-media { padding: 24px 0; }
+    .ev-media img { max-height: none; }
+    .ev-head { padding: 36px 20px; }
+    .ev-head h1 { font-size: 40px; }
+    .ev-body { padding: 36px 20px 20px; }
+    .ev-section h2 { font-size: 26px; }
+    .ticket-total { gap: 60px; }
+  }
+  @media (max-width: 600px) {
+    .ev-head h1 { font-size: 30px; }
+    .ev-short { font-size: 15px; }
+    .ticket-row { grid-template-columns: 1fr 1fr; }
+    .ticket-head span:nth-child(3), .ticket-row .tq { grid-column: span 2; text-align: left; padding-top: 10px; }
+  }
+</style>

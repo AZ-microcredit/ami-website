@@ -1,0 +1,58 @@
+---
+import PlaybookOverview from '../components/PlaybookOverview.astro';
+
+const columns = [
+  { name: 'BUILD', tagline: 'to start your<br />business plan', icon: '/media/760f7c_52ae679ecce44fee9ecace63a7124e1b.png', head: '#999999', body: '#d3d3d3', size: 17, spaced: true,
+    items: ['Why do you want to start a business?', 'What will your business do?', 'Who will your business serve?', 'How will you reach your customers?', 'How will you get returning customers?', 'What things do you have to do to deliver value?', 'What resources do you need to make these things happen?', 'Who do you need to make these things happen?', 'How will you make money?', 'What will all this cost?', 'How do I make my operation official?', 'I need money – can I still do this?'].map((text) => ({ text })) },
+  { name: 'ELEVATE', tagline: 'to bring your business<br />to next level', icon: '/media/760f7c_fe3e5d7a5655483eab186e919c54f8a4.png', head: '#5eb346', body: '#badfb0', size: 16,
+    items: ['How can I raise money for my business?', 'How can I protect my business?', 'How can I make better decisions?', 'How can I grow as a business owner?', 'How do I work with partners to achieve my goals?', 'How can I elevate my online presence?'].map((text) => ({ text })) },
+  { name: 'EXPAND', tagline: 'to scale and grow<br />your business', icon: '/media/760f7c_52ae679ecce44fee9ecace63a7124e1b.png', head: '#000000', body: '#a8a8a8', size: 17, slot: 'expand' },
+];
+---
+
+<PlaybookOverview
+  pageTitle="Arizona Microcredit Initiative |  BUSINESS EDUCATION"
+  description="Designed for startups or established businesses, our online interactive workshops cover all the business basics."
+  title="RESOURCES"
+  subtitle="Digital programming and playbooks to help you Build, Elevate, and Expand your business"
+  image="/media/760f7c_1ea4966d6f7e44e88025f5d7849868c4.jpg"
+  columns={columns}
+  bodyHeight={632}
+  headingSpaced
+>
+  <Fragment slot="expand">
+    <p>COMING SOON!</p>
+    <p class="gap"><a href="/schedule-a-consultation-1">Schedule a consulting appointment by clicking here!</a></p>
+  </Fragment>
+
+  <Fragment slot="after">
+    <section class="partners">
+      <h3>Recommended by our Partners</h3>
+      <div class="logos">
+        <img src="/media/760f7c_3763d8cb0b95499cbe85fd64ef77c762.png" alt="Local First Arizona.png" />
+        <img src="/media/760f7c_2882e8961ae84354a975f5907d9d03a7.png" alt="Hera Hub Phoenix.png" />
+        <img src="/media/760f7c_01992304a85546a9b96fe3cd88986473.png" alt="FABRIC Tempe" />
+        <img src="/media/760f7c_2266edc984bd4225a64cfcc2813227f1.png" alt="Gilbert Chamber of Commerce.png" />
+      </div>
+    </section>
+  </Fragment>
+
+  <Fragment slot="note">
+    Can't find what you need? We also offer <b>free consulting services</b> on these topics and more. To receive <b>personalized instruction</b> for your business, please <a class="u" href="/contact">schedule an appointment</a><b>.</b>
+  </Fragment>
+</PlaybookOverview>
+
+<style>
+  .gap { margin-top: 18px; }
+  .partners { margin: 52px 0 0 -20px; width: calc(100% + 40px); }
+  .partners h3 { background: var(--green); color: #fff; text-align: center; font-family: var(--font-avenir-heavy); font-size: 33px; line-height: 1.2; padding: 12px 20px; }
+  .logos { background: #d3d3d3; display: flex; align-items: center; justify-content: space-between; gap: 10px; padding: 10px 6px; }
+  .logos img { height: 84px; width: auto; max-width: 30%; object-fit: contain; }
+  .logos img:first-child { height: 96px; }
+  @media (max-width: 900px) {
+    .partners { margin-left: 0; width: 100%; }
+    .partners h3 { font-size: 24px; }
+    .logos { flex-wrap: wrap; justify-content: center; }
+    .logos img { max-width: 45%; height: 64px; }
+  }
+</style>

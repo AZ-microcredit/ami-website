@@ -1,0 +1,90 @@
+---
+import Base from '../layouts/Base.astro';
+import PlusBand from '../components/PlusBand.astro';
+import InterestedCTA from '../components/InterestedCTA.astro';
+
+// Displayed left → right: video call → AMI staff → storefront (Wix DOM order differs).
+const steps = [
+  { icon: '/media/760f7c_d5c6bcd9360545388ecf34ee967f6196.png', alt: 'zoom.png', size: 280, text: "Schedule an initial call with our educated staff to see if your small business is the right fit for AMI's services." },
+  { icon: '/media/760f7c_048f20cf9a504ce48cb5cc2d8f3d3506.png', alt: 'download copy 2.png', size: 323, text: 'Once AMI decides your small business is the right fit, our staff will work on loan logistics.' },
+  { icon: '/media/760f7c_3b094e768b03422bbe13849cecf1349e.png', alt: 'small business.png', size: 274, text: 'Once your loan is approved, your business receives the funding it needs to grow to new heights.' },
+];
+const arrow = '/media/760f7c_cbf9f37727404a6ea466915bf3446aa2.png';
+---
+
+<Base
+  title="Arizona Microcredit Initiative | LOANS"
+  description="Our loans up to $7,500 are tailored to fit your business needs. Let us help your business reach its fullest potential!"
+>
+  <PlusBand
+    title="MICROLOANS"
+    subtitle="We work to help your business succeed.Our loans are tailored to fit your business needs. Let us help your business reach its full potential."
+    subtitleWidth={665}
+  />
+
+  <div class="photo-strip">
+    <img src="/media/a1a2f8_041507f5ccdd47b892dcbd6be40ad177.jpg" alt="website image_3.JPG" loading="eager" />
+  </div>
+
+  <section class="grey">
+    <div class="inner">
+      <h2 class="why-title">Why choose AMI for your small business loan?</h2>
+      <p class="why-text">With AMI, there is a lower barrier to entry to acquire a microloan since alternative options like banks require higher credit scores. Also, AMI specializes in small businesses, which makes us more knowledgeable about what aid we can provide for your company.</p>
+
+      <h2 class="process-title">How Does AMI's Loan Process Work?</h2>
+
+      <div class="process">
+        <div class="icons">
+          {steps.map((s, i) => (
+            <div class="icon-cell">
+              <img src={s.icon} alt={s.alt} width={s.size} height={s.size} loading="lazy" />
+              {i < 2 && <img class="arrow" src={arrow} alt="arrow.png" width="111" height="111" loading="lazy" />}
+            </div>
+          ))}
+        </div>
+        <div class="texts">
+          {steps.map((s) => <h3>{s.text}</h3>)}
+        </div>
+      </div>
+
+      <InterestedCTA href="/schedule-a-consultation" />
+    </div>
+  </section>
+</Base>
+
+<style>
+  .photo-strip { height: 400px; overflow: hidden; background: #fafafa; }
+  .photo-strip img { width: 100%; height: 100%; object-fit: cover; object-position: center 40%; }
+
+  .grey { background: var(--grey-bg); }
+  .inner { max-width: var(--content-width); margin: 0 auto; padding: 44px 20px 106px; }
+  .why-title { text-align: center; font-family: var(--font-bold); font-size: 30px; line-height: 1.5; color: var(--green); }
+  .why-text { max-width: 693px; margin: 18px auto 0; text-align: center; font-family: var(--font-bold); font-size: 22px; line-height: 1.5; }
+  .process-title { margin-top: 74px; text-align: center; font-family: var(--font-bold); font-size: 43px; line-height: 1.2; color: var(--green); }
+
+  .process { margin-top: 38px; }
+  .icons { display: grid; grid-template-columns: repeat(3, 1fr); height: 300px; }
+  .icon-cell { position: relative; display: flex; justify-content: center; align-items: flex-start; }
+  .icon-cell > img:first-child { max-width: none; flex: none; }
+  .arrow { position: absolute; right: -55px; top: 38px; }
+  .texts { display: grid; grid-template-columns: repeat(3, 1fr); }
+  .texts h3 { max-width: 255px; margin: 0 auto; text-align: center; font-family: var(--font-body); font-size: 23px; line-height: 1.6; color: var(--green); }
+  .texts h3:nth-child(2) { max-width: 223px; }
+
+  .inner :global(.interested) { margin-top: 128px; }
+
+  @media (max-width: 900px) {
+    .photo-strip { height: 52vw; min-height: 220px; }
+    .inner { padding-bottom: 60px; }
+    .why-title { font-size: 24px; }
+    .why-text { font-size: 18px; }
+    .process-title { font-size: 30px; margin-top: 44px; }
+    .icons { grid-template-columns: 1fr; height: auto; gap: 10px; }
+    .icon-cell > img:first-child { max-width: 200px; height: auto; }
+    .arrow { position: static; width: 70px; height: 70px; transform: rotate(90deg); }
+    .icon-cell { flex-direction: column; align-items: center; }
+    .texts { grid-template-columns: 1fr; gap: 16px; margin-top: 10px; }
+    .texts h3 { font-size: 20px; }
+    .inner :global(.interested) { margin-top: 60px; }
+  }
+</style>

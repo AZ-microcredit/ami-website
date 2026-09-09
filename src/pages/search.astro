@@ -1,0 +1,93 @@
+---
+import Base from '../layouts/Base.astro';
+import { posts, postUrl, excerpt, formatDate } from '../lib/blog';
+
+// Compact index for the client-side search (title + description).
+const index = posts.map((p) => ({ t: p.title, d: excerpt(p, 400), u: postUrl(p), c: p.cover, m: formatDate(p.datePublished), r: p.readTime }));
+---
+
+<Base title="Arizona Microcredit Initiative | Search Results" description="Search the Arizona Microcredit Initiative blog.">
+  <div class="search-bg">
+    <div class="search-wrap">
+      <h1>Search Results</h1>
+      <form class="search-form" role="search" action="/search" method="get">
+        <label class="sr-only" for="q">Search</label>
+        <svg class="icon" viewBox="0 0 24 24" width="20" height="20" aria-hidden="true"><circle cx="10" cy="10" r="7" fill="none" stroke="currentColor" stroke-width="1.6"/><path d="m15 15 6 6" stroke="currentColor" stroke-width="1.6"/></svg>
+        <input id="q" name="q" type="search" placeholder="Search..." autocomplete="off" />
+      </form>
+      <p class="status" id="status" aria-live="polite">No results found for empty search. Try a new search.</p>
+      <div class="results" id="results"></div>
+    </div>
+  </div>
+
+  <script type="application/json" id="search-index" set:html={JSON.stringify(index)} />
+  <script>
+    const index: { t: string; d: string; u: string; c: string; m: string; r: string }[] =
+      JSON.parse(document.getElementById('search-index')!.textContent || '[]');
+    const input = document.getElementById('q') as HTMLInputElement;
+    const status = document.getElementById('status')!;
+    const results = document.getElementById('results')!;
+    const esc = (s: string) => s.replace(/[&<>"]/g, (c) => ({ '&': '&amp;', '<': '&lt;', '>': '&gt;', '"': '&quot;' })[c]!);
+
+    function run(q: string) {
+      const query = q.trim().toLowerCase();
+      const terms = query.split(/\s+/).filter(Boolean);
+      const hits = terms.length
+        ? index.filter((p) => { const hay = (p.t + ' ' + p.d).toLowerCase(); return terms.every((t) => hay.includes(t)); })
+        : [];
+      if (!query) {
+        status.textContent = 'No results found for empty search. Try a new search.';
+      } else if (!hits.length) {
+        status.textContent = `No results found for "${q.trim()}". Try a new search.`;
+      } else {
+        status.textContent = `${hits.length} result${hits.length === 1 ? '' : 's'} for "${q.trim()}"`;
+      }
+      results.innerHTML = hits.map((p) => `
+        <article class="hit">
+          <a class="thumb" href="${p.u}" tabindex="-1" aria-hidden="true"><img src="${p.c}" alt="" loading="lazy"></a>
+          <div class="body">
+            <h2><a href="${p.u}">${esc(p.t)}</a></h2>
+            <p class="meta">${esc(p.m)} · ${esc(p.r)}</p>
+            <p class="excerpt">${esc(p.d)}</p>
+          </div>
+        </article>`).join('');
+      const url = new URL(location.href);
+      if (query) url.searchParams.set('q', q.trim()); else url.searchParams.delete('q');
+      history.replaceState(null, '', url);
+    }
+
+    const initial = new URL(location.href).searchParams.get('q') || '';
+    input.value = initial;
+    run(initial);
+    input.addEventListener('input', () => run(input.value));
+    input.form?.addEventListener('submit', (e) => { e.preventDefault(); run(input.value); });
+  </script>
+</Base>
+
+<style>
+  .search-bg { background: var(--grey-bg); padding: 50px 0 40px; min-height: 260px; }
+  .search-wrap { max-width: 980px; margin: 0 auto; padding: 0 20px; }
+  h1 { font-family: var(--font-bold); font-size: 36px; text-align: center; margin-bottom: 40px; }
+  .search-form { position: relative; }
+  .search-form .icon { position: absolute; left: 12px; top: 50%; transform: translateY(-50%); color: #7d7d7d; }
+  .search-form input {
+    width: 100%; height: 52px; border: 1px solid #333; background: var(--white); font: 22px/1 var(--font-body); padding: 0 12px 0 42px;
+    -webkit-appearance: none; appearance: none; border-radius: 0;
+  }
+  .search-form input::placeholder { color: #7d7d7d; }
+  .status { font-family: var(--font-body); font-size: 14px; margin: 24px 0 20px; }
+  .results { display: flex; flex-direction: column; gap: 24px; }
+  .results :global(.hit) { background: var(--white); display: grid; grid-template-columns: 220px 1fr; }
+  .results :global(.thumb img) { width: 100%; height: 100%; min-height: 160px; object-fit: cover; }
+  .results :global(.body) { padding: 22px 24px; min-width: 0; }
+  .results :global(h2) { font-family: var(--font-avenir-heavy); font-size: 22px; line-height: 1.25; margin-bottom: 6px; }
+  .results :global(h2 a) { text-decoration: none; }
+  .results :global(h2 a:hover) { text-decoration: underline; }
+  .results :global(.meta) { font-family: var(--font-avenir-light); font-size: 13px; color: #555; margin-bottom: 10px; }
+  .results :global(.excerpt) { font-family: var(--font-avenir-light); font-size: 15px; line-height: 1.5; display: -webkit-box; -webkit-line-clamp: 3; -webkit-box-orient: vertical; overflow: hidden; }
+  @media (max-width: 600px) {
+    h1 { font-size: 28px; }
+    .results :global(.hit) { grid-template-columns: 1fr; }
+    .results :global(.thumb img) { height: 180px; }
+  }
+</style>

@@ -1,0 +1,28 @@
+---
+import TutorialPage from '../components/TutorialPage.astro';
+---
+
+<TutorialPage
+  pageTitle="Interact with Customers | az-microcredit"
+  title="INTERACT WITH CUSTOMERS"
+  subtitle="Learn how to build and maintain meaningful relations with customers"
+  lead="In this document, our staff guides you on how to effectively communicate through e-mail in business contexts."
+  leadWidth={744}
+  leadOffset={118}
+>
+  <!-- INTEGRATION: three Wix "PDF File Viewer" apps (551x606 each), stacked. The documents are loaded by the Wix TPA at runtime and are not in the page HTML; put the PDFs in public/ and replace each block with an <iframe>/<object>. -->
+  <div class="docs" slot="embed">
+    <div class="tut-pdf" role="img" aria-label="PDF File Viewer"><span>PDF File Viewer</span></div>
+    <div class="tut-pdf" role="img" aria-label="PDF File Viewer"><span>PDF File Viewer</span></div>
+    <div class="tut-pdf" role="img" aria-label="PDF File Viewer"><span>PDF File Viewer</span></div>
+  </div>
+</TutorialPage>
+
+<style>
+  .docs { display: flex; flex-direction: column; gap: 40px; margin: 40px 0 0 118px; }
+  .docs .tut-pdf { width: 551px; height: 606px; }
+  @media (max-width: 900px) {
+    .docs { margin-left: 0; gap: 24px; }
+    .docs .tut-pdf { height: 420px; }
+  }
+</style>
