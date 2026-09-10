@@ -4,10 +4,10 @@ import PlusBand from '../components/PlusBand.astro';
 
 // The seven slides of the Wix slideshow (four quote cards, three image cards).
 const slides = [
-  { quote: '"AMI and my team of Joelle, Ian, Jarred, and others has been my lifeline to information that has made it possible for me to back up my position with facts. As a solo entrepreneur, I lack the time and resources to find the information needed to put together a great pitch or presentation; AMI has made that possible for me. They are always helpful, supportive, understanding, and considerate. I recently was part of a large event and six AMI volunteers came and donated many hours to make sure that it was a huge success. In the two years that I have worked with them, Joelle has been by my side, a valuable asset and team member. I consider myself lucky to have found such a great resource in Arizona."', author: ['—  Jennifer Walter,', 'Founder of Serving Glamour'] },
-  { quote: '“AMI explained the entire process of obtaining 501(c)(3) status. They provided us with all the information in neat and organized ways, empowering us. We are extremely grateful to AMI, and would recommend them to all other entrepreneurs.”', author: ['—  Nisha Rehman,', 'Founder of Hands for Henna'], big: true },
-  { quote: '"I really like the direction that the information AMI provided gives me. It makes me feel like I am on a mission!"', author: ['—  Suzette Smith,', 'Garden Goddess Ferments'], big: true },
-  { quote: '"The AMI team was a great help in training my team on social media. I would highly recommend their talents for any entrepreneur looking to improve their social media skills."', author: ['—  Susan Hansen'], big: true },
+  { quote: '"AMI and my team of Joelle, Ian, Jarred, and others has been my lifeline to information that has made it possible for me to back up my position with facts. As a solo entrepreneur, I lack the time and resources to find the information needed to put together a great pitch or presentation; AMI has made that possible for me. They are always helpful, supportive, understanding, and considerate. I recently was part of a large event and six AMI volunteers came and donated many hours to make sure that it was a huge success. In the two years that I have worked with them, Joelle has been by my side, a valuable asset and team member. I consider myself lucky to have found such a great resource in Arizona."', author: ['Jennifer Walter,', 'Founder of Serving Glamour'] },
+  { quote: '“AMI explained the entire process of obtaining 501(c)(3) status. They provided us with all the information in neat and organized ways, empowering us. We are extremely grateful to AMI, and would recommend them to all other entrepreneurs.”', author: ['Nisha Rehman,', 'Founder of Hands for Henna'], big: true },
+  { quote: '"I really like the direction that the information AMI provided gives me. It makes me feel like I am on a mission!"', author: ['Suzette Smith,', 'Garden Goddess Ferments'], big: true },
+  { quote: '"The AMI team was a great help in training my team on social media. I would highly recommend their talents for any entrepreneur looking to improve their social media skills."', author: ['Susan Hansen'], big: true },
   { image: '/media/760f7c_bcc6e75d307b442ca3d76f5b103e2a09.png', alt: 'Client testimonial: Meet Rodney, Grow Spaces LLC' },
   { image: '/media/760f7c_70887a5da308415e9ac1ac3d3a3cb839.png', alt: 'Client testimonial quotes' },
   { image: '/media/760f7c_2a10aaefb371445582436d726326b1a0.png', alt: 'Client testimonial from @e.villstylesyou' },
@@ -23,8 +23,8 @@ const slides = [
       {slides.map((s, i) => (
         <div class:list={['slide', { current: i === 0, big: s.big, image: !!s.image }]} role="group" aria-roledescription="slide" aria-label={`${i + 1} of ${slides.length}`}>
           {s.image ? (
-            <img src={s.image} alt={s.alt} loading={i === 4 ? 'eager' : 'lazy'} />
-          ) : (
+            <img src={s.image} alt={s.alt} loading={i === 4 ? 'eager': 'lazy'} />
+          ): (
             <div class="card">
               <h2>WHAT OUR CLIENTS SAY</h2>
               <p class="quote">{s.quote}</p>
@@ -37,7 +37,7 @@ const slides = [
     <button class="arrow prev" type="button" aria-label="Previous"><svg viewBox="0 0 24 44" width="22" height="40"><path d="M22 2 3 22l19 20" fill="none" stroke="currentColor" stroke-width="2.5"/></svg></button>
     <button class="arrow next" type="button" aria-label="Next"><svg viewBox="0 0 24 44" width="22" height="40"><path d="M2 2l19 20L2 42" fill="none" stroke="currentColor" stroke-width="2.5"/></svg></button>
     <div class="dots" role="tablist">
-      {slides.map((_, i) => <button type="button" role="tab" class:list={['dot', { current: i === 0 }]} aria-label={`Go to slide ${i + 1}`} aria-selected={i === 0 ? 'true' : 'false'} />)}
+      {slides.map((_, i) => <button type="button" role="tab" class:list={['dot', { current: i === 0 }]} aria-label={`Go to slide ${i + 1}`} aria-selected={i === 0 ? 'true': 'false'} />)}
     </div>
   </section>
 </Base>

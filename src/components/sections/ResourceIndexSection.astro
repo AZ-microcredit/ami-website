@@ -40,108 +40,30 @@ const expand = [
   card('small-business-upskilling', '/media/dd2ea9_db47d1f63d8146daaedb3b8a40375415.png'),
   card('business-process-improvement-bpi', '/media/dd2ea9_93fa0f6b15da4909aae0bfdcefa959bc.png'),
 ];
+const groups = [{name:'Getting started',items:build},{name:'Finding customers',items:elevate},{name:'Growing your business',items:expand}];
 ---
 
 <section class="resource-index" id={id}>
-  <h2 class="spaced-title ri-heading">RESOURCE INDEX</h2>
-
-  <div class="videos container">
-    <div class="video-row">
-      <!-- INTEGRATION: Wix VideoPlayer "AMI Interviews Fair Trade Cafe" (YouTube). The video id is not
-           present in the page dump; replace the placeholder with
-           <iframe src="https://www.youtube.com/embed/<VIDEO_ID>" title="AMI Interviews Fair Trade Cafe" allowfullscreen></iframe> -->
-      <div class="video video-placeholder" role="img" aria-label="AMI Interviews Fair Trade Cafe (video)">
-        <span class="play" aria-hidden="true"></span>
-        <span class="video-title">AMI Interviews Fair Trade Cafe</span>
-      </div>
-      <!-- Second (empty) Wix VideoPlayer on the live page: rendered as the blank white card. -->
-      <div class="video video-empty" aria-hidden="true"></div>
-    </div>
-    <p class="intro">AMI’s interview series features conversations with local Arizona small business owners, offering insights into their entrepreneurial journeys as part of our ongoing effort to provide meaningful educational resources</p>
-    <hr class="rule" />
-  </div>
-
-  <div class="groups container">
-    <div class="two-col">
-      <div class="group">
-        <h3 class="group-title">Build your business</h3>
-        <ul class="list-cards">
-          {build.map((p) => (
-            <li><a class="lcard" href={p.href}><span class="thumb"><img src={p.image} alt="" /></span><span class="ttl">{p.title}</span></a></li>
-          ))}
-        </ul>
-      </div>
-      <div class="group">
-        <h3 class="group-title">Elevate your process</h3>
-        <ul class="list-cards">
-          {elevate.map((p) => (
-            <li><a class="lcard" href={p.href}><span class="thumb"><img src={p.image} alt="" /></span><span class="ttl">{p.title}</span></a></li>
-          ))}
-        </ul>
-      </div>
-    </div>
-
-    <div class="group expand">
-      <h3 class="group-title">Expand your brand</h3>
-      <ul class="grid-cards">
-        {expand.map((p) => (
-          <li><a class="gcard" href={p.href}><span class="ttl">{p.title}</span><span class="thumb"><img src={p.image} alt="" /></span></a></li>
-        ))}
-      </ul>
-    </div>
-  </div>
+ <div class="library-head"><p class="eyebrow">The resource library</p><h2>Find your next<br/><em>“I’ve got this.”</em></h2><p>Practical reading for the questions that come with running a business.</p></div>
+ <div class="library-controls" hidden><label for="resource-search">What do you want to learn?</label><input id="resource-search" type="search" placeholder="Try pricing, accounting, marketing…"/><div class="filters" aria-label="Filter resources"><button type="button" data-filter="all" aria-pressed="true">All topics</button>{groups.map((g,i)=><button type="button" data-filter={String(i)} aria-pressed="false">{g.name}</button>)}</div><p class="result-count" role="status" aria-live="polite"></p></div>
+ <div class="library-groups">{groups.map((group,i)=><section class="resource-group" data-group={i}><header><span class="group-number">0{i+1}</span><h3>{group.name}</h3></header><ul>{group.items.map((post,n)=><li data-resource data-title={post.title.toLowerCase()}><a href={post.href}><span class="resource-number">{String(n+1).padStart(2,'0')}</span><span>{post.title}</span><span aria-hidden="true">↗</span></a></li>)}</ul></section>)}</div>
+ <p class="empty-results" hidden>No matching resources. Try a different word or choose “All topics.”</p>
 </section>
-
+<script>
+ const root=document.querySelector<HTMLElement>('.resource-index');
+ if(root){
+  root.querySelector<HTMLElement>('.library-controls')!.hidden=false;
+  const search=root.querySelector<HTMLInputElement>('input')!;
+  const buttons=[...root.querySelectorAll<HTMLButtonElement>('[data-filter]')];
+  let filter='all';
+  function update(){let total=0;
+   root!.querySelectorAll<HTMLElement>('[data-group]').forEach(group=>{let count=0;group.querySelectorAll<HTMLElement>('[data-resource]').forEach(row=>{const visible=(filter==='all'||group.dataset.group===filter)&&row.dataset.title!.includes(search.value.toLowerCase().trim());row.hidden=!visible;if(visible)count++});group.hidden=count===0;total+=count});
+   root!.querySelector<HTMLElement>('.result-count')!.textContent=`${total} resource${total===1?'':'s'}`;
+   root!.querySelector<HTMLElement>('.empty-results')!.hidden=total>0;
+  }
+  buttons.forEach(button=>button.addEventListener('click',()=>{filter=button.dataset.filter!;buttons.forEach(b=>b.setAttribute('aria-pressed',String(b===button)));update()}));search.addEventListener('input',update);update();
+ }
+</script>
 <style>
-  .ri-heading { font-size: 40px; letter-spacing: 0.5em; }
-  .videos { padding: 44px 20px 0; }
-  .video-row { display: grid; grid-template-columns: 440px 440px; justify-content: center; gap: 0 25px; }
-  .video { width: 100%; aspect-ratio: 440 / 268; }
-  .video-empty { background: #fff; box-shadow: 0 0 6px rgba(0,0,0,.25); }
-  .video-placeholder { background: #111 url('/media/760f7c_9137a574e4d84a87893bad5f3eb1fec8.jpg') center/cover; position: relative; display: flex; align-items: center; justify-content: center; }
-  .video-placeholder::before { content: ''; position: absolute; inset: 0; background: rgba(0,0,0,.45); }
-  .video-placeholder .play { position: relative; width: 64px; height: 64px; border: 3px solid #fff; border-radius: 50%; }
-  .video-placeholder .play::after { content: ''; position: absolute; left: 24px; top: 17px; border-left: 20px solid #fff; border-top: 12px solid transparent; border-bottom: 12px solid transparent; }
-  .video-placeholder .video-title { position: absolute; left: 0; right: 0; bottom: 14px; text-align: center; color: #fff; font-family: var(--font-bold); font-size: 16px; }
-  .intro { max-width: 880px; margin: 40px auto 6px; text-align: center; font-family: var(--font-bold); font-size: 20px; line-height: 1.35; }
-  .rule { width: 885px; max-width: 100%; margin: 0 auto; border: 0; border-top: 2px solid var(--green); }
-
-  .groups { padding: 58px 20px 60px; }
-  .two-col { display: grid; grid-template-columns: 446px 446px; justify-content: center; gap: 0 34px; }
-  .group-title { font-family: var(--font-bold); font-size: 36px; line-height: 1.2; text-align: center; text-decoration: underline; text-underline-offset: 6px; text-decoration-thickness: 2px; margin-bottom: 28px; }
-  .list-cards { display: flex; flex-direction: column; gap: 30px; }
-  .lcard { display: grid; grid-template-columns: 158px 1fr; height: 158px; text-decoration: none; color: #fff; }
-  .lcard .thumb { background: #fff; border: 1px solid #e6e6e6; display: flex; align-items: center; justify-content: center; overflow: hidden; }
-  .lcard .thumb img, .gcard .thumb img { width: 100%; height: 100%; object-fit: contain; }
-  .lcard .ttl { background: var(--green); padding: 22px 24px; font-family: var(--font-bold); font-size: 22px; line-height: 1.3; display: -webkit-box; -webkit-line-clamp: 3; -webkit-box-orient: vertical; overflow: hidden; }
-  .lcard:hover .ttl, .gcard:hover { background: var(--green-dark); }
-
-  .expand { margin-top: 90px; }
-  .grid-cards { display: grid; grid-template-columns: repeat(3, 300px); justify-content: center; gap: 15px; }
-  .gcard { background: var(--green); color: #fff; text-decoration: none; height: 184px; padding: 22px 18px; display: grid; grid-template-columns: 1fr 80px; gap: 12px; align-items: start; }
-  .gcard .ttl { font-family: var(--font-bold); font-size: 22px; line-height: 1.3; display: -webkit-box; -webkit-line-clamp: 3; -webkit-box-orient: vertical; overflow: hidden; }
-  .gcard .thumb { width: 80px; height: 80px; display: block; }
-
-  @media (max-width: 1000px) {
-    .video-row { grid-template-columns: 1fr 1fr; gap: 20px; }
-    .two-col { grid-template-columns: 1fr 1fr; gap: 30px; }
-    .grid-cards { grid-template-columns: repeat(3, 1fr); }
-  }
-  @media (max-width: 900px) {
-    .video-row { grid-template-columns: 1fr; }
-    .video-empty { display: none; }
-    .two-col { grid-template-columns: 1fr; gap: 50px; }
-    .grid-cards { grid-template-columns: repeat(2, 1fr); }
-    .group-title { font-size: 28px; }
-    .expand { margin-top: 50px; }
-    .ri-heading { font-size: 28px; letter-spacing: 0.35em; }
-  }
-  @media (max-width: 600px) {
-    .lcard { grid-template-columns: 110px 1fr; height: auto; min-height: 110px; }
-    .lcard .ttl { font-size: 18px; padding: 14px 16px; }
-    .grid-cards { grid-template-columns: 1fr; }
-    .gcard { height: auto; min-height: 140px; }
-    .intro { font-size: 17px; }
-    .ri-heading { font-size: 22px; letter-spacing: 0.25em; }
-  }
+.resource-index{padding:100px 4.2vw}.eyebrow{font:11px/1.6 Helvetica,Arial,sans-serif;letter-spacing:.1em;text-transform:uppercase}.library-head{display:grid;grid-template-columns:.6fr 1.3fr 1fr;gap:40px;align-items:start;margin-bottom:56px}.library-head h2{font:500 clamp(40px,4.6vw,70px)/1.04 Helvetica,Arial,sans-serif;letter-spacing:-.045em}.library-head em{font-family:Georgia,serif;font-weight:400}.library-head>p:last-child{font:18px/1.7 Georgia,serif;color:#555}.library-controls{margin-left:23%;margin-bottom:50px}.library-controls label{display:block;font:13px Helvetica,Arial,sans-serif;margin-bottom:16px}.library-controls input{border:0;border-bottom:1px solid #777;background:transparent;padding:16px 0;width:100%;font:22px/1.5 Helvetica,Arial,sans-serif;color:#111;border-radius:0}.filters{display:flex;flex-wrap:wrap;gap:12px 24px;margin:24px 0}.filters button{background:none;border:0;border-bottom:2px solid transparent;padding:9px 0;cursor:pointer;font:13px Helvetica,Arial,sans-serif;color:#555}.filters button[aria-pressed=true]{border-color:#39732b;color:#111}.result-count{font:12px Helvetica,Arial,sans-serif;color:#777}.resource-group{display:grid;grid-template-columns:1fr 2.3fr;gap:60px;margin-top:50px}.resource-group header{padding-top:20px;border-top:1px solid #111}.group-number{font:16px Helvetica,Arial,sans-serif;color:#777}.resource-group h3{font:400 30px/1.1 Helvetica,Arial,sans-serif;margin-top:25px;max-width:240px}.resource-group ul{border-top:1px solid #aaa}.resource-group li{border-bottom:1px solid #ccc}.resource-group a{display:grid;grid-template-columns:30px 1fr 25px;gap:22px;padding:26px 0;font:22px/1.35 Helvetica,Arial,sans-serif;text-decoration:none;transition:padding .25s,color .25s,background .25s}.resource-group a:hover{padding-left:15px;padding-right:15px;color:#39732b;background:#f3f3ef}.resource-number{font-size:11px;color:#777;padding-top:6px}.empty-results{padding:35px 0;font:20px Georgia,serif}[hidden]{display:none!important}@media(max-width:750px){.resource-index{padding:60px 22px}.library-head{grid-template-columns:1fr;gap:24px;margin-bottom:36px}.library-controls{margin-left:0}.library-controls input{font-size:18px}.resource-group{grid-template-columns:1fr;gap:24px;margin-top:40px}.resource-group h3{max-width:none;font-size:28px;margin-top:14px}.resource-group a{font-size:19px;gap:12px;padding:23px 0}.resource-group header{display:flex;align-items:baseline;gap:20px}.resource-group header h3{margin:0}}
 </style>

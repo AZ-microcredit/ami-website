@@ -5,7 +5,7 @@
  * replaced with the standard spaced-title section header.
  *
  * Card design (Executive Board + Staff) follows Dorm Room Fund's "Our Team" partner
- * cards: https://www.dormroomfund.com/our-team — grayscale photo, name + title, and
+ * cards: https://www.dormroomfund.com/our-team: grayscale photo, name + title, and
  * a solid-color panel that wipes in diagonally from the bottom-left corner on hover
  * (CSS ::before, translate(-105%,105%) -> translate(0,0)). Recolored to AMI's
  * bright --green instead of DRF's orange; everything else (fonts, base colors) is
@@ -14,7 +14,7 @@
 interface Props { id?: string }
 const { id } = Astro.props;
 
-// Executive board — names/titles/emails are the visible text on the live page
+// Executive board: names/titles/emails are the visible text on the live page
 // (the live mailto targets are stale, so we link to the shown address).
 // The Executive Director's card stays the same neutral gray as everyone else's
 // (no pre-filled wipe); she's set apart with a green accent ring + "ED" badge
@@ -28,10 +28,11 @@ const board = [
   { name: 'Arya Tailor', title: 'Director of Operations', email: 'arya@azmicrocredit.org', image: '/media/760f7c_b2ea127e5daa4454a5fed560a7ddf3f1.jpg' },
 ];
 
-// Staff (compact card grid — same card design/animation as the board, smaller/denser)
+// Staff (compact card grid: same card design/animation as the board, smaller/denser)
 const staff = [
-  ['Siddharth Mehta', 'Senior Associate', '760f7c_1337c4cc5ca743abbe0c24d8dc2b1877.jpg'],
-  ['Ruby Xia', 'Senior Associate', '760f7c_83599111c89c445792ed94844264b8d8.png'],
+  ['Atharva Goel', 'Head of Records and Technology', '760f7c_06be2e36746a4675beaf10cd07f84683.jpg'],
+  ['Mihir Shrestha', 'Head of Brand Management', '760f7c_f88204b3e42647689349994c75c4f7b0.jpg'],
+  ['Peter Cipra', 'Head of Internal Development', '760f7c_569e51a2ca6e40a1ab604a84ddad340a.jpg'],
   ['Faizan Yousef', 'Senior Associate', '760f7c_d2b525cefe4a4a7baf21f9779620602a.png'],
   ['Sam Benividez', 'Senior Associate', '760f7c_3db0064fbe00412eb9df298d29ad678e.jpg'],
   ['Medha Peddireddi', 'Senior Associate', '760f7c_6ddc743e29c844d3ad3ff236dc7ee1c2.jpg'],
@@ -39,22 +40,17 @@ const staff = [
   ['Anya Kannan', 'Senior Associate', '760f7c_de36764b15b24dbaac6295b956e89ec2.jpg'],
   ['Ryan Meyer', 'Senior Associate', '760f7c_ad300e2d62ef40739c560c0a3966ba9e.png'],
   ['Colin Franklin', 'Associate', '760f7c_f3a8a6b022224cbaa4633438dc7acc63.jpg'],
-  ['Hannah Hughens', 'Associate', '760f7c_e0fe6be87c384c02b967260d804cec18.jpg'],
   ['Ignacy Sajek', 'Associate', '760f7c_8f01eaac340d438cad0372f64b9a642c.jpg'],
   ['Ronak Bhatia', 'Associate', '760f7c_78980234f8914fe6b2c26b94d38cecd3.jpg'],
   ['Akhil Choda', 'Associate', '760f7c_8a529d3191c0477f934d058a147a20bb.png'],
   ['Simoni Thakkar', 'Associate', '760f7c_83feb3eda30c46c98b8741daccfebb82.jpg'],
-  ['Zachary Speck', 'Associate', '760f7c_28e40b089bb5470cbf8cda54b061efe6.png'],
   ['Jacob Batty', 'Associate', '760f7c_dbcd8564f7ce4dee9ae7201695ba1f02.jpg'],
-  ['Rishab Mantri', 'Head of Records and Technology', '760f7c_19c622300fa448029d916ba52c080447.jpg'],
-  ['Kierat Mangat', 'Head of Brand Management', '760f7c_b9f14375248a41b287914fd167467168.jpg'],
-  ['Aanya Jain', 'Head of Internal Development', '760f7c_5ad44d2f7b3a467fbdaa19e3679022cc.jpg'],
+  ['Rishab Mantri', 'Associate', '760f7c_19c622300fa448029d916ba52c080447.jpg'],
+  ['Kierat Mangat', 'Associate', '760f7c_b9f14375248a41b287914fd167467168.jpg'],
+  ['Aanya Jain', 'Associate', '760f7c_5ad44d2f7b3a467fbdaa19e3679022cc.jpg'],
   ['Pablo Navarro', 'Associate', '760f7c_118c4a9c9471461193fd20b5e17c59f6.jpg'],
-  ['Mihir Shrestha', 'Associate', '760f7c_f88204b3e42647689349994c75c4f7b0.jpg'],
   ['Kate Mitsuda', 'Associate', '760f7c_0c89b2297b3b4b6ebab58fb619c09654.jpg'],
-  ['Atharva Goel', 'Associate', '760f7c_06be2e36746a4675beaf10cd07f84683.jpg'],
   ['Cyra Khourdepaz', 'Associate', '760f7c_14fc284f82994e819eba31b22ec16800.jpg'],
-  ['Peter Cipra', 'Associate', '760f7c_569e51a2ca6e40a1ab604a84ddad340a.jpg'],
 ];
 ---
 
@@ -163,7 +159,7 @@ const staff = [
 
   /* Color wipe: a full-card panel starts off-card (bottom-left) and slides in on hover,
      timed to match the photo/text color transitions above so nothing appears to stall
-     mid-way. will-change is applied only while actually hovering/focused (not at rest) —
+     mid-way. will-change is applied only while actually hovering/focused (not at rest):
      leaving it on ~30 cards permanently promotes that many compositor layers at once,
      which is what caused the wipe to visibly hang/flicker for a moment after the mouse
      left a card. */

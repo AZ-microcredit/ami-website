@@ -11,8 +11,8 @@ const { event: e } = Astro.props;
 //  closed       -> "Registration is closed" + See other events
 //  notOnSale    -> "Tickets are not on sale" + See other events (dated events with the default RSVP link)
 //  open         -> Register button (external registration URL / RSVP link / local RSVP form)
-const state = e.registrationClosed ? 'closed' : e.rsvpLabel === 'See other events' ? 'notOnSale' : 'open';
-const registerHref = e.registrationUrl ?? (e.rsvpHref && !/azmicrocredit\.org\/?$/.test(e.rsvpHref) ? e.rsvpHref : `/event-details-registration/${e.slug}/form`);
+const state = e.registrationClosed ? 'closed': e.rsvpLabel === 'See other events' ? 'notOnSale': 'open';
+const registerHref = e.registrationUrl ?? (e.rsvpHref && !/azmicrocredit\.org\/?$/.test(e.rsvpHref) ? e.rsvpHref: `/event-details-registration/${e.slug}/form`);
 const isExternal = /^https?:/.test(registerHref);
 
 const pageUrl = new URL(Astro.url.pathname, Astro.site ?? 'https://www.azmicrocredit.org').toString();
@@ -22,7 +22,7 @@ const share = {
   x: `https://twitter.com/intent/tweet?url=${encodeURIComponent(pageUrl)}&text=${shareText}`,
   linkedin: `https://www.linkedin.com/shareArticle?mini=true&url=${encodeURIComponent(pageUrl)}`,
 };
-const description = e.tagline ?? e.description?.[0] ?? `${e.title} — an Arizona Microcredit Initiative event.`;
+const description = e.tagline ?? e.description?.[0] ?? `${e.title}: an Arizona Microcredit Initiative event.`;
 ---
 
 <Base title={`${e.title} | Arizona Microcredit Initiative`} description={description}>
@@ -38,7 +38,7 @@ const description = e.tagline ?? e.description?.[0] ?? `${e.title} — an Arizon
         {state !== 'open' && <hr class="ev-divider" />}
         {state === 'closed' && <p class="ev-state">Registration is closed<br /><a href="/events">See other events</a></p>}
         {state === 'notOnSale' && <p class="ev-state">Tickets are not on sale<br /><a href="/events">See other events</a></p>}
-        {state === 'open' && <a class="ev-register" href={registerHref} target={isExternal ? '_blank' : undefined} rel={isExternal ? 'noopener' : undefined}>Register</a>}
+        {state === 'open' && <a class="ev-register" href={registerHref} target={isExternal ? '_blank': undefined} rel={isExternal ? 'noopener': undefined}>Register</a>}
       </div>
     </header>
 
