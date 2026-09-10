@@ -7,6 +7,7 @@ const topics=[
 ];
 ---
 <section class="expertise-network" id="expertise" aria-labelledby="expertise-heading">
+ <div class="skip-holder"><a class="scene-skip" href="#main">Skip this animation</a></div>
  <div class="network-stage">
   <div class="network-center"><p class="eyebrow">Our expertise / Your next move</p><h2 id="expertise-heading">A big question?<br/><em>Bring it.</em></h2><p>Fresh eyes. Practical skills. A team ready to work through your next business challenge.</p><a href="#schedule">Let’s figure it out together <span aria-hidden="true"><Icon name="arrow-up-right" /></span></a></div>
   <ul class="network-topics">{topics.map(([title,text,x,y],i)=><li class={`topic topic-${i%4}`} style={`--x:${x}%;--y:${y}%;--tilt:${i%2?4:-5}deg`} data-x={x} data-y={y} data-index={i}><span class="topic-index"><b aria-hidden="true"><Icon name={['arrow-up-right','spark','arrows-horizontal','plus'][i%4]} /></b></span><h3>{title}</h3><p>{text}</p></li>)}</ul>
@@ -14,22 +15,24 @@ const topics=[
 </section>
 <section class="expertise-more"><p class="eyebrow">And the questions in between.</p><p>Competitor analysis. Market entry. Revenue models. Business restructuring. Customer retention. Business model canvases.</p><a href="#schedule">Not sure where to start? Start with a conversation. <Icon name="arrow-up-right" /></a></section>
 <style>
-.expertise-network{background:#111;color:#fff;position:relative}.network-stage{padding:70px 4.2vw}.network-center{max-width:650px;margin:0 auto 60px;text-align:center}.eyebrow{font:11px/1.5 'AMI Sans',sans-serif;letter-spacing:.12em;text-transform:uppercase}.network-center h2{font:600 clamp(48px,5.8vw,86px)/.98 'AMI Sans',sans-serif;letter-spacing:-.06em;margin:26px 0}.network-center h2 em{font:italic 400 1.08em/1 'AMI Serif',serif;color:var(--green)}.network-center>p:not(.eyebrow){font:18px/1.55 'AMI Serif',serif;max-width:370px;margin:0 auto;color:#ccc}.network-center a{display:inline-block;margin-top:25px;padding:10px 0;border-bottom:1px solid #aaa;color:white;font:14px/1.4 'AMI Sans',sans-serif;text-decoration:none}.network-center a span{margin-left:16px}.network-topics{display:grid;grid-template-columns:repeat(4,1fr);gap:20px;list-style:none;margin:0;padding:0}.topic{padding:20px 24px;background:#eee;color:#111;min-width:0}.topic h3{font:500 20px/1.1 'AMI Sans',sans-serif;letter-spacing:-.03em;margin:14px 0 7px}.topic p{font:13px/1.35 'AMI Serif',serif;margin:0}.topic-index{font:10px/1 'AMI Sans',sans-serif;display:flex;align-items:center;justify-content:flex-end}.topic-index b{font-size:24px;font-weight:400}.topic-1{background:var(--green);border-radius:50% 50% 8px 8px;padding-top:23px;text-align:center}.topic-2{background:#111;color:white;border:1px solid #777;border-radius:60px}.topic-3{background:#dedbcf;border-radius:2px 28px 2px 2px}.expertise-more{padding:65px 8vw 80px;background:#eee}.expertise-more>p:nth-child(2){font:400 clamp(25px,3vw,43px)/1.35 'AMI Sans',sans-serif;letter-spacing:-.035em;max-width:1050px;margin:25px 0 30px}.expertise-more a{font:15px/1.6 'AMI Sans',sans-serif;text-underline-offset:7px}
-.expertise-network.is-animated{height:260vh}.is-animated .network-stage{position:sticky;top:var(--header-height);height:calc(100vh - var(--header-height));height:calc(100svh - var(--header-height));min-height:560px;padding:0;overflow:hidden;perspective:1200px}.is-animated .network-center{position:absolute;left:50%;top:48%;width:42%;margin:0;transform:translate(-50%,-50%);z-index:2}.is-animated .network-center h2{font-size:clamp(48px,5.8vw,86px)}.is-animated .network-topics{display:contents}.is-animated .topic{position:absolute;left:var(--x);top:var(--y);width:18%;max-width:240px;min-height:115px;transform:translate(-50%,-50%) rotate(var(--tilt))}.is-animated .topic h3{font-size:clamp(16px,1.5vw,23px)}.is-animated .topic p{font-size:12px}.is-animated .topic-index{font-size:9px}.is-animated .topic-index b{font-size:22px}
+.expertise-network{background:#111;color:#fff;position:relative}.skip-holder{display:none;position:sticky;top:calc(var(--header-height) + 8px);height:0;z-index:6;overflow:visible}.expertise-network.is-animated .skip-holder{display:block}.scene-skip{position:absolute;left:4.2vw;top:0;background:#fff;color:#111;padding:8px 12px;font:12px 'AMI Sans',sans-serif;text-decoration:none;opacity:0;pointer-events:none;transition:opacity .15s}.scene-skip:focus-visible{opacity:1;pointer-events:auto}.network-stage{padding:70px 4.2vw}.network-center{max-width:650px;margin:0 auto 60px;text-align:center}.eyebrow{font:11px/1.5 'AMI Sans',sans-serif;letter-spacing:.12em;text-transform:uppercase}.network-center h2{font:600 clamp(48px,5.8vw,86px)/.98 'AMI Sans',sans-serif;letter-spacing:-.06em;margin:26px 0}.network-center h2 em{font:italic 400 1.08em/1 'AMI Serif',serif;color:var(--green)}.network-center>p:not(.eyebrow){font:18px/1.55 'AMI Serif',serif;max-width:370px;margin:0 auto;color:#ccc}.network-center a{display:inline-block;margin-top:25px;padding:10px 0;border-bottom:1px solid #aaa;color:white;font:14px/1.4 'AMI Sans',sans-serif;text-decoration:none}.network-center a span{margin-left:16px}.network-topics{display:grid;grid-template-columns:repeat(4,1fr);gap:20px;list-style:none;margin:0;padding:0}.topic{padding:20px 24px;background:#eee;color:#111;min-width:0}.topic h3{font:500 20px/1.1 'AMI Sans',sans-serif;letter-spacing:-.03em;margin:14px 0 7px}.topic p{font:13px/1.35 'AMI Serif',serif;margin:0}.topic-index{font:10px/1 'AMI Sans',sans-serif;display:flex;align-items:center;justify-content:flex-end}.topic-index b{font-size:24px;font-weight:400}.topic-1{background:var(--green);border-radius:50% 50% 8px 8px;padding-top:23px;text-align:center}.topic-2{background:#111;color:white;border:1px solid #777;border-radius:60px}.topic-3{background:#dedbcf;border-radius:2px 28px 2px 2px}.expertise-more{padding:65px 8vw 80px;background:#eee}.expertise-more>p:nth-child(2){font:400 clamp(25px,3vw,43px)/1.35 'AMI Sans',sans-serif;letter-spacing:-.035em;max-width:1050px;margin:25px 0 30px}.expertise-more a{font:15px/1.6 'AMI Sans',sans-serif;text-underline-offset:7px}
+.expertise-network.is-animated{height:calc(330vh*var(--tempo-scale,1))}.is-animated .network-stage{position:sticky;top:var(--header-height);height:calc(100vh - var(--header-height));height:calc(100svh - var(--header-height));min-height:560px;padding:0;overflow:hidden;perspective:1200px}.is-animated .network-center{position:absolute;left:50%;top:48%;width:42%;margin:0;transform:translate(-50%,-50%);z-index:2}.is-animated .network-center h2{font-size:clamp(48px,5.8vw,86px)}.is-animated .network-topics{display:contents}.is-animated .topic{position:absolute;left:var(--x);top:var(--y);width:18%;max-width:240px;min-height:115px;transform:translate(-50%,-50%) rotate(var(--tilt))}.is-animated .topic h3{font-size:clamp(16px,1.5vw,23px)}.is-animated .topic p{font-size:12px}.is-animated .topic-index{font-size:9px}.is-animated .topic-index b{font-size:22px}
 @media(max-width:900px){.network-topics{grid-template-columns:repeat(2,1fr)}.topic{padding:22px 18px}.topic:nth-child(odd){transform:rotate(-2deg)}.topic:nth-child(even){transform:rotate(2deg)}.network-stage{padding:60px 22px}.network-center{margin-bottom:45px}.expertise-more{padding:50px 22px}.topic h3{font-size:19px}}
 @media(prefers-reduced-motion:reduce){.topic{transform:none!important}}
 </style>
 <script>
- import { createScrollScene, reducedMotion, viewportHeight, headerHeight, localProgress } from '../scripts/motion/engine';
+ import { createScrollScene, reducedMotion, viewportHeight, headerHeight, localProgress, beat, setupSkipLink } from '../scripts/motion/engine';
  const network=document.querySelector<HTMLElement>('.expertise-network');
  if(network){
   const topics=[...network.querySelectorAll<HTMLElement>('.topic')];
   const grid=network.querySelector<HTMLElement>('.network-topics')!;
   const center=network.querySelector<HTMLElement>('.network-center')!;
   let overlay=false;
+  setupSkipLink(network);
   createScrollScene({
    root:network,
    margin:420,
+   smooth:true,
    measure:()=>{
     const stageBlock=viewportHeight()-headerHeight();
     network.classList.remove('is-animated');network.classList.remove('is-resolve');
@@ -45,10 +48,10 @@ const topics=[
    render:(f)=>{
     if(f.reduced){topics.forEach(t=>{t.style.removeProperty('transform');t.style.removeProperty('opacity');t.style.removeProperty('will-change');});return}
     if(overlay){
-     const progress=Math.max(0,Math.min(1,(f.header-f.top)/Math.max(1,f.height-f.vh+f.header)));
+     const progress=beat(Math.max(0,Math.min(1,(f.header-f.top)/Math.max(1,f.height-f.vh+f.header))));
      topics.forEach(t=>{
       const i=Number(t.dataset.index);const x=Number(t.dataset.x);const y=Number(t.dataset.y);
-      const start=(i%4)*.055;const q=Math.max(0,Math.min(1,(progress-start)/.66));
+      const start=(i%4)*.055;const q=Math.max(0,Math.min(1,(progress-start)/.835));
       const ease=1-Math.pow(1-q,3);const distance=1-ease;
       const dx=(x-50)*f.vw*.035*distance;const dy=(y-50)*f.vh*.035*distance;
       const rotation=(i%2?1:-1)*(65*distance+4);
@@ -59,7 +62,7 @@ const topics=[
     }else{
      topics.forEach((t,i)=>{
       const r=t.getBoundingClientRect();
-      const q=localProgress(r,f.vh,.92,.55);
+      const q=localProgress(r,f.vh,.95,.9);
       const dx=(i%2?-1:1)*Math.min(90,f.vw*.14);
       const tilt=(i%2?4:-5)*(1-q);
       // Settle back onto the slight static tilt the narrow layout already uses.

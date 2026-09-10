@@ -1,6 +1,6 @@
-<div class="services-scroll"><slot/></div>
+<div class="services-scroll"><div class="skip-holder"><a class="scene-skip" href="#main">Skip this animation</a></div><slot/></div>
 <script>
- import { createScrollScene, reducedMotion, viewportHeight, localProgress } from '../scripts/motion/engine';
+ import { createScrollScene, reducedMotion, viewportHeight, localProgress, beat, setupSkipLink } from '../scripts/motion/engine';
  const scene=document.querySelector<HTMLElement>('.services-scroll');
  if(scene){
   const cards=[...scene.querySelectorAll<HTMLElement>('.service-card')];
@@ -13,9 +13,11 @@
    card.addEventListener('focusout',()=>{focusProgress=null;});
   });
 
+  setupSkipLink(scene);
   createScrollScene({
    root:scene,
    margin:420,
+   smooth:true,
    measure:()=>{
     scene.classList.remove('is-rise');
     cards.forEach(c=>{c.style.removeProperty('transform');c.style.removeProperty('opacity');});
@@ -33,7 +35,8 @@
     if(f.reduced){cards.forEach(c=>{c.style.removeProperty('transform');c.style.removeProperty('opacity');});return}
     if(overlay){
      const travel=scene.offsetHeight-stage.offsetHeight;
-     const progress=Math.max(0,Math.min(2,(96-f.top)/Math.max(1,travel)*2.25));
+     const raw=Math.max(0,Math.min(1,(96-f.top)/Math.max(1,travel)));
+     const progress=beat(raw)*2;
      const p=focusProgress??progress;
      cards.forEach((card,i)=>{
       const entry=Math.max(0,Math.min(1,p-i+1));const cover=Math.max(0,Math.min(1,p-i));
@@ -43,7 +46,7 @@
     }else{
      cards.forEach(card=>{
       const r=card.getBoundingClientRect();
-      const q=localProgress(r,f.vh,.9,.6);
+      const q=localProgress(r,f.vh,.95,.9);
       card.style.transform=`translate3d(0,${(1-q)*72}px,0) scale(${.96+.04*q})`;
       card.style.opacity=String(.25+.75*q);
      });
@@ -53,7 +56,8 @@
  }
 </script>
 <style is:global>
-.modern-home .services-scroll.is-stacked{height:210vh;position:relative}.modern-home .services-scroll.is-stacked .service-grid{position:sticky;top:96px;height:min(680px,calc(100vh - 135px));height:min(680px,calc(100svh - 135px));min-height:520px;overflow:clip;border:0;perspective:1600px}.modern-home .services-scroll.is-stacked .service-card{position:absolute;inset:0;display:flex;flex-direction:column;align-items:start;justify-content:start;gap:0;padding:50px 6%;min-height:0;border:1px solid #1114;transform-origin:center bottom;transition:background .2s;box-shadow:0 -20px 60px #0002;background:#efefe9;color:#111}.modern-home .services-scroll.is-stacked .service-card:first-child{background:var(--green);color:#111}.modern-home .services-scroll.is-stacked .service-card:nth-child(2){background:#111;color:white}.modern-home .services-scroll.is-stacked .card-top{width:100%;display:flex;flex-direction:row;justify-content:space-between;align-items:center}.modern-home .services-scroll.is-stacked .card-top>span:last-child{font-size:44px;color:inherit}.modern-home .services-scroll.is-stacked .service-card h3{font-size:clamp(46px,5.8vw,84px);line-height:1.03;max-width:1000px;margin:45px 0 28px;color:inherit}.modern-home .services-scroll.is-stacked .service-card>p{font:22px/1.6 'AMI Serif',serif;max-width:620px}.modern-home .services-scroll.is-stacked .card-link{margin-top:auto;padding-top:32px;width:100%;justify-content:space-between;font-size:16px;border-top:1px solid currentColor}.modern-home .services-scroll.is-stacked .card-link span{font-size:36px}.modern-home .services-scroll.is-stacked .service-card:hover .card-link{opacity:.7}
+.modern-home .services-scroll .skip-holder{display:none;position:sticky;top:calc(96px + 8px);height:0;z-index:6;overflow:visible}.modern-home .services-scroll.is-stacked .skip-holder{display:block}.modern-home .services-scroll .scene-skip{position:absolute;left:6%;top:0;background:#111;color:#fff;padding:8px 12px;font:12px 'AMI Sans',sans-serif;text-decoration:none;opacity:0;pointer-events:none;transition:opacity .15s}.modern-home .services-scroll .scene-skip:focus-visible{opacity:1;pointer-events:auto}
+.modern-home .services-scroll.is-stacked{height:calc(285vh*var(--tempo-scale,1));position:relative}.modern-home .services-scroll.is-stacked .service-grid{position:sticky;top:96px;height:min(680px,calc(100vh - 135px));height:min(680px,calc(100svh - 135px));min-height:520px;overflow:clip;border:0;perspective:1600px}.modern-home .services-scroll.is-stacked .service-card{position:absolute;inset:0;display:flex;flex-direction:column;align-items:start;justify-content:start;gap:0;padding:50px 6%;min-height:0;border:1px solid #1114;transform-origin:center bottom;transition:background .2s;box-shadow:0 -20px 60px #0002;background:#efefe9;color:#111}.modern-home .services-scroll.is-stacked .service-card:first-child{background:var(--green);color:#111}.modern-home .services-scroll.is-stacked .service-card:nth-child(2){background:#111;color:white}.modern-home .services-scroll.is-stacked .card-top{width:100%;display:flex;flex-direction:row;justify-content:space-between;align-items:center}.modern-home .services-scroll.is-stacked .card-top>span:last-child{font-size:44px;color:inherit}.modern-home .services-scroll.is-stacked .service-card h3{font-size:clamp(46px,5.8vw,84px);line-height:1.03;max-width:1000px;margin:45px 0 28px;color:inherit}.modern-home .services-scroll.is-stacked .service-card>p{font:22px/1.6 'AMI Serif',serif;max-width:620px}.modern-home .services-scroll.is-stacked .card-link{margin-top:auto;padding-top:32px;width:100%;justify-content:space-between;font-size:16px;border-top:1px solid currentColor}.modern-home .services-scroll.is-stacked .card-link span{font-size:36px}.modern-home .services-scroll.is-stacked .service-card:hover .card-link{opacity:.7}
 </style>
 
 <style is:global>

@@ -3,11 +3,14 @@ import MotionBanner from './MotionBanner.astro';
 ---
 <MotionBanner label="Small business, big possibility"><span>Small business.</span><em>Big possibility.</em><span>Right here.</span></MotionBanner>
 <script>
- import { createScrollScene, reducedMotion, viewportHeight } from '../scripts/motion/engine';
+ import { createScrollScene, reducedMotion, viewportHeight, createSmoother, queueFrame } from '../scripts/motion/engine';
  const home=document.querySelector<HTMLElement>('.modern-home');
  if(home){
   const sections=[...home.querySelectorAll<HTMLElement>('.support-section,.client-story,.quote-section')];
   let depthScale=1;
+  // Light temporal smoothing on the continuous drifts: no wheel-step jitter.
+  const smoothers=new Map<HTMLElement,{enter:ReturnType<typeof createSmoother>,depth:ReturnType<typeof createSmoother>}>();
+  sections.forEach(section=>smoothers.set(section,{enter:createSmoother(),depth:createSmoother()}));
   createScrollScene({
    root:home,
    margin:240,
@@ -15,18 +18,26 @@ import MotionBanner from './MotionBanner.astro';
     // Continuous compression instead of a binary compact switch: drift scales
     // with the room the layout actually has, never a fixed width gate.
     depthScale=Math.max(0.3,Math.min(1,(window.innerWidth-520)/700));
+    smoothers.forEach(sm=>{sm.enter.reset();sm.depth.reset();});
    },
    render:()=>{
     const vh=viewportHeight();const disabled=reducedMotion();
+    let settling=false;
     sections.forEach(section=>{
      const r=section.getBoundingClientRect();if(r.bottom<-200||r.top>vh+200)return;
-     const enter=Math.max(0,Math.min(1,(vh-r.top)/(vh*.8)));
+     // Reveal spans roughly one full viewport of travel.
+     const enterRaw=Math.max(0,Math.min(1,(vh*.95-r.top)/(vh*.95)));
      const pass=Math.max(0,Math.min(1,-r.top/Math.max(1,r.height)));
-     const centered=Math.max(-1,Math.min(1,(vh/2-r.top-r.height/2)/vh));
-     section.style.setProperty('--enter',disabled?'1':String(enter));
+     const centeredRaw=Math.max(-1,Math.min(1,(vh/2-r.top-r.height/2)/vh));
+     const sm=smoothers.get(section)!;
+     const enter=disabled?1:sm.enter.value(enterRaw);
+     const centered=disabled?0:sm.depth.value(centeredRaw);
+     if(!disabled&&(!sm.enter.settled||!sm.depth.settled))settling=true;
+     section.style.setProperty('--enter',String(enter));
      section.style.setProperty('--pass',disabled?'0':String(pass));
-     section.style.setProperty('--depth',disabled?'0':String(centered*depthScale));
+     section.style.setProperty('--depth',String(centered*depthScale));
     });
+    if(settling)queueFrame();
    },
   });
   home.classList.add('scroll-effects');

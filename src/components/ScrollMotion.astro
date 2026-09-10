@@ -1,23 +1,29 @@
 <script>
- import { createScrollScene, reducedMotion, viewportHeight } from '../scripts/motion/engine';
+ import { createScrollScene, reducedMotion, viewportHeight, createSmoother, queueFrame } from '../scripts/motion/engine';
  const items = [...document.querySelectorAll<HTMLElement>('[data-parallax]')];
  const caps = new WeakMap<HTMLElement, number>();
+ const smoothers = new WeakMap<HTMLElement, ReturnType<typeof createSmoother>>();
  items.forEach(item => {
   const holder = item.parentElement as HTMLElement;
   if (!holder) return;
+  smoothers.set(item, createSmoother());
   createScrollScene({
    root: holder,
    measure: () => {
     // Never drift past the overscan the 1.12 scale creates - no blank edges.
     caps.set(item, Math.min(55, Math.max(12, Math.floor(item.offsetHeight * 0.06))));
+    smoothers.get(item)!.reset();
    },
    render: () => {
     if (reducedMotion()) { item.style.setProperty('--drift', '0px'); return; }
     const rect = holder.getBoundingClientRect();
     const vh = viewportHeight();
     const cap = caps.get(item) ?? 55;
-    const distance = (vh / 2 - rect.top - rect.height / 2) * Number(item.dataset.parallax || .08);
-    item.style.setProperty('--drift', `${Math.max(-cap, Math.min(cap, distance))}px`);
+    const distance = Math.max(-cap, Math.min(cap, (vh / 2 - rect.top - rect.height / 2) * Number(item.dataset.parallax || .08)));
+    // Light temporal smoothing removes wheel-step jitter without scroll lag.
+    const smoother = smoothers.get(item)!;
+    item.style.setProperty('--drift', `${smoother.value(distance)}px`);
+    if (!smoother.settled) queueFrame();
    },
   });
  });

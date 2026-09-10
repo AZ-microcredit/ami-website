@@ -7,7 +7,7 @@ const {label, variant='words'}=Astro.props;
 
 </section>
 <style>
-.motion-banner{position:relative;overflow:hidden;background:var(--green);padding:22px 0;color:#111}.banner-window{overflow:hidden}.banner-drift{transform:translate3d(var(--drift,0px),0,0)}.banner-track{display:flex;width:max-content;animation:travel var(--travel-time,35s) linear infinite}.banner-group{display:flex;align-items:center;flex-shrink:0;gap:55px;padding-right:55px;min-width:0}.words .banner-group{font:500 clamp(38px,6vw,86px)/1.1 'AMI Sans',sans-serif;letter-spacing:-.05em;white-space:nowrap}.words :global(em){font-family:'AMI Serif',serif;color:white;font-weight:400}.partners{background:#fff;padding:30px 0;border-top:1px solid #ddd;border-bottom:1px solid #ddd}.partners .banner-track{--travel-time:45s}.partners .banner-group{gap:70px;padding-right:70px}.partners :global(a){display:flex;align-items:center;justify-content:center;width:170px;height:90px;flex-shrink:0}.partners :global(img){max-width:170px;max-height:76px;object-fit:contain;filter:grayscale(1)}@keyframes travel{to{transform:translate3d(var(--travel-distance,-33.333333%),0,0)}}
+.motion-banner{position:relative;overflow:hidden;background:var(--green);padding:22px 0;color:#111}.banner-window{overflow:hidden}.banner-drift{transform:translate3d(var(--drift,0px),0,0)}.banner-track{display:flex;width:max-content;animation:travel var(--travel-time,52s) linear infinite}.banner-group{display:flex;align-items:center;flex-shrink:0;gap:55px;padding-right:55px;min-width:0}.words .banner-group{font:500 clamp(38px,6vw,86px)/1.1 'AMI Sans',sans-serif;letter-spacing:-.05em;white-space:nowrap}.words :global(em){font-family:'AMI Serif',serif;color:white;font-weight:400}.partners{background:#fff;padding:30px 0;border-top:1px solid #ddd;border-bottom:1px solid #ddd}.partners .banner-track{--travel-time:62s}.partners .banner-group{gap:70px;padding-right:70px}.partners :global(a){display:flex;align-items:center;justify-content:center;width:170px;height:90px;flex-shrink:0}.partners :global(img){max-width:170px;max-height:76px;object-fit:contain;filter:grayscale(1)}@keyframes travel{to{transform:translate3d(var(--travel-distance,-33.333333%),0,0)}}
 .partners .banner-window:hover .banner-track,.partners:focus-within .banner-track{animation-play-state:paused}
 @media(prefers-reduced-motion:reduce){.banner-track{animation:none;transform:none}.banner-drift{transform:none!important}.banner-group[aria-hidden]{display:none}.banner-group{flex-wrap:wrap;min-width:0;width:100%;padding:0 22px;gap:24px;white-space:normal!important}.banner-track{width:100%}}
 </style>
@@ -29,7 +29,7 @@ const {label, variant='words'}=Astro.props;
     const delta=Math.max(-160,Math.min(160,scrollY-last));last=scrollY;
     if(reducedMotion())return;
     // Low-pass filtered scroll-velocity drift, capped relative to the container.
-    drift=drift*.72+(-delta*.22)*.28;
+    drift=drift*.80+(-delta*.14)*.20;
     drift=Math.max(-limit,Math.min(0,drift));
     banner.style.setProperty('--drift',`${drift}px`);
    },

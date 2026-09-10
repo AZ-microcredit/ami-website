@@ -9,6 +9,17 @@
  * Progress is always normalized 0..1 against measured scroll travel - never
  * a hardcoded viewport resolution. The only hard motion-off state is
  * `prefers-reduced-motion: reduce`.
+ *
+ * Pacing layer:
+ * - TEMPO is the single site-wide speed knob. It scales every pinned scene's
+ *   scroll travel through the `--tempo-scale` CSS variable (1.0 = the tuned
+ *   baseline pacing, currently tuned at TEMPO = 1.5).
+ * - beat() maps raw pin progress onto the LEAD -> PLAY -> DWELL structure
+ *   every pinned scene shares: the choreography holds at its start, plays,
+ *   then holds its completed state so viewers can absorb it.
+ * - smooth (per scene) and createSmoother (per value) add a light temporal
+ *   low-pass (~90ms) that removes wheel-step jitter without decoupling
+ *   motion from scroll.
  */
 
 export interface SceneFrame {
@@ -18,7 +29,7 @@ export interface SceneFrame {
   vh: number;
   /** Sticky header height from --header-height. */
   header: number;
-  /** Root element's current bounding top. */
+  /** Root element's current bounding top (smoothed when the scene opts in). */
   top: number;
   /** Root element's current bounding bottom. */
   bottom: number;
@@ -38,6 +49,8 @@ export interface SceneOptions {
   render: (frame: SceneFrame) => void;
   /** Offscreen margin (px) beyond which render work is skipped. */
   margin?: number;
+  /** Low-pass the scene's scroll position (~90ms) to smooth wheel steps. */
+  smooth?: boolean;
 }
 
 interface Scene {
@@ -45,7 +58,17 @@ interface Scene {
   measure?: () => void;
   render: (frame: SceneFrame) => void;
   margin: number;
+  smooth: boolean;
+  smoothTop: number | null;
 }
+
+/**
+ * The one site-wide pacing knob. 1.5 is the tuned baseline; raise it to slow
+ * every pinned scene further, lower it to speed them up. Pin heights scale
+ * through `--tempo-scale`, so fit checks and choreography stay proportional.
+ */
+export const TEMPO = 1.5;
+document.documentElement.style.setProperty('--tempo-scale', String(TEMPO / 1.5));
 
 const reducedQuery = window.matchMedia('(prefers-reduced-motion: reduce)');
 const scenes = new Set<Scene>();
@@ -73,9 +96,87 @@ export function segment(from: number, to: number, progress: number): number {
   return clamp01((progress - from) / Math.max(1e-6, to - from));
 }
 
+/**
+ * Beat structure for pinned scenes: LEAD (choreography holds at its start
+ * while the pin engages) -> PLAY (the choreography itself) -> DWELL (the
+ * completed state holds for reading). Returns the 0..1 PLAY progress for a
+ * raw 0..1 pin progress.
+ */
+export function beat(raw: number, lead = 0.10, play = 0.68): number {
+  return clamp01((raw - lead) / Math.max(1e-6, play));
+}
+
 /** Local 0..1 progress of an element travelling up through the viewport. */
-export function localProgress(rect: DOMRect | { top: number; height: number }, vh: number, enter = 0.9, span = 0.55): number {
+export function localProgress(rect: DOMRect | { top: number; height: number }, vh: number, enter = 0.95, span = 0.9): number {
   return clamp01((vh * enter - rect.top) / Math.max(1, vh * span));
+}
+
+export interface Smoother {
+  /** Next smoothed value; converges on target at ~90ms time constant. */
+  value(target: number): number;
+  /** True once the smoothed value has fully caught up with the target. */
+  readonly settled: boolean;
+  /** Snap the next value directly to its target (call from measure()). */
+  reset(): void;
+}
+
+/** Light temporal smoothing for continuous scroll-linked values. */
+export function createSmoother(lerp = 0.18): Smoother {
+  let current: number | null = null;
+  let settled = true;
+  return {
+    value(target: number): number {
+      if (current == null) {
+        current = target;
+        settled = true;
+        return current;
+      }
+      const delta = target - current;
+      if (Math.abs(delta) <= 0.15) {
+        current = target;
+        settled = true;
+      } else {
+        current += delta * lerp;
+        settled = false;
+      }
+      return current;
+    },
+    get settled() {
+      return settled;
+    },
+    reset() {
+      current = null;
+      settled = true;
+    },
+  };
+}
+
+/**
+ * The element a keyboard skip link should jump to: the first content after
+ * the scene's outermost local container. Returns null when nothing follows.
+ */
+export function skipTargetFor(root: HTMLElement): HTMLElement | null {
+  let el: HTMLElement | null = root;
+  while (el && !el.nextElementSibling && el.tagName !== 'MAIN') el = el.parentElement;
+  const target = el?.nextElementSibling ?? null;
+  return target instanceof HTMLElement ? target : null;
+}
+
+/**
+ * Wire a scene's skip link (`.scene-skip` / `.landing-skip`) to the content
+ * after the scene; removes the link when there is nowhere to skip to.
+ */
+export function setupSkipLink(root: HTMLElement): void {
+  const link = root.querySelector<HTMLAnchorElement>('.scene-skip, .landing-skip');
+  if (!link) return;
+  const target = skipTargetFor(root);
+  if (!target) {
+    (link.closest('.skip-holder') ?? link).remove();
+    return;
+  }
+  if (!target.id) target.id = `after-${root.className.toString().split(/\s+/)[0] || 'scene'}`;
+  target.tabIndex = -1;
+  link.href = `#${target.id}`;
 }
 
 function runFrame(): void {
@@ -84,19 +185,32 @@ function runFrame(): void {
   const vh = viewportHeight();
   const header = headerHeight();
   const reduced = reducedQuery.matches;
+  let needsMore = false;
   for (const scene of [...scenes]) {
     try {
       const rect = scene.root.getBoundingClientRect();
       if (rect.bottom < -scene.margin || rect.top > vh + scene.margin) continue;
+      let top = rect.top;
+      if (scene.smooth && !reduced) {
+        if (scene.smoothTop == null) scene.smoothTop = rect.top;
+        const delta = rect.top - scene.smoothTop;
+        if (Math.abs(delta) > 0.5) {
+          scene.smoothTop += delta * 0.18;
+          top = scene.smoothTop;
+          needsMore = true;
+        } else {
+          scene.smoothTop = rect.top;
+        }
+      }
       scene.render({
         vw,
         vh,
         header,
-        top: rect.top,
+        top,
         bottom: rect.bottom,
         height: scene.root.offsetHeight,
         reduced,
-        segment: (from, to) => segment(from, to, clamp01((header - rect.top) / Math.max(1, scene.root.offsetHeight - vh + header))),
+        segment: (from, to) => segment(from, to, clamp01((header - top) / Math.max(1, scene.root.offsetHeight - vh + header))),
       });
     } catch (error) {
       // A failing scene must never break the page: drop the enhancement and
@@ -105,6 +219,8 @@ function runFrame(): void {
       scenes.delete(scene);
     }
   }
+  // Keep animating until every smoothed scene has caught up with the scroll.
+  if (needsMore) queueFrame();
 }
 
 export function queueFrame(): void {
@@ -117,6 +233,7 @@ export function remeasure(): void {
   try {
     for (const scene of [...scenes]) {
       try {
+        scene.smoothTop = null;
         scene.measure?.();
       } catch (error) {
         console.error('[motion] scene measure failed', error);
@@ -137,6 +254,8 @@ export function createScrollScene(options: SceneOptions): () => void {
     measure: options.measure,
     render: options.render,
     margin: options.margin ?? 160,
+    smooth: options.smooth ?? false,
+    smoothTop: null,
   };
   scenes.add(scene);
   resizeObserver.observe(options.root);

@@ -2,6 +2,7 @@
 import Icon from './Icon.astro';
 ---
 <section class="support-amplifier" id="support-in-motion" aria-labelledby="amplifier-title">
+ <div class="skip-holder"><a class="scene-skip" href="#main">Skip this animation</a></div>
  <div class="amplifier-stage">
   <header><p>What your support makes possible</p><h2 id="amplifier-title">A little from you.<br/><em>A lot to build on.</em></h2></header>
   <div class="amplifier-lines">
@@ -13,21 +14,23 @@ import Icon from './Icon.astro';
  </div>
 </section>
 <style>
-.support-amplifier{background:var(--green);color:#111;overflow:clip}.amplifier-stage{padding:64px 5vw}.amplifier-stage header>p{font:11px/1.5 'AMI Sans',sans-serif;text-transform:uppercase;letter-spacing:.12em;margin-bottom:24px}.amplifier-stage h2{font:500 clamp(38px,4.4vw,64px)/1 'AMI Sans',sans-serif;letter-spacing:-.055em;margin-bottom:38px}.amplifier-stage h2 em{font-family:'AMI Serif',serif;font-weight:400}.amplifier-lines article{display:grid;grid-template-columns:1.75fr 1fr;align-items:center;gap:6vw;border-top:1px solid #1115;padding:22px 0}.amplifier-lines article:last-child{border-bottom:1px solid #1115}.word-window{overflow:hidden;padding:5px 0}.amplifier-lines h3{font:700 clamp(36px,5.5vw,86px)/.95 'AMI Sans',sans-serif;letter-spacing:-.065em;display:flex;align-items:center;justify-content:space-between;gap:18px}.amplifier-lines h3 span{font-weight:400;color:white}.amplifier-lines article>p{font:17px/1.6 'AMI Serif',serif;max-width:350px}.amplifier-stage footer{display:flex;justify-content:space-between;align-items:center;gap:30px;margin-top:32px}.amplifier-stage footer a{background:#111;color:white;padding:18px 24px;display:inline-flex;gap:38px;align-items:center;text-decoration:none;font:14px/1.5 'AMI Sans',sans-serif}.amplifier-stage footer>p{font:14px/1.4 'AMI Serif',serif}
-.support-amplifier.is-amplifying{height:190vh}.is-amplifying .amplifier-stage{position:sticky;top:var(--header-height);height:calc(100vh - var(--header-height));height:calc(100svh - var(--header-height));display:flex;flex-direction:column;justify-content:center;padding-top:30px;padding-bottom:30px}.is-amplifying .amplifier-lines h3{transform:translateY(calc((1 - var(--reveal,1))*115%)) rotate(calc((1 - var(--reveal,1))*7deg));transform-origin:left bottom}.is-amplifying .amplifier-lines h3 span{transform:rotate(calc((1 - var(--reveal,1))*-160deg))}.is-amplifying .amplifier-lines article>p{opacity:calc(.2 + var(--reveal,1)*.8);transform:translateX(calc((1 - var(--reveal,1))*35px))}
+.support-amplifier{background:var(--green);color:#111;overflow:clip}.skip-holder{display:none;position:sticky;top:calc(var(--header-height) + 8px);height:0;z-index:6;overflow:visible}.support-amplifier.is-amplifying .skip-holder{display:block}.scene-skip{position:absolute;left:5vw;top:0;background:#111;color:#fff;padding:8px 12px;font:12px 'AMI Sans',sans-serif;text-decoration:none;opacity:0;pointer-events:none;transition:opacity .15s}.scene-skip:focus-visible{opacity:1;pointer-events:auto}.amplifier-stage{padding:64px 5vw}.amplifier-stage header>p{font:11px/1.5 'AMI Sans',sans-serif;text-transform:uppercase;letter-spacing:.12em;margin-bottom:24px}.amplifier-stage h2{font:500 clamp(38px,4.4vw,64px)/1 'AMI Sans',sans-serif;letter-spacing:-.055em;margin-bottom:38px}.amplifier-stage h2 em{font-family:'AMI Serif',serif;font-weight:400}.amplifier-lines article{display:grid;grid-template-columns:1.75fr 1fr;align-items:center;gap:6vw;border-top:1px solid #1115;padding:22px 0}.amplifier-lines article:last-child{border-bottom:1px solid #1115}.word-window{overflow:hidden;padding:5px 0}.amplifier-lines h3{font:700 clamp(36px,5.5vw,86px)/.95 'AMI Sans',sans-serif;letter-spacing:-.065em;display:flex;align-items:center;justify-content:space-between;gap:18px}.amplifier-lines h3 span{font-weight:400;color:white}.amplifier-lines article>p{font:17px/1.6 'AMI Serif',serif;max-width:350px}.amplifier-stage footer{display:flex;justify-content:space-between;align-items:center;gap:30px;margin-top:32px}.amplifier-stage footer a{background:#111;color:white;padding:18px 24px;display:inline-flex;gap:38px;align-items:center;text-decoration:none;font:14px/1.5 'AMI Sans',sans-serif}.amplifier-stage footer>p{font:14px/1.4 'AMI Serif',serif}
+.support-amplifier.is-amplifying{height:calc(250vh*var(--tempo-scale,1))}.is-amplifying .amplifier-stage{position:sticky;top:var(--header-height);height:calc(100vh - var(--header-height));height:calc(100svh - var(--header-height));display:flex;flex-direction:column;justify-content:center;padding-top:30px;padding-bottom:30px}.is-amplifying .amplifier-lines h3{transform:translateY(calc((1 - var(--reveal,1))*115%)) rotate(calc((1 - var(--reveal,1))*7deg));transform-origin:left bottom}.is-amplifying .amplifier-lines h3 span{transform:rotate(calc((1 - var(--reveal,1))*-160deg))}.is-amplifying .amplifier-lines article>p{opacity:calc(.2 + var(--reveal,1)*.8);transform:translateX(calc((1 - var(--reveal,1))*35px))}
 .is-flow .amplifier-lines h3{transform:translateY(calc((1 - var(--reveal,1))*115%)) rotate(calc((1 - var(--reveal,1))*7deg));transform-origin:left bottom}.is-flow .amplifier-lines h3 span{transform:rotate(calc((1 - var(--reveal,1))*-160deg))}.is-flow .amplifier-lines article>p{opacity:calc(.2 + var(--reveal,1)*.8);transform:translateX(calc((1 - var(--reveal,1))*35px))}
 @media(max-width:900px){.amplifier-stage{padding:52px 22px}.amplifier-lines article{grid-template-columns:1fr;gap:16px;padding:25px 0}.amplifier-lines h3{font-size:clamp(35px,8.4vw,72px)}.amplifier-lines article>p{max-width:550px}.amplifier-stage footer>p{display:none}}
 </style>
 <script>
- import { createScrollScene, reducedMotion, viewportHeight, headerHeight, clamp01, localProgress } from '../scripts/motion/engine';
+ import { createScrollScene, reducedMotion, viewportHeight, headerHeight, clamp01, localProgress, beat, setupSkipLink } from '../scripts/motion/engine';
  const amplifier=document.querySelector<HTMLElement>('.support-amplifier');
  if(amplifier){
   const stage=amplifier.querySelector<HTMLElement>('.amplifier-stage')!;
   const rows=[...amplifier.querySelectorAll<HTMLElement>('.amplifier-lines article')];
   let overlay=false;
+  setupSkipLink(amplifier);
   createScrollScene({
    root:amplifier,
    margin:420,
+   smooth:true,
    measure:()=>{
     const stageBlock=viewportHeight()-headerHeight();
     amplifier.classList.remove('is-amplifying');amplifier.classList.remove('is-flow');
@@ -41,10 +44,10 @@ import Icon from './Icon.astro';
    render:(f)=>{
     if(f.reduced){rows.forEach(row=>row.style.setProperty('--reveal','1'));return}
     if(overlay){
-     const p=clamp01((f.header-f.top)/Math.max(1,f.height-f.vh+f.header));
+     const p=beat(clamp01((f.header-f.top)/Math.max(1,f.height-f.vh+f.header)))*.76;
      rows.forEach((row,i)=>{const q=clamp01((p-i*.23)/.3);row.style.setProperty('--reveal',String(1-Math.pow(1-q,3)));});
     }else{
-     rows.forEach(row=>{const r=row.getBoundingClientRect();const q=localProgress(r,f.vh,.92,.5);row.style.setProperty('--reveal',String(1-Math.pow(1-q,3)));});
+     rows.forEach(row=>{const r=row.getBoundingClientRect();const q=localProgress(r,f.vh,.95,.9);row.style.setProperty('--reveal',String(1-Math.pow(1-q,3)));});
     }
    },
   });
