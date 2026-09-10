@@ -1,5 +1,6 @@
 ---
 import Base from '../layouts/Base.astro';
+import CommunityWindow from '../components/CommunityWindow.astro';
 import PlusBand from '../components/PlusBand.astro';
 import ServiceIntro from '../components/ServiceIntro.astro';
 import PartnerBox from '../components/PartnerBox.astro';
@@ -32,6 +33,7 @@ const partners = [
     </div>
   </section>
 
+  <CommunityWindow />
   <TeamSection id="meet-the-team" />
 
   <BoardSection id="board-of-advisors" />
@@ -55,7 +57,7 @@ const partners = [
       <PartnerBox logos={partners} />
     </div>
   </section>
-  <figure class="about-gathering"><img src="/media/ami-about-gathering.webp" width="2400" height="1800" alt="The audience and speakers gathered at AMI’s December 2025 pitch competition" loading="lazy"/><figcaption>Our community, together. / December 2025 pitch competition</figcaption></figure>
+
 </Base>
 
 <style>

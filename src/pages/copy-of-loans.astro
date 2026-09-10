@@ -1,13 +1,8 @@
 ---
 import Base from '../layouts/Base.astro';
+import FundingBlueprint from '../components/FundingBlueprint.astro';
 import ScheduleEmbed from '../components/ScheduleEmbed.astro';
-import ClientSlider from '../components/ClientSlider.astro';
 import FaqSection from '../components/sections/FaqSection.astro';
-const clients = [
-  { name: 'Un Petit Merlot', image: '/media/760f7c_34589fbe015b4fc5a16ca548c06d15dd.png', href: 'https://www.facebook.com/100063561103904/posts/1682151951937887/' },
-  { name: 'Dust Seasonings and Rubs', image: '/media/760f7c_3182a2ef6c8b485385fd9d1124e95e76.jpg', href: 'https://www.azultimatetransport.com/about' },
-  { name: 'The Move LLC', image: '/media/760f7c_d8d70a70b9ef46fdaab2ce9b8af09cd6.jpg', href: 'https://api.us.nextdoor.com/pages/the-move-phoenix-chandler-az/' },
-];
 const steps = [
  {title:'Start with a conversation.',text:'Tell us what you’re building and what’s next. We’ll get to know your business, your goals, and how a microloan could help.',tag:'Your ambition comes first',link:'Book your first call',href:'#schedule'},
  {title:'Put your plan on paper.',text:'Equipment. Inventory. Your next revenue-generating investment. Bring a clear plan for the funds, along with the documents that tell your business’s story.',tag:'Make the next step tangible',link:'See the document checklist',href:'#documents'},
@@ -25,7 +20,8 @@ const groups=[
   <div class="hero-copy"><p class="eyebrow">Microloans / Built around your potential</p><h1>A little capital.<br/><span>A big next step.</span></h1><p class="intro">For the equipment you need. The inventory you’re ready for. The business you believe in.</p><a class="loan-button" href="#schedule">Let’s talk about your business <span aria-hidden="true">↗</span></a><a class="scroll-cue" href="#how-it-works">Explore what’s possible <span aria-hidden="true">↓</span></a></div>
   <div class="hero-art" aria-hidden="true"><div class="orbit orbit-one"></div><div class="orbit orbit-two"></div><div class="orbit orbit-three"></div><span class="big-arrow">↗</span><span class="art-caption">SMALL BEGINNINGS.<br/>FORWARD MOMENTUM.</span></div>
  </section>
- <section class="loan-facts" aria-label="Published microloan terms"><div><span class="fact-label">Room to begin</span><strong>$500–$7,500</strong><p>For your business needs</p></div><div><span class="fact-label">Time to build</span><strong>6–24 <small>months</small></strong><p>Repayment terms</p></div><div><span class="fact-label">Accessible capital</span><strong>1% <small>fixed</small></strong><p>Published interest rate</p></div><p class="terms-note">Discuss current terms and eligibility with our team on your initial call.</p></section>
+ <section class="loan-facts" aria-label="Published microloan terms"><div><span class="fact-label">Room to begin</span><strong>$500 <small>to</small> $7,500</strong><p>For your business needs</p></div><div><span class="fact-label">Time to build</span><strong>6 <small>to</small> 24 <small>months</small></strong><p>Repayment terms</p></div><div><span class="fact-label">Accessible capital</span><strong>1% <small>fixed</small></strong><p>Published interest rate</p></div><p class="terms-note">Discuss current terms and eligibility with our team on your initial call.</p></section>
+ <FundingBlueprint />
  <section class="journey" id="how-it-works">
   <div class="journey-sticky"><p class="eyebrow">From “what if” to what’s next</p><h2>Your next move.<br/><span>Four steps forward.</span></h2><p>A lower credit barrier. A team that listens. A process built around small business.</p><div class="step-track" aria-hidden="true">{steps.map((_,i)=><span data-step-dot={i}>{String(i+1).padStart(2,'0')}</span>)}</div><a href="#schedule" class="underlined">Take the first step ↗</a></div>
   <div class="journey-steps">{steps.map((s,i)=><article class="journey-step" data-step={i}><span class="step-number" aria-hidden="true">{String(i+1).padStart(2,'0')}</span><div><p class="eyebrow">{s.tag}</p><h3>{s.title}</h3><p class="step-copy">{s.text}</p>{s.link&&<a class="underlined" href={s.href}>{s.link} ↗</a>}</div></article>)}</div>
@@ -33,7 +29,6 @@ const groups=[
  <section class="loan-photo"><img src="/media/ami-pitch-community.webp" alt="Community members at AMI’s December 2025 pitch competition" loading="lazy"/><div><p class="eyebrow">Local people. Real possibility.</p><h2>You bring the vision.<br/>We’ll help with<br/><span>the next move.</span></h2><p>Supporting entrepreneurs in the Phoenix area.</p></div></section>
  <section class="documents" id="documents"><div class="docs-heading"><div><p class="eyebrow">A head start on your application</p><h2>A little preparation.<br/>A clearer path.</h2></div><p>You don’t need to figure it all out alone. Start gathering these documents, and we’ll walk through what’s needed on your call.</p></div><div class="doc-grid">{groups.map((g,i)=><article><span class="doc-index">0{i+1} / Get ready</span><h3>{g.title}</h3><ul>{g.items.map(item=><li><span aria-hidden="true">↗</span>{item}</li>)}</ul></article>)}</div></section>
  <FaqSection id="faq"/>
- <ClientSlider items={clients}/>
  <section class="loan-closing"><p class="eyebrow">Your ambition belongs here</p><h2>Ready when<br/><span>you are.</span></h2><a class="loan-button" href="#schedule">Book a loan interest meeting <span aria-hidden="true">↗</span></a></section>
  <ScheduleEmbed id="schedule" sub="Let’s talk about your business’s next chapter." url="https://calendly.com/azmicrocredit/loans"/>
 </Base>

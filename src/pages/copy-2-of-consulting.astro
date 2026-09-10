@@ -4,27 +4,10 @@ import ServiceIntro from '../components/ServiceIntro.astro';
 import WhyRow from '../components/WhyRow.astro';
 import ScheduleCTA from '../components/ScheduleCTA.astro';
 import ScheduleEmbed from '../components/ScheduleEmbed.astro';
-import LogoCarousel from '../components/LogoCarousel.astro';
+import ExpertiseNetwork from '../components/ExpertiseNetwork.astro';
 import MethodologySection from '../components/sections/MethodologySection.astro';
 
-const expertise = [
-  'COMPETITOR<br />ANALYSIS',
-  'FINANCIAL<br />MODELING',
-  'SUPPLIER<br />ANALYSIS',
-  'MONETIZATION<br />STRATEGIES',
-  'MARKET ENTRY<br />STRATEGY',
-  'BUSINESS<br />RESTRUCTURE',
-  'TECHNOLOGY<br />INTEGRATION',
-  'BRAND<br />DEVELOPMENT',
-  'BUSINESS<br />MODEL CANVAS',
-];
 
-// Placeholder client images (borrowed from the Loans page client slider).
-const clients = [
-  { name: 'Un Petit Merlot', image: '/media/760f7c_34589fbe015b4fc5a16ca548c06d15dd.png', href: 'https://www.facebook.com/100063561103904/posts/1682151951937887/' },
-  { name: 'Dust Seasonings and Rubs', image: '/media/760f7c_3182a2ef6c8b485385fd9d1124e95e76.jpg', href: 'https://www.azultimatetransport.com/about' },
-  { name: 'The Move LLC', image: '/media/760f7c_d8d70a70b9ef46fdaab2ce9b8af09cd6.jpg', href: 'https://api.us.nextdoor.com/pages/the-move-phoenix-chandler-az/' },
-];
 ---
 
 <Base
@@ -38,22 +21,9 @@ const clients = [
     html="AMI offers <span class='g'>free, personalized consulting</span> for local businesses at any stage, with expert guidance <span class='g'>tailored to each client's needs.</span>"
   />
 
-  <section class="expertise" id="expertise">
-    <h2 class="spaced-title">OUR EXPERTISE</h2>
-    <div class="tile-grid expertise-grid">
-      {expertise.map((label) => <div class="tile"><h3 set:html={label} /></div>)}
-    </div>
-  </section>
+  <ExpertiseNetwork />
 
   <MethodologySection id="methodology" />
-
-  <section class="clients" id="clients">
-    <h2 class="spaced-title">OUR CLIENTS</h2>
-    <!-- INTEGRATION: replace with real client logos from Wix carousel
-         (live site embeds https://static.parastorage.com/services/editor-elements-library/dist/siteAssets/media/Carousel.b605841e.html?compId=comp-ma23oxp1;
-         its contents could not be captured, so Loans-page client images are used as placeholders). -->
-    <LogoCarousel items={clients} height={270} />
-  </section>
 
   <ScheduleCTA
     title="SCHEDULE<br />A CALL"
@@ -67,30 +37,5 @@ const clients = [
 </Base>
 
 <style>
- .expertise-grid .tile{background:#f2f2f2;color:#111;border:1px solid #ccc;justify-content:flex-start;text-align:left;padding:30px!important;min-height:160px!important}
- .expertise-grid h3{font-size:25px!important;text-transform:none!important}
-
-
-  /* the live text column is a little wider than the shared why-row default */
-  @media (min-width: 901px) { :global(.why-row) { grid-template-columns: 1fr 1.75fr; } }
-
-  .expertise { max-width: var(--content-width); margin: 0 auto; padding: 30px 20px 40px; }
-  .expertise .spaced-title { margin-bottom: 28px; }
-  .expertise-grid { grid-template-columns: repeat(3, 1fr); gap: 16px; }
-  .expertise-grid .tile { min-height: 200px; padding: 16px 8px; }
-  .expertise-grid h3 { font-family: var(--font-bold); font-size: 34px; line-height: 1.05; text-transform: uppercase; white-space: nowrap; }
-
-  .clients { max-width: var(--content-width); margin: 0 auto; padding: 30px 20px 60px; }
-  .clients .spaced-title { margin-bottom: 40px; }
-
-  @media (max-width: 900px) {
-    .expertise-grid { grid-template-columns: repeat(2, 1fr); }
-    .expertise-grid h3 { font-size: 28px; white-space: normal; }
-    .clients { padding-bottom: 40px; }
-  }
-  @media (max-width: 600px) {
-    .expertise-grid { grid-template-columns: 1fr; }
-    .expertise-grid .tile { min-height: 150px; }
-    .expertise-grid h3 { font-size: 24px; }
-  }
+ @media (min-width: 901px) { :global(.why-row) { grid-template-columns: 1fr 1.75fr; } }
 </style>

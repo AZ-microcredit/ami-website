@@ -1,13 +1,14 @@
-<div class="scroll-ribbon" aria-hidden="true"><div><span>Small business.</span><em>Big possibility.</em><span>Right here.</span><em>Small business.</em></div></div>
+---
+import MotionBanner from './MotionBanner.astro';
+---
+<MotionBanner label="Small business, big possibility"><span>Small business.</span><em>Big possibility.</em><span>Right here.</span></MotionBanner>
 <script>
  const home=document.querySelector<HTMLElement>('.modern-home');
  if(home){
   const reduce=matchMedia('(prefers-reduced-motion: reduce)');let frame=0;
   const sections=[...home.querySelectorAll<HTMLElement>('.support-section,.community-section,.client-story,.quote-section')];
-  const ribbon=home.querySelector<HTMLElement>('.scroll-ribbon');
   function update(){frame=0;const disabled=reduce.matches;const compact=innerWidth<700;
    sections.forEach(section=>{const isLanding=section.matches('.opening');const r=(isLanding?section.parentElement!:section).getBoundingClientRect();if(r.bottom < -200||r.top>innerHeight+200)return;const enter=Math.max(0,Math.min(1,(innerHeight-r.top)/(innerHeight*.8)));const pass=Math.max(0,Math.min(1,isLanding?(72-r.top)/Math.max(1,r.height-innerHeight+72):-r.top/Math.max(1,r.height)));const centered=Math.max(-1,Math.min(1,(innerHeight/2-r.top-r.height/2)/innerHeight));section.style.setProperty('--enter',disabled?'1':String(enter));section.style.setProperty('--pass',disabled?'0':String(pass));section.style.setProperty('--depth',disabled?'0':String(centered*(compact?.35:1)));});
-   if(ribbon){const r=ribbon.getBoundingClientRect();ribbon.style.setProperty('--ribbon',disabled?'0px':`${(innerHeight-r.top)*-.18}px`)}
   }
   const queue=()=>{if(!frame)frame=requestAnimationFrame(update)};addEventListener('scroll',queue,{passive:true});addEventListener('resize',queue);reduce.addEventListener('change',queue);home.classList.add('scroll-effects');update();
  }

@@ -1,0 +1,20 @@
+---
+interface Props { label: string; variant?: 'words' | 'partners' }
+const {label, variant='words'}=Astro.props;
+---
+<section class:list={['motion-banner',variant]} aria-label={label}>
+ <div class="banner-window"><div class="banner-drift"><div class="banner-track"><div class="banner-group"><slot/><slot/></div><div class="banner-group" aria-hidden="true" inert><slot/><slot/></div><div class="banner-group" aria-hidden="true" inert><slot/><slot/></div></div></div></div>
+
+</section>
+<style>
+.motion-banner{position:relative;overflow:hidden;background:var(--green);padding:22px 0;color:#111}.banner-window{overflow:hidden}.banner-drift{transform:translate3d(var(--drift,0px),0,0)}.banner-track{display:flex;width:max-content;animation:travel 35s linear infinite}.banner-group{display:flex;align-items:center;flex-shrink:0;gap:55px;padding-right:55px;min-width:0}.words .banner-group{font:500 clamp(38px,6vw,86px)/1.1 Helvetica,Arial,sans-serif;letter-spacing:-.05em;white-space:nowrap}.words :global(em){font-family:Georgia,serif;color:white;font-weight:400}.partners{background:#fff;padding:30px 0;border-top:1px solid #ddd;border-bottom:1px solid #ddd}.partners .banner-track{animation-duration:45s}.partners .banner-group{gap:70px;padding-right:70px}.partners :global(a){display:flex;align-items:center;justify-content:center;width:170px;height:90px;flex-shrink:0}.partners :global(img){max-width:170px;max-height:76px;object-fit:contain;filter:grayscale(1)}@keyframes travel{to{transform:translate3d(-33.333333%,0,0)}}
+@media(prefers-reduced-motion:reduce){.banner-track{animation:none;transform:none}.banner-drift{transform:none!important}.banner-group[aria-hidden]{display:none}.banner-group{flex-wrap:wrap;min-width:0;width:100%;padding:0 22px;gap:24px;white-space:normal!important}.banner-track{width:100%}}
+</style>
+<script>
+ document.querySelectorAll<HTMLElement>('.motion-banner').forEach(banner=>{
+  const reduce=matchMedia('(prefers-reduced-motion: reduce)');
+  let frame=0;let last=scrollY;let drift=0;
+  const update=()=>{frame=0;const delta=scrollY-last;last=scrollY;const r=banner.getBoundingClientRect();if(!reduce.matches&&r.top<innerHeight&&r.bottom>0){drift=Math.max(-innerWidth*.7,Math.min(0,drift-delta*.22));banner.style.setProperty('--drift',`${drift}px`);}};
+  addEventListener('scroll',()=>{if(!frame)frame=requestAnimationFrame(update)},{passive:true});
+ });
+</script>

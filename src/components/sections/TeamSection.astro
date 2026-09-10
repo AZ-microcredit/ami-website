@@ -102,7 +102,10 @@ const staff = [
 
   .card-grid { display: grid; gap: 20px; }
   .exec-grid { grid-template-columns: repeat(5, 1fr); }
-  .staff-grid { grid-template-columns: repeat(5, 1fr); gap: 18px; }
+  .staff-grid { grid-template-columns: repeat(10, 1fr); gap: 18px; }
+  .staff-grid>.person-card{grid-column:span 2}
+  .staff-grid>.person-card:nth-child(11),.staff-grid>.person-card:nth-child(15){grid-column:2 / span 2}
+  .staff-grid>.person-card:nth-child(19){grid-column:3 / span 2}
 
   /* ---- Person card: grayscale photo + name/title, color wipe on hover ---- */
   .person-card {
@@ -205,7 +208,8 @@ const staff = [
   @media (max-width: 900px) {
     .team-heading { font-size: 28px; letter-spacing: 0.35em; }
     .exec-grid { grid-template-columns: repeat(2, 1fr); }
-    .staff-grid { grid-template-columns: repeat(4, 1fr); }
+    .staff-grid { grid-template-columns: repeat(3, 1fr); }
+    .staff-grid>.person-card:nth-child(n){grid-column:auto}
     .exec, .staff { padding: 24px 12px 40px; }
   }
   @media (max-width: 600px) {
