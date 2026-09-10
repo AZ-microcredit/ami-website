@@ -14,7 +14,7 @@
   --font-din: 'DINNextLight', 'DIN', Helvetica, Arial, sans-serif;
 
   --content-width: 980px;   /* Wix classic site grid width */
-  --header-height: 96px;
+  --header-height: 72px;
 }
 
 *, *::before, *::after { box-sizing: border-box; }
@@ -30,7 +30,7 @@ body {
 }
 img { max-width: 100%; height: auto; display: block; }
 [id] { scroll-margin-top: calc(var(--header-height) + 16px); }
-@media (max-width: 900px) { :root { --header-height: 80px; } }
+@media (max-width: 900px) { :root { --header-height: 60px; } }
 a { color: inherit; }
 h1, h2, h3, h4, h5, h6 { margin: 0; font-weight: 400; font-family: var(--font-bold); }
 p { margin: 0; }
