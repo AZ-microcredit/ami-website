@@ -1,32 +1,20 @@
-/* ---- Fonts (same Wix-hosted font files the live site uses) ---- */
-@font-face { font-family: 'HelveticaW01-Roman'; font-weight: 400; font-style: normal; font-display: swap;
-  src: url('https://static.parastorage.com/fonts/v2/2af1bf48-e783-4da8-9fa0-599dde29f2d5/v1/helvetica-w01-roman.woff2') format('woff2'); }
-@font-face { font-family: 'HelveticaW01-Bold'; font-weight: 400; font-style: normal; font-display: swap;
-  src: url('https://static.parastorage.com/fonts/v2/2f12de04-5ca4-4ada-9e66-a958673b12b5/v1/helvetica-w01-bold.woff2') format('woff2'); }
-@font-face { font-family: 'AvenirLight'; font-weight: 400; font-style: normal; font-display: swap;
-  src: url('https://static.parastorage.com/fonts/v2/af36905f-3c92-4ef9-b0c1-f91432f16ac1/v1/avenir-lt-w01_35-light1475496.woff2') format('woff2'); }
-@font-face { font-family: 'AvenirHeavy'; font-weight: 400; font-style: normal; font-display: swap;
-  src: url('https://static.parastorage.com/fonts/v2/74290729-59ae-4129-87d0-2eec3974dce1/v1/avenir-lt-w01_85-heavy1475544.woff2') format('woff2'); }
-@font-face { font-family: 'DINNextLight'; font-weight: 400; font-style: normal; font-display: swap;
-  src: url('https://static.parastorage.com/fonts/v2/eca8b0cd-45d8-43cf-aee7-ca462bc5497c/v1/din-next-w01-light.woff2') format('woff2'); }
-
 :root {
   --green: #5eb346;        /* brand green (bands, cards, footer) */
-  --green-dark: #289e19;   /* active nav, buttons */
+  --green-dark: #39732b;   /* active nav, buttons */
   --navy: #070d3a;         /* icon accents */
   --black: #000;
   --white: #fff;
-  --grey-bg: #bfbfbf;
+  --grey-bg: #f2f2f2;
   --grey-text: #727272;
 
-  --font-body: 'HelveticaW01-Roman', Helvetica, Arial, sans-serif;
-  --font-bold: 'HelveticaW01-Bold', Helvetica, Arial, sans-serif;
-  --font-avenir-light: 'AvenirLight', 'Avenir Next', 'Nunito Sans', Helvetica, Arial, sans-serif;
-  --font-avenir-heavy: 'AvenirHeavy', 'Avenir Next', 'Nunito Sans', Helvetica, Arial, sans-serif;
+  --font-body: Georgia, 'Times New Roman', serif;
+  --font-bold: Helvetica, Arial, sans-serif;
+  --font-avenir-light: Georgia, serif;
+  --font-avenir-heavy: Helvetica, Arial, sans-serif;
   --font-din: 'DINNextLight', 'DIN', Helvetica, Arial, sans-serif;
 
   --content-width: 980px;   /* Wix classic site grid width */
-  --header-height: 118px;
+  --header-height: 96px;
 }
 
 *, *::before, *::after { box-sizing: border-box; }
@@ -128,3 +116,15 @@ button { font: inherit; }
   .spaced-title { font-size: 22px; letter-spacing: 0.25em; }
   .why-row .why-title { font-size: 24px; letter-spacing: 0.3em; }
 }
+
+/* Modern shared foundations; all fonts are available locally. */
+:focus-visible { outline: 3px solid #39732b; outline-offset: 5px; }
+.sr-only:focus { position: fixed; top: 10px; left: 10px; width: auto; height: auto; clip: auto; padding: 14px; background: white; color: black; z-index: 200; }
+h1,h2,h3,h4 { letter-spacing: -.035em; }
+.spaced-title { text-transform: none; letter-spacing: -.035em; font-size: 40px; text-align: left; }
+.band { color: #111; padding: 32px 24px; }
+.btn { font-family: Helvetica,Arial,sans-serif; text-transform: none; padding: 16px 28px; }
+.btn-green { color: #111; }
+.btn-green:hover { color: white; }
+main img[src$=".jpg"], main img[src$=".jpeg"], main .hero-bg { filter: grayscale(1); }
+@media(prefers-reduced-motion:reduce){html{scroll-behavior:auto}*,*::before,*::after{animation:none!important;transition:none!important}}

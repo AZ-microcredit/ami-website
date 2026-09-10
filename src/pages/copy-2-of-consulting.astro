@@ -1,6 +1,6 @@
 ---
 import Base from '../layouts/Base.astro';
-import Hero from '../components/Hero.astro';
+import ServiceIntro from '../components/ServiceIntro.astro';
 import WhyRow from '../components/WhyRow.astro';
 import ScheduleCTA from '../components/ScheduleCTA.astro';
 import LogoCarousel from '../components/LogoCarousel.astro';
@@ -29,15 +29,7 @@ const clients = [
   title="Arizona Microcredit Initiative | CONSULTING"
   description="AMI offers free, one-on-one business consulting for local businesses in any phase, from startup to expansion."
 >
-  <Hero
-    image="/media/760f7c_6c7c8fedf1f64f10bcf64fceb8ded258.jpg"
-    height={645}
-    align="left"
-    title="CONSULTING"
-    subtitle="FREE BUSINESS SOLUTIONS"
-    cta={{ label: 'SCHEDULE', href: '/copy-of-schedule-a-consultation' }}
-    class="consulting-hero"
-  />
+  <ServiceIntro label="Free consulting" title="Your ambition.|Our support." text="Big decisions feel different with someone in your corner. Get free, one-on-one business consulting, tailored to where you are and where you want to go." image="/media/ami-community.jpg" alt="AMI community members at a pitch competition" href="/copy-of-schedule-a-consultation" cta="Let’s work together" />
 
   <WhyRow
     title="WHY OUR<br />CONSULTING"
@@ -69,9 +61,9 @@ const clients = [
 </Base>
 
 <style>
-  :global(.consulting-hero .hero-content) { padding-bottom: 26px; }
-  :global(.consulting-hero .hero-subtitle) { margin-top: 8px; }
-  :global(.consulting-hero .hero-cta) { min-width: 268px; margin-top: 18px; padding: 13px 40px; }
+ .expertise-grid .tile{background:#f2f2f2;color:#111;border:1px solid #ccc;justify-content:flex-start;text-align:left;padding:30px!important;min-height:160px!important}
+ .expertise-grid h3{font-size:25px!important;text-transform:none!important}
+
 
   /* the live text column is a little wider than the shared why-row default */
   @media (min-width: 901px) { :global(.why-row) { grid-template-columns: 1fr 1.75fr; } }

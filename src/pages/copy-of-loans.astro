@@ -1,6 +1,6 @@
 ---
 import Base from '../layouts/Base.astro';
-import Hero from '../components/Hero.astro';
+import ServiceIntro from '../components/ServiceIntro.astro';
 import WhyRow from '../components/WhyRow.astro';
 import ScheduleCTA from '../components/ScheduleCTA.astro';
 import ClientSlider from '../components/ClientSlider.astro';
@@ -28,11 +28,7 @@ const clients = [
 ---
 
 <Base title="Arizona Microcredit Initiative | LOANS">
-  <Hero image="/media/760f7c_341b24391a4a4db094f7e53ad88a8d3a.png" height={640} align="top-left" class="loans-hero">
-    <h1 class="hero-title">MICROLOANS</h1>
-    <p class="hero-subtitle">JUST FOR YOU</p>
-    <a class="btn btn-green hero-cta" href="/copy-of-apply-for-a-loan" aria-label="SCHEDULE NOW">SCHEDULE NOW</a>
-  </Hero>
+  <ServiceIntro label="Microloans" title="A little capital.|A big next step." text="Funding that sees your potential. Our low-interest microloans help local entrepreneurs invest in the next chapter of their business." image="/media/760f7c_6ca28189de8c4da9bd7a8a6d3b4be85e.jpg" alt="AMI team members working together" href="/copy-of-apply-for-a-loan" cta="Talk about your business" />
 
   <WhyRow
     title="WHY OUR<br />MICROLOANS"
@@ -64,21 +60,17 @@ const clients = [
 
 <style>
   /* Hero: title block top-left, button lower-left (matches the Wix layout) */
-  :global(.loans-hero .hero-inner) { align-items: flex-start !important; }
-  :global(.loans-hero .hero-content) { padding-top: 40px; height: 100%; }
-  :global(.loans-hero .hero-subtitle) { margin-top: 34px; }
-  :global(.loans-hero .hero-cta) { margin-top: auto; margin-bottom: 120px; min-width: 270px; }
 
   .loan-stats { max-width: var(--content-width); margin: 0 auto; padding: 40px 20px 60px; display: grid; grid-template-columns: repeat(3, 1fr); gap: 20px; text-align: center; }
-  .loan-stats h3 { font-family: var(--font-bold); font-size: 80px; line-height: 1; color: var(--green); margin-bottom: 8px; }
+  .loan-stats h3 { font-family: var(--font-bold); font-size: 64px; line-height: 1; color: var(--green); margin-bottom: 8px; }
   .loan-stats p { font-family: var(--font-bold); font-size: 14px; line-height: 1.3; max-width: 230px; margin: 0 auto; }
 
   .docs { max-width: var(--content-width); margin: 0 auto; padding: 20px 20px 40px; }
   .docs .spaced-title { margin-bottom: 30px; }
   .doc-cols { display: grid; grid-template-columns: 1fr 1fr; gap: 20px; }
   .doc-list { list-style: none; display: flex; flex-direction: column; gap: 20px; }
-  .doc-list li { background: #e6e6e6; display: flex; align-items: center; gap: 30px; padding: 40px 30px; min-height: 150px; }
-  .doc-list .num { font-family: var(--font-bold); font-size: 67px; line-height: 1; color: var(--green); min-width: 90px; }
+  .doc-list li { background: #e6e6e6; display: flex; align-items: center; gap: 30px; padding: 24px 22px; min-height: 115px; }
+  .doc-list .num { font-family: var(--font-bold); font-size: 45px; line-height: 1; color: var(--green); min-width: 60px; }
   .doc-list .txt { font-family: var(--font-bold); font-size: 20px; line-height: 1.2; }
 
   @media (max-width: 800px) {
@@ -87,6 +79,5 @@ const clients = [
     .doc-cols { grid-template-columns: 1fr; }
     .doc-list li { padding: 24px 20px; min-height: 0; }
     .doc-list .num { font-size: 44px; min-width: 60px; }
-    :global(.loans-hero .hero-cta) { margin-bottom: 30px; }
-  }
+    }
 </style>

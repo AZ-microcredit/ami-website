@@ -1,6 +1,7 @@
 ---
 import Base from '../layouts/Base.astro';
 import PlusBand from '../components/PlusBand.astro';
+import ServiceIntro from '../components/ServiceIntro.astro';
 import PartnerBox from '../components/PartnerBox.astro';
 import CollaborateForm from '../components/CollaborateForm.astro';
 
@@ -15,11 +16,7 @@ const partners = [
 ---
 
 <Base title="Arizona Microcredit Initiative | ABOUT US" description="Our mission is to empower local entrepreneurs through education, consulting, and competitive small business loans.">
-  <PlusBand title="ABOUT US" subtitle="Serving communities in Greater Phoenix since 2011" />
-
-  <div class="photo-strip blur">
-    <img src="/media/760f7c_5e0b4762dac64f80b9b77cb6634767d9.jpg" alt="DSC_0441.jpg" loading="eager" />
-  </div>
+  <ServiceIntro label="About AMI" title="Local roots.|Shared ambition." text="Since 2011, we’ve helped entrepreneurs in Greater Phoenix build toward financial self-sufficiency. Small businesses make our communities stronger. We’re here to help them thrive." image="/media/ami-community.jpg" alt="AMI community members at a local pitch competition" href="/meet-the-team" cta="Meet our team" />
 
   <section class="about">
     <div class="about-inner">
@@ -29,17 +26,7 @@ const partners = [
         <p>As a 501(c)(3) nonprofit, we are dedicated to that original vision by providing underserved entrepreneurs with access to business instruction and capital.</p>
       </div>
 
-      <!-- INTEGRATION: Wix Forms "Contact Us" form (name/email/subject/message → "Thanks! Message sent.").
-           Wire this form up to a form handler / email service; it currently does not submit. -->
-      <form class="contact-form" onsubmit="return false" aria-label="Contact Us">
-        <div class="form-head"><h2>Contact Us</h2><span class="fold" aria-hidden="true"></span></div>
-        <input type="text" name="name" placeholder="Name *" aria-label="Name" required />
-        <input type="email" name="email" placeholder="Email *" aria-label="Email" required />
-        <input type="text" name="subject" placeholder="Subject" aria-label="Subject" />
-        <textarea name="message" placeholder="Message" aria-label="Message"></textarea>
-        <p class="sent" hidden>Thanks! Message sent.</p>
-        <button type="submit">Send</button>
-      </form>
+      <div class="contact-card"><p>LET’S BUILD SOMETHING TOGETHER</p><h2>Your next step<br/>starts with hello.</h2><a class="btn btn-green" href="mailto:info@azmicrocredit.org">Email the AMI team ↗</a></div>
     </div>
   </section>
 
@@ -64,6 +51,9 @@ const partners = [
 </Base>
 
 <style>
+ .contact-card{padding:40px;background:#111;color:#fff}.contact-card>p{font:10px Helvetica,Arial,sans-serif;letter-spacing:.1em}.contact-card h2{font:40px/1.1 Helvetica,Arial,sans-serif;margin:35px 0}.about .about-text{text-align:left}.about{padding-top:70px!important;padding-bottom:70px!important}.about-inner{grid-template-columns:1fr 1fr!important;gap:60px!important}.photo-strip.blur img{filter:grayscale(1)}
+ @media(max-width:700px){.about-inner{grid-template-columns:1fr!important;gap:30px!important}.contact-card{padding:28px}}
+
   .photo-strip { height: 370px; overflow: hidden; background: #1a2c40; }
   .photo-strip img { width: 100%; height: 100%; object-fit: cover; object-position: center 40%; }
   .photo-strip.blur img { filter: blur(14px); transform: scale(1.06); }

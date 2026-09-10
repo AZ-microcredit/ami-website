@@ -12,7 +12,7 @@ const isActive = (item) =>
     </button>
 
     <a class="logo" href="/" aria-label="Arizona Microcredit Initiative home">
-      <img src="/media/760f7c_f4419df412384c578cdc5452c8ce8279.png" alt="Arizona Microcredit Initiative's Logo" width="180" height="58" />
+      <img src="/media/ami-official-black.png" alt="Arizona Microcredit Initiative's Logo" width="180" height="58" />
     </a>
 
     <nav class="main-nav" aria-label="Site">
@@ -32,6 +32,7 @@ const isActive = (item) =>
       </ul>
     </nav>
 
+    <a class="header-cta" href="/copy-of-schedule-a-consultation"><span class="cta-desktop">Book a free consultation</span><span class="cta-mobile">Book a free call</span><span aria-hidden="true">↗</span></a>
     <div class="social">
       <a href={social.facebook} target="_blank" rel="noopener"><img src="/media/4057345bcf57474b96976284050c00df.png" alt="Facebook - Black Circle" width="28" height="28" /></a>
       <a href={social.instagram} target="_blank" rel="noopener"><img src="/media/e1aa082f7c0747168d9cf43e77046142.png" alt="Instagram - Black Circle" width="28" height="28" /></a>
@@ -75,18 +76,23 @@ const isActive = (item) =>
 </script>
 
 <style>
-  .site-header { background: var(--white); position: relative; z-index: 50; }
+  .header-inner > .social { display:none; }
+  .header-cta { display:flex; gap:28px; align-items:center; padding:14px 18px; background:var(--green); color:#111; text-decoration:none; font:12px Helvetica,Arial,sans-serif; white-space:nowrap; }
+ .header-cta>span[aria-hidden]{font-size:20px}.cta-mobile{display:none} .header-cta:hover{background:#73c55a}
+ .nav-item>a{text-transform:capitalize}
+
+  .site-header { border-bottom: 1px solid #ddd; background: var(--white); position: relative; z-index: 50; }
   .header-inner {
-    max-width: var(--content-width);
+    max-width: 1600px;
     margin: 0 auto;
     height: var(--header-height);
     display: flex;
     align-items: center;
     justify-content: space-between;
-    padding: 0 20px;
+    padding: 0 4.2vw;
     gap: 20px;
   }
-  .logo img { width: 180px; height: auto; }
+  .logo img { width: 154px; height: auto; }
 
   .main-nav > ul { display: flex; align-items: center; gap: 0; }
   .nav-item { position: relative; }
@@ -136,12 +142,14 @@ const isActive = (item) =>
   .mobile-nav { display: none; }
 
   @media (max-width: 900px) {
+ .cta-desktop{display:none}.cta-mobile{display:inline}
     .main-nav, .header-inner > .social { display: none; }
+ .header-cta{margin-left:auto;padding:12px;gap:14px}
     .menu-toggle { display: flex; }
     .header-inner { height: 80px; justify-content: flex-start; }
-    .logo { margin: 0 auto; }
+    .logo { margin: 0; }
     .logo img { width: 130px; }
-    .header-inner::after { content: ''; width: 40px; }
+
     .mobile-nav { display: block; border-top: 1px solid #eee; padding: 10px 20px 24px; background: var(--white); }
     .mobile-nav[hidden] { display: none; }
     .mobile-nav > ul > li > a { display: block; padding: 12px 0; font-family: var(--font-bold); font-size: 16px; text-decoration: none; color: var(--black); }

@@ -4,7 +4,7 @@ import Hero from '../components/Hero.astro';
 ---
 
 <Base
-  title="Arizona Microcredit Initiative | ABOUT US"
+  title="Support AMI | Arizona Microcredit Initiative"
   description="Our mission is to empower local entrepreneurs through education and small loans and with your help, we can accomplish it together."
 >
   <Hero image="/media/760f7c_d3ee80b0dc704ef18c86e278f6c9dfd7.jpg" height={640} align="center" class="donate-hero">
@@ -13,7 +13,7 @@ import Hero from '../components/Hero.astro';
   </Hero>
 
   <section class="tagline">
-    <p>Together we can empower entrepreneurs in Phoenix (WIP)</p>
+    <p>Together we can empower entrepreneurs in Phoenix </p>
     <hr />
   </section>
 
@@ -36,7 +36,7 @@ import Hero from '../components/Hero.astro';
        placeholder with the donation widget/embed. Both DONATE buttons anchor to #donate. -->
   <section class="donation" id="donate">
     <div class="donation-placeholder" role="region" aria-label="Donation checkout">
-      <span>Donation checkout</span>
+      <div><h2>Help the next business take its first step.</h2><p>Donation checkout isn’t connected in this local preview. Contact AMI to learn how to contribute.</p><a class="btn btn-green" href="mailto:info@azmicrocredit.org">Contact AMI about giving ↗</a></div>
     </div>
   </section>
 
@@ -46,6 +46,8 @@ import Hero from '../components/Hero.astro';
 </Base>
 
 <style>
+ .donation-placeholder{height:auto!important;padding:45px 24px!important;color:#111!important;letter-spacing:normal!important;text-transform:none!important;text-align:center}.donation-placeholder h2{font:32px/1.15 Helvetica,Arial,sans-serif}.donation-placeholder p{font:17px/1.6 Georgia,serif;max-width:580px;margin:20px auto}.tax{background:#f2f2f2!important}.tax p{color:#333!important;font-size:15px!important;line-height:1.7!important;text-align:left!important}
+
   /* Hero: centered "SUPPORT US" box + solid green DONATE button */
   :global(.donate-hero .hero-content) { padding-top: 26px; gap: 0; }
   :global(.donate-hero .hero-content .hero-title.support) { background: #68b04d; color: #fafafa; font-size: 80px; line-height: 1.15; letter-spacing: -0.02em; padding: 0 6px 0 8px; }

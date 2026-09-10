@@ -63,3 +63,17 @@ Astro caches, and environment files are excluded by `.gitignore`.
 - Hosting and the live Wix site have not been changed.
 - A broader visual review of the other legacy page families remains pending.
 - Known inherited route gaps: punctuation-containing legacy CMS URLs need host redirects; two `huub-workshop-*` form URLs lack parent event detail pages. Some legacy links target posts that no longer exist on the source site.
+
+## Local design preview (September 2026)
+
+The homepage, main service introductions, About page, navigation, and footer have been modernized using the AMI Branding Guide, with Dorm Room Fund as the primary visual reference. Bain Capital Ventures and Legora informed the photographic composition and spacious layouts. All changes are local; nothing has been deployed.
+
+Start the preview with `npm run dev -- --host 127.0.0.1`, then open http://127.0.0.1:4321 in a browser. Keep the terminal running. Stop it with Control-C.
+
+Brand treatment: #5EB346 green, grayscale photography, Helvetica headings, Georgia body copy, sharp rectangular surfaces. Fonts resolve locally without external font requests.
+
+New photography is saved in `public/media/ami-community.jpg` (100_1954.JPG, December 2025 pitch competition) and `public/media/ami-workshop.jpg` (IMG_7768.jpeg, F24 stock photos), from the supplied Google Drive folders. `ami-pitch-2025.jpg` is an additional downloaded branding photo (100_1963.JPG).
+
+The Calendly widget from GitHub main (ee9972b) has been restored locally for consulting and loan meetings, preserving its configured event URLs. Donation checkout remains unconnected and has an email contact fallback; no payment processing or new backend has been added. Legacy content pages keep their routes and receive the shared branding, header, and footer.
+
+Market Fund was removed at the organization’s request. Its three legacy URLs redirect to the current services section. The main CTA is now “Book a free consultation”; the header uses the current official black AMI logo from Drive.

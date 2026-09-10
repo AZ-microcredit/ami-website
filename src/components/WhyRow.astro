@@ -7,3 +7,8 @@ const { title, html } = Astro.props;
   <h2 class="why-title" set:html={title} />
   <p class="why-text" set:html={html} />
 </section>
+
+<style>
+.why-row{padding:75px 20px;align-items:start}.why-row .why-title{letter-spacing:-.04em;text-transform:none;font-size:36px}.why-row .why-text{font:20px/1.65 Georgia,serif;border-left:1px solid #ccc}.why-row .why-text :global(.g){color:#39732b}
+@media(max-width:600px){.why-row{padding:50px 22px}.why-row .why-title{font-size:30px}.why-row .why-text{font-size:18px}}
+</style>

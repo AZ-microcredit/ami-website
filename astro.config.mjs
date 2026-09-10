@@ -2,6 +2,7 @@ import { defineConfig } from 'astro/config';
 
 export default defineConfig({
   site: 'https://www.azmicrocredit.org',
+  devToolbar: { enabled: false },
   trailingSlash: 'never',
   build: { format: 'file' },
   // The live site exposes a Spanish "/es" mirror via Wix Multilingual, but the content
