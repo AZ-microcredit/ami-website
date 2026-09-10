@@ -1,10 +1,6 @@
 // Site navigation. Top-level hrefs are the consolidated family pages (current live-site
 // slugs kept for SEO continuity); children are section anchors on the parent page.
 export const nav = [
-  { label: 'About', href: '/about-us', children: [
-    { label: 'Meet the Team', href: '/about-us#meet-the-team' },
-    { label: 'Board of Advisors', href: '/about-us#board-of-advisors' },
-  ]},
   { label: 'Microloans', href: '/copy-of-loans', children: [
     { label: "Microloan FAQ's", href: '/copy-of-loans#faq' },
     { label: 'Schedule Loan Call', href: '/copy-of-loans#schedule' },
@@ -18,6 +14,10 @@ export const nav = [
     { label: 'Events', href: '/events' },
   ]},
   { label: 'Support AMI', href: '/copy-of-donate', children: [] },
+  { label: 'About', href: '/about-us', children: [
+    { label: 'Meet the Team', href: '/about-us#meet-the-team' },
+    { label: 'Board of Advisors', href: '/about-us#board-of-advisors' },
+  ]},
 ];
 
 export const social = {
