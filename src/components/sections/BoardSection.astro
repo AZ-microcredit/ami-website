@@ -1,0 +1,53 @@
+---
+/**
+ * Board of Advisors section (consolidated into /about-us#board-of-advisors).
+ * Content moved verbatim from the retired /board-of-advisors page.
+ */
+interface Props { id?: string }
+const { id } = Astro.props;
+
+// Each advisor: name + role lines exactly as broken on the live page.
+const advisors = [
+  { name: 'Farhan Khera', lines: ['Senior Product Manager,', 'Huge,', 'ASU Alumnus'], image: '/media/760f7c_0c083e3332214985bd13dd367cb616cc.png' },
+  { name: 'Mikkaela Salamatin', lines: ['Associate,', 'Norton Rose Fulbright,', 'ASU Alumnus'], image: '/media/760f7c_72e0086c21ea4fcdb703bdde41dbfdb1.png' },
+  { name: 'Gabriel A. Gasca', lines: ['SBA Loan Officer,', 'Midwest Regional Bank,', 'Community Partner'], image: '/media/760f7c_5b6647f3a06b4e8b95ea5adafa17cd0b.jpg' },
+  { name: 'Jason Kerrick', lines: ['Regional Manager', 'OneAZ Credit Union,', 'Community Partner'], image: '/media/760f7c_7aeef3109ba94e36a9567019794c03bc.jpeg' },
+  { name: 'TJ Radigan', lines: ['Senior Associate,', 'McKinsey & Co.,', 'AMI Alumnus'], image: '/media/760f7c_8a5e5b0b202242de9150f2226a8f1b45.jpg' },
+  { name: 'Michael Barger', lines: ['Senior Business Analyst,', 'McKinsey & Co.,', 'AMI Alumnus'], image: '/media/760f7c_8b28568b48b347f18e4fa6e44dc5e0f4.png' },
+  { name: 'Timothy Desmond', lines: ['Strategic initiatives SM,', 'CNA,', 'AZ Supporter'], image: '/media/760f7c_9d489a49338f425c9d078408499d3f9f.png' },
+  { name: 'Cecilia Ashe', lines: ['Vice President/Chief', 'Operating Officer,', 'Landing Credit Union', 'Community Partner'], image: '/media/760f7c_8644fe14193c411288b2bcd317e0d698.png' },
+  { name: 'Chelsea Smith', lines: ['Chief Operating Officer,', 'HUUB,', 'Community Partner'], image: '/media/760f7c_b370416e42be40f48d0297631a5fdef2.png' },
+  { name: 'Dr. Phil Lamoreaux', lines: ['Professor,', 'W.P. Carey,', 'ASU Advisor'], image: '/media/760f7c_f70794db56064f438f465937be8cb40d.jpg' },
+];
+---
+
+<section class="advisors" id={id}>
+  <h2 class="spaced-title">THE BOARD OF ADVISORS</h2>
+  <div class="grid">
+    {advisors.map((a) => (
+      <div class="advisor">
+        <img src={a.image} alt={a.name} width="200" height="200" loading="lazy" />
+        <h3>{a.name}<br />{a.lines.map((l, i) => <><span class="role">{l}</span>{i < a.lines.length - 1 && <br />}</>)}</h3>
+      </div>
+    ))}
+  </div>
+</section>
+
+<style>
+  .advisors { max-width: var(--content-width); margin: 0 auto; padding: 30px 20px 60px; }
+  .advisors .spaced-title { font-size: 40px; letter-spacing: 0.5em; margin-bottom: 56px; }
+  .grid { display: grid; grid-template-columns: repeat(3, 254px); justify-content: center; row-gap: 46px; }
+  .advisor { text-align: center; }
+  .advisor img { width: 200px; height: 200px; border-radius: 50%; object-fit: cover; margin: 0 auto 16px; }
+  .advisor h3 { font-family: var(--font-bold); font-size: 17px; line-height: 1.2; }
+  .advisor .role { font-family: var(--font-body); }
+
+  @media (max-width: 900px) {
+    .advisors .spaced-title { font-size: 26px; letter-spacing: 0.35em; margin-bottom: 40px; }
+    .grid { grid-template-columns: repeat(2, 1fr); gap: 36px 16px; }
+  }
+  @media (max-width: 600px) {
+    .advisors .spaced-title { font-size: 20px; letter-spacing: 0.25em; }
+    .grid { grid-template-columns: 1fr; }
+  }
+</style>

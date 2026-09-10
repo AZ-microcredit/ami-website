@@ -1,53 +1,7 @@
 ---
-import Base from '../layouts/Base.astro';
-import ResourceBand from '../components/ResourceBand.astro';
-import CantFind from '../components/CantFind.astro';
+// Retired page. Content now lives on the consolidated family page; keep this URL
+// working via a redirect stub (meta refresh + canonical).
+import Redirect from '../layouts/Redirect.astro';
 ---
 
-<Base title="Arizona Microcredit Initiative |  BUSINESS EDUCATION" description="Designed for startups or established businesses, our education services cover all the business basics.">
-  <ResourceBand title="EDUCATION" subtitle="Equipping entrepreneurs with fundamental business knowledge" />
-  <img class="edu-photo" src="/media/760f7c_dc0c9cb6df204406af0fbf9c8dfc95a9.jpg" alt="DSC_0239.jpg" loading="eager" />
-
-  <div class="edu-body">
-    <div class="edu-inner">
-      <div class="edu-text">
-        <p class="lg">AMI strives to provide meaningful resources to our clients. Our new online educational materials are an extension of this effort. Below is our new interview series.</p>
-        <p class="lg">In these videos, AMI staff members interviewed local Arizona small business owners to learn more about their business and their experience being a small business owner.</p>
-        <p class="lg">Hear from the owners of Fair Trade Cafe and Justice Java below to understand how they started their business and are currently operating it.</p>
-      </div>
-
-      <!-- Two Wix VideoPlayer widgets (YouTube). Ids come from the live page data. -->
-      <div class="edu-videos">
-        <iframe src="https://www.youtube.com/embed/x6lUgPoOlG4" title="AMI Interviews Fair Trade Cafe" loading="lazy" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
-        <iframe src="https://www.youtube.com/embed/jXy_6qYDf_Y" title="AMI Interviews Justice Java" loading="lazy" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
-      </div>
-
-      <p class="edu-text lg edu-outro">We hope these accounts of other small business owners provided insight on the intricacies of operating a small business. If you are interested in learning about starting a small business, head over to our other tabs for more educational resources to aid you in crafting your business.</p>
-    </div>
-    <div class="edu-note"><CantFind /></div>
-  </div>
-</Base>
-
-<style>
-  .edu-photo { width: 100%; height: 390px; object-fit: cover; object-position: center 40%; display: block; }
-  .edu-body { background: var(--grey-bg); padding-bottom: 16px; }
-  .edu-inner { max-width: var(--content-width); margin: 0 auto; padding: 0 20px; }
-  .edu-text { width: 882px; max-width: 100%; margin: 48px 0 0 29px; font-family: var(--font-avenir-light); font-size: 16px; line-height: 1.55; }
-  .edu-text p + p { margin-top: 25px; }
-  .edu-text .lg, .edu-text.lg { font-size: 21px; line-height: 1.2; }
-  .edu-videos { display: flex; gap: 41px; margin: 30px 0 0 52px; }
-  .edu-videos iframe { width: 400px; height: 273px; border: 0; background: #000; display: block; }
-  .edu-outro { margin-top: 40px; }
-  .edu-note { padding: 40px 0 10px; }
-
-  @media (max-width: 1000px) {
-    .edu-text, .edu-videos { margin-left: 0; width: auto; }
-  }
-  @media (max-width: 900px) {
-    .edu-photo { height: 260px; }
-    .edu-videos { flex-direction: column; gap: 20px; }
-    .edu-videos iframe { width: 100%; max-width: 560px; aspect-ratio: 16 / 9; height: auto; }
-    .edu-text { margin-top: 30px; }
-    .edu-text .lg, .edu-text.lg { font-size: 18px; }
-  }
-</style>
+<Redirect target="/copy-of-education" label="Business Education" />

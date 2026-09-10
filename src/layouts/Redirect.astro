@@ -1,0 +1,25 @@
+---
+/**
+ * Redirect stub for retired child/duplicate URLs. Renders a minimal document with a
+ * meta-refresh to the consolidated parent page (and section anchor), plus rel=canonical.
+ * Follows the existing schedule-a-consultation-1.astro pattern; replace with real 301s
+ * at the host level when a deploy target is chosen.
+ */
+interface Props {
+  /** Absolute-path redirect target, e.g. '/about-us#meet-the-team' */
+  target: string;
+  /** Human label for the fallback link */
+  label: string;
+}
+const { target, label } = Astro.props;
+---
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <title>Redirecting…</title>
+    <meta http-equiv="refresh" content={`0; url=${target}`} />
+    <link rel="canonical" href={target} />
+  </head>
+  <body><p>Redirecting to <a href={target}>{label}</a>…</p></body>
+</html>

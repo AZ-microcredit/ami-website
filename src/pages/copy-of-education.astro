@@ -3,30 +3,35 @@ import Base from '../layouts/Base.astro';
 import ServiceIntro from '../components/ServiceIntro.astro';
 import WhyRow from '../components/WhyRow.astro';
 import EventsWidget from '../components/EventsWidget.astro';
+import ResourceIndexSection from '../components/sections/ResourceIndexSection.astro';
 ---
 
 <Base
-  title="Arizona Microcredit Initiative |  BUSINESS EDUCATION"
-  description="Designed for startups or established businesses, our education services cover all the business basics."
+  title="Arizona Microcredit Initiative | BUSINESS EDUCATION"
+  description="Designed for startups or established businesses, our education services cover all the business basics. Browse the resource index and upcoming workshops and events."
 >
-  <ServiceIntro label="Business education" title="A little know-how.|A lot of potential." text="Practical tools, free workshops, and a community of people building something of their own. Start learning. Keep moving." image="/media/ami-workshop.jpg" alt="An AMI business workshop" href="/copy-2-of-education-f" cta="Explore free resources" />
+  <ServiceIntro label="Business education" title="A little know-how.|A lot of potential." text="Practical tools, free workshops, and a community of people building something of their own. Start learning. Keep moving." image="/media/ami-workshop.jpg" alt="An AMI business workshop" href="#resources" cta="Explore free resources" />
 
   <WhyRow
     title="WHY OUR<br />EDUCATION"
     html="AMI is committed to empowering entrepreneurs by providing <span class='g'>free business education workshops</span> and maintaining a <span class='g'>comprehensive resource index</span> to support their growth and success"
   />
 
-  <section class="edu-events"><h2 class="spaced-title">Learn alongside your community.</h2><p class="event-intro">Explore upcoming workshops and events from AMI.</p>
+  <ResourceIndexSection id="resources" />
+
+  <section class="edu-events" id="events">
+    <h2 class="spaced-title">Learn alongside your community.</h2>
+    <p class="event-intro">Explore upcoming workshops and events from AMI.</p>
     <EventsWidget />
+    <p class="events-more"><a class="btn btn-outline" href="/events">Browse the full event calendar ↗</a></p>
   </section>
 </Base>
 
 <style>
  .event-intro{font:18px/1.6 Georgia,serif;margin:22px 0 40px;color:#555}
 
-  /* Hero: title block top-left, button bottom-left (matches the Wix layout) */
-
   .edu-events { max-width: var(--content-width); margin: 0 auto; padding: 50px 20px 60px; }
+  .events-more { text-align: center; margin-top: 40px; }
 
   @media (max-width: 900px) {
       .edu-events { padding: 30px 20px 40px; }

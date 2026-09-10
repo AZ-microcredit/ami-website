@@ -3,7 +3,9 @@ import Base from '../layouts/Base.astro';
 import ServiceIntro from '../components/ServiceIntro.astro';
 import WhyRow from '../components/WhyRow.astro';
 import ScheduleCTA from '../components/ScheduleCTA.astro';
+import ScheduleEmbed from '../components/ScheduleEmbed.astro';
 import ClientSlider from '../components/ClientSlider.astro';
+import FaqSection from '../components/sections/FaqSection.astro';
 
 const docs = [
   'Personal tax returns of the past 2 years',
@@ -27,8 +29,8 @@ const clients = [
 ];
 ---
 
-<Base title="Arizona Microcredit Initiative | LOANS">
-  <ServiceIntro label="Microloans" title="A little capital.|A big next step." text="Funding that sees your potential. Our low-interest microloans help local entrepreneurs invest in the next chapter of their business." image="/media/760f7c_6ca28189de8c4da9bd7a8a6d3b4be85e.jpg" alt="AMI team members working together" href="/copy-of-apply-for-a-loan" cta="Talk about your business" />
+<Base title="Arizona Microcredit Initiative | LOANS" description="Low-interest microloans for Phoenix small businesses: loan terms, required documents, answers to common microloan questions, and scheduling a loan call.">
+  <ServiceIntro label="Microloans" title="A little capital.|A big next step." text="Funding that sees your potential. Our low-interest microloans help local entrepreneurs invest in the next chapter of their business." image="/media/760f7c_6ca28189de8c4da9bd7a8a6d3b4be85e.jpg" alt="AMI team members working together" href="#schedule" cta="Talk about your business" />
 
   <WhyRow
     title="WHY OUR<br />MICROLOANS"
@@ -41,7 +43,7 @@ const clients = [
     <div><h3>1%</h3><p>FIXED INTEREST RATES</p></div>
   </section>
 
-  <section class="docs">
+  <section class="docs" id="documents">
     <h2 class="spaced-title">REQUIRED DOCUMENTS</h2>
     <div class="doc-cols">
       <ol class="doc-list">
@@ -53,14 +55,16 @@ const clients = [
     </div>
   </section>
 
+  <FaqSection id="faq" />
+
   <ClientSlider items={clients} />
 
-  <ScheduleCTA title="SCHEDULE A<br />CALL" text="FIND THE RIGHT PLAN FOR YOU" label="SCHEDULE NOW" href="/copy-of-apply-for-a-loan" />
+  <ScheduleCTA title="SCHEDULE A<br />CALL" text="FIND THE RIGHT PLAN FOR YOU" label="SCHEDULE NOW" href="#schedule" />
+
+  <ScheduleEmbed id="schedule" sub="to learn how we can help fund your dreams" url="https://calendly.com/azmicrocredit/loans" />
 </Base>
 
 <style>
-  /* Hero: title block top-left, button lower-left (matches the Wix layout) */
-
   .loan-stats { max-width: var(--content-width); margin: 0 auto; padding: 40px 20px 60px; display: grid; grid-template-columns: repeat(3, 1fr); gap: 20px; text-align: center; }
   .loan-stats h3 { font-family: var(--font-bold); font-size: 64px; line-height: 1; color: var(--green); margin-bottom: 8px; }
   .loan-stats p { font-family: var(--font-bold); font-size: 14px; line-height: 1.3; max-width: 230px; margin: 0 auto; }

@@ -10,7 +10,7 @@ export default defineConfig({
   redirects: {
     '/es': '/',
     // old slug still linked from a few legacy pages
-    '/schedule-a-consultation': '/copy-of-schedule-a-consultation',
+    '/schedule-a-consultation': '/copy-2-of-consulting#schedule',
     // NOTE: a dynamic '/es/[...slug]' -> '/[...slug]' redirect is not possible in static output
     // (Astro requires getStaticPaths for rest params and the build fails). Map /es/* -> /* at the
     // host level (e.g. Netlify/Vercel redirects) instead.

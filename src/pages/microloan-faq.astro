@@ -1,52 +1,7 @@
 ---
-import Base from '../layouts/Base.astro';
-import PlusBand from '../components/PlusBand.astro';
-
-const faqs = [
-  { q: 'What is a microloan?', a: 'A microloan is a small loan aimed at supporting the growth of small businesses.' },
-  { q: 'Who can apply for a microloan?', a: 'Small business entrepreneurs in the Phoenix area seeking financial support for their businesses are encouraged to apply.' },
-  { q: 'How can I apply for a microloan?', a: 'You can schedule a Loan Interest Meeting through the AMI website to meet with experts who will guide you through the application process.' },
-  { q: 'Why choose AMI?', a: 'AMI offers lower credit score requirements compared to traditional banks and specializes in supporting small businesses, making us well-equipped to meet your needs.' },
-  { q: 'What loan terms does AMI offer?', a: 'We offer loans up to $7,500 with terms of 6–24 months and a fixed interest rate of 1%.' },
-  { q: 'How can I use the loan funds?', a: 'Loan funds should be invested in revenue-generating assets, such as equipment, rather than temporary expenses like inventory.' },
-  { q: 'What is the loan process?', a: 'The process begins with an initial consultation call to understand your business and loan purpose. After approval, funds are disbursed, and repayment follows the agreed plan. Once fully repaid, your business can continue to grow.' },
-  { q: 'What documents are required?', a: 'The required documents for a loan include personal tax returns from the last two years, personal and business bank statements from the last 12 months, an EIN and tax ID, a utility bill, a personal resume, a business plan, and a planned loan budget outlining how the funds will be used. Additionally, professional references are required.' },
-  { q: 'Can I apply for more than one loan?', a: 'Yes, after fully repaying your first loan, you may apply for additional funding.' },
-  { q: 'What does a “holistic review” mean?', a: 'AMI assesses loan applicants using the five C’s: Capacity, Capital, Collateral, Conditions, and Character. Each factor is considered to ensure a fair evaluation.' },
-];
+// Retired page. Content now lives on the consolidated family page; keep this URL
+// working via a redirect stub (meta refresh + canonical).
+import Redirect from '../layouts/Redirect.astro';
 ---
 
-<Base
-  title="Microloan FAQ's | az-microcredit"
-  description="Interested In Funding Your Small Business, But Not Sure How To Get Started? Here At AMI, We Want To Make The Loan Application Process As Simple As Possible. Read All Our Our Most-Asked Microloan FAQ's Here!"
->
-  <PlusBand
-    title="MICROLOAN FAQ's"
-    subtitle="Financing your small business is an important step to growth. Here at AMI, we want to make this process as simple as possible. Read a compilation of our most-asked microloan FAQ's here."
-    subtitleWidth={789}
-  />
-
-  <section class="grey">
-    <dl class="faq">
-      {faqs.map((f) => (
-        <div class="item">
-          <dt>{f.q}</dt>
-          <dd>{f.a}</dd>
-        </div>
-      ))}
-    </dl>
-  </section>
-</Base>
-
-<style>
-  .grey { background: var(--grey-bg); }
-  .faq { max-width: var(--content-width); margin: 0 auto; padding: 44px 20px 50px 57px; }
-  .item { max-width: 841px; }
-  dt { font-family: var(--font-bold); font-size: 25px; line-height: 1.4; }
-  dd { margin: 15px 0 22px; font-family: var(--font-body); font-size: 20px; line-height: 1.4; }
-  @media (max-width: 900px) {
-    .faq { padding-left: 20px; }
-    dt { font-size: 22px; }
-    dd { font-size: 18px; }
-  }
-</style>
+<Redirect target="/copy-of-loans#faq" label="Microloan FAQ's" />

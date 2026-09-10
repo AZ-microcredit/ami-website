@@ -1,20 +1,21 @@
-// Site navigation. Paths mirror the live Wix site's URL slugs so links match 1:1.
+// Site navigation. Top-level hrefs are the consolidated family pages (current live-site
+// slugs kept for SEO continuity); children are section anchors on the parent page.
 export const nav = [
   { label: 'About', href: '/about-us', children: [
-    { label: 'Meet the Team', href: '/meet-the-team' },
-    { label: 'Board of Advisors', href: '/board-of-advisors' },
-    { label: 'In the News', href: '/in-the-news' },
+    { label: 'Meet the Team', href: '/about-us#meet-the-team' },
+    { label: 'Board of Advisors', href: '/about-us#board-of-advisors' },
+    { label: 'In the News', href: '/about-us#in-the-news' },
   ]},
   { label: 'Microloans', href: '/copy-of-loans', children: [
-    { label: "Microloan FAQ's", href: '/copy-of-microloan-faq-s-1' },
-    { label: 'Schedule Loan Call', href: '/copy-of-apply-for-a-loan' },
+    { label: "Microloan FAQ's", href: '/copy-of-loans#faq' },
+    { label: 'Schedule Loan Call', href: '/copy-of-loans#schedule' },
   ]},
   { label: 'Consulting', href: '/copy-2-of-consulting', children: [
-    { label: 'Schedule Consultation Call', href: '/copy-of-schedule-a-consultation' },
-    { label: 'Our Methodology', href: '/copy-of-our-methodology-1' },
+    { label: 'Schedule Consultation Call', href: '/copy-2-of-consulting#schedule' },
+    { label: 'Our Methodology', href: '/copy-2-of-consulting#methodology' },
   ]},
   { label: 'Education', href: '/copy-of-education', children: [
-    { label: 'Resource Index', href: '/copy-2-of-education-f' },
+    { label: 'Resource Index', href: '/copy-of-education#resources' },
     { label: 'Events', href: '/events' },
   ]},
   { label: 'Support AMI', href: '/copy-of-donate', children: [] },

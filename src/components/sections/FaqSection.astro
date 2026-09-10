@@ -1,0 +1,79 @@
+---
+/**
+ * Microloan FAQ section (consolidated into /copy-of-loans#faq).
+ * Content moved verbatim from the retired /copy-of-microloan-faq-s-1 page; the photo
+ * hero was replaced with the standard spaced-title section header.
+ */
+interface Props { id?: string }
+const { id } = Astro.props;
+
+const faqs = [
+  { q: 'What is a microloan?', a: 'A microloan is a small loan aimed at supporting the growth of small businesses.' },
+  { q: 'Who can apply for a microloan?', a: 'Small business entrepreneurs in the Phoenix area seeking financial support for their businesses are encouraged to apply.' },
+  { q: 'How can I apply for a microloan?', a: 'You can schedule a Loan Interest Meeting through the AMI website to meet with experts who will guide you through the application process.' },
+  { q: 'Why choose AMI?', a: 'AMI offers lower credit score requirements compared to traditional banks and specializes in supporting small businesses, making us well-equipped to meet your needs.' },
+  { q: 'What loan terms does AMI offer?', a: 'We offer loans up to $7,500 with terms of 6–24 months and a fixed interest rate of 1%.' },
+  { q: 'How can I use the loan funds?', a: 'Loan funds should be invested in revenue-generating assets, such as equipment, and can also be invested in inventory.' },
+  { q: 'What is the loan process?', a: 'The process begins with an initial consultation call to understand your business and loan purpose. After approval, funds are disbursed, and repayment follows the agreed plan. Once fully repaid, your business can continue to grow.' },
+  { q: 'What documents are required?', a: 'The required documents for a loan include personal tax returns from the last two years, personal and business bank statements from the last six months, an EIN and tax ID, a utility bill, a personal resume, a business plan, and a planned loan budget outlining how the funds will be used. Additionally, professional references are required.' },
+  { q: 'Can I apply for more than one loan?', a: 'Yes, after fully repaying your first loan, you may apply for additional funding.' },
+  { q: 'What does a “holistic review” mean?', a: 'AMI assesses loan applicants using the five C’s: Capacity, Capital, Collateral, Conditions, and Character. Each factor is considered to ensure a fair evaluation.' },
+];
+---
+
+<section class="faq-section" id={id}>
+  <h2 class="spaced-title faq-heading">MICROLOAN FAQ'S</h2>
+  <div class="faq">
+    <dl class="faq-list">
+      {faqs.map((f) => (
+        <div class="faq-item">
+          <dt>{f.q}</dt>
+          <dd>{f.a}</dd>
+        </div>
+      ))}
+    </dl>
+  </div>
+
+  <div class="still">
+    <hr />
+    <h3 class="still-title">STILL HAVE QUESTIONS?</h3>
+    <p class="still-text">
+      Reach out to us directly at: <a class="mail" href="mailto:info@azmicrocredit.org">info@azmicrocredit.org</a><br />
+      or <a class="call" href="#schedule">schedule an initial loan call</a>!
+    </p>
+  </div>
+</section>
+
+<style>
+  .faq-heading { font-size: 40px; letter-spacing: 0.5em; margin-bottom: 10px; }
+  .faq { max-width: var(--content-width); margin: 0 auto; padding: 32px 20px 30px 57px; }
+  .faq-list { margin: 0; max-width: 841px; }
+  .faq-item { margin-bottom: 27px; }
+  .faq-item dt { font-family: var(--font-bold); font-size: 32px; line-height: 1.6; color: var(--green); }
+  .faq-item dd { margin: 0 0 0 40px; font-family: var(--font-body); font-size: 20px; line-height: 1.4; }
+
+  .still { max-width: var(--content-width); margin: 0 auto; padding: 8px 20px 44px; }
+  .still hr { border: 0; border-top: 2px solid var(--black); margin: 0 -20px 20px; }
+  .still-title { display: inline-block; margin-left: 24px; background: var(--green); color: var(--white); font-family: var(--font-bold); font-size: 32px; line-height: normal; letter-spacing: 0.1em; padding: 0 0.35em; }
+  .still-text { margin: 14px 0 0 37px; font-family: var(--font-body); font-size: 20px; line-height: normal; letter-spacing: 0.01em; color: #242323; }
+  .still-text .mail { font-family: var(--font-bold); color: var(--green); text-decoration: none; }
+  .still-text .mail:hover { text-decoration: underline; }
+  .still-text .call { color: inherit; text-decoration: none; }
+  .still-text .call:hover { text-decoration: underline; }
+
+  @media (max-width: 900px) {
+    .faq-heading { font-size: 28px; letter-spacing: 0.35em; }
+    .faq { padding-left: 20px; }
+    .faq-item dt { font-size: 26px; line-height: 1.4; margin-bottom: 6px; }
+    .faq-item dd { margin-left: 20px; font-size: 18px; }
+    .still-title, .still-text { margin-left: 0; }
+    .still-title { font-size: 24px; }
+  }
+  @media (max-width: 600px) {
+    .faq-heading { font-size: 22px; letter-spacing: 0.25em; }
+    .faq-item dt { font-size: 22px; }
+    .faq-item dd { margin-left: 0; font-size: 16px; }
+    .still-title { font-size: 18px; letter-spacing: 0.06em; }
+    .still-text { font-size: 17px; }
+  }
+</style>

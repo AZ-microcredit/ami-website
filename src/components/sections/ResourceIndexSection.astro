@@ -1,0 +1,147 @@
+---
+/**
+ * Resource Index section (consolidated into /copy-of-education#resources).
+ * Content moved verbatim from the retired /copy-2-of-education-f page; the photo hero
+ * was replaced with the standard spaced-title section header. The resource/tutorial
+ * pages these cards link to stay standalone routes.
+ */
+import posts from '../../data/posts.json';
+
+interface Props { id?: string }
+const { id } = Astro.props;
+
+// Resource Index: three curated groups of blog posts (order matches the live page).
+const bySlug = (slug: string) => {
+  const p = posts.find((x) => x.slug === slug);
+  if (!p) throw new Error(`Resource Index: unknown post slug ${slug}`);
+  return p;
+};
+const card = (slug: string, image: string) => ({ ...bySlug(slug), href: `/single-post/${slug}`, image });
+
+const build = [
+  card('loan-resources', '/media/dd2ea9_7b5d3aa0abc244eb8319685614b3b192.png'),
+  card('what-will-your-business-do', '/media/dd2ea9_842e149c5f774b49b356288156d958a2.png'),
+  card('accounting-101', '/media/dd2ea9_2b08aa91e15143a181944297972b8244.png'),
+  card('business-registration', '/media/dd2ea9_f3e752868bd643449f981617755385a7.png'),
+  card('business-model-canvas', '/media/760f7c_1e1ea1f25403430bb9b41b3d383298ce.png'),
+];
+const elevate = [
+  card('seo-for-small-businesses', '/media/760f7c_5b5eeef02222408c915d96de311eccd4.png'),
+  card('promotion-strategies', '/media/dd2ea9_ea61fa7a97aa41c4bb0d1b9436d46ddb.png'),
+  card('networking-101', '/media/dd2ea9_631923d6e15044a29f26b78b0843b3b5.png'),
+  card('market-research', '/media/dd2ea9_37eb76861f834c5fb6d7b77d5d454d1e.png'),
+  card('5-ps-of-marketing-explained', '/media/dd2ea9_8a5bf811a56e4a31aeeff9b36a822352.png'),
+];
+const expand = [
+  card('industry-analysis', '/media/760f7c_151df3e09f984b45964111af0be28cfe.jpg'),
+  card('pricing', '/media/760f7c_dee8836d8cd9433d97a0bef7bf783a30.png'),
+  card('introduction-to-competitive-analysis', '/media/760f7c_886b927bee784f24b50b67fcf1fcd606.png'),
+  card('a-b-testing-5', '/media/760f7c_c5d542b7aa554e1ebd67832b24f9ee62.png'),
+  card('small-business-upskilling', '/media/dd2ea9_db47d1f63d8146daaedb3b8a40375415.png'),
+  card('business-process-improvement-bpi', '/media/dd2ea9_93fa0f6b15da4909aae0bfdcefa959bc.png'),
+];
+---
+
+<section class="resource-index" id={id}>
+  <h2 class="spaced-title ri-heading">RESOURCE INDEX</h2>
+
+  <div class="videos container">
+    <div class="video-row">
+      <!-- INTEGRATION: Wix VideoPlayer "AMI Interviews Fair Trade Cafe" (YouTube). The video id is not
+           present in the page dump; replace the placeholder with
+           <iframe src="https://www.youtube.com/embed/<VIDEO_ID>" title="AMI Interviews Fair Trade Cafe" allowfullscreen></iframe> -->
+      <div class="video video-placeholder" role="img" aria-label="AMI Interviews Fair Trade Cafe (video)">
+        <span class="play" aria-hidden="true"></span>
+        <span class="video-title">AMI Interviews Fair Trade Cafe</span>
+      </div>
+      <!-- Second (empty) Wix VideoPlayer on the live page: rendered as the blank white card. -->
+      <div class="video video-empty" aria-hidden="true"></div>
+    </div>
+    <p class="intro">AMI’s interview series features conversations with local Arizona small business owners, offering insights into their entrepreneurial journeys as part of our ongoing effort to provide meaningful educational resources</p>
+    <hr class="rule" />
+  </div>
+
+  <div class="groups container">
+    <div class="two-col">
+      <div class="group">
+        <h3 class="group-title">Build your business</h3>
+        <ul class="list-cards">
+          {build.map((p) => (
+            <li><a class="lcard" href={p.href}><span class="thumb"><img src={p.image} alt="" /></span><span class="ttl">{p.title}</span></a></li>
+          ))}
+        </ul>
+      </div>
+      <div class="group">
+        <h3 class="group-title">Elevate your process</h3>
+        <ul class="list-cards">
+          {elevate.map((p) => (
+            <li><a class="lcard" href={p.href}><span class="thumb"><img src={p.image} alt="" /></span><span class="ttl">{p.title}</span></a></li>
+          ))}
+        </ul>
+      </div>
+    </div>
+
+    <div class="group expand">
+      <h3 class="group-title">Expand your brand</h3>
+      <ul class="grid-cards">
+        {expand.map((p) => (
+          <li><a class="gcard" href={p.href}><span class="ttl">{p.title}</span><span class="thumb"><img src={p.image} alt="" /></span></a></li>
+        ))}
+      </ul>
+    </div>
+  </div>
+</section>
+
+<style>
+  .ri-heading { font-size: 40px; letter-spacing: 0.5em; }
+  .videos { padding: 44px 20px 0; }
+  .video-row { display: grid; grid-template-columns: 440px 440px; justify-content: center; gap: 0 25px; }
+  .video { width: 100%; aspect-ratio: 440 / 268; }
+  .video-empty { background: #fff; box-shadow: 0 0 6px rgba(0,0,0,.25); }
+  .video-placeholder { background: #111 url('/media/760f7c_9137a574e4d84a87893bad5f3eb1fec8.jpg') center/cover; position: relative; display: flex; align-items: center; justify-content: center; }
+  .video-placeholder::before { content: ''; position: absolute; inset: 0; background: rgba(0,0,0,.45); }
+  .video-placeholder .play { position: relative; width: 64px; height: 64px; border: 3px solid #fff; border-radius: 50%; }
+  .video-placeholder .play::after { content: ''; position: absolute; left: 24px; top: 17px; border-left: 20px solid #fff; border-top: 12px solid transparent; border-bottom: 12px solid transparent; }
+  .video-placeholder .video-title { position: absolute; left: 0; right: 0; bottom: 14px; text-align: center; color: #fff; font-family: var(--font-bold); font-size: 16px; }
+  .intro { max-width: 880px; margin: 40px auto 6px; text-align: center; font-family: var(--font-bold); font-size: 20px; line-height: 1.35; }
+  .rule { width: 885px; max-width: 100%; margin: 0 auto; border: 0; border-top: 2px solid var(--green); }
+
+  .groups { padding: 58px 20px 60px; }
+  .two-col { display: grid; grid-template-columns: 446px 446px; justify-content: center; gap: 0 34px; }
+  .group-title { font-family: var(--font-bold); font-size: 36px; line-height: 1.2; text-align: center; text-decoration: underline; text-underline-offset: 6px; text-decoration-thickness: 2px; margin-bottom: 28px; }
+  .list-cards { display: flex; flex-direction: column; gap: 30px; }
+  .lcard { display: grid; grid-template-columns: 158px 1fr; height: 158px; text-decoration: none; color: #fff; }
+  .lcard .thumb { background: #fff; border: 1px solid #e6e6e6; display: flex; align-items: center; justify-content: center; overflow: hidden; }
+  .lcard .thumb img, .gcard .thumb img { width: 100%; height: 100%; object-fit: contain; }
+  .lcard .ttl { background: var(--green); padding: 22px 24px; font-family: var(--font-bold); font-size: 22px; line-height: 1.3; display: -webkit-box; -webkit-line-clamp: 3; -webkit-box-orient: vertical; overflow: hidden; }
+  .lcard:hover .ttl, .gcard:hover { background: var(--green-dark); }
+
+  .expand { margin-top: 90px; }
+  .grid-cards { display: grid; grid-template-columns: repeat(3, 300px); justify-content: center; gap: 15px; }
+  .gcard { background: var(--green); color: #fff; text-decoration: none; height: 184px; padding: 22px 18px; display: grid; grid-template-columns: 1fr 80px; gap: 12px; align-items: start; }
+  .gcard .ttl { font-family: var(--font-bold); font-size: 22px; line-height: 1.3; display: -webkit-box; -webkit-line-clamp: 3; -webkit-box-orient: vertical; overflow: hidden; }
+  .gcard .thumb { width: 80px; height: 80px; display: block; }
+
+  @media (max-width: 1000px) {
+    .video-row { grid-template-columns: 1fr 1fr; gap: 20px; }
+    .two-col { grid-template-columns: 1fr 1fr; gap: 30px; }
+    .grid-cards { grid-template-columns: repeat(3, 1fr); }
+  }
+  @media (max-width: 900px) {
+    .video-row { grid-template-columns: 1fr; }
+    .video-empty { display: none; }
+    .two-col { grid-template-columns: 1fr; gap: 50px; }
+    .grid-cards { grid-template-columns: repeat(2, 1fr); }
+    .group-title { font-size: 28px; }
+    .expand { margin-top: 50px; }
+    .ri-heading { font-size: 28px; letter-spacing: 0.35em; }
+  }
+  @media (max-width: 600px) {
+    .lcard { grid-template-columns: 110px 1fr; height: auto; min-height: 110px; }
+    .lcard .ttl { font-size: 18px; padding: 14px 16px; }
+    .grid-cards { grid-template-columns: 1fr; }
+    .gcard { height: auto; min-height: 140px; }
+    .intro { font-size: 17px; }
+    .ri-heading { font-size: 22px; letter-spacing: 0.25em; }
+  }
+</style>

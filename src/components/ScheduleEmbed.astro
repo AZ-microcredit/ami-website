@@ -1,0 +1,45 @@
+---
+/**
+ * Embedded scheduling section: heading + note + inline Calendly widget.
+ * Used as the #schedule section on the consolidated Microloans and Consulting pages
+ * (content from the retired /copy-of-apply-for-a-loan and
+ * /copy-of-schedule-a-consultation pages).
+ */
+import CalendlyWidget from './CalendlyWidget.astro';
+
+interface Props {
+  id?: string;
+  /** Second line, e.g. 'to learn how we can help fund your dreams' */
+  sub: string;
+  /** Full Calendly event-type URL */
+  url: string;
+}
+const { id, sub, url } = Astro.props;
+---
+
+<section class="schedule" id={id}>
+  <h2 class="sched-title">SCHEDULE A TIME</h2>
+  <p class="sched-sub">{sub}</p>
+  <p class="sched-note">If no available times work for you, please contact <a href="mailto:info@azmicrocredit.org">info@azmicrocredit.org</a> so we can coordinate a time!</p>
+
+  <CalendlyWidget url={url} height={760} />
+</section>
+
+<style>
+  .schedule { max-width: var(--content-width); margin: 0 auto; padding: 20px 20px 0; }
+  .sched-title { color: #111; font-family: var(--font-bold); font-size: 50px; line-height: 1.1; letter-spacing: -0.04em; }
+  .sched-sub { margin-top: 6px; color: #39732b; font-family: var(--font-body); font-weight: bold; font-size: clamp(25px, 3.5vw, 40px); line-height: 1.15; }
+  .sched-note { margin-top: 66px; text-align: center; font-family: var(--font-body); font-size: 20px; line-height: 1.4; }
+  .sched-note a { color: inherit; }
+
+  @media (max-width: 900px) {
+    .sched-title { font-size: 36px; }
+    .sched-sub { font-size: 26px; }
+    .sched-note { margin-top: 36px; font-size: 18px; }
+  }
+  @media (max-width: 600px) {
+    .sched-title { font-size: 28px; }
+    .sched-sub { font-size: 20px; }
+    .sched-note { font-size: 16px; }
+  }
+</style>

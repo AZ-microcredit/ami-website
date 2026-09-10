@@ -4,6 +4,9 @@ import PlusBand from '../components/PlusBand.astro';
 import ServiceIntro from '../components/ServiceIntro.astro';
 import PartnerBox from '../components/PartnerBox.astro';
 import CollaborateForm from '../components/CollaborateForm.astro';
+import TeamSection from '../components/sections/TeamSection.astro';
+import BoardSection from '../components/sections/BoardSection.astro';
+import NewsSection from '../components/sections/NewsSection.astro';
 
 const partners = [
   { name: 'FABRIC Tempe', image: '/media/760f7c_01992304a85546a9b96fe3cd88986473.png', href: 'https://www.fabrictempe.com/' },
@@ -15,8 +18,8 @@ const partners = [
 ];
 ---
 
-<Base title="Arizona Microcredit Initiative | ABOUT US" description="Our mission is to empower local entrepreneurs through education, consulting, and competitive small business loans.">
-  <ServiceIntro label="About AMI" title="Local roots.|Shared ambition." text="Since 2011, we’ve helped entrepreneurs in Greater Phoenix build toward financial self-sufficiency. Small businesses make our communities stronger. We’re here to help them thrive." image="/media/ami-community.jpg" alt="AMI community members at a local pitch competition" href="/meet-the-team" cta="Meet our team" />
+<Base title="Arizona Microcredit Initiative | ABOUT US" description="Our mission is to empower local entrepreneurs through education, consulting, and competitive small business loans. Meet our team, board of advisors, and AMI in the news.">
+  <ServiceIntro label="About AMI" title="Local roots.|Shared ambition." text="Since 2011, we’ve helped entrepreneurs in Greater Phoenix build toward financial self-sufficiency. Small businesses make our communities stronger. We’re here to help them thrive." image="/media/ami-community.jpg" alt="AMI community members at a local pitch competition" href="#meet-the-team" cta="Meet our team" />
 
   <section class="about">
     <div class="about-inner">
@@ -29,6 +32,12 @@ const partners = [
       <div class="contact-card"><p>LET’S BUILD SOMETHING TOGETHER</p><h2>Your next step<br/>starts with hello.</h2><a class="btn btn-green" href="mailto:info@azmicrocredit.org">Email the AMI team ↗</a></div>
     </div>
   </section>
+
+  <TeamSection id="meet-the-team" />
+
+  <BoardSection id="board-of-advisors" />
+
+  <NewsSection id="in-the-news" />
 
   <PlusBand tag="h2" title="SUPPORT OUR MISSION" subtitle="Together we can empower entrepreneurs in Phoenix" />
 
@@ -63,17 +72,6 @@ const partners = [
   .about-text { padding-top: 6px; text-align: right; font-family: var(--font-avenir-light); font-size: 19px; line-height: 1.6; color: var(--black); }
   .about-text p + p { margin-top: 30px; }
 
-  .contact-form { display: flex; flex-direction: column; }
-  .form-head { position: relative; background: var(--green); color: var(--white); height: 71px; display: flex; align-items: center; padding-left: 10px; margin-bottom: 14px; }
-  .form-head h2 { font-family: var(--font-avenir-heavy); font-size: 30px; color: var(--white); }
-  .form-head .fold { position: absolute; right: 0; bottom: -14px; width: 0; height: 0; border-top: 14px solid #3f8a2c; border-right: 14px solid transparent; }
-  .contact-form input, .contact-form textarea { width: 480px; max-width: 100%; height: 32px; margin-bottom: 11px; border: 2px solid var(--green); background: transparent; font-family: var(--font-avenir-light); font-size: 14px; padding: 4px 8px; color: var(--black); border-radius: 0; }
-  .contact-form textarea { height: 120px; margin-top: 4px; resize: none; }
-  .contact-form input::placeholder, .contact-form textarea::placeholder { color: #333; opacity: 1; }
-  .contact-form button { align-self: flex-end; margin-right: 20px; background: var(--green); color: var(--white); border: 0; font-family: var(--font-avenir-light); font-size: 14px; padding: 6px 8px; cursor: pointer; }
-  .contact-form button:hover { background: var(--green-dark); }
-  .sent { font-family: var(--font-body); font-size: 14px; color: #68b04d; }
-
   .letter { background: #fafafa; min-height: 489px; padding: 82px 20px 40px; text-align: center; }
   .letter h3 { font-family: var(--font-avenir-heavy); font-size: 28px; line-height: 1.4; }
   .letter hr { width: 302px; max-width: 100%; margin: 2px auto 20px; border: 0; border-top: 4px solid var(--black); }
@@ -87,7 +85,6 @@ const partners = [
     .photo-strip { height: 50vw; min-height: 220px; }
     .about-inner, .community-inner { grid-template-columns: 1fr; }
     .about-text { text-align: left; }
-    .contact-form input, .contact-form textarea { width: 100%; }
     .letter { padding: 50px 20px 40px; }
     .letter p { font-size: 18px; }
     .community { min-height: 0; padding: 30px 20px 50px; }

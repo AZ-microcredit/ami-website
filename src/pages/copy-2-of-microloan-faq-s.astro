@@ -1,4 +1,7 @@
 ---
-// Retired program: preserve old bookmarks without promoting a discontinued service.
-return Astro.redirect('/#support', 301);
+// Retired page. Content now lives on the consolidated family page; keep this URL
+// working via a redirect stub (meta refresh + canonical).
+import Redirect from '../layouts/Redirect.astro';
 ---
+
+<Redirect target="/copy-of-loans#faq" label="Microloan FAQ's" />

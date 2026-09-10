@@ -1,8 +1,11 @@
 ---
 import { nav, social } from '../data/nav.js';
-const current = Astro.url.pathname.replace(/\/$/, '') || '/';
+// build.format 'file' makes pathname end in .html on static builds; normalize to the clean slug.
+const current = Astro.url.pathname.replace(/\.html$/, '').replace(/\/$/, '') || '/';
+// Child hrefs carry #anchors; Astro.url.pathname never includes the hash, so compare paths only.
+const pathOf = (href) => href.split('#')[0];
 const isActive = (item) =>
-  item.href === current || item.children?.some((c) => c.href === current);
+  pathOf(item.href) === current || item.children?.some((c) => pathOf(c.href) === current);
 ---
 
 <header class="site-header">
@@ -23,7 +26,7 @@ const isActive = (item) =>
             {item.children.length > 0 && (
               <ul class="dropdown">
                 {item.children.map((c) => (
-                  <li><a href={c.href} class:list={{ active: c.href === current }}>{c.label}</a></li>
+                  <li><a href={c.href} class:list={{ active: pathOf(c.href) === current }}>{c.label}</a></li>
                 ))}
               </ul>
             )}
@@ -32,7 +35,7 @@ const isActive = (item) =>
       </ul>
     </nav>
 
-    <a class="header-cta" href="/copy-of-schedule-a-consultation"><span class="cta-desktop">Book a free consultation</span><span class="cta-mobile">Book a free call</span><span aria-hidden="true">↗</span></a>
+    <a class="header-cta" href="/copy-2-of-consulting#schedule"><span class="cta-desktop">Book a free consultation</span><span class="cta-mobile">Book a free call</span><span aria-hidden="true">↗</span></a>
     <div class="social">
       <a href={social.facebook} target="_blank" rel="noopener"><img src="/media/4057345bcf57474b96976284050c00df.png" alt="Facebook - Black Circle" width="28" height="28" /></a>
       <a href={social.instagram} target="_blank" rel="noopener"><img src="/media/e1aa082f7c0747168d9cf43e77046142.png" alt="Instagram - Black Circle" width="28" height="28" /></a>
@@ -66,12 +69,23 @@ const isActive = (item) =>
 <script>
   const toggle = document.querySelector('.menu-toggle');
   const mobile = document.getElementById('mobile-nav');
+  const closeMenu = () => {
+    toggle?.setAttribute('aria-expanded', 'false');
+    toggle?.setAttribute('aria-label', 'Open menu');
+    if (mobile) mobile.hidden = true;
+    document.body.classList.remove('nav-open');
+  };
   toggle?.addEventListener('click', () => {
     const open = toggle.getAttribute('aria-expanded') === 'true';
-    toggle.setAttribute('aria-expanded', String(!open));
-    toggle.setAttribute('aria-label', open ? 'Open menu' : 'Close menu');
-    if (mobile) mobile.hidden = open;
-    document.body.classList.toggle('nav-open', !open);
+    if (open) { closeMenu(); return; }
+    toggle.setAttribute('aria-expanded', 'true');
+    toggle.setAttribute('aria-label', 'Close menu');
+    if (mobile) mobile.hidden = false;
+    document.body.classList.add('nav-open');
+  });
+  // Tapping any link in the mobile menu (parent or section anchor) closes it.
+  mobile?.addEventListener('click', (e) => {
+    if (e.target instanceof Element && e.target.closest('a')) closeMenu();
   });
 </script>
 
@@ -106,7 +120,8 @@ const isActive = (item) =>
     color: var(--black);
     white-space: nowrap;
   }
-  .nav-item > a:hover, .nav-item.active > a { color: var(--green-dark); }
+  .nav-item > a:hover { color: var(--green-dark); }
+  .nav-item.active > a { color: var(--green-dark); text-decoration: underline; text-underline-offset: 6px; text-decoration-thickness: 2px; }
 
   .dropdown {
     position: absolute;

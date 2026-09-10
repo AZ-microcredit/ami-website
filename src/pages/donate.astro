@@ -1,11 +1,7 @@
 ---
-import Base from '../layouts/Base.astro';
-import SupportMission from '../components/SupportMission.astro';
+// Retired page. Content now lives on the consolidated family page; keep this URL
+// working via a redirect stub (meta refresh + canonical).
+import Redirect from '../layouts/Redirect.astro';
 ---
 
-<Base
-  title="Arizona Microcredit Initiative | ABOUT US"
-  description="Our mission is to empower local entrepreneurs through education and small loans and with your help, we can accomplish it together."
->
-  <SupportMission />
-</Base>
+<Redirect target="/copy-of-donate" label="Support AMI" />

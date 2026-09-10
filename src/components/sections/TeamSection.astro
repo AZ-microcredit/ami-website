@@ -1,0 +1,125 @@
+---
+/**
+ * Meet the Team section (consolidated into /about-us#meet-the-team).
+ * Content moved verbatim from the retired /meet-the-team page; the photo hero was
+ * replaced with the standard spaced-title section header.
+ */
+interface Props { id?: string }
+const { id } = Astro.props;
+
+// Executive board — names/titles/emails are the visible text on the live page
+// (the live mailto targets are stale, so we link to the shown address).
+const director = { name: 'Catherine Jiang', title: 'Executive Director', email: 'catherine@azmicrocredit.org', image: '/media/760f7c_1ef0478ea640401caceaa858e174fcb0.jpg' };
+const board = [
+  { name: 'Arjun Sudalaimuthu', title: 'Director of Finance', email: 'arjuns@azmicrocredit.org', image: '/media/760f7c_f44e072cd91c49b9bac6435afcdcf99a.jpg' },
+  { name: 'Brendan Salisbury', title: 'Director of Education', email: 'brendan@azmicrocredit.org', image: '/media/760f7c_197e4f2807314ed6864f5a190cbd5a74.jpg' },
+  { name: 'Aarav Dugar', title: 'Director of Consulting', email: 'aarav@azmicrocredit.org', image: '/media/760f7c_11ed9e7eca0648a98476e131201946e2.jpg' },
+  { name: 'Arya Tailor', title: 'Director of Operations', email: 'arya@azmicrocredit.org', image: '/media/760f7c_b2ea127e5daa4454a5fed560a7ddf3f1.jpg' },
+];
+
+// Staff gallery (Wix pro-gallery: 6 columns of 160x205 tiles, captions on hover)
+const staff = [
+  ['Siddharth Mehta', 'Senior Associate', '760f7c_1337c4cc5ca743abbe0c24d8dc2b1877.jpg'],
+  ['Ruby Xia', 'Senior Associate', '760f7c_83599111c89c445792ed94844264b8d8.png'],
+  ['Faizan Yousef', 'Senior Associate', '760f7c_d2b525cefe4a4a7baf21f9779620602a.png'],
+  ['Sam Benividez', 'Senior Associate', '760f7c_3db0064fbe00412eb9df298d29ad678e.jpg'],
+  ['Medha Peddireddi', 'Senior Associate', '760f7c_6ddc743e29c844d3ad3ff236dc7ee1c2.jpg'],
+  ['Brigid Bernoski', 'Senior Associate', '760f7c_72e573429fdd43dc8479799e87dc4378.png'],
+  ['Anya Kannan', 'Senior Associate', '760f7c_de36764b15b24dbaac6295b956e89ec2.jpg'],
+  ['Ryan Meyer', 'Senior Associate', '760f7c_ad300e2d62ef40739c560c0a3966ba9e.png'],
+  ['Colin Franklin', 'Associate', '760f7c_f3a8a6b022224cbaa4633438dc7acc63.jpg'],
+  ['Hannah Hughens', 'Associate', '760f7c_e0fe6be87c384c02b967260d804cec18.jpg'],
+  ['Ignacy Sajek', 'Associate', '760f7c_8f01eaac340d438cad0372f64b9a642c.jpg'],
+  ['Ronak Bhatia', 'Associate', '760f7c_78980234f8914fe6b2c26b94d38cecd3.jpg'],
+  ['Akhil Choda', 'Associate', '760f7c_8a529d3191c0477f934d058a147a20bb.png'],
+  ['Simoni Thakkar', 'Associate', '760f7c_83feb3eda30c46c98b8741daccfebb82.jpg'],
+  ['Zachary Speck', 'Associate', '760f7c_28e40b089bb5470cbf8cda54b061efe6.png'],
+  ['Jacob Batty', 'Associate', '760f7c_dbcd8564f7ce4dee9ae7201695ba1f02.jpg'],
+  ['Rishab Mantri', 'Head of Records and Technology', '760f7c_19c622300fa448029d916ba52c080447.jpg'],
+  ['Kierat Mangat', 'Head of Brand Management', '760f7c_b9f14375248a41b287914fd167467168.jpg'],
+  ['Aanya Jain', 'Head of Internal Development', '760f7c_5ad44d2f7b3a467fbdaa19e3679022cc.jpg'],
+  ['Pablo Navarro', 'Associate', '760f7c_118c4a9c9471461193fd20b5e17c59f6.jpg'],
+  ['Mihir Shrestha', 'Associate', '760f7c_f88204b3e42647689349994c75c4f7b0.jpg'],
+  ['Kate Mitsuda', 'Associate', '760f7c_0c89b2297b3b4b6ebab58fb619c09654.jpg'],
+  ['Atharva Goel', 'Associate', '760f7c_06be2e36746a4675beaf10cd07f84683.jpg'],
+  ['Cyra Khourdepaz', 'Associate', '760f7c_14fc284f82994e819eba31b22ec16800.jpg'],
+  ['Peter Cipra', 'Associate', '760f7c_569e51a2ca6e40a1ab604a84ddad340a.jpg'],
+];
+---
+
+<section class="team-section" id={id}>
+  <h2 class="spaced-title team-heading">MEET THE TEAM</h2>
+  <div class="exec">
+    <h3 class="spaced-title small">EXECUTIVE BOARD</h3>
+    <div class="person-row single">
+      <div class="person">
+        <img src={director.image} alt={director.name} width="200" height="200" />
+        <h4>{director.name}<br /><span class="role">{director.title}</span><br /><a href={`mailto:${director.email}`}>{director.email}</a></h4>
+      </div>
+    </div>
+    <div class="person-row four">
+      {board.map((p) => (
+        <div class="person">
+          <img src={p.image} alt={p.name} width="200" height="200" />
+          <h4>{p.name}<br /><span class="role">{p.title}</span><br /><a href={`mailto:${p.email}`}>{p.email}</a></h4>
+        </div>
+      ))}
+    </div>
+  </div>
+
+  <div class="staff">
+    <h3 class="spaced-title small">STAFF</h3>
+    <ul class="gallery">
+      {staff.map(([name, role, file]) => (
+        <li>
+          <figure>
+            <img src={`/media/${file}`} alt={name} width="160" height="205" />
+            <figcaption><span class="name">{name}</span><span class="role">{role}</span></figcaption>
+          </figure>
+        </li>
+      ))}
+    </ul>
+  </div>
+</section>
+
+<style>
+  .team-section { padding-top: 34px; }
+  .team-heading { font-size: 40px; letter-spacing: 0.5em; margin-bottom: 10px; }
+  .exec { max-width: var(--content-width); margin: 0 auto; padding: 24px 20px 40px; }
+  .exec .spaced-title { margin-bottom: 30px; }
+  .person-row { display: grid; gap: 20px; justify-items: center; }
+  .person-row.single { grid-template-columns: 1fr; }
+  .person-row.four { grid-template-columns: repeat(4, 1fr); margin-top: 10px; }
+  .person { text-align: center; }
+  .person img { width: 200px; height: 200px; border-radius: 50%; object-fit: cover; margin: 0 auto 6px; }
+  .person h4 { font-family: var(--font-bold); font-size: 22px; line-height: 1.25; }
+  .person .role { font-family: var(--font-body); font-size: 18px; }
+  .person-row.four .role { font-size: 17px; }
+  .person h4 a { font-family: var(--font-body); font-size: 14px; color: inherit; }
+
+  .staff { max-width: var(--content-width); margin: 0 auto; padding: 30px 0 70px; }
+  .staff .spaced-title { margin-bottom: 26px; }
+  .gallery { display: grid; grid-template-columns: repeat(6, 1fr); gap: 3px 4px; }
+  .gallery figure { position: relative; margin: 0; overflow: hidden; }
+  .gallery img { width: 100%; aspect-ratio: 160 / 205; object-fit: cover; object-position: top; display: block; }
+  .gallery figcaption { position: absolute; inset: 0; display: flex; flex-direction: column; justify-content: flex-end; align-items: center; text-align: center; padding: 12px 8px; color: var(--white); background: linear-gradient(to top, rgba(0,0,0,.65), rgba(0,0,0,0) 60%); opacity: 0; transition: opacity .2s; }
+  .gallery figure:hover figcaption, .gallery figure:focus-within figcaption { opacity: 1; }
+  .gallery .name { font-family: var(--font-bold); font-size: 15px; }
+  .gallery .role { font-family: var(--font-body); font-size: 13px; }
+
+  @media (max-width: 900px) {
+    .team-heading { font-size: 28px; letter-spacing: 0.35em; }
+    .person-row.four { grid-template-columns: repeat(2, 1fr); gap: 30px 16px; }
+    .gallery { grid-template-columns: repeat(4, 1fr); }
+    .staff { padding: 30px 12px 50px; }
+  }
+  @media (max-width: 600px) {
+    .team-heading { font-size: 22px; letter-spacing: 0.25em; }
+    .person img { width: 160px; height: 160px; }
+    .person h4 { font-size: 19px; }
+    .person .role, .person-row.four .role { font-size: 15px; }
+    .person h4 a { font-size: 13px; word-break: break-all; }
+    .gallery { grid-template-columns: repeat(3, 1fr); }
+    .gallery figcaption { opacity: 1; }
+  }
+</style>
