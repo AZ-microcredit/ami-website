@@ -1,4 +1,5 @@
 ---
+import Icon from './Icon.astro';
 import { nav, social } from '../data/nav.js';
 // build.format 'file' makes pathname end in .html on static builds; normalize to the clean slug.
 const current = Astro.url.pathname.replace(/\.html$/, '').replace(/\/$/, '') || '/';
@@ -28,7 +29,7 @@ const isActive = (item) =>
       </ul>
     </nav>
 
-    <a class="header-cta" href="/copy-2-of-consulting#schedule"><span class="cta-desktop">Book a Free Consultation</span><span class="cta-mobile">Book a Free Consultation</span><span aria-hidden="true">↗</span></a>
+    <a class="header-cta" href="/copy-2-of-consulting#schedule"><span class="cta-desktop">Book a Free Consultation</span><span class="cta-mobile">Book a Free Consultation</span><span aria-hidden="true"><Icon name="arrow-up-right" /></span></a>
     <div class="social">
       <a href={social.facebook} target="_blank" rel="noopener"><img src="/media/4057345bcf57474b96976284050c00df.png" alt="Facebook - Black Circle" width="28" height="28" /></a>
       <a href={social.instagram} target="_blank" rel="noopener"><img src="/media/e1aa082f7c0747168d9cf43e77046142.png" alt="Instagram - Black Circle" width="28" height="28" /></a>
@@ -77,7 +78,7 @@ const isActive = (item) =>
 
 <style>
   .header-inner > .social { display:none; }
-  .header-cta { display:flex; gap:18px; align-items:center; padding:9px 14px; background:var(--black); color:#fff; text-decoration:none; font:700 11px Helvetica,Arial,sans-serif; white-space:nowrap; }
+  .header-cta { display:flex; gap:18px; align-items:center; padding:9px 14px; background:var(--black); color:#fff; text-decoration:none; font:700 11px 'AMI Sans',sans-serif; white-space:nowrap; }
  .header-cta>span[aria-hidden]{font-size:16px}.cta-mobile{display:none} .header-cta:hover{background:#333}
  .nav-item>a{text-transform:capitalize}
 

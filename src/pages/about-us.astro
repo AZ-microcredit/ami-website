@@ -1,4 +1,5 @@
 ---
+import Icon from '../components/Icon.astro';
 import Base from '../layouts/Base.astro';
 import CommunityWindow from '../components/CommunityWindow.astro';
 import PlusBand from '../components/PlusBand.astro';
@@ -29,7 +30,7 @@ const partners = [
         <p>As a 501(c)(3) nonprofit, we are dedicated to that original vision by providing underserved entrepreneurs with access to business instruction and capital.</p>
       </div>
 
-      <div class="contact-card"><p>LET’S BUILD SOMETHING TOGETHER</p><h2>Your next step<br/>starts with hello.</h2><a class="btn btn-green" href="mailto:info@azmicrocredit.org">Email the AMI team ↗</a></div>
+      <div class="contact-card"><p>LET’S BUILD SOMETHING TOGETHER</p><h2>Your next step<br/>starts with hello.</h2><a class="btn btn-green" href="mailto:info@azmicrocredit.org">Email the AMI team <Icon name="arrow-up-right" /></a></div>
     </div>
   </section>
 
@@ -51,7 +52,7 @@ const partners = [
 </Base>
 
 <style>
- .contact-card{padding:40px;background:#111;color:#fff}.contact-card>p{font:10px Helvetica,Arial,sans-serif;letter-spacing:.1em}.contact-card h2{font:40px/1.1 Helvetica,Arial,sans-serif;margin:35px 0}.about .about-text{text-align:left}.about{padding-top:70px!important;padding-bottom:70px!important}.about-inner{grid-template-columns:1fr 1fr!important;gap:60px!important}.photo-strip.blur img{filter:grayscale(1)}
+ .contact-card{padding:40px;background:#111;color:#fff}.contact-card>p{font:10px 'AMI Sans',sans-serif;letter-spacing:.1em}.contact-card h2{font:40px/1.1 'AMI Sans',sans-serif;margin:35px 0}.about .about-text{text-align:left}.about{padding-top:70px!important;padding-bottom:70px!important}.about-inner{grid-template-columns:1fr 1fr!important;gap:60px!important}.photo-strip.blur img{filter:grayscale(1)}
  @media(max-width:700px){.about-inner{grid-template-columns:1fr!important;gap:30px!important}.contact-card{padding:28px}}
 
   .photo-strip { height: 370px; overflow: hidden; background: #1a2c40; }
@@ -86,5 +87,5 @@ const partners = [
     .letter h3 { font-size: 22px; }
     .letter p { font-size: 16px; }
   }
-.about-gathering{margin:0;padding:60px 4.2vw;background:#f2f2f2}.about-gathering img{width:100%;max-height:650px;object-fit:cover;filter:grayscale(1)}.about-gathering figcaption{font:12px/1.7 Helvetica,Arial,sans-serif;color:#555;padding-top:20px}@media(max-width:600px){.about-gathering{padding:40px 22px}}
+.about-gathering{margin:0;padding:60px 4.2vw;background:#f2f2f2}.about-gathering img{width:100%;max-height:650px;object-fit:cover;filter:grayscale(1)}.about-gathering figcaption{font:12px/1.7 'AMI Sans',sans-serif;color:#555;padding-top:20px}@media(max-width:600px){.about-gathering{padding:40px 22px}}
 </style>

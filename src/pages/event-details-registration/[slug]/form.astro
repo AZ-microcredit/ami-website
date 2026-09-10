@@ -1,4 +1,5 @@
 ---
+import Icon from '../../../components/Icon.astro';
 import Base from '../../../layouts/Base.astro';
 import { events } from '../../../data/events.js';
 
@@ -12,7 +13,7 @@ const backHref = `/event-details-registration/${e.slug}`;
 
 <Base title={`RSVP: ${e.title} | Arizona Microcredit Initiative`} description={`Register for ${e.title}.`}>
   <section class="rsvp">
-    <a class="back" href={backHref}>&larr; {e.title}</a>
+    <a class="back" href={backHref}><Icon name="arrow-left" /> {e.title}</a>
     <h1>{e.title}</h1>
     <p class="meta"><span>{e.shortDate}</span><span class="sep">|</span><span>{e.shortLocation}</span></p>
 

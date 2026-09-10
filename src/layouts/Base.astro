@@ -24,6 +24,8 @@ const canonical = new URL(canonicalPath, Astro.site ?? 'https://www.azmicrocredi
 <html lang="en">
   <head>
     <meta charset="utf-8" />
+    <link rel="preload" href="/fonts/arimo-latin-wght-normal.woff2" as="font" type="font/woff2" crossorigin />
+    <link rel="preload" href="/fonts/tinos-latin-400-normal.woff2" as="font" type="font/woff2" crossorigin />
     <meta name="viewport" content="width=device-width, initial-scale=1" />
     <title>{title}</title>
     <meta name="description" content={description} />

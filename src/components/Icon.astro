@@ -1,0 +1,16 @@
+---
+interface Props { name?: string }
+const {name='arrow-up-right'}=Astro.props;
+const paths:Record<string,string>={
+ 'arrow-up-right':'M5 19 19 5M5 5h14v14',
+ 'arrow-right':'M4 12h16M13 5l7 7-7 7',
+ 'arrow-left':'M20 12H4M11 5l-7 7 7 7',
+ 'arrow-down':'M12 4v16M5 13l7 7 7-7',
+ 'arrow-up':'M12 20V4M5 11l7-7 7 7',
+ 'arrows-horizontal':'M3 12h18M8 7l-5 5 5 5M16 7l5 5-5 5',
+ 'spark':'M12 2v20M2 12h20M5 5l14 14M5 19 19 5',
+ 'plus':'M12 4v16M4 12h16',
+ 'close':'M5 5l14 14M5 19 19 5'
+};
+---
+<svg class="ami-icon" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" width="24" height="24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" focusable="false"><path d={paths[name]||paths['arrow-up-right']}/></svg>
