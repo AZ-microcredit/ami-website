@@ -151,15 +151,26 @@ export function createSmoother(lerp = 0.18): Smoother {
   };
 }
 
+/** Elements that can never receive an anchor jump meaningfully. */
+function isContentElement(el: Element): el is HTMLElement {
+  return el instanceof HTMLElement && !/^(SCRIPT|STYLE|LINK|TEMPLATE|NOSCRIPT)$/.test(el.tagName);
+}
+
 /**
- * The element a keyboard skip link should jump to: the first content after
- * the scene's outermost local container. Returns null when nothing follows.
+ * The element a keyboard skip link should jump to: the first real content
+ * after the scene's outermost local container. Astro injects script/style
+ * siblings between sections, so non-content tags are skipped. Returns null
+ * when nothing follows.
  */
 export function skipTargetFor(root: HTMLElement): HTMLElement | null {
   let el: HTMLElement | null = root;
-  while (el && !el.nextElementSibling && el.tagName !== 'MAIN') el = el.parentElement;
-  const target = el?.nextElementSibling ?? null;
-  return target instanceof HTMLElement ? target : null;
+  while (el && el.tagName !== 'MAIN') {
+    let sib = el.nextElementSibling;
+    while (sib && !isContentElement(sib)) sib = sib.nextElementSibling;
+    if (sib) return sib;
+    el = el.parentElement;
+  }
+  return null;
 }
 
 /**
