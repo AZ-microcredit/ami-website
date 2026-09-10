@@ -1,21 +1,28 @@
 <script>
- const media = window.matchMedia('(prefers-reduced-motion: reduce)');
+ import { createScrollScene, reducedMotion, viewportHeight } from '../scripts/motion/engine';
  const items = [...document.querySelectorAll<HTMLElement>('[data-parallax]')];
- let frame = 0;
- function update() {
-  frame = 0;
-  items.forEach(item => {
-   if (media.matches || window.innerWidth < 700) { item.style.setProperty('--drift','0px'); return; }
-   const rect = item.parentElement!.getBoundingClientRect();
-   if (rect.bottom < -150 || rect.top > innerHeight + 150) return;
-   const distance = (innerHeight / 2 - rect.top - rect.height / 2) * Number(item.dataset.parallax || .08);
-   item.style.setProperty('--drift',`${Math.max(-55,Math.min(55,distance))}px`);
+ const caps = new WeakMap<HTMLElement, number>();
+ items.forEach(item => {
+  const holder = item.parentElement as HTMLElement;
+  if (!holder) return;
+  createScrollScene({
+   root: holder,
+   measure: () => {
+    // Never drift past the overscan the 1.12 scale creates - no blank edges.
+    caps.set(item, Math.min(55, Math.max(12, Math.floor(item.offsetHeight * 0.06))));
+   },
+   render: () => {
+    if (reducedMotion()) { item.style.setProperty('--drift', '0px'); return; }
+    const rect = holder.getBoundingClientRect();
+    const vh = viewportHeight();
+    const cap = caps.get(item) ?? 55;
+    const distance = (vh / 2 - rect.top - rect.height / 2) * Number(item.dataset.parallax || .08);
+    item.style.setProperty('--drift', `${Math.max(-cap, Math.min(cap, distance))}px`);
+   },
   });
- }
- const queue = () => {if (!frame) frame=requestAnimationFrame(update)};
- window.addEventListener('scroll',queue,{passive:true});window.addEventListener('resize',queue);media.addEventListener('change',queue);update();
+ });
 </script>
 <style is:global>
 [data-parallax]{transform:translate3d(0,var(--drift,0px),0) scale(1.12)}
-@media(prefers-reduced-motion:reduce),(max-width:699px){[data-parallax]{transform:none}}
+@media(prefers-reduced-motion:reduce){[data-parallax]{transform:none}}
 </style>
