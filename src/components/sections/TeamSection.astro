@@ -3,21 +3,32 @@
  * Meet the Team section (consolidated into /about-us#meet-the-team).
  * Content moved verbatim from the retired /meet-the-team page; the photo hero was
  * replaced with the standard spaced-title section header.
+ *
+ * Card design (Executive Board + Staff) follows Dorm Room Fund's "Our Team" partner
+ * cards: https://www.dormroomfund.com/our-team — grayscale photo, name + title, and
+ * a solid-color panel that wipes in diagonally from the bottom-left corner on hover
+ * (CSS ::before, translate(-105%,105%) -> translate(0,0)). Recolored to AMI's
+ * bright --green instead of DRF's orange; everything else (fonts, base colors) is
+ * unchanged from the rest of the site.
  */
 interface Props { id?: string }
 const { id } = Astro.props;
 
 // Executive board — names/titles/emails are the visible text on the live page
 // (the live mailto targets are stale, so we link to the shown address).
-const director = { name: 'Catherine Jiang', title: 'Executive Director', email: 'catherine@azmicrocredit.org', image: '/media/760f7c_1ef0478ea640401caceaa858e174fcb0.jpg' };
+// The Executive Director's card stays the same neutral gray as everyone else's
+// (no pre-filled wipe); she's set apart with a green accent ring + "ED" badge
+// on her photo instead.
+const director = { name: 'Catherine Jiang', title: 'Executive Director', email: 'catherine@azmicrocredit.org', image: '/media/760f7c_1ef0478ea640401caceaa858e174fcb0.jpg', lead: true };
 const board = [
+  director,
   { name: 'Arjun Sudalaimuthu', title: 'Director of Finance', email: 'arjuns@azmicrocredit.org', image: '/media/760f7c_f44e072cd91c49b9bac6435afcdcf99a.jpg' },
   { name: 'Brendan Salisbury', title: 'Director of Education', email: 'brendan@azmicrocredit.org', image: '/media/760f7c_197e4f2807314ed6864f5a190cbd5a74.jpg' },
   { name: 'Aarav Dugar', title: 'Director of Consulting', email: 'aarav@azmicrocredit.org', image: '/media/760f7c_11ed9e7eca0648a98476e131201946e2.jpg' },
   { name: 'Arya Tailor', title: 'Director of Operations', email: 'arya@azmicrocredit.org', image: '/media/760f7c_b2ea127e5daa4454a5fed560a7ddf3f1.jpg' },
 ];
 
-// Staff gallery (Wix pro-gallery: 6 columns of 160x205 tiles, captions on hover)
+// Staff (compact card grid — same card design/animation as the board, smaller/denser)
 const staff = [
   ['Siddharth Mehta', 'Senior Associate', '760f7c_1337c4cc5ca743abbe0c24d8dc2b1877.jpg'],
   ['Ruby Xia', 'Senior Associate', '760f7c_83599111c89c445792ed94844264b8d8.png'],
@@ -49,19 +60,20 @@ const staff = [
 
 <section class="team-section" id={id}>
   <h2 class="spaced-title team-heading">MEET THE TEAM</h2>
+
   <div class="exec">
     <h3 class="spaced-title small">EXECUTIVE BOARD</h3>
-    <div class="person-row single">
-      <div class="person">
-        <img src={director.image} alt={director.name} width="200" height="200" />
-        <h4>{director.name}<br /><span class="role">{director.title}</span><br /><a href={`mailto:${director.email}`}>{director.email}</a></h4>
-      </div>
-    </div>
-    <div class="person-row four">
+    <div class="card-grid exec-grid">
       {board.map((p) => (
-        <div class="person">
-          <img src={p.image} alt={p.name} width="200" height="200" />
-          <h4>{p.name}<br /><span class="role">{p.title}</span><br /><a href={`mailto:${p.email}`}>{p.email}</a></h4>
+        <div class:list={['person-card', { 'is-lead': p.lead }]}>
+          <div class="person-card__avatar-wrap">
+            <img class="person-card__avatar" src={p.image} alt={p.name} width="200" height="200" loading="lazy" />
+          </div>
+          <div class="person-card__info">
+            <p class="person-card__name">{p.name}</p>
+            <p class="person-card__title">{p.title}</p>
+            <a class="person-card__email" href={`mailto:${p.email}`}>{p.email}</a>
+          </div>
         </div>
       ))}
     </div>
@@ -69,57 +81,141 @@ const staff = [
 
   <div class="staff">
     <h3 class="spaced-title small">STAFF</h3>
-    <ul class="gallery">
+    <div class="card-grid staff-grid">
       {staff.map(([name, role, file]) => (
-        <li>
-          <figure>
-            <img src={`/media/${file}`} alt={name} width="160" height="205" />
-            <figcaption><span class="name">{name}</span><span class="role">{role}</span></figcaption>
-          </figure>
-        </li>
+        <div class="person-card person-card--compact">
+          <div class="person-card__avatar-wrap">
+            <img class="person-card__avatar" src={`/media/${file}`} alt={name} width="160" height="160" loading="lazy" />
+          </div>
+          <div class="person-card__info">
+            <p class="person-card__name">{name}</p>
+            <p class="person-card__title">{role}</p>
+          </div>
+        </div>
       ))}
-    </ul>
+    </div>
   </div>
 </section>
 
 <style>
   .team-section { padding-top: 34px; }
   .team-heading { font-size: 40px; letter-spacing: 0.5em; margin-bottom: 10px; }
-  .exec { max-width: var(--content-width); margin: 0 auto; padding: 24px 20px 40px; }
-  .exec .spaced-title { margin-bottom: 30px; }
-  .person-row { display: grid; gap: 20px; justify-items: center; }
-  .person-row.single { grid-template-columns: 1fr; }
-  .person-row.four { grid-template-columns: repeat(4, 1fr); margin-top: 10px; }
-  .person { text-align: center; }
-  .person img { width: 200px; height: 200px; border-radius: 50%; object-fit: cover; margin: 0 auto 6px; }
-  .person h4 { font-family: var(--font-bold); font-size: 22px; line-height: 1.25; }
-  .person .role { font-family: var(--font-body); font-size: 18px; }
-  .person-row.four .role { font-size: 17px; }
-  .person h4 a { font-family: var(--font-body); font-size: 14px; color: inherit; }
 
-  .staff { max-width: var(--content-width); margin: 0 auto; padding: 30px 0 70px; }
-  .staff .spaced-title { margin-bottom: 26px; }
-  .gallery { display: grid; grid-template-columns: repeat(6, 1fr); gap: 3px 4px; }
-  .gallery figure { position: relative; margin: 0; overflow: hidden; }
-  .gallery img { width: 100%; aspect-ratio: 160 / 205; object-fit: cover; object-position: top; display: block; }
-  .gallery figcaption { position: absolute; inset: 0; display: flex; flex-direction: column; justify-content: flex-end; align-items: center; text-align: center; padding: 12px 8px; color: var(--white); background: linear-gradient(to top, rgba(0,0,0,.65), rgba(0,0,0,0) 60%); opacity: 0; transition: opacity .2s; }
-  .gallery figure:hover figcaption, .gallery figure:focus-within figcaption { opacity: 1; }
-  .gallery .name { font-family: var(--font-bold); font-size: 15px; }
-  .gallery .role { font-family: var(--font-body); font-size: 13px; }
+  .exec, .staff { max-width: 1280px; margin: 0 auto; padding: 24px 32px 40px; }
+  .exec .spaced-title, .staff .spaced-title { margin-bottom: 26px; }
+
+  .card-grid { display: grid; gap: 20px; }
+  .exec-grid { grid-template-columns: repeat(5, 1fr); }
+  .staff-grid { grid-template-columns: repeat(5, 1fr); gap: 18px; }
+
+  /* ---- Person card: grayscale photo + name/title, color wipe on hover ---- */
+  .person-card {
+    position: relative;
+    isolation: isolate;
+    overflow: hidden;
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+    padding: 12px;
+    border-radius: 10px;
+    background: var(--grey-bg);
+  }
+  .person-card__avatar-wrap {
+    position: relative;
+    width: 100%;
+    aspect-ratio: 1 / 1;
+    overflow: hidden;
+    border-radius: 6px;
+    background: var(--grey-bg);
+  }
+  .person-card__avatar {
+    position: absolute;
+    inset: 0;
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    object-position: top;
+    filter: grayscale(1) contrast(1.03);
+    transition: filter 0.5s cubic-bezier(0.22, 1, 0.36, 1);
+  }
+  .person-card__info { display: flex; flex-direction: column; gap: 2px; min-width: 0; }
+  .person-card__name {
+    font-family: var(--font-bold);
+    font-weight: 700;
+    font-size: 16px;
+    line-height: 1.25;
+    color: var(--black);
+    transition: color 0.5s cubic-bezier(0.22, 1, 0.36, 1);
+  }
+  .person-card__title {
+    font-family: var(--font-body);
+    font-size: 13px;
+    color: var(--black);
+    transition: color 0.5s cubic-bezier(0.22, 1, 0.36, 1);
+  }
+  .person-card__email {
+    font-family: var(--font-body);
+    font-size: 11px;
+    color: inherit;
+    word-break: break-all;
+    transition: color 0.5s cubic-bezier(0.22, 1, 0.36, 1);
+  }
+
+  /* Color wipe: a full-card panel starts off-card (bottom-left) and slides in on hover,
+     timed to match the photo/text color transitions above so nothing appears to stall
+     mid-way. will-change is applied only while actually hovering/focused (not at rest) —
+     leaving it on ~30 cards permanently promotes that many compositor layers at once,
+     which is what caused the wipe to visibly hang/flicker for a moment after the mouse
+     left a card. */
+  .person-card::before {
+    content: '';
+    position: absolute;
+    inset: 0;
+    z-index: -1;
+    border-radius: inherit;
+    background: var(--green);
+    transform: translate3d(-105%, 105%, 0);
+    transition: transform 0.5s cubic-bezier(0.22, 1, 0.36, 1);
+  }
+  .person-card:hover::before,
+  .person-card:focus-within::before {
+    transform: translate3d(0, 0, 0);
+    will-change: transform;
+  }
+  .person-card:hover .person-card__avatar,
+  .person-card:focus-within .person-card__avatar {
+    filter: grayscale(0);
+  }
+  .person-card:hover .person-card__name,
+  .person-card:hover .person-card__title,
+  .person-card:hover .person-card__email,
+  .person-card:focus-within .person-card__name,
+  .person-card:focus-within .person-card__title,
+  .person-card:focus-within .person-card__email {
+    color: var(--white);
+  }
+
+  /* Executive Director: same neutral card as everyone else, called out with a
+     green ring around the whole card instead of a pre-filled green card. */
+  .person-card.is-lead {
+    outline: 3px solid var(--green);
+    outline-offset: 3px;
+  }
+
+  .person-card--compact .person-card__name { font-size: 13px; }
+  .person-card--compact .person-card__title { font-size: 11px; }
+  .person-card--compact { padding: 8px; gap: 6px; }
 
   @media (max-width: 900px) {
     .team-heading { font-size: 28px; letter-spacing: 0.35em; }
-    .person-row.four { grid-template-columns: repeat(2, 1fr); gap: 30px 16px; }
-    .gallery { grid-template-columns: repeat(4, 1fr); }
-    .staff { padding: 30px 12px 50px; }
+    .exec-grid { grid-template-columns: repeat(2, 1fr); }
+    .staff-grid { grid-template-columns: repeat(4, 1fr); }
+    .exec, .staff { padding: 24px 12px 40px; }
   }
   @media (max-width: 600px) {
     .team-heading { font-size: 22px; letter-spacing: 0.25em; }
-    .person img { width: 160px; height: 160px; }
-    .person h4 { font-size: 19px; }
-    .person .role, .person-row.four .role { font-size: 15px; }
-    .person h4 a { font-size: 13px; word-break: break-all; }
-    .gallery { grid-template-columns: repeat(3, 1fr); }
-    .gallery figcaption { opacity: 1; }
+    .exec-grid { grid-template-columns: repeat(2, 1fr); gap: 12px; }
+    .staff-grid { grid-template-columns: repeat(3, 1fr); gap: 8px; }
+    .person-card__email { font-size: 10px; }
   }
 </style>
