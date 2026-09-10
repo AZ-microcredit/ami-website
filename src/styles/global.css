@@ -18,7 +18,10 @@
 }
 
 *, *::before, *::after { box-sizing: border-box; }
-html { -webkit-text-size-adjust: 100%; scroll-behavior: smooth; }
+html { -webkit-text-size-adjust: 100%; scroll-behavior: smooth;
+  scrollbar-width: none;        /* Firefox: hide page scrollbar, scrolling unchanged */
+  -ms-overflow-style: none; }   /* legacy Edge/IE */
+html::-webkit-scrollbar { display: none; } /* Chrome/Safari: hide page scrollbar, scrolling unchanged */
 body {
   margin: 0;
   font-family: var(--font-body);
