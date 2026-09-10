@@ -38,8 +38,19 @@ import Icon from './Icon.astro';
     root.classList.remove('is-curtain');
     // Measure the panels inside the cinematic layout itself: the page-turn
     // runs whenever both measured panels fit the sticky stage it would use.
+    root.style.removeProperty('--landing-pad-y');
     root.classList.add('is-cinematic');
     const stageBlock=stage.offsetHeight;
+    // Browser chrome can leave a 1366x768 laptop with only ~650px of page
+    // viewport at 100% zoom. Compress only the hero's vertical breathing room,
+    // and only by the measured shortage, before abandoning the page turn.
+    const frontShortage=Math.max(0,front.scrollHeight-stageBlock);
+    if(frontShortage>0){
+     const copy=front.querySelector<HTMLElement>('.opening-copy');
+     const pad=parseFloat(getComputedStyle(copy!).paddingTop);
+     const fittedPad=Math.max(24,pad-Math.ceil(frontShortage/2)-2);
+     root.style.setProperty('--landing-pad-y',`${fittedPad}px`);
+    }
     const fits=front.scrollHeight<=stageBlock+4&&next.scrollHeight<=stageBlock-20;
     overlay=!reducedMotion()&&stageBlock>=420&&fits;
     root.classList.toggle('is-cinematic',overlay);
@@ -67,7 +78,7 @@ import Icon from './Icon.astro';
 </script>
 <style>
 .landing-experience{--turn:0;background:#111;position:relative}.landing-stage{position:relative}.landing-next{background:var(--green);color:#111;padding:55px 5vw;display:flex;flex-direction:column;justify-content:center;gap:28px}.chapter{font:11px/1.6 'AMI Sans',sans-serif;letter-spacing:.12em;text-transform:uppercase}.landing-next h2{font:500 clamp(44px,5.8vw,88px)/.98 'AMI Sans',sans-serif;letter-spacing:-.06em}.landing-next h2>span{color:white}.landing-paths{max-width:1000px}.landing-paths>a{display:flex;gap:25px;align-items:center;text-decoration:none;border-top:1px solid #1115;padding:16px 0;font:400 clamp(23px,2.4vw,38px)/1.1 'AMI Sans',sans-serif;letter-spacing:-.035em}.landing-paths>a:last-child{border-bottom:1px solid #1115}.landing-paths>a>span{font:11px 'AMI Sans',sans-serif;letter-spacing:0}.landing-paths b{margin-left:auto;font-weight:400}.landing-paths a:hover{color:white}.landing-next-bottom{display:flex;align-items:end;justify-content:space-between;gap:25px}.landing-book{display:inline-flex;gap:40px;padding:18px 24px;background:#111;color:white;text-decoration:none;font:14px/1.5 'AMI Sans',sans-serif}.landing-book span{font-size:22px;line-height:1}.landing-next-bottom p{font:16px/1.4 'AMI Serif',serif}.landing-skip{display:none}
-.is-cinematic{height:235vh}.is-cinematic .landing-stage{position:sticky;top:var(--header-height);height:min(820px,calc(100vh - var(--header-height)));height:min(820px,calc(100svh - var(--header-height)));overflow:clip;perspective:1900px;isolation:isolate}.is-cinematic .landing-front{height:100%;transform-origin:left center;transform:translate3d(calc(var(--turn)*-28%),0,calc(var(--turn)*-180px)) rotateY(calc(var(--turn)*12deg));opacity:calc(1 - var(--turn))}.is-cinematic .landing-front :global(.opening){height:100%;min-height:0}.is-cinematic .landing-front :global(.opening-copy){padding:clamp(32px,4vw,64px) 5vw;justify-content:center}.is-cinematic .landing-front :global(.opening h1){font-size:clamp(52px,5.6vw,100px)}.is-cinematic .landing-front :global(.opening-bottom){margin-top:24px;padding-top:0}.is-cinematic .landing-front :global(.opening-visual img){transform:scale(1.08)}.is-cinematic .landing-next{position:absolute;inset:12px;transform-origin:left center;transform:translate3d(calc((1 - var(--turn))*104%),0,0) rotateY(calc((1 - var(--turn))*-68deg)) scale(calc(.91 + var(--turn)*.09));backface-visibility:hidden;box-shadow:-22px 0 65px #0005}.is-cinematic .landing-skip{display:block;position:absolute;left:5vw;bottom:14px;color:white;font:12px 'AMI Sans',sans-serif;text-underline-offset:5px}
+.is-cinematic{height:235vh}.is-cinematic .landing-stage{position:sticky;top:var(--header-height);height:min(820px,calc(100vh - var(--header-height)));height:min(820px,calc(100svh - var(--header-height)));overflow:clip;perspective:1900px;isolation:isolate}.is-cinematic .landing-front{height:100%;transform-origin:left center;transform:translate3d(calc(var(--turn)*-28%),0,calc(var(--turn)*-180px)) rotateY(calc(var(--turn)*12deg));opacity:calc(1 - var(--turn))}.is-cinematic .landing-front :global(.opening){height:100%;min-height:0}.is-cinematic .landing-front :global(.opening-copy){padding:var(--landing-pad-y,clamp(32px,4vw,64px)) 5vw;justify-content:center}.is-cinematic .landing-front :global(.opening h1){font-size:clamp(52px,5.6vw,100px)}.is-cinematic .landing-front :global(.opening-bottom){margin-top:24px;padding-top:0}.is-cinematic .landing-front :global(.opening-visual img){transform:scale(1.08)}.is-cinematic .landing-next{position:absolute;inset:12px;transform-origin:left center;transform:translate3d(calc((1 - var(--turn))*104%),0,0) rotateY(calc((1 - var(--turn))*-68deg)) scale(calc(.91 + var(--turn)*.09));backface-visibility:hidden;box-shadow:-22px 0 65px #0005}.is-cinematic .landing-skip{display:block;position:absolute;left:5vw;bottom:14px;color:white;font:12px 'AMI Sans',sans-serif;text-underline-offset:5px}
 .is-curtain .landing-front{transform:translate3d(0,calc(var(--lift,0)*-1px),0);opacity:var(--front-o,1)}.is-curtain .landing-next{transform:translate3d(0,calc((1 - var(--next-in,1))*56px),0);opacity:calc(.25 + var(--next-in,1)*.75)}
 @media(max-width:799px),(max-height:699px){.landing-next{padding:45px 22px;gap:30px}.landing-next h2{font-size:clamp(42px,8vw,65px)}.landing-next-bottom{align-items:start;flex-direction:column}.landing-paths>a{font-size:23px;padding:20px 0;gap:15px}.landing-next-bottom p{display:none}}
 
