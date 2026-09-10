@@ -12,15 +12,33 @@ import Icon from './Icon.astro';
  </div>
 </section>
 <script>
+ import { createScrollScene } from '../scripts/motion/engine';
  const scene=document.querySelector<HTMLElement>('.home-parallax');
  if(scene){
-  const motion=matchMedia('(prefers-reduced-motion: reduce)');let frame=0;
-  const update=()=>{frame=0;if(motion.matches||innerWidth<700){scene.style.setProperty('--scene','0.5');return}const rect=scene.getBoundingClientRect();const travel=scene.offsetHeight-innerHeight+72;const progress=Math.max(0,Math.min(1,(72-rect.top)/Math.max(1,travel)));scene.style.setProperty('--scene',String(progress))};
-  const queue=()=>{if(!frame)frame=requestAnimationFrame(update)};
-  addEventListener('scroll',queue,{passive:true});addEventListener('resize',queue);motion.addEventListener('change',queue);update();
+  const stage=scene.querySelector<HTMLElement>('.parallax-stage')!;
+  createScrollScene({
+   root:scene,
+   margin:420,
+   measure:()=>{
+    const stageBlock=stage.offsetHeight||1;
+    // Travel scales with the measured room around the content - full strength
+    // on roomy screens, gently compressed when space is tight. Never a gate.
+    const sv=Math.max(.3,Math.min(1,(stageBlock-340)/400));
+    const sh=Math.max(.4,Math.min(1,(window.innerWidth-300)/320));
+    scene.style.setProperty('--scene-sv',String(sv));
+    scene.style.setProperty('--scene-sh',String(sh));
+   },
+   render:(f)=>{
+    if(f.reduced){scene.style.setProperty('--scene','0.5');return}
+    const travel=scene.offsetHeight-f.vh+f.header;
+    const progress=Math.max(0,Math.min(1,(f.header-f.top)/Math.max(1,travel)));
+    scene.style.setProperty('--scene',String(progress));
+   },
+  });
  }
 </script>
 <style>
-.home-parallax{--scene:0;position:relative;height:155vh;background:#111;color:white}.parallax-stage{height:calc(100vh - var(--header-height));min-height:580px;position:sticky;top:var(--header-height);overflow:hidden;isolation:isolate}.scene-photo{position:absolute;inset:-7%;z-index:-2;transform:translate3d(0,calc(var(--scene) * -60px),0) scale(calc(1.1 - var(--scene)*.09))}.scene-photo img{width:100%;height:100%;object-fit:cover;object-position:center 55%;filter:grayscale(1)}.scene-shade{position:absolute;inset:0;z-index:-1;background:linear-gradient(180deg,#0006,#0002 35%,#000b)}.scene-top{position:absolute;top:36px;left:4.2vw;right:4.2vw;display:flex;justify-content:space-between;font:11px/1.6 'AMI Sans',sans-serif;text-transform:uppercase;letter-spacing:.1em}.home-parallax h2{position:absolute;top:30%;left:4.2vw;right:4.2vw;font:500 clamp(48px,7.3vw,112px)/.97 'AMI Sans',sans-serif;letter-spacing:-.06em}.home-parallax h2>span{display:block;width:fit-content;max-width:100%;transform:translate3d(calc(24px - var(--scene)*48px),0,0)}.home-parallax h2>span:last-child{margin-left:6%;transform:translate3d(calc(-24px + var(--scene)*48px),0,0)}.home-parallax h2 em{font-family:'AMI Serif',serif;font-weight:400;color:#a3df8e}.scene-bottom{position:absolute;left:4.2vw;right:4.2vw;bottom:50px;display:flex;justify-content:space-between;align-items:end;gap:30px;transform:translate3d(0,calc(25px - var(--scene)*25px),0)}.scene-bottom p{font:20px/1.5 'AMI Serif',serif}.scene-bottom a{display:flex;gap:50px;align-items:center;border-bottom:1px solid #ccc;padding:12px 0;text-decoration:none;font:14px 'AMI Sans',sans-serif}.scene-bottom a span{font-size:28px}.scene-progress{position:absolute;bottom:0;left:0;width:100%;height:5px;background:var(--green);transform:scaleX(var(--scene));transform-origin:left}
-@media(max-width:699px),(prefers-reduced-motion:reduce){.home-parallax{height:auto}.parallax-stage{position:relative;top:auto;height:620px;min-height:0}.scene-photo,.home-parallax h2>span,.home-parallax h2>span:last-child,.scene-bottom{transform:none}.scene-progress{display:none}.home-parallax h2{left:22px;right:22px;font-size:clamp(46px,9vw,96px)}.home-parallax h2>span:last-child{margin-left:0;margin-top:12px}.scene-top{left:22px;right:22px;gap:30px;font-size:9px}.scene-bottom{left:22px;right:22px;bottom:35px;flex-direction:column;align-items:start;gap:24px}.scene-bottom p{font-size:18px}}
+.home-parallax{--scene:0;position:relative;height:155vh;background:#111;color:white}.parallax-stage{height:calc(100vh - var(--header-height));height:calc(100svh - var(--header-height));min-height:min(580px,calc(100svh - var(--header-height)));position:sticky;top:var(--header-height);overflow:hidden;isolation:isolate}.scene-photo{position:absolute;inset:-7%;z-index:-2;transform:translate3d(0,calc(var(--scene) * -60px * var(--scene-sv,1)),0) scale(calc(1.1 - var(--scene)*.09))}.scene-photo img{width:100%;height:100%;object-fit:cover;object-position:center 55%;filter:grayscale(1)}.scene-shade{position:absolute;inset:0;z-index:-1;background:linear-gradient(180deg,#0006,#0002 35%,#000b)}.scene-top{position:absolute;top:36px;left:4.2vw;right:4.2vw;display:flex;justify-content:space-between;font:11px/1.6 'AMI Sans',sans-serif;text-transform:uppercase;letter-spacing:.1em}.home-parallax h2{position:absolute;top:30%;left:4.2vw;right:4.2vw;font:500 clamp(48px,7.3vw,112px)/.97 'AMI Sans',sans-serif;letter-spacing:-.06em}.home-parallax h2>span{display:block;width:fit-content;max-width:100%;transform:translate3d(calc((24px - var(--scene)*48px)*var(--scene-sh,1)),0,0)}.home-parallax h2>span:last-child{margin-left:6%;transform:translate3d(calc((-24px + var(--scene)*48px)*var(--scene-sh,1)),0,0)}.home-parallax h2 em{font-family:'AMI Serif',serif;font-weight:400;color:#a3df8e}.scene-bottom{position:absolute;left:4.2vw;right:4.2vw;bottom:50px;display:flex;justify-content:space-between;align-items:end;gap:30px;transform:translate3d(0,calc((25px - var(--scene)*25px)*var(--scene-sv,1)),0)}.scene-bottom p{font:20px/1.5 'AMI Serif',serif}.scene-bottom a{display:flex;gap:50px;align-items:center;border-bottom:1px solid #ccc;padding:12px 0;text-decoration:none;font:14px 'AMI Sans',sans-serif}.scene-bottom a span{font-size:28px}.scene-progress{position:absolute;bottom:0;left:0;width:100%;height:5px;background:var(--green);transform:scaleX(var(--scene));transform-origin:left}
+@media(max-width:699px){.home-parallax h2{left:22px;right:22px;font-size:clamp(46px,9vw,96px)}.home-parallax h2>span:last-child{margin-left:0;margin-top:12px}.scene-top{left:22px;right:22px;gap:30px;font-size:9px}.scene-bottom{left:22px;right:22px;bottom:35px;flex-direction:column;align-items:start;gap:24px}.scene-bottom p{font-size:18px}}
+@media(prefers-reduced-motion:reduce){.home-parallax{height:auto}.parallax-stage{position:relative;top:auto;height:620px;min-height:0}.scene-photo,.home-parallax h2>span,.home-parallax h2>span:last-child,.scene-bottom{transform:none}.scene-progress{display:none}}
 </style>

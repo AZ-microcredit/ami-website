@@ -14,10 +14,49 @@ import Icon from './Icon.astro';
  </div>
 </section>
 <style>
-.funding-blueprint{background:#ecece5;color:#111}.blueprint-stage{padding:70px 5vw;display:grid;grid-template-columns:.8fr 1.4fr;align-items:center;gap:6vw;overflow:hidden}.kicker,.board-heading,.board-footnote{font:10px/1.5 'AMI Sans',sans-serif;letter-spacing:.09em;text-transform:uppercase}.blueprint-stage h2{font:500 clamp(45px,5.5vw,84px)/.97 'AMI Sans',sans-serif;letter-spacing:-.06em;margin:28px 0}.blueprint-stage h2 em{font:italic 400 1em 'AMI Serif',serif;color:#39732b}.blueprint-stage header>p:not(.kicker){font:18px/1.6 'AMI Serif',serif;max-width:320px}.blueprint-stage header>a{display:inline-block;margin-top:30px;padding-bottom:10px;border-bottom:1px solid;font:14px/1.5 'AMI Sans',sans-serif;text-decoration:none}.blueprint-board{position:relative;border:1px solid #8b9a82;background:#f7f8ef;padding:32px;isolation:isolate;transform-origin:center}.board-grid{position:absolute;inset:0;background-image:linear-gradient(#39732b0c 1px,transparent 1px),linear-gradient(90deg,#39732b0c 1px,transparent 1px);background-size:24px 24px;z-index:-1}.board-heading{display:flex;justify-content:space-between;gap:20px;color:#39732b}.blueprint-drawing{color:#39732b;margin:28px auto 20px;max-width:600px}.blueprint-drawing svg{width:100%;display:block}.blueprint-drawing text{font:13px 'AMI Sans',sans-serif;letter-spacing:3px;fill:currentColor}.blueprint-notes{display:flex;gap:22px}.blueprint-notes article{flex:1;min-width:0;border-top:1px solid #8b9a82;padding-top:20px;display:grid;grid-template-rows:32px 48px auto;align-content:start;row-gap:12px}.blueprint-notes article>span{font:27px 'AMI Sans',sans-serif;color:#39732b}.blueprint-notes h3{font:500 20px/1.1 'AMI Sans',sans-serif;letter-spacing:-.03em;margin:0}.blueprint-notes p{font:14px/1.6 'AMI Serif',serif;margin:0}.board-footnote{font-size:9px;margin-top:28px;letter-spacing:.03em;color:#52624d;border-top:1px solid #8b9a8244;padding-top:20px}.funding-blueprint.is-drawing{height:165vh}.is-drawing .blueprint-stage{position:sticky;top:var(--header-height);height:calc(100vh - var(--header-height));padding-top:40px;padding-bottom:40px}.is-drawing .draw-lines path{stroke-dasharray:1;stroke-dashoffset:calc(1 - var(--draw,1))}.is-drawing .blueprint-board{transform:perspective(1500px) rotateY(calc((1 - var(--draw,1))*-22deg)) rotate(calc((1 - var(--draw,1))*4deg))}.is-drawing .blueprint-notes article{transform:translateY(calc((1 - var(--draw,1))*80px));opacity:calc(.25 + var(--draw,1)*.75)}
+.funding-blueprint{background:#ecece5;color:#111}.blueprint-stage{padding:70px 5vw;display:grid;grid-template-columns:.8fr 1.4fr;align-items:center;gap:6vw;overflow:hidden}.kicker,.board-heading,.board-footnote{font:10px/1.5 'AMI Sans',sans-serif;letter-spacing:.09em;text-transform:uppercase}.blueprint-stage h2{font:500 clamp(45px,5.5vw,84px)/.97 'AMI Sans',sans-serif;letter-spacing:-.06em;margin:28px 0}.blueprint-stage h2 em{font:italic 400 1em 'AMI Serif',serif;color:#39732b}.blueprint-stage header>p:not(.kicker){font:18px/1.6 'AMI Serif',serif;max-width:320px}.blueprint-stage header>a{display:inline-block;margin-top:30px;padding-bottom:10px;border-bottom:1px solid;font:14px/1.5 'AMI Sans',sans-serif;text-decoration:none}.blueprint-board{position:relative;border:1px solid #8b9a82;background:#f7f8ef;padding:32px;isolation:isolate;transform-origin:center}.board-grid{position:absolute;inset:0;background-image:linear-gradient(#39732b0c 1px,transparent 1px),linear-gradient(90deg,#39732b0c 1px,transparent 1px);background-size:24px 24px;z-index:-1}.board-heading{display:flex;justify-content:space-between;gap:20px;color:#39732b}.blueprint-drawing{color:#39732b;margin:28px auto 20px;max-width:600px}.blueprint-drawing svg{width:100%;display:block}.blueprint-drawing text{font:13px 'AMI Sans',sans-serif;letter-spacing:3px;fill:currentColor}.blueprint-notes{display:flex;gap:22px}.blueprint-notes article{flex:1;min-width:0;border-top:1px solid #8b9a82;padding-top:20px;display:grid;grid-template-rows:32px 48px auto;align-content:start;row-gap:12px}.blueprint-notes article>span{font:27px 'AMI Sans',sans-serif;color:#39732b}.blueprint-notes h3{font:500 20px/1.1 'AMI Sans',sans-serif;letter-spacing:-.03em;margin:0}.blueprint-notes p{font:14px/1.6 'AMI Serif',serif;margin:0}.board-footnote{font-size:9px;margin-top:28px;letter-spacing:.03em;color:#52624d;border-top:1px solid #8b9a8244;padding-top:20px}
+.funding-blueprint.is-drawing{height:165vh}.is-drawing .blueprint-stage{position:sticky;top:var(--header-height);height:calc(100vh - var(--header-height));height:calc(100svh - var(--header-height));padding-top:var(--stage-pad,40px);padding-bottom:var(--stage-pad,40px)}.is-drawing .draw-lines path{stroke-dasharray:1;stroke-dashoffset:calc(1 - var(--draw,1))}.is-drawing .blueprint-board{transform:perspective(1500px) rotateY(calc((1 - var(--draw,1))*-22deg*var(--tilt-f,1))) rotate(calc((1 - var(--draw,1))*4deg*var(--tilt-f,1)))}.is-drawing .blueprint-notes article{transform:translateY(calc((1 - var(--draw,1))*80px*var(--tilt-f,1)));opacity:calc(.25 + var(--draw,1)*.75)}
+.is-flow .draw-lines path{stroke-dasharray:1;stroke-dashoffset:calc(1 - var(--draw,1))}.is-flow .blueprint-board{transform:perspective(1500px) rotateY(calc((1 - var(--draw,1))*-22deg*var(--tilt-f,1))) rotate(calc((1 - var(--draw,1))*4deg*var(--tilt-f,1)))}.is-flow .blueprint-notes article{transform:translateY(calc((1 - var(--draw,1))*80px*var(--tilt-f,1)));opacity:calc(.25 + var(--draw,1)*.75)}
 @media(max-width:900px){.blueprint-stage{grid-template-columns:1fr;padding:52px 22px;gap:38px}.blueprint-stage h2 br{display:none}.blueprint-stage h2 br:after{content:' '}.blueprint-stage h2{max-width:600px}.blueprint-stage header>p:not(.kicker){max-width:500px}.blueprint-board{padding:22px}.blueprint-notes{flex-direction:column;gap:20px}.blueprint-notes article{display:grid;grid-template-columns:32px 1fr;grid-template-rows:auto auto;column-gap:12px}.blueprint-notes h3{margin:0}.blueprint-notes p{grid-column:2;margin-top:6px}.board-heading{font-size:8px}}
 </style>
 <script>
+ import { createScrollScene, reducedMotion, viewportHeight, headerHeight, clamp01, localProgress } from '../scripts/motion/engine';
  const blueprint=document.querySelector<HTMLElement>('.funding-blueprint');
- if(blueprint){const reduce=matchMedia('(prefers-reduced-motion: reduce)');let frame=0;const update=()=>{frame=0;const active=innerWidth>=1050&&innerHeight>=800&&!reduce.matches;blueprint.classList.toggle('is-drawing',active);if(!active){blueprint.style.setProperty('--draw','1');return;}const r=blueprint.getBoundingClientRect();const top=parseFloat(getComputedStyle(document.documentElement).getPropertyValue('--header-height'))||72;const p=Math.max(0,Math.min(1,(top-r.top)/(r.height-innerHeight+top)*1.35));blueprint.style.setProperty('--draw',String(p));};const queue=()=>{if(!frame)frame=requestAnimationFrame(update)};addEventListener('scroll',queue,{passive:true});addEventListener('resize',queue);reduce.addEventListener('change',queue);update();}
+ if(blueprint){
+  const stage=blueprint.querySelector<HTMLElement>('.blueprint-stage')!;
+  const board=blueprint.querySelector<HTMLElement>('.blueprint-board')!;
+  let overlay=false;
+  createScrollScene({
+   root:blueprint,
+   margin:420,
+   measure:()=>{
+    const stageBlock=viewportHeight()-headerHeight();
+    blueprint.classList.remove('is-drawing');blueprint.classList.remove('is-flow');
+    const need=stage.scrollHeight;
+    const cols=getComputedStyle(stage).gridTemplateColumns.split(' ').filter(Boolean).length;
+    // Sticky split board whenever the two-column layout fits the stage
+    // (with the small tolerance the original design already allowed);
+    // otherwise the board draws as its own scene in normal flow.
+    overlay=!reducedMotion()&&cols>=2&&stageBlock>=need-110;
+    blueprint.classList.toggle('is-drawing',overlay);
+    blueprint.classList.toggle('is-flow',!overlay&&!reducedMotion());
+    // Tilt and stage padding compress only when the room is genuinely tight.
+    const tilt=Math.max(.3,Math.min(1,(stageBlock-560)/168));
+    const pad=Math.max(12,Math.min(40,40+(stageBlock-728)/2));
+    blueprint.style.setProperty('--tilt-f',String(tilt));
+    blueprint.style.setProperty('--stage-pad',`${Math.round(pad)}px`);
+   },
+   render:(f)=>{
+    if(f.reduced){blueprint.style.setProperty('--draw','1');return}
+    if(overlay){
+     const p=clamp01((f.header-f.top)/Math.max(1,f.height-f.vh+f.header)*1.35);
+     blueprint.style.setProperty('--draw',String(p));
+    }else{
+     const r=board.getBoundingClientRect();
+     const q=localProgress(r,f.vh,.9,.7);
+     blueprint.style.setProperty('--draw',String(q));
+    }
+   },
+  });
+ }
 </script>

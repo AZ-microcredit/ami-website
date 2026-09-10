@@ -13,10 +13,40 @@ import Icon from './Icon.astro';
  </div>
 </section>
 <style>
-.support-amplifier{background:var(--green);color:#111;overflow:clip}.amplifier-stage{padding:64px 5vw}.amplifier-stage header>p{font:11px/1.5 'AMI Sans',sans-serif;text-transform:uppercase;letter-spacing:.12em;margin-bottom:24px}.amplifier-stage h2{font:500 clamp(38px,4.4vw,64px)/1 'AMI Sans',sans-serif;letter-spacing:-.055em;margin-bottom:38px}.amplifier-stage h2 em{font-family:'AMI Serif',serif;font-weight:400}.amplifier-lines article{display:grid;grid-template-columns:1.75fr 1fr;align-items:center;gap:6vw;border-top:1px solid #1115;padding:22px 0}.amplifier-lines article:last-child{border-bottom:1px solid #1115}.word-window{overflow:hidden;padding:5px 0}.amplifier-lines h3{font:700 clamp(36px,5.5vw,86px)/.95 'AMI Sans',sans-serif;letter-spacing:-.065em;display:flex;align-items:center;justify-content:space-between;gap:18px}.amplifier-lines h3 span{font-weight:400;color:white}.amplifier-lines article>p{font:17px/1.6 'AMI Serif',serif;max-width:350px}.amplifier-stage footer{display:flex;justify-content:space-between;align-items:center;gap:30px;margin-top:32px}.amplifier-stage footer a{background:#111;color:white;padding:18px 24px;display:inline-flex;gap:38px;align-items:center;text-decoration:none;font:14px/1.5 'AMI Sans',sans-serif}.amplifier-stage footer>p{font:14px/1.4 'AMI Serif',serif}.support-amplifier.is-amplifying{height:190vh}.is-amplifying .amplifier-stage{position:sticky;top:var(--header-height);height:calc(100vh - var(--header-height));display:flex;flex-direction:column;justify-content:center;padding-top:30px;padding-bottom:30px}.is-amplifying .amplifier-lines h3{transform:translateY(calc((1 - var(--reveal,1))*115%)) rotate(calc((1 - var(--reveal,1))*7deg));transform-origin:left bottom}.is-amplifying .amplifier-lines h3 span{transform:rotate(calc((1 - var(--reveal,1))*-160deg))}.is-amplifying .amplifier-lines article>p{opacity:calc(.2 + var(--reveal,1)*.8);transform:translateX(calc((1 - var(--reveal,1))*35px))}
+.support-amplifier{background:var(--green);color:#111;overflow:clip}.amplifier-stage{padding:64px 5vw}.amplifier-stage header>p{font:11px/1.5 'AMI Sans',sans-serif;text-transform:uppercase;letter-spacing:.12em;margin-bottom:24px}.amplifier-stage h2{font:500 clamp(38px,4.4vw,64px)/1 'AMI Sans',sans-serif;letter-spacing:-.055em;margin-bottom:38px}.amplifier-stage h2 em{font-family:'AMI Serif',serif;font-weight:400}.amplifier-lines article{display:grid;grid-template-columns:1.75fr 1fr;align-items:center;gap:6vw;border-top:1px solid #1115;padding:22px 0}.amplifier-lines article:last-child{border-bottom:1px solid #1115}.word-window{overflow:hidden;padding:5px 0}.amplifier-lines h3{font:700 clamp(36px,5.5vw,86px)/.95 'AMI Sans',sans-serif;letter-spacing:-.065em;display:flex;align-items:center;justify-content:space-between;gap:18px}.amplifier-lines h3 span{font-weight:400;color:white}.amplifier-lines article>p{font:17px/1.6 'AMI Serif',serif;max-width:350px}.amplifier-stage footer{display:flex;justify-content:space-between;align-items:center;gap:30px;margin-top:32px}.amplifier-stage footer a{background:#111;color:white;padding:18px 24px;display:inline-flex;gap:38px;align-items:center;text-decoration:none;font:14px/1.5 'AMI Sans',sans-serif}.amplifier-stage footer>p{font:14px/1.4 'AMI Serif',serif}
+.support-amplifier.is-amplifying{height:190vh}.is-amplifying .amplifier-stage{position:sticky;top:var(--header-height);height:calc(100vh - var(--header-height));height:calc(100svh - var(--header-height));display:flex;flex-direction:column;justify-content:center;padding-top:30px;padding-bottom:30px}.is-amplifying .amplifier-lines h3{transform:translateY(calc((1 - var(--reveal,1))*115%)) rotate(calc((1 - var(--reveal,1))*7deg));transform-origin:left bottom}.is-amplifying .amplifier-lines h3 span{transform:rotate(calc((1 - var(--reveal,1))*-160deg))}.is-amplifying .amplifier-lines article>p{opacity:calc(.2 + var(--reveal,1)*.8);transform:translateX(calc((1 - var(--reveal,1))*35px))}
+.is-flow .amplifier-lines h3{transform:translateY(calc((1 - var(--reveal,1))*115%)) rotate(calc((1 - var(--reveal,1))*7deg));transform-origin:left bottom}.is-flow .amplifier-lines h3 span{transform:rotate(calc((1 - var(--reveal,1))*-160deg))}.is-flow .amplifier-lines article>p{opacity:calc(.2 + var(--reveal,1)*.8);transform:translateX(calc((1 - var(--reveal,1))*35px))}
 @media(max-width:900px){.amplifier-stage{padding:52px 22px}.amplifier-lines article{grid-template-columns:1fr;gap:16px;padding:25px 0}.amplifier-lines h3{font-size:clamp(35px,8.4vw,72px)}.amplifier-lines article>p{max-width:550px}.amplifier-stage footer>p{display:none}}
 </style>
 <script>
+ import { createScrollScene, reducedMotion, viewportHeight, headerHeight, clamp01, localProgress } from '../scripts/motion/engine';
  const amplifier=document.querySelector<HTMLElement>('.support-amplifier');
- if(amplifier){const reduce=matchMedia('(prefers-reduced-motion: reduce)');const rows=[...amplifier.querySelectorAll<HTMLElement>('.amplifier-lines article')];let frame=0;const update=()=>{frame=0;const active=innerWidth>=1050&&innerHeight>=850&&!reduce.matches;amplifier.classList.toggle('is-amplifying',active);const r=amplifier.getBoundingClientRect();const top=parseFloat(getComputedStyle(document.documentElement).getPropertyValue('--header-height'))||72;const p=Math.max(0,Math.min(1,(top-r.top)/Math.max(1,r.height-innerHeight+top)));rows.forEach((row,i)=>{const q=active?Math.max(0,Math.min(1,(p-i*.23)/.3)):1;row.style.setProperty('--reveal',String(1-Math.pow(1-q,3)));});};const queue=()=>{if(!frame)frame=requestAnimationFrame(update)};addEventListener('scroll',queue,{passive:true});addEventListener('resize',queue);reduce.addEventListener('change',queue);update();}
+ if(amplifier){
+  const stage=amplifier.querySelector<HTMLElement>('.amplifier-stage')!;
+  const rows=[...amplifier.querySelectorAll<HTMLElement>('.amplifier-lines article')];
+  let overlay=false;
+  createScrollScene({
+   root:amplifier,
+   margin:420,
+   measure:()=>{
+    const stageBlock=viewportHeight()-headerHeight();
+    amplifier.classList.remove('is-amplifying');amplifier.classList.remove('is-flow');
+    // Sticky word-window reveal whenever the measured content fits the stage;
+    // otherwise the same reveal runs per row in normal flow.
+    const need=stage.scrollHeight;
+    overlay=!reducedMotion()&&stageBlock>=need&&window.innerWidth>=640;
+    amplifier.classList.toggle('is-amplifying',overlay);
+    amplifier.classList.toggle('is-flow',!overlay&&!reducedMotion());
+   },
+   render:(f)=>{
+    if(f.reduced){rows.forEach(row=>row.style.setProperty('--reveal','1'));return}
+    if(overlay){
+     const p=clamp01((f.header-f.top)/Math.max(1,f.height-f.vh+f.header));
+     rows.forEach((row,i)=>{const q=clamp01((p-i*.23)/.3);row.style.setProperty('--reveal',String(1-Math.pow(1-q,3)));});
+    }else{
+     rows.forEach(row=>{const r=row.getBoundingClientRect();const q=localProgress(r,f.vh,.92,.5);row.style.setProperty('--reveal',String(1-Math.pow(1-q,3)));});
+    }
+   },
+  });
+ }
 </script>
