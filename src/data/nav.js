@@ -4,7 +4,6 @@ export const nav = [
   { label: 'About', href: '/about-us', children: [
     { label: 'Meet the Team', href: '/about-us#meet-the-team' },
     { label: 'Board of Advisors', href: '/about-us#board-of-advisors' },
-    { label: 'In the News', href: '/about-us#in-the-news' },
   ]},
   { label: 'Microloans', href: '/copy-of-loans', children: [
     { label: "Microloan FAQ's", href: '/copy-of-loans#faq' },
