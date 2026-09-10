@@ -39,16 +39,6 @@ const partners = [
   <BoardSection id="board-of-advisors" />
 
 
-  <PlusBand tag="h2" title="SUPPORT OUR MISSION" subtitle="Together we can empower entrepreneurs in Phoenix" />
-
-  <section class="letter">
-    <h3>A Letter from the Executive Director</h3>
-    <hr />
-    <p>Arizona Microcredit Initiative works to empower entrepreneurs in the greater Phoenix area and we could not do so without the help of our partners and our donors. Donations allow us to continue to offer our workshop and consulting services free of charge while maintaining minimal fees on our loan program. We at AMI hope that you can help us continue to fulfill our mission with your donation. We can assure you without a doubt that your funding will not only make an immediate impact, but will also continue to support the aspirations of entrepreneurs in Phoenix for years to come.</p>
-    <p>Thank you again for your support!</p>
-    <p>Rashi Duttagupta</p>
-  </section>
-
   <PlusBand tag="h2" title="JOIN THE COMMUNITY" subtitle="Helping us expand our impact on the local community" />
 
   <section class="community">
@@ -76,15 +66,15 @@ const partners = [
   .letter { background: #fafafa; min-height: 489px; padding: 82px 20px 40px; text-align: center; }
   .letter h3 { font-family: var(--font-avenir-heavy); font-size: 28px; line-height: 1.4; }
   .letter hr { width: 302px; max-width: 100%; margin: 2px auto 20px; border: 0; border-top: 4px solid var(--black); }
-  .letter p { max-width: 880px; margin: 0 auto; font-family: var(--font-avenir-light); font-size: 20px; line-height: 1.2; }
+  .letter p { max-width: 880px; margin: 0 auto; font-family: var(--font-avenir-light); font-size: 20px; line-height: 1.65; }
   .letter p + p { margin-top: 24px; }
 
-  .community { background: #fafafa; min-height: 1063px; padding: 53px 20px 70px; }
-  .community-inner { max-width: var(--content-width); margin: 0 auto; display: grid; grid-template-columns: 525px 387px; justify-content: space-between; align-items: start; }
+  .community { background: #fafafa; padding: 60px 22px 70px; }
+  .community-inner { max-width: var(--content-width); margin: 0 auto; display: grid; grid-template-columns: minmax(0,1.25fr) minmax(0,1fr);gap:40px; justify-content: space-between; align-items: start; }
 
   @media (max-width: 900px) {
     .photo-strip { height: 50vw; min-height: 220px; }
-    .about-inner, .community-inner { grid-template-columns: 1fr; }
+    .about-inner, .community-inner { width:100%;min-width:0;grid-template-columns: minmax(0,1fr); }
     .about-text { text-align: left; }
     .letter { padding: 50px 20px 40px; }
     .letter p { font-size: 18px; }

@@ -5,7 +5,7 @@
  */
 interface Logo { name: string; image: string; href: string; height?: number }
 interface Props { logos: Logo[]; text?: string }
-const { logos, text = 'Click the logos below to learn more about out partners!' } = Astro.props;
+const { logos, text = 'Click the logos below to learn more about our partners!' } = Astro.props;
 ---
 <aside class="partner-box">
   <p class="partner-text">{text}</p>
@@ -17,9 +17,9 @@ const { logos, text = 'Click the logos below to learn more about out partners!' 
 </aside>
 
 <style>
-  .partner-box { width: 387px; max-width: 100%; background: #808080; border-radius: 10px; box-shadow: 0 1px 4px rgba(0,0,0,.35); padding: 30px 14px 22px; }
-  .partner-text { font-family: var(--font-avenir-light); font-size: 20px; line-height: 1.25; color: var(--black); margin: 0 0 12px 18px; max-width: 300px; }
-  .partner-logos { display: flex; flex-direction: column; align-items: center; gap: 10px; }
+  .partner-box { width: 100%; min-width:0; max-width: 387px; background: #808080; border-radius: 10px; box-shadow: 0 1px 4px rgba(0,0,0,.35); padding: 28px 24px; }
+  .partner-text { font-family: var(--font-avenir-light); font-size: 20px; line-height: 1.25; color: var(--black); margin: 0 0 24px; max-width: 300px; }
+  .partner-logos { display: flex; flex-direction: column; align-items: center; gap: 24px; }
   .partner-logos a { display: block; }
   .partner-logos img { width: 358px; max-width: 100%; height: auto; object-fit: contain; display: block; }
   @media (max-width: 900px) { .partner-box { margin: 0 auto; } }

@@ -34,20 +34,20 @@ const advisors = [
 </section>
 
 <style>
-  .advisors { max-width: var(--content-width); margin: 0 auto; padding: 30px 20px 60px; }
-  .advisors .spaced-title { font-size: 40px; letter-spacing: 0.5em; margin-bottom: 56px; }
-  .grid { display: grid; grid-template-columns: repeat(3, 254px); justify-content: center; row-gap: 46px; }
-  .advisor { text-align: center; }
+  .advisors { max-width: var(--content-width); margin: 0 auto; padding: 60px 22px 72px; }
+  .advisors .spaced-title { font-size: 40px; letter-spacing: -.025em; margin-bottom: 56px; }
+  .grid { display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); justify-content: center; gap: 46px 28px; }
+  .advisor { text-align: center; min-width:0;padding:0 8px; }
   .advisor img { width: 200px; height: 200px; border-radius: 50%; object-fit: cover; margin: 0 auto 16px; }
-  .advisor h3 { font-family: var(--font-bold); font-size: 17px; line-height: 1.2; }
+  .advisor h3 { font-family: var(--font-bold); font-size: 17px; line-height: 1.5; }
   .advisor .role { font-family: var(--font-body); }
 
   @media (max-width: 900px) {
-    .advisors .spaced-title { font-size: 26px; letter-spacing: 0.35em; margin-bottom: 40px; }
+    .advisors .spaced-title { font-size: 26px; letter-spacing: -.025em; margin-bottom: 40px; }
     .grid { grid-template-columns: repeat(2, 1fr); gap: 36px 16px; }
   }
   @media (max-width: 600px) {
-    .advisors .spaced-title { font-size: 20px; letter-spacing: 0.25em; }
+    .advisors .spaced-title { font-size: 20px; letter-spacing: -.025em; }
     .grid { grid-template-columns: 1fr; }
   }
 </style>

@@ -94,13 +94,17 @@ const staff = [
 </section>
 
 <style>
-  .team-section { padding-top: 34px; }
-  .team-heading { font-size: 40px; letter-spacing: 0.5em; margin-bottom: 10px; }
+  .team-section { padding: clamp(52px,6vw,88px) 0 24px; }
+  .team-heading { max-width:1280px;margin:0 auto 12px;padding:0 clamp(22px,4.2vw,54px);font-size:clamp(32px,4vw,52px);letter-spacing:-.035em;line-height:1.15; }
 
-  .exec, .staff { max-width: 1280px; margin: 0 auto; padding: 24px 32px 40px; }
+  .exec, .staff { max-width: 1280px; margin: 0 auto; padding: 28px clamp(22px,4.2vw,54px) 44px; }
   .exec .spaced-title, .staff .spaced-title { margin-bottom: 26px; }
 
   .card-grid { display: grid; gap: 20px; }
+  .exec .small,.staff .small{font-size:clamp(22px,2.5vw,30px);line-height:1.2;letter-spacing:-.025em}
+  .person-card{min-width:0}
+  .person-card__info{padding:8px 4px 6px;overflow-wrap:anywhere}
+  .person-card__title{line-height:1.5}
   .exec-grid { grid-template-columns: repeat(5, 1fr); }
   .staff-grid { grid-template-columns: repeat(10, 1fr); gap: 18px; }
   .staff-grid>.person-card{grid-column:span 2}
@@ -206,14 +210,14 @@ const staff = [
   .person-card--compact { padding: 8px; gap: 6px; }
 
   @media (max-width: 900px) {
-    .team-heading { font-size: 28px; letter-spacing: 0.35em; }
+    .team-heading { font-size: 36px; letter-spacing: -.035em; }
     .exec-grid { grid-template-columns: repeat(2, 1fr); }
     .staff-grid { grid-template-columns: repeat(3, 1fr); }
     .staff-grid>.person-card:nth-child(n){grid-column:auto}
-    .exec, .staff { padding: 24px 12px 40px; }
+    .exec, .staff { padding: 24px 22px 36px; }
   }
   @media (max-width: 600px) {
-    .team-heading { font-size: 22px; letter-spacing: 0.25em; }
+    .team-heading { font-size: 30px; letter-spacing: -.035em; }
     .exec-grid { grid-template-columns: repeat(2, 1fr); gap: 12px; }
     .staff-grid { grid-template-columns: repeat(3, 1fr); gap: 8px; }
     .person-card__email { font-size: 10px; }

@@ -28,10 +28,10 @@ const partners = [
 
 <style>
   .grey-strip { height: 19px; background: var(--grey-bg); }
-  .community { background: #fafafa; min-height: 1032px; padding: 27px 20px 60px; }
-  .community-inner { max-width: var(--content-width); margin: 0 auto; display: grid; grid-template-columns: 525px 387px; justify-content: space-between; align-items: start; }
+  .community { background: #fafafa; padding: 48px 22px 60px; }
+  .community-inner { max-width: var(--content-width); margin: 0 auto; display: grid; grid-template-columns: minmax(0,1.25fr) minmax(0,1fr);gap:40px; justify-content: space-between; align-items: start; }
   @media (max-width: 900px) {
     .community { min-height: 0; padding: 30px 20px 50px; }
-    .community-inner { grid-template-columns: 1fr; gap: 40px; justify-items: center; }
+    .community-inner { width:100%;min-width:0;grid-template-columns: minmax(0,1fr); gap: 40px; justify-items: center; }
   }
 </style>
