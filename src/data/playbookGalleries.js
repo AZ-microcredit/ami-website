@@ -29,7 +29,7 @@ export const build = [
 ];
 
 export const elevate = [
-  // (the live "Loan Resources" tile links to the upskilling post — kept as-is)
+  // (the live "Loan Resources" tile links to the upskilling post: kept as-is)
   item('Loan Resources', 'What are different ways to get money for your business?', '760f7c_797eb116dd98499da07f0c05c88ab72c.png', 'small-business-upskilling'),
   item('Grant Guide', 'What are different ways to get money for your business?', '760f7c_fb668cdab84946c9b1ddd3094ce41a6b.png', 'grant-funding'),
   item('Small Business Insurance', 'How can you protect your business?', '85b1e5_94e5f6d8cda3406e97862cc1ac80c93c.png', 'small-business-insurance'),

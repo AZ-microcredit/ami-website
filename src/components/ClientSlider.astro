@@ -43,11 +43,11 @@ const { items, height = 450, title } = Astro.props;
 </script>
 
 <style>
-  .client-slider { max-width: var(--content-width); margin: 0 auto; padding: 20px 20px 10px; }
+  .client-slider { max-width: var(--content-width); margin: 0 auto; padding: 64px 24px; }
   .client-slider .spaced-title { margin-bottom: 30px; }
   .frame { position: relative; height: var(--h); background: #222; overflow: hidden; }
-  .item { position: absolute; inset: 0; margin: 0; opacity: 0; transition: opacity .5s; }
-  .item.current { opacity: 1; }
+  .item { visibility: hidden; position: absolute; inset: 0; margin: 0; opacity: 0; transition: opacity .5s; }
+  .item.current { opacity: 1; visibility: visible; }
   .item a { display: block; height: 100%; }
   .item img { width: 100%; height: 100%; object-fit: cover; }
   .item figcaption { position: absolute; left: 0; right: 0; bottom: 0; padding: 14px 20px; background: rgba(0,0,0,.55); color: #fff; font-family: var(--font-avenir-heavy); font-size: 18px; }

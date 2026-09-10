@@ -1,41 +1,7 @@
 ---
-import Base from '../layouts/Base.astro';
-import CalendlyWidget from '../components/CalendlyWidget.astro';
-
-// ── CALENDLY CONFIG ──────────────────────────────────────────────────────────
-// Update this URL to the AMI Calendly account + event type for consulting calls.
-// Find the URL at: https://calendly.com/event_types/user/me  (after logging in)
-const CALENDLY_URL = 'https://calendly.com/azmicrocredit/consulting';
-// ─────────────────────────────────────────────────────────────────────────────
+// Retired page. Content now lives on the consolidated family page; keep this URL
+// working via a redirect stub (meta refresh + canonical).
+import Redirect from '../layouts/Redirect.astro';
 ---
 
-<Base title="Schedule Consultation Call | Arizona Microcredit Initiative">
-  <section class="schedule">
-    <h1 class="sched-title">SCHEDULE A TIME&nbsp;</h1>
-    <h2 class="sched-sub">to learn how we can advise your strategy&nbsp;</h2>
-    <p class="sched-note">If no available times work for you, please contact <a href="mailto:info@azmicrocredit.org">info@azmicrocredit.org</a> so we can coordinate a time!</p>
-
-    <CalendlyWidget url={CALENDLY_URL} height={640} />
-  </section>
-</Base>
-
-<style>
-  .schedule { max-width: var(--content-width); margin: 0 auto; padding: 12px 20px 0; }
-  .sched-title { display: inline-block; margin-left: -5px; background: #68b04d; color: var(--white); font-family: var(--font-bold); font-size: 50px; line-height: 1.1; padding: 0 0 0 2px; }
-  .sched-sub { display: block; width: max-content; max-width: 100%; margin: 4px 0 0 42px; background: #68b04d; color: var(--white); font-family: var(--font-body); font-weight: bold; font-size: 40px; line-height: 1.15; padding: 0 0 0 4px; }
-  .sched-note { margin-top: 62px; text-align: center; font-family: var(--font-body); font-size: 20px; line-height: 1.4; }
-  .sched-note a { color: inherit; }
-
-  .calendly-inline-widget { margin: 22px 0 0; }
-
-  @media (max-width: 900px) {
-    .sched-title { margin-left: 0; font-size: 36px; }
-    .sched-sub { margin-left: 0; font-size: 26px; white-space: normal; width: auto; }
-    .sched-note { margin-top: 36px; font-size: 18px; }
-  }
-  @media (max-width: 600px) {
-    .sched-title { font-size: 28px; }
-    .sched-sub { font-size: 20px; }
-    .sched-note { font-size: 16px; }
-  }
-</style>
+<Redirect target="/copy-2-of-consulting#schedule" label="Schedule a Consultation" />

@@ -1,0 +1,42 @@
+---
+interface Props { value:number; suffix?:string; prefix?:string; }
+const {value,suffix='',prefix=''}=Astro.props;
+const formatted=prefix+value.toLocaleString('en-US')+suffix;
+---
+<strong class="count-up" data-value={value} data-prefix={prefix} data-suffix={suffix}><span class="sr-only">{formatted}</span><span class="count-visual" aria-hidden="true">{formatted}</span></strong>
+<script>
+ const reduced = window.matchMedia('(prefers-reduced-motion: reduce)');
+ const counters = document.querySelectorAll<HTMLElement>('.count-up');
+ if ('IntersectionObserver' in window) {
+  const render=(el:HTMLElement,val:number)=>{
+   const visual=el.querySelector<HTMLElement>('.count-visual');
+   if(visual) visual.textContent=(el.dataset.prefix||'')+val.toLocaleString('en-US')+(el.dataset.suffix||'');
+  };
+  const run=(el:HTMLElement)=>{
+   const anyEl=el as any;
+   if(anyEl._raf) cancelAnimationFrame(anyEl._raf);
+   const value=Number(el.dataset.value);
+   if(reduced.matches){ render(el,value); anyEl._raf=0; return; }
+   const start=performance.now();
+   const tick=(now:number)=>{
+    const progress=reduced.matches?1:Math.min((now-start)/950,1);
+    render(el,Math.round(value*(1-Math.pow(1-progress,3))));
+    if(progress<1){ anyEl._raf=requestAnimationFrame(tick); } else { anyEl._raf=0; }
+   };
+   anyEl._raf=requestAnimationFrame(tick);
+  };
+  const reset=(el:HTMLElement)=>{
+   const anyEl=el as any;
+   if(anyEl._raf){ cancelAnimationFrame(anyEl._raf); anyEl._raf=0; }
+   render(el, reduced.matches ? Number(el.dataset.value) : 0);
+  };
+  const observer = new IntersectionObserver(entries => {
+   for (const entry of entries) {
+    const el = entry.target as HTMLElement;
+    if (entry.isIntersecting) run(el); else reset(el);
+   }
+  },{threshold:.6});
+  counters.forEach(el=>observer.observe(el));
+ }
+</script>
+<style>.count-up{font-variant-numeric:tabular-nums;white-space:nowrap}.count-visual{font:inherit!important;color:inherit!important}</style>

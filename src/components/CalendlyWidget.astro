@@ -1,6 +1,6 @@
 ---
 /**
- * CalendlyWidget — inline Calendly scheduling embed.
+ * CalendlyWidget: inline Calendly scheduling embed.
  *
  * Usage:
  *   <CalendlyWidget url="https://calendly.com/ACCOUNT/EVENT-TYPE" height={700} />
@@ -22,7 +22,7 @@ const { url, height = 700 } = Astro.props;
 <div
   class="calendly-inline-widget"
   data-url={url}
-  style={`min-width:320px;height:${height}px;`}
+  style={`min-width:0;width:100%;height:${height}px;`}
 ></div>
 <script
   type="text/javascript"
@@ -30,3 +30,6 @@ const { url, height = 700 } = Astro.props;
   async
 ></script>
 <!-- Calendly inline widget end -->
+
+<p class="booking-link">Prefer a separate window? <a href={url} target="_blank" rel="noopener">Open the scheduling page ↗</a></p>
+<style>.calendly-inline-widget{margin:32px 0}.booking-link{font:15px/1.6 Georgia,serif;text-align:center;padding:0 20px 40px}.booking-link a{color:#39732b}@media(max-width:600px){.calendly-inline-widget{height:950px!important}}</style>

@@ -1,11 +1,7 @@
 ---
-import Base from '../layouts/Base.astro';
-import WhoWeServe from '../components/WhoWeServe.astro';
+// Retired page. Content now lives on the consolidated family page; keep this URL
+// working via a redirect stub (meta refresh + canonical).
+import Redirect from '../layouts/Redirect.astro';
 ---
 
-<Base
-  title="Who We Serve | az-microcredit"
-  description="Are you unsure if AMI's services are right for your business? We've created a few example consulting personas to help! "
->
-  <WhoWeServe />
-</Base>
+<Redirect target="/copy-2-of-consulting" label="Consulting" />

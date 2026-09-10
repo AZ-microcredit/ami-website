@@ -73,7 +73,7 @@ export const tags = (() => {
     e.count++;
     m.set(slug, e);
   }
-  return [...m.values()].sort((a, b) => (a.name < b.name ? -1 : a.name > b.name ? 1 : 0));
+  return [...m.values()].sort((a, b) => (a.name < b.name ? -1: a.name > b.name ? 1: 0));
 })();
 
 export const postsWithTag = (slug: string) => posts.filter((p) => p.tags.some((t) => slugify(t) === slug));
@@ -92,7 +92,7 @@ export const archive = (() => {
     e.count++;
     m.set(key, e);
   }
-  return [...m.entries()].sort((a, b) => (a[0] < b[0] ? 1 : -1)).map(([, v]) => v);
+  return [...m.entries()].sort((a, b) => (a[0] < b[0] ? 1: -1)).map(([, v]) => v);
 })();
 
 export const postsInMonth = (year: string, month: string) =>
@@ -111,12 +111,12 @@ export const recent = (n = 10) => posts.slice(0, n);
 /** Plain-text excerpt for cards / RSS: the excerpt Wix showed in its post lists, else the SEO description. */
 export const excerpt = (p: Post, max = 300) => {
   const t = ((wixExcerpts as Record<string, string>)[p.slug] || p.description).replace(/\s+/g, ' ').trim();
-  return t.length > max ? t.slice(0, max).replace(/\s+\S*$/, '') + '…' : t;
+  return t.length > max ? t.slice(0, max).replace(/\s+\S*$/, '') + '…': t;
 };
 
 /**
  * URL slugs the legacy Wix CMS pages (/posts/<slug>) used for a post: the exact title-derived slug
- * (with "/", "|", "?", ":" kept — Wix percent-encodes them), the same with a trailing dash (titles that
+ * (with "/", "|", "?", ":" kept: Wix percent-encodes them), the same with a trailing dash (titles that
  * had trailing whitespace), punctuation-stripped variants that a static file server can actually serve,
  * and the modern post slug. Deduplicated; when two posts share a title the newer one wins.
  */

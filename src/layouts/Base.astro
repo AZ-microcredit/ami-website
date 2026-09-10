@@ -15,6 +15,9 @@ const {
   description = 'Arizona Microcredit Initiative is a 501(c)3 nonprofit providing business education, consulting and small loans.',
   mainClass = '',
 } = Astro.props;
+// build.format 'file' makes Astro.url.pathname end in .html; canonical uses the clean slug.
+const canonicalPath = Astro.url.pathname.replace(/\.html$/, '').replace(/\/$/, '') || '/';
+const canonical = new URL(canonicalPath, Astro.site ?? 'https://www.azmicrocredit.org');
 ---
 
 <!doctype html>
@@ -28,6 +31,7 @@ const {
     <link rel="apple-touch-icon" href="/media/760f7c_d1c7d1796b1d418982570c13b1747ef3.png" />
     <meta property="og:title" content={title} />
     <meta property="og:description" content={description} />
+    <link rel="canonical" href={canonical} />
     <meta property="og:type" content="website" />
     <slot name="head" />
   </head>

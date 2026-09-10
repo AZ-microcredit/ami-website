@@ -1,43 +1,7 @@
 ---
-import Base from '../layouts/Base.astro';
-import CalendlyWidget from '../components/CalendlyWidget.astro';
-
-// ── CALENDLY CONFIG ──────────────────────────────────────────────────────────
-// Update this URL to the AMI Calendly account + event type for loan meetings.
-const CALENDLY_URL = 'https://calendly.com/azmicrocredit/loans';
-// ─────────────────────────────────────────────────────────────────────────────
+// Retired page. Content now lives on the consolidated family page; keep this URL
+// working via a redirect stub (meta refresh + canonical).
+import Redirect from '../layouts/Redirect.astro';
 ---
 
-<Base
-  title="SMALL INTEREST LOANS | Arizona Microcredit Initiative"
-  description="Schedule a loan consultation meeting with one of our staff members to help your business achieve its potential."
->
-  <section class="schedule">
-    <h1 class="sched-title">SCHEDULE A TIME&nbsp;</h1>
-    <h2 class="sched-sub">to learn how we can help fund your dreams&nbsp;</h2>
-    <p class="sched-note">If no available times work for you, please contact <a href="mailto:info@azmicrocredit.org">info@azmicrocredit.org</a> so we can coordinate a time!</p>
-
-    <CalendlyWidget url={CALENDLY_URL} height={600} />
-  </section>
-</Base>
-
-<style>
-  .schedule { max-width: var(--content-width); margin: 0 auto; padding: 20px 20px 0; }
-  .sched-title { display: inline-block; margin-left: 16px; background: #68b04d; color: var(--white); font-family: var(--font-bold); font-size: 50px; line-height: 1.1; padding: 0 0 0 2px; }
-  .sched-sub { display: block; width: max-content; max-width: 100%; margin: 6px 0 0 63px; background: #68b04d; color: var(--white); font-family: var(--font-body); font-weight: bold; font-size: 40px; line-height: 1.15; padding: 0 0 0 4px; }
-  .sched-note { margin-top: 66px; text-align: center; font-family: var(--font-body); font-size: 20px; line-height: 1.4; }
-  .sched-note a { color: inherit; }
-
-  .calendly-inline-widget { margin: 22px 0 0; }
-
-  @media (max-width: 900px) {
-    .sched-title { margin-left: 0; font-size: 36px; }
-    .sched-sub { margin-left: 0; font-size: 26px; white-space: normal; width: auto; }
-    .sched-note { margin-top: 36px; font-size: 18px; }
-  }
-  @media (max-width: 600px) {
-    .sched-title { font-size: 28px; }
-    .sched-sub { font-size: 20px; }
-    .sched-note { font-size: 16px; }
-  }
-</style>
+<Redirect target="/copy-of-loans#schedule" label="Schedule a Loan Call" />

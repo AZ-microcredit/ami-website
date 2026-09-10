@@ -1,0 +1,23 @@
+<section class="home-parallax" aria-labelledby="parallax-title">
+ <div class="parallax-stage">
+  <div class="scene-photo"><img src="/media/ami-pitch-speakers.webp" width="2400" height="1800" alt="Speakers and community members gathered at AMI’s December 2025 pitch competition" loading="lazy"/></div>
+  <div class="scene-shade" aria-hidden="true"></div>
+  <div class="scene-top"><span>Arizona Microcredit Initiative</span><span>Phoenix / Since 2011</span></div>
+  <h2 id="parallax-title"><span>Built here.</span><span>Grown <em>together.</em></span></h2>
+  <div class="scene-bottom"><p>Local ambition.<br/>A community behind it.</p><a href="/about-us">Get to know AMI <span aria-hidden="true">↗</span></a></div>
+  <div class="scene-progress" aria-hidden="true"></div>
+ </div>
+</section>
+<script>
+ const scene=document.querySelector<HTMLElement>('.home-parallax');
+ if(scene){
+  const motion=matchMedia('(prefers-reduced-motion: reduce)');let frame=0;
+  const update=()=>{frame=0;if(motion.matches||innerWidth<700){scene.style.setProperty('--scene','0.5');return}const rect=scene.getBoundingClientRect();const travel=scene.offsetHeight-innerHeight+72;const progress=Math.max(0,Math.min(1,(72-rect.top)/Math.max(1,travel)));scene.style.setProperty('--scene',String(progress))};
+  const queue=()=>{if(!frame)frame=requestAnimationFrame(update)};
+  addEventListener('scroll',queue,{passive:true});addEventListener('resize',queue);motion.addEventListener('change',queue);update();
+ }
+</script>
+<style>
+.home-parallax{--scene:0;position:relative;height:155vh;background:#111;color:white}.parallax-stage{height:calc(100vh - var(--header-height));min-height:580px;position:sticky;top:var(--header-height);overflow:hidden;isolation:isolate}.scene-photo{position:absolute;inset:-7%;z-index:-2;transform:translate3d(0,calc(var(--scene) * -60px),0) scale(calc(1.1 - var(--scene)*.09))}.scene-photo img{width:100%;height:100%;object-fit:cover;object-position:center 55%;filter:grayscale(1)}.scene-shade{position:absolute;inset:0;z-index:-1;background:linear-gradient(180deg,#0006,#0002 35%,#000b)}.scene-top{position:absolute;top:36px;left:4.2vw;right:4.2vw;display:flex;justify-content:space-between;font:11px/1.6 Helvetica,Arial,sans-serif;text-transform:uppercase;letter-spacing:.1em}.home-parallax h2{position:absolute;top:30%;left:4.2vw;right:4.2vw;font:500 clamp(60px,9vw,140px)/.97 Helvetica,Arial,sans-serif;letter-spacing:-.06em}.home-parallax h2>span{display:block;transform:translate3d(calc(55px - var(--scene)*110px),0,0)}.home-parallax h2>span:last-child{margin-left:12%;transform:translate3d(calc(-55px + var(--scene)*110px),0,0)}.home-parallax h2 em{font-family:Georgia,serif;font-weight:400;color:#a3df8e}.scene-bottom{position:absolute;left:4.2vw;right:4.2vw;bottom:50px;display:flex;justify-content:space-between;align-items:end;gap:30px;transform:translate3d(0,calc(25px - var(--scene)*25px),0)}.scene-bottom p{font:20px/1.5 Georgia,serif}.scene-bottom a{display:flex;gap:50px;align-items:center;border-bottom:1px solid #ccc;padding:12px 0;text-decoration:none;font:14px Helvetica,Arial,sans-serif}.scene-bottom a span{font-size:28px}.scene-progress{position:absolute;bottom:0;left:0;width:100%;height:5px;background:var(--green);transform:scaleX(var(--scene));transform-origin:left}
+@media(max-width:699px),(prefers-reduced-motion:reduce){.home-parallax{height:auto}.parallax-stage{position:relative;top:auto;height:620px;min-height:0}.scene-photo,.home-parallax h2>span,.home-parallax h2>span:last-child,.scene-bottom{transform:none}.scene-progress{display:none}.home-parallax h2{left:22px;right:22px;font-size:clamp(46px,9vw,96px)}.home-parallax h2>span:last-child{margin-left:0;margin-top:12px}.scene-top{left:22px;right:22px;gap:30px;font-size:9px}.scene-bottom{left:22px;right:22px;bottom:35px;flex-direction:column;align-items:start;gap:24px}.scene-bottom p{font-size:18px}}
+</style>

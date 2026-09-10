@@ -1,14 +1,7 @@
 ---
-// Old blog-post link target; the live consultation page is /copy-of-schedule-a-consultation.
-const target = '/copy-of-schedule-a-consultation';
+// Retired page. Content now lives on the consolidated family page; keep this URL
+// working via a redirect stub (meta refresh + canonical).
+import Redirect from '../layouts/Redirect.astro';
 ---
-<!doctype html>
-<html lang="en">
-  <head>
-    <meta charset="utf-8" />
-    <title>Redirecting…</title>
-    <meta http-equiv="refresh" content={`0; url=${target}`} />
-    <link rel="canonical" href={target} />
-  </head>
-  <body><p>Redirecting to <a href={target}>Schedule a Consultation</a>…</p></body>
-</html>
+
+<Redirect target="/copy-2-of-consulting#schedule" label="Schedule a Consultation" />

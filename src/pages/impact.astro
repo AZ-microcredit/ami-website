@@ -41,6 +41,7 @@ const stats = [
   </section>
 
   <section class="stats">
+    <p class="report-note">These are previously published cumulative figures; the source does not give a reporting cutoff. The 2026 impact report is still a draft and contains conflicting loan totals, so these figures should not be read as current-year results. Its education section records 22 workshops in 2025 and 2 in 2026, pending final approval.</p>
     <div class="stat-grid">
       {stats.map((s) => (
         <div class:list={['stat', { green: s.green }]}>
@@ -57,6 +58,8 @@ const stats = [
 </Base>
 
 <style>
+.report-note{max-width:900px;margin:0 auto 50px;padding:0 24px;font:17px/1.6 Georgia,serif}
+
   .photo-strip { height: 405px; overflow: hidden; background: #172838; }
   .photo-strip img { width: 100%; height: 100%; object-fit: cover; object-position: center 30%; }
 

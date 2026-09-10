@@ -16,10 +16,10 @@ const backHref = `/event-details-registration/${e.slug}`;
     <h1>{e.title}</h1>
     <p class="meta"><span>{e.shortDate}</span><span class="sep">|</span><span>{e.shortLocation}</span></p>
 
-    <!-- INTEGRATION: Wix Events RSVP / ticket checkout form. Static placeholder — wire action to the registration backend. -->
+    <!-- INTEGRATION: Wix Events RSVP / ticket checkout form. Static placeholder: wire action to the registration backend. -->
     {e.registrationClosed ? (
       <p class="closed">Registration is closed. <a href="/events">See other events</a></p>
-    ) : (
+    ): (
       <form class="rsvp-form" action="#" method="post">
         <h2>Add your details</h2>
         <div class="row">

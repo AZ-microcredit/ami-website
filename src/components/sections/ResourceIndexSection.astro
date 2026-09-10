@@ -1,0 +1,69 @@
+---
+/**
+ * Resource Index section (consolidated into /copy-of-education#resources).
+ * Content moved verbatim from the retired /copy-2-of-education-f page; the photo hero
+ * was replaced with the standard spaced-title section header. The resource/tutorial
+ * pages these cards link to stay standalone routes.
+ */
+import posts from '../../data/posts.json';
+
+interface Props { id?: string }
+const { id } = Astro.props;
+
+// Resource Index: three curated groups of blog posts (order matches the live page).
+const bySlug = (slug: string) => {
+  const p = posts.find((x) => x.slug === slug);
+  if (!p) throw new Error(`Resource Index: unknown post slug ${slug}`);
+  return p;
+};
+const card = (slug: string, image: string) => ({ ...bySlug(slug), href: `/single-post/${slug}`, image });
+
+const build = [
+  card('loan-resources', '/media/dd2ea9_7b5d3aa0abc244eb8319685614b3b192.png'),
+  card('what-will-your-business-do', '/media/dd2ea9_842e149c5f774b49b356288156d958a2.png'),
+  card('accounting-101', '/media/dd2ea9_2b08aa91e15143a181944297972b8244.png'),
+  card('business-registration', '/media/dd2ea9_f3e752868bd643449f981617755385a7.png'),
+  card('business-model-canvas', '/media/760f7c_1e1ea1f25403430bb9b41b3d383298ce.png'),
+];
+const elevate = [
+  card('seo-for-small-businesses', '/media/760f7c_5b5eeef02222408c915d96de311eccd4.png'),
+  card('promotion-strategies', '/media/dd2ea9_ea61fa7a97aa41c4bb0d1b9436d46ddb.png'),
+  card('networking-101', '/media/dd2ea9_631923d6e15044a29f26b78b0843b3b5.png'),
+  card('market-research', '/media/dd2ea9_37eb76861f834c5fb6d7b77d5d454d1e.png'),
+  card('5-ps-of-marketing-explained', '/media/dd2ea9_8a5bf811a56e4a31aeeff9b36a822352.png'),
+];
+const expand = [
+  card('industry-analysis', '/media/760f7c_151df3e09f984b45964111af0be28cfe.jpg'),
+  card('pricing', '/media/760f7c_dee8836d8cd9433d97a0bef7bf783a30.png'),
+  card('introduction-to-competitive-analysis', '/media/760f7c_886b927bee784f24b50b67fcf1fcd606.png'),
+  card('a-b-testing-5', '/media/760f7c_c5d542b7aa554e1ebd67832b24f9ee62.png'),
+  card('small-business-upskilling', '/media/dd2ea9_db47d1f63d8146daaedb3b8a40375415.png'),
+  card('business-process-improvement-bpi', '/media/dd2ea9_93fa0f6b15da4909aae0bfdcefa959bc.png'),
+];
+const groups = [{name:'Getting started',items:build},{name:'Finding customers',items:elevate},{name:'Growing your business',items:expand}];
+---
+
+<section class="resource-index" id={id}>
+ <div class="library-head"><p class="eyebrow">The resource library</p><h2>Find your next<br/><em>“I’ve got this.”</em></h2><p>Practical reading for the questions that come with running a business.</p></div>
+ <div class="library-controls" hidden><label for="resource-search">What do you want to learn?</label><input id="resource-search" type="search" placeholder="Try pricing, accounting, marketing…"/><div class="filters" aria-label="Filter resources"><button type="button" data-filter="all" aria-pressed="true">All topics</button>{groups.map((g,i)=><button type="button" data-filter={String(i)} aria-pressed="false">{g.name}</button>)}</div><p class="result-count" role="status" aria-live="polite"></p></div>
+ <div class="library-groups">{groups.map((group,i)=><section class="resource-group" data-group={i}><header><span class="group-number">0{i+1}</span><h3>{group.name}</h3></header><ul>{group.items.map((post,n)=><li data-resource data-title={post.title.toLowerCase()}><a href={post.href}><span class="resource-number">{String(n+1).padStart(2,'0')}</span><span>{post.title}</span><span aria-hidden="true">↗</span></a></li>)}</ul></section>)}</div>
+ <p class="empty-results" hidden>No matching resources. Try a different word or choose “All topics.”</p>
+</section>
+<script>
+ const root=document.querySelector<HTMLElement>('.resource-index');
+ if(root){
+  root.querySelector<HTMLElement>('.library-controls')!.hidden=false;
+  const search=root.querySelector<HTMLInputElement>('input')!;
+  const buttons=[...root.querySelectorAll<HTMLButtonElement>('[data-filter]')];
+  let filter='all';
+  function update(){let total=0;
+   root!.querySelectorAll<HTMLElement>('[data-group]').forEach(group=>{let count=0;group.querySelectorAll<HTMLElement>('[data-resource]').forEach(row=>{const visible=(filter==='all'||group.dataset.group===filter)&&row.dataset.title!.includes(search.value.toLowerCase().trim());row.hidden=!visible;if(visible)count++});group.hidden=count===0;total+=count});
+   root!.querySelector<HTMLElement>('.result-count')!.textContent=`${total} resource${total===1?'':'s'}`;
+   root!.querySelector<HTMLElement>('.empty-results')!.hidden=total>0;
+  }
+  buttons.forEach(button=>button.addEventListener('click',()=>{filter=button.dataset.filter!;buttons.forEach(b=>b.setAttribute('aria-pressed',String(b===button)));update()}));search.addEventListener('input',update);update();
+ }
+</script>
+<style>
+.resource-index{padding:100px 4.2vw}.eyebrow{font:11px/1.6 Helvetica,Arial,sans-serif;letter-spacing:.1em;text-transform:uppercase}.library-head{display:grid;grid-template-columns:.6fr 1.3fr 1fr;gap:40px;align-items:start;margin-bottom:56px}.library-head h2{font:500 clamp(40px,4.6vw,70px)/1.04 Helvetica,Arial,sans-serif;letter-spacing:-.045em}.library-head em{font-family:Georgia,serif;font-weight:400}.library-head>p:last-child{font:18px/1.7 Georgia,serif;color:#555}.library-controls{margin-left:23%;margin-bottom:50px}.library-controls label{display:block;font:13px Helvetica,Arial,sans-serif;margin-bottom:16px}.library-controls input{border:0;border-bottom:1px solid #777;background:transparent;padding:16px 0;width:100%;font:22px/1.5 Helvetica,Arial,sans-serif;color:#111;border-radius:0}.filters{display:flex;flex-wrap:wrap;gap:12px 24px;margin:24px 0}.filters button{background:none;border:0;border-bottom:2px solid transparent;padding:9px 0;cursor:pointer;font:13px Helvetica,Arial,sans-serif;color:#555}.filters button[aria-pressed=true]{border-color:#39732b;color:#111}.result-count{font:12px Helvetica,Arial,sans-serif;color:#777}.resource-group{display:grid;grid-template-columns:1fr 2.3fr;gap:60px;margin-top:50px}.resource-group header{padding-top:20px;border-top:1px solid #111}.group-number{font:16px Helvetica,Arial,sans-serif;color:#777}.resource-group h3{font:400 30px/1.1 Helvetica,Arial,sans-serif;margin-top:25px;max-width:240px}.resource-group ul{border-top:1px solid #aaa}.resource-group li{border-bottom:1px solid #ccc}.resource-group a{display:grid;grid-template-columns:30px 1fr 25px;gap:22px;padding:26px 0;font:22px/1.35 Helvetica,Arial,sans-serif;text-decoration:none;transition:padding .25s,color .25s,background .25s}.resource-group a:hover{padding-left:15px;padding-right:15px;color:#39732b;background:#f3f3ef}.resource-number{font-size:11px;color:#777;padding-top:6px}.empty-results{padding:35px 0;font:20px Georgia,serif}[hidden]{display:none!important}@media(max-width:750px){.resource-index{padding:60px 22px}.library-head{grid-template-columns:1fr;gap:24px;margin-bottom:36px}.library-controls{margin-left:0}.library-controls input{font-size:18px}.resource-group{grid-template-columns:1fr;gap:24px;margin-top:40px}.resource-group h3{max-width:none;font-size:28px;margin-top:14px}.resource-group a{font-size:19px;gap:12px;padding:23px 0}.resource-group header{display:flex;align-items:baseline;gap:20px}.resource-group header h3{margin:0}}
+</style>
