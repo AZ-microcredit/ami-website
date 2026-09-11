@@ -7,36 +7,35 @@ const formatted=prefix+value.toLocaleString('en-US')+suffix;
 <script>
  const reduced = window.matchMedia('(prefers-reduced-motion: reduce)');
  const counters = document.querySelectorAll<HTMLElement>('.count-up');
+ const render=(el:HTMLElement,val:number)=>{
+  const visual=el.querySelector<HTMLElement>('.count-visual');
+  if(visual) visual.textContent=(el.dataset.prefix||'')+val.toLocaleString('en-US')+(el.dataset.suffix||'');
+ };
  if ('IntersectionObserver' in window) {
-  const render=(el:HTMLElement,val:number)=>{
-   const visual=el.querySelector<HTMLElement>('.count-visual');
-   if(visual) visual.textContent=(el.dataset.prefix||'')+val.toLocaleString('en-US')+(el.dataset.suffix||'');
-  };
   const run=(el:HTMLElement)=>{
-   const anyEl=el as any;
-   if(anyEl._raf) cancelAnimationFrame(anyEl._raf);
    const value=Number(el.dataset.value);
-   if(reduced.matches){ render(el,value); anyEl._raf=0; return; }
+   if(reduced.matches){ render(el,value); return; }
    const start=performance.now();
    const tick=(now:number)=>{
-    const progress=reduced.matches?1:Math.min((now-start)/950,1);
+    const progress=reduced.matches?1:Math.min((now-start)/1700,1);
     render(el,Math.round(value*(1-Math.pow(1-progress,3))));
-    if(progress<1){ anyEl._raf=requestAnimationFrame(tick); } else { anyEl._raf=0; }
+    if(progress<1) requestAnimationFrame(tick);
    };
-   anyEl._raf=requestAnimationFrame(tick);
+   requestAnimationFrame(tick);
   };
-  const reset=(el:HTMLElement)=>{
-   const anyEl=el as any;
-   if(anyEl._raf){ cancelAnimationFrame(anyEl._raf); anyEl._raf=0; }
-   render(el, reduced.matches ? Number(el.dataset.value) : 0);
-  };
+  // Count once on first meaningful visibility, then keep the final value.
+  if(!reduced.matches) counters.forEach(el=>render(el,0));
   const observer = new IntersectionObserver(entries => {
    for (const entry of entries) {
+    if (!entry.isIntersecting) continue;
     const el = entry.target as HTMLElement;
-    if (entry.isIntersecting) run(el); else reset(el);
+    observer.unobserve(el);
+    run(el);
    }
-  },{threshold:.6});
+  },{threshold:.35});
   counters.forEach(el=>observer.observe(el));
+ } else {
+  counters.forEach(el=>render(el,Number(el.dataset.value)));
  }
 </script>
 <style>.count-up{font-variant-numeric:tabular-nums;white-space:nowrap}.count-visual{font:inherit!important;color:inherit!important}</style>

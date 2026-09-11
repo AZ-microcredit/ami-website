@@ -2,12 +2,55 @@
 import Icon from './Icon.astro';
 ---
 <section class="community-window" id="shared-ambition" aria-labelledby="community-window-title">
+ <div class="skip-holder"><a class="scene-skip" href="#main">Skip this animation</a></div>
  <div class="window-stage"><div class="window-heading"><p>Local roots. Shared ambition.</p><h2 id="community-window-title">A community<br/><em>in the making.</em></h2></div><figure><img src="/media/ami-about-gathering.webp" width="2400" height="1800" alt="Community members and speakers gathered at AMI’s December 2025 pitch competition" loading="lazy"/><figcaption>Different stories. A shared place to grow.<span>AMI pitch competition / December 2025</span></figcaption></figure><div class="window-footer"><p>Entrepreneurs. Students. Neighbors.<br/>The people behind the possibility.</p><a href="#meet-the-team">Meet our team <span aria-hidden="true"><Icon name="arrow-up-right" /></span></a></div></div>
 </section>
 <style>
-.community-window{background:#111;color:white}.window-stage{position:relative;padding:64px 5vw;overflow:hidden}.window-heading{position:relative;z-index:2;pointer-events:none}.window-heading>p{font:11px/1.5 'AMI Sans',sans-serif;text-transform:uppercase;letter-spacing:.12em;margin-bottom:24px}.window-heading h2{font:500 clamp(48px,7vw,110px)/.98 'AMI Sans',sans-serif;letter-spacing:-.06em}.window-heading h2 em{font-family:'AMI Serif',serif;font-weight:400;color:var(--green)}.window-stage figure{position:relative;margin:40px 0 28px;height:560px;overflow:hidden}.window-stage img{width:100%;height:100%;object-fit:cover;filter:grayscale(0)}.window-stage figcaption{position:absolute;bottom:0;left:0;right:0;background:linear-gradient(transparent,#000b);padding:70px 30px 28px;font:24px/1.2 'AMI Serif',serif}.window-stage figcaption span{display:block;font:10px/1.5 'AMI Sans',sans-serif;margin-top:14px;text-transform:uppercase;letter-spacing:.08em}.window-footer{display:flex;align-items:center;justify-content:space-between;gap:30px}.window-footer p{font:17px/1.5 'AMI Serif',serif}.window-footer a{font:14px/1.5 'AMI Sans',sans-serif;padding:12px 0;border-bottom:1px solid;text-decoration:none}.window-footer a span{margin-left:32px}.community-window.is-revealing{height:180vh}.is-revealing .window-stage{height:calc(100vh - var(--header-height));position:sticky;top:var(--header-height);padding:38px 5vw;display:flex;flex-direction:column;justify-content:space-between}.is-revealing .window-heading{transform:translateY(calc(var(--open,0)*-25px));opacity:calc(1 - var(--open,0)*.9)}.is-revealing .window-stage figure{position:absolute;inset:30px 5vw 115px;height:auto;margin:0;clip-path:inset(calc((1 - var(--open,0))*32%) calc((1 - var(--open,0))*37%) round calc((1 - var(--open,0))*220px));z-index:1}.is-revealing .window-stage img{filter:grayscale(clamp(0,calc(2 - var(--open,0)*2),1));transform:scale(calc(1.28 - var(--open,0)*.28))}.is-revealing .window-stage figcaption{opacity:var(--open,0)}.is-revealing .window-footer{position:relative;z-index:2;margin-top:auto}
+.community-window{background:#111;color:white}.skip-holder{display:none;position:sticky;top:calc(var(--header-height) + 8px);height:0;z-index:6;overflow:visible}.community-window.is-revealing .skip-holder{display:block}.scene-skip{position:absolute;left:5vw;top:0;background:#fff;color:#111;padding:8px 12px;font:12px 'AMI Sans',sans-serif;text-decoration:none;opacity:0;pointer-events:none;transition:opacity .15s}.scene-skip:focus-visible{opacity:1;pointer-events:auto}.window-stage{position:relative;padding:64px 5vw;overflow:hidden}.window-heading{position:relative;z-index:2;pointer-events:none}.window-heading>p{font:11px/1.5 'AMI Sans',sans-serif;text-transform:uppercase;letter-spacing:.12em;margin-bottom:24px}.window-heading h2{font:500 clamp(48px,7vw,110px)/.98 'AMI Sans',sans-serif;letter-spacing:-.06em}.window-heading h2 em{font-family:'AMI Serif',serif;font-weight:400;color:var(--green)}.window-stage figure{position:relative;margin:40px 0 28px;height:560px;overflow:hidden}.window-stage img{width:100%;height:100%;object-fit:cover;filter:grayscale(clamp(0,calc(2 - var(--open,1)*2),1))}.window-stage figcaption{position:absolute;bottom:0;left:0;right:0;background:linear-gradient(transparent,#000b);padding:70px 30px 28px;font:24px/1.2 'AMI Serif',serif}.window-stage figcaption span{display:block;font:10px/1.5 'AMI Sans',sans-serif;margin-top:14px;text-transform:uppercase;letter-spacing:.08em}.window-footer{display:flex;align-items:center;justify-content:space-between;gap:30px}.window-footer p{font:17px/1.5 'AMI Serif',serif}.window-footer a{font:14px/1.5 'AMI Sans',sans-serif;padding:12px 0;border-bottom:1px solid;text-decoration:none}.window-footer a span{margin-left:32px}
+.community-window.is-revealing{height:calc(250vh*var(--tempo-scale,1))}.is-revealing .window-stage{height:calc(100vh - var(--header-height));height:calc(100svh - var(--header-height));position:sticky;top:var(--header-height);padding:38px 5vw;display:flex;flex-direction:column;justify-content:space-between}.is-revealing .window-heading{transform:translateY(calc(var(--open,0)*var(--head-shift,-25px)));opacity:calc(1 - var(--open,0)*.9)}.is-revealing .window-stage figure{position:absolute;inset:30px 5vw 115px;height:auto;margin:0;clip-path:inset(calc((1 - var(--open,0))*32%) calc((1 - var(--open,0))*37%*var(--open-h,1)) round calc((1 - var(--open,0))*220px));z-index:1}.is-revealing .window-stage img{transform:scale(calc(1.28 - var(--open,0)*.28))}.is-revealing .window-stage figcaption{opacity:var(--open,0)}.is-revealing .window-footer{position:relative;z-index:2;margin-top:auto}
+.is-flow .window-heading{transform:translateY(calc((1 - var(--open,1))*24px));opacity:calc(.3 + var(--open,1)*.7)}.is-flow .window-stage figure{clip-path:inset(calc((1 - var(--open,1))*14%) calc((1 - var(--open,1))*6%) round calc((1 - var(--open,1))*90px))}.is-flow .window-stage img{transform:scale(calc(1.22 - var(--open,1)*.22))}.is-flow .window-stage figcaption{opacity:calc(.25 + var(--open,1)*.75)}.is-flow .window-footer{opacity:calc(.4 + var(--open,1)*.6);transform:translateY(calc((1 - var(--open,1))*18px))}
 @media(max-width:800px){.window-stage{padding:50px 22px}.window-stage figure{height:390px}.window-stage figcaption{padding:60px 22px 22px;font-size:20px}.window-footer{align-items:start;flex-direction:column}.window-heading h2{font-size:52px}}
 </style>
 <script>
- const community=document.querySelector<HTMLElement>('.community-window');if(community){const reduce=matchMedia('(prefers-reduced-motion: reduce)');let frame=0;const update=()=>{frame=0;const active=innerWidth>=1050&&innerHeight>=800&&!reduce.matches;community.classList.toggle('is-revealing',active);if(!active){community.style.setProperty('--open','1');return;}const r=community.getBoundingClientRect();const top=parseFloat(getComputedStyle(document.documentElement).getPropertyValue('--header-height'))||72;const p=Math.max(0,Math.min(1,(top-r.top)/(r.height-innerHeight+top)*1.25));community.style.setProperty('--open',String(p*p*(3-2*p)));};const queue=()=>{if(!frame)frame=requestAnimationFrame(update)};addEventListener('scroll',queue,{passive:true});addEventListener('resize',queue);reduce.addEventListener('change',queue);update();}
+ import { createScrollScene, reducedMotion, viewportHeight, headerHeight, clamp01, localProgress, beat, setupSkipLink } from '../scripts/motion/engine';
+ const community=document.querySelector<HTMLElement>('.community-window');
+ if(community){
+  const stage=community.querySelector<HTMLElement>('.window-stage')!;
+  const heading=community.querySelector<HTMLElement>('.window-heading')!;
+  const figure=community.querySelector<HTMLElement>('figure')!;
+  const footer=community.querySelector<HTMLElement>('.window-footer')!;
+  let overlay=false;
+  setupSkipLink(community);
+  createScrollScene({
+   root:community,
+   margin:420,
+   smooth:true,
+   measure:()=>{
+    const stageBlock=viewportHeight()-headerHeight();
+    community.classList.remove('is-revealing');community.classList.remove('is-flow');
+    // The expanding-window scene runs whenever the stage can actually hold the
+    // heading, the figure, and the footer. Below that it becomes a flow reveal.
+    const need=30+115+380;
+    overlay=!reducedMotion()&&stageBlock>=need&&window.innerWidth>=560;
+    community.classList.toggle('is-revealing',overlay);
+    community.classList.toggle('is-flow',!overlay&&!reducedMotion());
+    // Horizontal expansion and heading displacement follow the measured room.
+    const hFactor=Math.max(.25,Math.min(1,(window.innerWidth-560)/490));
+    const headShift=-25*Math.max(.3,Math.min(1,(stageBlock-need)/140));
+    community.style.setProperty('--open-h',String(hFactor));
+    community.style.setProperty('--head-shift',`${headShift.toFixed(1)}px`);
+   },
+   render:(f)=>{
+    if(f.reduced){community.style.setProperty('--open','1');return}
+    if(overlay){
+     const p=beat(clamp01((f.header-f.top)/Math.max(1,f.height-f.vh+f.header)));
+     community.style.setProperty('--open',String(p*p*(3-2*p)));
+    }else{
+     const r=figure.getBoundingClientRect();
+     const q=localProgress(r,f.vh,.95,.95);
+     community.style.setProperty('--open',String(q*q*(3-2*q)));
+    }
+   },
+  });
+ }
 </script>
