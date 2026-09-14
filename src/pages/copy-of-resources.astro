@@ -45,13 +45,13 @@ const columns = [
 <style>
   .gap { margin-top: 18px; }
   .partners { margin: 52px 0 0 -20px; width: calc(100% + 40px); }
-  .partners h3 { background: var(--green); color: #fff; text-align: center; font-family: var(--font-avenir-heavy); font-size: 33px; line-height: 1.2; padding: 12px 20px; }
+  .partners h3 { background: var(--green); color: #fff; text-align: center; font-family: var(--font-avenir-heavy); font-size: var(--text-heading); line-height: 1.2; padding: 12px 20px; }
   .logos { background: #d3d3d3; display: flex; align-items: center; justify-content: space-between; gap: 10px; padding: 10px 6px; }
   .logos img { height: 84px; width: auto; max-width: 30%; object-fit: contain; }
   .logos img:first-child { height: 96px; }
   @media (max-width: 900px) {
     .partners { margin-left: 0; width: 100%; }
-    .partners h3 { font-size: 24px; }
+    .partners h3 { font-size: var(--text-heading); }
     .logos { flex-wrap: wrap; justify-content: center; }
     .logos img { max-width: 45%; height: 64px; }
   }

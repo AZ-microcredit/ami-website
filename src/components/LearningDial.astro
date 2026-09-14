@@ -7,20 +7,20 @@ const chapters=[{word:'START',title:'Give your idea a starting point.',text:'Exp
  <div class="dial-chapters">{chapters.map((c,i)=><article data-dial-word={c.word}><p class="eyebrow">{c.word} / Your business education</p><h2>{c.title}</h2><p>{c.text}</p><a href={c.href}>{c.link} <span aria-hidden="true"><Icon name="arrow-up-right" /></span></a></article>)}
 </section>
 <style>
-.learning-dial{background:#faf9f2;padding:70px 5vw;display:grid;grid-template-columns:1fr 1fr;gap:9vw;align-items:start}.dial-sticky{position:sticky;top:calc(var(--header-height) + 32px)}.eyebrow{font:11px/1.5 'AMI Sans',sans-serif;text-transform:uppercase;letter-spacing:.12em}.dial-art{position:relative;max-width:520px;margin:24px auto}.dial-art svg{display:block;width:100%;overflow:visible;transform:rotate(var(--angle,0deg))}.dial-art circle{fill:none;stroke:#111;stroke-width:1}.dial-art text{font:500 42px 'AMI Sans',sans-serif;fill:#111;letter-spacing:2px}.dial-word{position:absolute;inset:0;display:grid;place-items:center;transition:opacity .11s ease;font:700 clamp(40px,5.5vw,85px)/1 'AMI Sans',sans-serif;letter-spacing:-.06em;color:#39732b}.dial-word.is-fading{opacity:0}.dial-caption{font:32px/1.15 'AMI Sans',sans-serif;letter-spacing:-.03em}.dial-caption em{font-family:'AMI Serif',serif}.dial-chapters article{min-height:70vh;display:flex;flex-direction:column;justify-content:center;padding:70px 0;border-top:1px solid #bbb}.dial-chapters article:first-child{border-top:0}.dial-chapters h2{font:500 clamp(38px,4vw,62px)/1.04 'AMI Sans',sans-serif;letter-spacing:-.05em;margin:28px 0}.dial-chapters article>p:not(.eyebrow){font:19px/1.65 'AMI Serif',serif;max-width:430px}.dial-chapters a{align-self:start;margin-top:32px;padding:12px 0;border-bottom:1px solid;font:14px/1.5 'AMI Sans',sans-serif;text-decoration:none}.dial-chapters a span{margin-left:25px}
+.learning-dial{background:#faf9f2;padding:70px 5vw;display:grid;grid-template-columns:1fr 1fr;gap:9vw;align-items:start}.dial-sticky{position:sticky;top:calc(var(--header-height) + 32px)}.eyebrow{font:var(--text-label)/1.5 var(--font-heading);text-transform:uppercase;letter-spacing:.12em}.dial-art{position:relative;max-width:520px;margin:24px auto}.dial-art svg{display:block;width:100%;overflow:visible;transform:rotate(var(--angle,0deg))}.dial-art circle{fill:none;stroke:#111;stroke-width:1}.dial-art text{font:500 var(--text-heading) var(--font-heading);fill:#111;letter-spacing:2px}.dial-word{position:absolute;inset:0;display:grid;place-items:center;transition:opacity .11s ease;font:700 var(--text-display)/1 var(--font-heading);letter-spacing:-.06em;color:#39732b}.dial-word.is-fading{opacity:0}.dial-caption{font:var(--text-heading)/1.15 var(--font-heading);letter-spacing:-.03em}.dial-caption em{font-family:var(--font-body)}.dial-chapters article{min-height:70vh;display:flex;flex-direction:column;justify-content:center;padding:70px 0;border-top:1px solid #bbb}.dial-chapters article:first-child{border-top:0}.dial-chapters h2{font:500 var(--text-display)/1.04 var(--font-heading);letter-spacing:-.05em;margin:28px 0}.dial-chapters article>p:not(.eyebrow){font:var(--text-body)/1.65 var(--font-body);max-width:430px}.dial-chapters a{align-self:start;margin-top:32px;padding:12px 0;border-bottom:1px solid;font:var(--text-label)/1.5 var(--font-heading);text-decoration:none}.dial-chapters a span{margin-left:25px}
 @media(max-width:900px){
  .learning-dial{grid-template-columns:1fr;padding:50px 22px;gap:34px}
  /* Compact sticky dial: the word and rotation keep following the chapters. */
  .dial-sticky{position:sticky;top:var(--header-height);z-index:4;display:flex;align-items:center;gap:22px;background:#faf9f2;padding:14px 0}
  .dial-sticky>.eyebrow{position:absolute;width:1px;height:1px;overflow:hidden;clip:rect(0 0 0 0);white-space:nowrap}
  .dial-art{max-width:120px;margin:0;flex-shrink:0}
- .dial-art text{font-size:60px}
- .dial-word{font-size:24px;letter-spacing:-.03em}
- .dial-caption{font-size:20px;margin:0}
+ .dial-art text{font-size:var(--text-display)}
+ .dial-word{font-size:var(--text-heading);letter-spacing:-.03em}
+ .dial-caption{font-size:var(--text-body);margin:0}
  .dial-chapters article{min-height:0;padding:44px 0}
  .dial-chapters article:first-child{border-top:1px solid #bbb}
 }
-@media(prefers-reduced-motion:reduce){.learning-dial{grid-template-columns:1fr;padding:50px 22px;gap:40px}.dial-sticky{position:static}.dial-art{max-width:340px}.dial-word{font-size:55px}.dial-chapters article{min-height:0;padding:40px 0}.dial-chapters article:first-child{border-top:1px solid #bbb}.dial-art svg{transform:none}.dial-caption{text-align:center}}
+@media(prefers-reduced-motion:reduce){.learning-dial{grid-template-columns:1fr;padding:50px 22px;gap:40px}.dial-sticky{position:static}.dial-art{max-width:340px}.dial-word{font-size:var(--text-heading)}.dial-chapters article{min-height:0;padding:40px 0}.dial-chapters article:first-child{border-top:1px solid #bbb}.dial-art svg{transform:none}.dial-caption{text-align:center}}
 </style>
 <script>
  import { createScrollScene } from '../scripts/motion/engine';

@@ -50,9 +50,9 @@ const { items, height = 450, title } = Astro.props;
   .item.current { opacity: 1; visibility: visible; }
   .item a { display: block; height: 100%; }
   .item img { width: 100%; height: 100%; object-fit: cover; }
-  .item figcaption { position: absolute; left: 0; right: 0; bottom: 0; padding: 14px 20px; background: rgba(0,0,0,.55); color: #fff; font-family: var(--font-avenir-heavy); font-size: 18px; }
+  .item figcaption { position: absolute; left: 0; right: 0; bottom: 0; padding: 14px 20px; background: rgba(0,0,0,.55); color: #fff; font-family: var(--font-avenir-heavy); font-size: var(--text-body); }
   .arrow { position: absolute; top: 50%; transform: translateY(-50%); background: none; border: 0; color: #fff; cursor: pointer; padding: 10px; }
   .prev { left: 10px; } .next { right: 10px; }
-  .counter { position: absolute; right: 16px; top: 12px; color: #fff; font-family: var(--font-avenir-light); font-size: 13px; }
+  .counter { position: absolute; right: 16px; top: 12px; color: #fff; font-family: var(--font-avenir-light); font-size: var(--text-label); }
   @media (max-width: 700px) { .frame { height: 60vw; } }
 </style>

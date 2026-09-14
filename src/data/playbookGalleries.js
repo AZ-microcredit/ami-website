@@ -43,7 +43,7 @@ export const elevate = [
 ];
 
 export const expand = [
-  item('AB testing', 'How can I reach a larger market to find my business’s niche?', '760f7c_d6efeed8d0214461b20922054b045f5e.jpg', 'a-b-testing-2'),
+  item('AB testing', 'How can I reach a larger market to find my business’s niche?', '760f7c_d6efeed8d0214461b20922054b045f5e.jpg', 'a-b-testing'),
   item('Finding and Retaining Investors', 'What are different ways to get money for your business?', '760f7c_77833d0317bf48f0a4a64cc6d7a4a80f.png', 'finding-and-retaining-investors'),
   item('Operational Analysis', 'Am I using all of my employees effectively?', '760f7c_9b10cb7665984f238ec9a1e1d0885575.jpg', 'operational-analysis-and-measuring-employee-effectiveness'),
   item('Financial Statements_edited_edited', 'How can I take track my profits and costs?', '760f7c_a3667c56e95a4c8c8bd56fc98c6bb565.jpg', 'creating-financial-statements'),

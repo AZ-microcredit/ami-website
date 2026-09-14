@@ -68,7 +68,7 @@ const staff = [
           <div class="person-card__info">
             <p class="person-card__name">{p.name}</p>
             <p class="person-card__title">{p.title}</p>
-            <a class="person-card__email" href={`mailto:${p.email}`}>{p.email}</a>
+            <a class="person-card__email" href={`mailto:${p.email}`}>{p.email.split('@')[0]}<wbr />@{p.email.split('@')[1]}</a>
           </div>
         </div>
       ))}
@@ -95,13 +95,13 @@ const staff = [
 
 <style>
   .team-section { padding: clamp(52px,6vw,88px) 0 24px; }
-  .team-heading { max-width:1280px;margin:0 auto 12px;padding:0 clamp(22px,4.2vw,54px);font-size:clamp(32px,4vw,52px);letter-spacing:-.035em;line-height:1.15; }
+  .team-heading { max-width:1280px;margin:0 auto 12px;padding:0 clamp(22px,4.2vw,54px);font-size:var(--text-heading);letter-spacing:-.035em;line-height:1.15; }
 
   .exec, .staff { max-width: 1280px; margin: 0 auto; padding: 28px clamp(22px,4.2vw,54px) 44px; }
   .exec .spaced-title, .staff .spaced-title { margin-bottom: 26px; }
 
   .card-grid { display: grid; gap: 20px; }
-  .exec .small,.staff .small{font-size:clamp(22px,2.5vw,30px);line-height:1.2;letter-spacing:-.025em}
+  .exec .small,.staff .small{font-size:var(--text-heading);line-height:1.2;letter-spacing:-.025em}
   .person-card{min-width:0}
   .person-card__info{padding:8px 4px 6px;overflow-wrap:anywhere}
   .person-card__title{line-height:1.5}
@@ -145,22 +145,23 @@ const staff = [
   .person-card__name {
     font-family: var(--font-bold);
     font-weight: 700;
-    font-size: 16px;
+    font-size: var(--text-body);
     line-height: 1.25;
     color: var(--black);
     transition: color 0.5s cubic-bezier(0.22, 1, 0.36, 1);
   }
   .person-card__title {
     font-family: var(--font-body);
-    font-size: 13px;
+    font-size: var(--text-label);
     color: var(--black);
     transition: color 0.5s cubic-bezier(0.22, 1, 0.36, 1);
   }
   .person-card__email {
     font-family: var(--font-body);
-    font-size: 11px;
+    font-size: var(--text-label);
     color: inherit;
-    word-break: break-all;
+    word-break: normal;
+    overflow-wrap: anywhere;
     transition: color 0.5s cubic-bezier(0.22, 1, 0.36, 1);
   }
 
@@ -205,21 +206,21 @@ const staff = [
     outline-offset: 3px;
   }
 
-  .person-card--compact .person-card__name { font-size: 13px; }
-  .person-card--compact .person-card__title { font-size: 11px; }
+  .person-card--compact .person-card__name { font-size: var(--text-label); }
+  .person-card--compact .person-card__title { font-size: var(--text-label); }
   .person-card--compact { padding: 8px; gap: 6px; }
 
   @media (max-width: 900px) {
-    .team-heading { font-size: 36px; letter-spacing: -.035em; }
+    .team-heading { font-size: var(--text-heading); letter-spacing: -.035em; }
     .exec-grid { grid-template-columns: repeat(2, 1fr); }
     .staff-grid { grid-template-columns: repeat(3, 1fr); }
     .staff-grid>.person-card:nth-child(n){grid-column:auto}
     .exec, .staff { padding: 24px 22px 36px; }
   }
   @media (max-width: 600px) {
-    .team-heading { font-size: 30px; letter-spacing: -.035em; }
+    .team-heading { font-size: var(--text-heading); letter-spacing: -.035em; }
     .exec-grid { grid-template-columns: repeat(2, 1fr); gap: 12px; }
     .staff-grid { grid-template-columns: repeat(3, 1fr); gap: 8px; }
-    .person-card__email { font-size: 10px; }
+    .person-card__email { font-size: var(--text-label); }
   }
 </style>

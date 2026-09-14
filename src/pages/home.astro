@@ -25,16 +25,16 @@ const services = [
   .legacy-hero { height: 332px; position: relative; display: grid; place-items: center; }
   .legacy-hero > img { position: absolute; inset: 0; width: 100%; height: 100%; object-fit: cover; }
   h1 { position: relative; text-align: center; color: white; line-height: 1; }
-  h1 strong { display: block; color: var(--green); letter-spacing: .25em; font: bold 90px var(--font-bold); }
-  h1 span { font: 60px 'AMI Serif',serif; }
+  h1 strong { display: block; color: var(--green); letter-spacing: .25em; font: bold var(--text-display) var(--font-bold); }
+  h1 span { font: var(--text-display) var(--font-body); }
   .services { background: var(--green); display: flex; justify-content: center; gap: 200px; padding: 14px 20px 20px; }
-  .services a { color: white; text-align: center; text-decoration: none; font: 20px var(--font-bold); letter-spacing: .15em; }
+  .services a { color: white; text-align: center; text-decoration: none; font: var(--text-body) var(--font-bold); letter-spacing: .15em; }
   .services img { width: 94px; height: 94px; padding: 20px; background: white; border-radius: 50%; margin: 0 auto 8px; }
   .intro { max-width: 940px; margin: auto; text-align: center; padding: 44px 20px 40px; }
-  .intro h2 { font: 34px/1.25 var(--font-bold); margin-bottom: 28px; }
-  .intro .btn { font: 30px var(--font-avenir-light); border-radius: 4px; padding: 14px 50px; }
+  .intro h2 { font: var(--text-heading)/1.25 var(--font-bold); margin-bottom: 28px; }
+  .intro .btn { font: var(--text-heading) var(--font-avenir-light); border-radius: 4px; padding: 14px 50px; }
   .legacy-band { height: 57px; background: var(--green); }
   .legacy-space { height: 940px; }
-  @media (max-width: 900px) { .services { gap: 60px; } .intro h2 { font-size: 28px; } .legacy-space { height: 300px; } }
-  @media (max-width: 600px) { .legacy-hero { height: 280px; } h1 strong { font-size: 58px; } h1 span { font-size: 38px; } .services { gap: 18px; } .services a { font-size: 12px; } .services img { width: 72px; height: 72px; padding: 15px; } .intro h2 { font-size: 22px; } .legacy-space { height: 100px; } }
+  @media (max-width: 900px) { .services { gap: 60px; } .intro h2 { font-size: var(--text-heading); } .legacy-space { height: 300px; } }
+  @media (max-width: 600px) { .legacy-hero { height: 280px; } h1 strong { font-size: var(--text-heading); } h1 span { font-size: var(--text-heading); } .services { gap: 18px; } .services a { font-size: var(--text-label); } .services img { width: 72px; height: 72px; padding: 15px; } .intro h2 { font-size: var(--text-body); } .legacy-space { height: 100px; } }
 </style>

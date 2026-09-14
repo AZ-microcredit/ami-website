@@ -39,17 +39,17 @@ const cards = slugs.map((s) => {
 </ul>
 
 <style>
-  .rc-grid { display: grid; grid-template-columns: repeat(4, 1fr); gap: 12px 11px; max-width: 980px; margin: 0 auto; font-family: 'AMI Serif',serif; }
+  .rc-grid { display: grid; grid-template-columns: repeat(4, 1fr); gap: 12px 11px; max-width: 980px; margin: 0 auto; font-family: var(--font-body); }
   .rc-card { background: #77be6e; color: var(--white); display: flex; flex-direction: column; height: 375px; }
   .rc-thumb { display: block; height: 176px; flex: none; background: #c8c8c8; overflow: hidden; }
   .rc-thumb img { width: 100%; height: 100%; object-fit: cover; }
   .rc-body { padding: 28px 10px 20px; text-align: center; overflow: hidden; }
-  .rc-cat { display: block; font-size: 14px; line-height: 1.4; color: #ddb40d; text-decoration: none; margin-bottom: 8px; }
+  .rc-cat { display: block; font-size: var(--text-label); line-height: 1.4; color: #ddb40d; text-decoration: none; margin-bottom: 8px; }
   .rc-cat:hover { text-decoration: underline; }
-  .rc-title { font-family: inherit; font-size: 22px; line-height: 1.3; margin: 0 0 10px; }
+  .rc-title { font-family: inherit; font-size: var(--text-body); line-height: 1.3; margin: 0 0 10px; }
   .rc-title a { text-decoration: none; }
   .rc-title a:hover { text-decoration: underline; }
-  .rc-text { font-size: 14px; line-height: 1.5; display: -webkit-box; -webkit-line-clamp: 2; -webkit-box-orient: vertical; overflow: hidden; }
+  .rc-text { font-size: var(--text-label); line-height: 1.5; display: -webkit-box; -webkit-line-clamp: 2; -webkit-box-orient: vertical; overflow: hidden; }
 
   @media (max-width: 900px) { .rc-grid { grid-template-columns: repeat(2, 1fr); } .rc-card { height: auto; min-height: 340px; } }
   @media (max-width: 480px) { .rc-grid { grid-template-columns: 1fr; } }

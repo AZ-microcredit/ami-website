@@ -29,17 +29,17 @@ import PlusBand from './PlusBand.astro';
 <style>
   .mission { background: #fafafa; }
   .inner { max-width: var(--content-width); margin: 0 auto; padding: 28px 20px 560px; text-align: center; }
-  .letter-title { font-family: var(--font-avenir-heavy); font-size: 28px; line-height: 1.4; color: #000; }
+  .letter-title { font-family: var(--font-avenir-heavy); font-size: var(--text-heading); line-height: 1.4; color: #000; }
   hr { width: 302px; max-width: 100%; margin: 6px auto 0; border: 0; border-top: 3px solid #000; }
-  .inner > p { max-width: 877px; margin: 0 auto; font-family: var(--font-avenir-light); font-size: 20px; line-height: normal; }
+  .inner > p { max-width: 877px; margin: 0 auto; font-family: var(--font-avenir-light); font-size: var(--text-body); line-height: normal; }
   hr + p { margin-top: 20px; }
   .gap { margin-top: 24px !important; }
-  .donation-placeholder { width: 980px; max-width: 100%; height: 267px; margin: 24px auto 0; border: 1px solid #ececec; background: #fdfdfd; display: flex; align-items: center; justify-content: center; font-family: var(--font-avenir-light); font-size: 18px; letter-spacing: 0.08em; color: #9a9a9a; text-transform: uppercase; }
+  .donation-placeholder { width: 980px; max-width: 100%; height: 267px; margin: 24px auto 0; border: 1px solid #ececec; background: #fdfdfd; display: flex; align-items: center; justify-content: center; font-family: var(--font-avenir-light); font-size: var(--text-body); letter-spacing: 0.08em; color: #9a9a9a; text-transform: uppercase; }
   .tax { max-width: 904px !important; margin-top: 10px !important; line-height: 1.3 !important; }
   @media (max-width: 900px) {
     .inner { padding-bottom: 120px; }
-    .letter-title { font-size: 24px; }
-    .inner > p { font-size: 18px; }
+    .letter-title { font-size: var(--text-heading); }
+    .inner > p { font-size: var(--text-body); }
     .donation-placeholder { height: 220px; }
   }
 </style>

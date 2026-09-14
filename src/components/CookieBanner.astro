@@ -30,12 +30,12 @@ import Icon from './Icon.astro';
     position: fixed; left: 0; right: 0; bottom: 0; z-index: 100;
     background: #fff; box-shadow: 0 -1px 6px rgba(0,0,0,.15);
     display: flex; align-items: center; justify-content: space-between; gap: 20px;
-    padding: 14px 24px; font-family: var(--font-body); font-size: 13px; color: #000;
+    padding: 14px 24px; font-family: var(--font-body); font-size: var(--text-label); color: #000;
   }
   .cookie-banner[hidden] { display: none; }
   .actions { display: flex; align-items: center; gap: 12px; }
-  .settings { color: #000; text-decoration: none; border: 1px solid #000; padding: 6px 14px; font-size: 13px; }
-  .accept { background: #000; color: #fff; border: 1px solid #000; padding: 6px 16px; cursor: pointer; font-size: 13px; }
-  .close { background: none; border: 0; font-size: 20px; line-height: 1; cursor: pointer; padding: 0 4px; }
+  .settings { color: #000; text-decoration: none; border: 1px solid #000; padding: 6px 14px; font-size: var(--text-label); }
+  .accept { background: #000; color: #fff; border: 1px solid #000; padding: 6px 16px; cursor: pointer; font-size: var(--text-label); }
+  .close { background: none; border: 0; font-size: var(--text-body); line-height: 1; cursor: pointer; padding: 0 4px; }
   @media (max-width: 600px) { .cookie-banner { flex-direction: column; align-items: flex-start; } }
 </style>

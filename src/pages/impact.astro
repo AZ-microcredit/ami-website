@@ -58,45 +58,45 @@ const stats = [
 </Base>
 
 <style>
-.report-note{max-width:900px;margin:0 auto 50px;padding:0 24px;font:17px/1.6 'AMI Serif',serif}
+.report-note{max-width:900px;margin:0 auto 50px;padding:0 24px;font:var(--text-body)/1.6 var(--font-body)}
 
   .photo-strip { height: 405px; overflow: hidden; background: #172838; }
   .photo-strip img { width: 100%; height: 100%; object-fit: cover; object-position: center 30%; }
 
   .facts { background: var(--grey-bg); min-height: 371px; padding: 64px 24px 48px; display: grid; grid-template-columns: repeat(3, 1fr); gap: 20px; text-align: center; }
-  .fact h2 { font-family: var(--font-avenir-heavy); font-size: 100px; line-height: 1; color: var(--black); margin-bottom: 30px; }
-  .fact p { font-family: var(--font-avenir-light); font-size: 22px; line-height: 1.4; color: var(--black); max-width: 360px; margin: 0 auto; }
+  .fact h2 { font-family: var(--font-avenir-heavy); font-size: var(--text-display); line-height: 1; color: var(--black); margin-bottom: 30px; }
+  .fact p { font-family: var(--font-avenir-light); font-size: var(--text-body); line-height: 1.4; color: var(--black); max-width: 360px; margin: 0 auto; }
   .fact .g { color: var(--green); }
 
   .history { background: #242323; color: var(--white); min-height: 362px; padding: 64px 20px 50px; text-align: center; }
-  .history p { max-width: 890px; margin: 0 auto; font-family: var(--font-avenir-light); font-size: 22px; line-height: 1.25; }
+  .history p { max-width: 890px; margin: 0 auto; font-family: var(--font-avenir-light); font-size: var(--text-body); line-height: 1.25; }
   .history p + p { margin-top: 26px; }
 
   .stats { background: var(--grey-bg); min-height: 858px; padding: 72px 24px; }
   .stat-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 58px 24px; text-align: center; }
-  .stat h3 { font-family: var(--font-avenir-heavy); font-size: 85px; line-height: 1.05; color: var(--black); margin-bottom: 8px; }
-  .stat p { font-family: var(--font-avenir-light); font-size: 22px; line-height: 1.4; color: var(--black); max-width: 330px; margin: 0 auto; }
+  .stat h3 { font-family: var(--font-avenir-heavy); font-size: var(--text-display); line-height: 1.05; color: var(--black); margin-bottom: 8px; }
+  .stat p { font-family: var(--font-avenir-light); font-size: var(--text-body); line-height: 1.4; color: var(--black); max-width: 330px; margin: 0 auto; }
   .stat.green h3, .stat.green p { color: var(--green); }
   .hear { text-align: center; margin-top: 80px; }
-  .hear p { font-family: var(--font-avenir-heavy); font-size: 30px; color: var(--black); margin-bottom: 26px; }
-  .testi-btn { display: inline-flex; align-items: center; justify-content: center; width: 371px; max-width: 100%; height: 84px; background: var(--green); color: var(--white); text-decoration: none; font-family: var(--font-avenir-heavy); font-size: 26px; transition: background .2s; }
+  .hear p { font-family: var(--font-avenir-heavy); font-size: var(--text-heading); color: var(--black); margin-bottom: 26px; }
+  .testi-btn { display: inline-flex; align-items: center; justify-content: center; width: 371px; max-width: 100%; height: 84px; background: var(--green); color: var(--white); text-decoration: none; font-family: var(--font-avenir-heavy); font-size: var(--text-heading); transition: background .2s; }
   .testi-btn:hover { background: var(--green-dark); }
 
   @media (max-width: 900px) {
     .photo-strip { height: 50vw; min-height: 220px; }
     .facts { grid-template-columns: 1fr; padding: 40px 20px; min-height: 0; }
-    .fact h2 { font-size: 64px; margin-bottom: 12px; }
+    .fact h2 { font-size: var(--text-display); margin-bottom: 12px; }
     .history { padding: 40px 20px; min-height: 0; }
-    .history p { font-size: 19px; }
+    .history p { font-size: var(--text-body); }
     .stats { min-height: 0; padding: 50px 20px; }
     .stat-grid { grid-template-columns: repeat(2, 1fr); row-gap: 36px; }
-    .stat h3 { font-size: 56px; }
-    .stat p { font-size: 18px; }
+    .stat h3 { font-size: var(--text-heading); }
+    .stat p { font-size: var(--text-body); }
     .hear { margin-top: 50px; }
-    .testi-btn { height: 64px; font-size: 22px; }
+    .testi-btn { height: 64px; font-size: var(--text-body); }
   }
   @media (max-width: 600px) {
     .stat-grid { grid-template-columns: 1fr; }
-    .hear p { font-size: 24px; }
+    .hear p { font-size: var(--text-heading); }
   }
 </style>

@@ -20,7 +20,7 @@ const { people, boldLines = false, class: cls = '' } = Astro.props;
   .advisor-grid { display: grid; grid-template-columns: repeat(3, 245px); justify-content: center; row-gap: 44px; }
   .advisor { text-align: center; }
   .advisor img { width: 200px; height: 200px; border-radius: 50%; object-fit: cover; margin: 0 auto 12px; }
-  .advisor h3 { font-family: var(--font-bold); font-size: 17px; line-height: 1.2; }
+  .advisor h3 { font-family: var(--font-bold); font-size: var(--text-body); line-height: 1.2; }
   .advisor .role { font-family: var(--font-body); }
   .bold-lines .advisor .role { font-family: var(--font-bold); }
   @media (max-width: 900px) { .advisor-grid { grid-template-columns: repeat(2, 1fr); gap: 36px 16px; } }

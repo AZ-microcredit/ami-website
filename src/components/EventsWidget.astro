@@ -43,13 +43,13 @@ const locationText = (e: any) => e.shortLocation ?? e.locationName ?? e.location
 )}
 
 <style>
-  .no-events { font-family: var(--font-bold); font-size: 17px; text-align: center; }
+  .no-events { font-family: var(--font-bold); font-size: var(--text-body); text-align: center; }
   .event-cards { display: grid; grid-template-columns: repeat(auto-fit, minmax(280px, 1fr)); gap: 30px; }
   .event-card { text-align: center; max-width: 660px; margin: 0 auto; }
   .event-card img { width: 100%; aspect-ratio: 1; object-fit: cover; margin-bottom: 26px; }
-  .event-card h3 { font-family: var(--font-avenir-heavy); font-size: 24px; margin-bottom: 8px; }
+  .event-card h3 { font-family: var(--font-avenir-heavy); font-size: var(--text-heading); margin-bottom: 8px; }
   .event-card h3 a { text-decoration: none; }
-  .event-card .meta { font-family: var(--font-avenir-light); font-size: 16px; margin-bottom: 18px; white-space: pre-wrap; }
-  .event-card .more { display: table; margin: 0 auto 26px; font-family: var(--font-avenir-light); font-size: 14px; }
-  .event-card .rsvp { text-transform: none; font-family: var(--font-avenir-light); font-size: 16px; padding: 8px 46px; }
+  .event-card .meta { font-family: var(--font-avenir-light); font-size: var(--text-body); margin-bottom: 18px; white-space: pre-wrap; }
+  .event-card .more { display: table; margin: 0 auto 26px; font-family: var(--font-avenir-light); font-size: var(--text-label); }
+  .event-card .rsvp { text-transform: none; font-family: var(--font-avenir-light); font-size: var(--text-body); padding: 8px 46px; }
 </style>

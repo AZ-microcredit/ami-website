@@ -49,54 +49,54 @@ import Hero from '../components/Hero.astro';
 </Base>
 
 <style>
- .donation-placeholder{height:auto!important;padding:45px 24px!important;color:#111!important;letter-spacing:normal!important;text-transform:none!important;text-align:center}.donation-placeholder h2{font:32px/1.15 'AMI Sans',sans-serif}.donation-placeholder p{font:17px/1.6 'AMI Serif',serif;max-width:580px;margin:20px auto}.tax{background:#f2f2f2!important}.tax p{color:#333!important;font-size:15px!important;line-height:1.7!important;text-align:left!important}
+ .donation-placeholder{height:auto!important;padding:45px 24px!important;color:#111!important;letter-spacing:normal!important;text-transform:none!important;text-align:center}.donation-placeholder h2{font:var(--text-heading)/1.15 var(--font-heading)}.donation-placeholder p{font:var(--text-body)/1.6 var(--font-body);max-width:580px;margin:20px auto}.tax{background:#f2f2f2!important}.tax p{color:#333!important;font-size:var(--text-body)!important;line-height:1.7!important;text-align:left!important}
 
   /* Hero: centered "SUPPORT US" box + solid green DONATE button */
   :global(.donate-hero .hero-content) { padding-top: 26px; gap: 0; }
-  :global(.donate-hero .hero-content .hero-title.support) { background: #68b04d; color: #fafafa; font-size: 80px; line-height: 1.15; letter-spacing: -0.02em; padding: 0 6px 0 8px; }
-  .donate-btn { display: inline-flex; align-items: center; justify-content: center; width: 235px; height: 47px; margin-top: 23px; background: var(--green); color: var(--white); font-family: var(--font-body); font-size: 19px; text-decoration: none; transition: background .4s; }
+  :global(.donate-hero .hero-content .hero-title.support) { background: #68b04d; color: #fafafa; font-size: var(--text-display); line-height: 1.15; letter-spacing: -0.02em; padding: 0 6px 0 8px; }
+  .donate-btn { display: inline-flex; align-items: center; justify-content: center; width: 235px; height: 47px; margin-top: 23px; background: var(--green); color: var(--white); font-family: var(--font-body); font-size: var(--text-body); text-decoration: none; transition: background .4s; }
   .donate-btn:hover { background: var(--green-dark); }
 
   .tagline { max-width: var(--content-width); margin: 0 auto; padding: 22px 20px 0; text-align: center; }
-  .tagline p { font-family: 'AMI Serif',serif; font-style: italic; font-size: 20px; line-height: normal; color: #000; }
+  .tagline p { font-family: var(--font-body); font-style: italic; font-size: var(--text-body); line-height: normal; color: #000; }
   .tagline hr { width: 608px; max-width: 100%; margin: 2px auto 0; border: 0; border-top: 2px solid var(--green); }
 
   /* Full-bleed two-column strip: letter (left) | photo (right) */
   .letter { display: grid; grid-template-columns: 1fr 1fr; margin-top: 30px; min-height: 567px; }
   .letter-text { padding: 20px 60px 40px 74px; }
-  .letter-text h2 { font-family: var(--font-avenir-heavy); font-size: 28px; line-height: 1.4; text-align: center; max-width: 489px; }
+  .letter-text h2 { font-family: var(--font-avenir-heavy); font-size: var(--text-heading); line-height: 1.4; text-align: center; max-width: 489px; }
   .letter-text hr { width: 302px; margin: 4px 0 20px; border: 0; border-top: 4px solid var(--black); }
-  .letter-text p { max-width: 488px; font-family: var(--font-body); font-size: 20px; line-height: normal; }
+  .letter-text p { max-width: 488px; font-family: var(--font-body); font-size: var(--text-body); line-height: normal; }
   .letter-text p + p { margin-top: 23px; }
-  .donate-outline { display: inline-flex; align-items: center; justify-content: center; width: 230px; height: 46px; margin: 56px 0 0 100px; padding: 0; border: 1px solid var(--green-dark); background: transparent; color: var(--black); font-size: 14px; letter-spacing: 0.12em; transition: background .2s, color .2s; }
+  .donate-outline { display: inline-flex; align-items: center; justify-content: center; width: 230px; height: 46px; margin: 56px 0 0 100px; padding: 0; border: 1px solid var(--green-dark); background: transparent; color: var(--black); font-size: var(--text-label); letter-spacing: 0.12em; transition: background .2s, color .2s; }
   .donate-outline:hover { background: var(--green-dark); color: var(--white); border-color: transparent; }
   .letter-photo { position: relative; min-height: 567px; }
   .letter-photo img { position: absolute; inset: 0; width: 100%; height: 100%; object-fit: cover; object-position: center; }
 
   .donation { padding: 20px 20px; }
-  .donation-placeholder { width: 865px; max-width: 100%; height: 267px; margin: 0 auto; border: 1px solid #e3e3e3; background: #fcfcfc; display: flex; align-items: center; justify-content: center; font-family: var(--font-avenir-light); font-size: 18px; letter-spacing: 0.08em; color: #9a9a9a; text-transform: uppercase; }
+  .donation-placeholder { width: 865px; max-width: 100%; height: 267px; margin: 0 auto; border: 1px solid #e3e3e3; background: #fcfcfc; display: flex; align-items: center; justify-content: center; font-family: var(--font-avenir-light); font-size: var(--text-body); letter-spacing: 0.08em; color: #9a9a9a; text-transform: uppercase; }
 
   .tax { padding: 30px 20px 24px; }
-  .tax p { max-width: 900px; margin: 0 auto; text-align: center; font-family: var(--font-avenir-light); font-size: 20px; line-height: 1.4; color: var(--white); }
+  .tax p { max-width: 900px; margin: 0 auto; text-align: center; font-family: var(--font-avenir-light); font-size: var(--text-body); line-height: 1.4; color: var(--white); }
 
   @media (max-width: 900px) {
-    :global(.donate-hero .hero-content .hero-title.support) { font-size: 48px; }
-    .donate-btn { width: 200px; height: 44px; font-size: 17px; }
+    :global(.donate-hero .hero-content .hero-title.support) { font-size: var(--text-heading); }
+    .donate-btn { width: 200px; height: 44px; font-size: var(--text-body); }
     .letter { grid-template-columns: 1fr; min-height: 0; }
     .letter-text { padding: 20px 20px 30px; }
-    .letter-text h2 { text-align: left; font-size: 24px; }
-    .letter-text p { font-size: 18px; }
+    .letter-text h2 { text-align: left; font-size: var(--text-heading); }
+    .letter-text p { font-size: var(--text-body); }
     .donate-outline { margin: 32px 0 0; }
     .letter-photo { min-height: 0; height: 60vw; max-height: 480px; }
     .donation-placeholder { height: 220px; }
-    .tax p { font-size: 17px; }
+    .tax p { font-size: var(--text-body); }
   }
   @media (max-width: 600px) {
-    :global(.donate-hero .hero-content .hero-title.support) { font-size: 34px; }
-    .tagline p { font-size: 17px; }
-    .letter-text h2 { font-size: 21px; }
+    :global(.donate-hero .hero-content .hero-title.support) { font-size: var(--text-heading); }
+    .tagline p { font-size: var(--text-body); }
+    .letter-text h2 { font-size: var(--text-body); }
     .letter-text hr { width: 200px; }
-    .letter-text p { font-size: 16px; }
-    .tax p { font-size: 15px; }
+    .letter-text p { font-size: var(--text-body); }
+    .tax p { font-size: var(--text-body); }
   }
 </style>

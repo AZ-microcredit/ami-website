@@ -90,19 +90,19 @@ const {
   .tut .tut-hero { background: var(--green-dark); color: var(--white); }
   .tut .tut-hero-inner { position: relative; max-width: var(--content-width); margin: 0 auto; padding: 14px 20px 9px 55px; }
   .tut .tut-plus { position: absolute; left: -2px; top: 20px; width: 40px; height: 39px; }
-  .tut .tut-hero h1 { font-family: var(--font-avenir-heavy); font-size: 55px; line-height: 1.25; color: var(--white); text-transform: uppercase; }
-  .tut .tut-sub { font-family: var(--font-noticia); font-style: italic; font-size: 20px; line-height: 1.4; color: var(--black); margin-top: 4px; }
+  .tut .tut-hero h1 { font-family: var(--font-avenir-heavy); font-size: var(--text-heading); line-height: 1.25; color: var(--white); text-transform: uppercase; }
+  .tut .tut-sub { font-family: var(--font-noticia); font-style: italic; font-size: var(--text-body); line-height: 1.4; color: var(--black); margin-top: 4px; }
 
   /* ---- body ---- */
   .tut .tut-body { max-width: var(--content-width); margin: 0 auto; padding: 21px 0 0; }
-  .tut .tut-lead { font-family: var(--font-avenir-light); font-size: 20px; line-height: 1.4; color: var(--black); max-width: 100%; }
+  .tut .tut-lead { font-family: var(--font-avenir-light); font-size: var(--text-body); line-height: 1.4; color: var(--black); max-width: 100%; }
   .tut .tut-lead b, .tut .tut-lead strong { font-family: var(--font-avenir-heavy); font-weight: 400; }
-  .tut .tut-note { font-family: var(--font-avenir-light); font-size: 20px; line-height: 1.2; text-align: center; width: 656px; max-width: 100%; margin: 30px auto 0; padding: 0 20px 20px; }
+  .tut .tut-note { font-family: var(--font-avenir-light); font-size: var(--text-body); line-height: 1.2; text-align: center; width: 656px; max-width: 100%; margin: 30px auto 0; padding: 0 20px 20px; }
   .tut .tut-note a { color: inherit; text-decoration: none; }
   .tut .tut-note a[href^='/'] { text-decoration: underline; }
 
   /* Wix-style rounded green button ("Break Even Template") */
-  .tut .tut-btn { display: flex; align-items: center; justify-content: center; background: var(--green-dark); color: var(--white); border-radius: 5px; font-family: var(--font-avenir-light); font-size: 20px; line-height: 1.4; text-decoration: none; text-align: center; padding: 0 10px; max-width: 100%; transition: background .4s, color .4s; }
+  .tut .tut-btn { display: flex; align-items: center; justify-content: center; background: var(--green-dark); color: var(--white); border-radius: 5px; font-family: var(--font-avenir-light); font-size: var(--text-body); line-height: 1.4; text-decoration: none; text-align: center; padding: 0 10px; max-width: 100%; transition: background .4s, color .4s; }
   .tut .tut-btn:hover { background: var(--green); }
 
   /* Wix Video box: poster + dark overlay + title + play button (video is
@@ -111,27 +111,27 @@ const {
   .tut .tut-video { position: relative; overflow: hidden; background: #000; max-width: 100%; }
   .tut .tut-video img { width: 100%; height: 100%; object-fit: cover; }
   .tut .tut-video-overlay { position: absolute; inset: 0; background: rgba(0, 0, 0, 0.35); display: flex; flex-direction: column; align-items: center; justify-content: center; gap: 30px; text-align: center; padding: 20px; }
-  .tut .tut-video-overlay h3 { font-family: var(--font-body); font-size: 36px; line-height: 1.3; color: var(--white); max-width: 90%; }
+  .tut .tut-video-overlay h3 { font-family: var(--font-body); font-size: var(--text-heading); line-height: 1.3; color: var(--white); max-width: 90%; }
   .tut .tut-video-overlay button { width: 56px; height: 56px; padding: 0; border: 0; background: none; cursor: pointer; display: block; }
   .tut .tut-video-overlay svg { width: 56px; height: 56px; display: block; }
 
   /* Wix "PDF File Viewer" app placeholder */
-  .tut .tut-pdf { position: relative; max-width: 100%; background: #e9e9e9; border: 1px solid #a9a9a9; box-sizing: border-box; display: flex; align-items: center; justify-content: center; text-align: center; color: var(--grey-text); font-family: var(--font-avenir-light); font-size: 15px; line-height: 1.4; padding: 20px; }
+  .tut .tut-pdf { position: relative; max-width: 100%; background: #e9e9e9; border: 1px solid #a9a9a9; box-sizing: border-box; display: flex; align-items: center; justify-content: center; text-align: center; color: var(--grey-text); font-family: var(--font-avenir-light); font-size: var(--text-body); line-height: 1.4; padding: 20px; }
   .tut .tut-pdf span { max-width: 300px; }
 
   @media (max-width: 900px) {
     .tut .tut-hero-inner { padding-left: 60px; }
     .tut .tut-plus { left: 12px; }
-    .tut .tut-hero h1 { font-size: 36px; }
+    .tut .tut-hero h1 { font-size: var(--text-heading); }
     .tut .tut-body { padding: 20px 20px 0; }
     .tut .tut-lead { width: auto !important; margin-left: 0 !important; }
-    .tut .tut-video-overlay h3 { font-size: 24px; }
+    .tut .tut-video-overlay h3 { font-size: var(--text-heading); }
   }
   @media (max-width: 600px) {
-    .tut .tut-hero h1 { font-size: 28px; }
-    .tut .tut-sub { font-size: 17px; }
-    .tut .tut-lead, .tut .tut-note { font-size: 18px; }
+    .tut .tut-hero h1 { font-size: var(--text-heading); }
+    .tut .tut-sub { font-size: var(--text-body); }
+    .tut .tut-lead, .tut .tut-note { font-size: var(--text-body); }
     .tut .tut-video-overlay { gap: 16px; }
-    .tut .tut-video-overlay h3 { font-size: 20px; }
+    .tut .tut-video-overlay h3 { font-size: var(--text-body); }
   }
 </style>

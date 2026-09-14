@@ -43,25 +43,25 @@ const application = 'https://form.jotform.com/252378373939169?fbclid=PAZXh0bgNhZ
   .photo-strip img { width: 100%; height: 100%; object-fit: cover; object-position: center 40%; filter: blur(14px); transform: scale(1.06); }
 
   .join { background: var(--grey-bg); min-height: 1219px; padding: 44px 20px 60px; }
-  .inner { max-width: 640px; margin: 0 auto; text-align: center; font-family: var(--font-avenir-light); font-size: 20px; line-height: 1.2; color: var(--black); }
-  .inner h1 { font-family: var(--font-avenir-heavy); font-size: 29px; line-height: 1.2; max-width: 420px; margin: 0 auto 28px; }
-  .inner h2 { font-family: var(--font-avenir-heavy); font-size: 22px; margin: 26px 0 14px; }
+  .inner { max-width: 640px; margin: 0 auto; text-align: center; font-family: var(--font-avenir-light); font-size: var(--text-body); line-height: 1.2; color: var(--black); }
+  .inner h1 { font-family: var(--font-avenir-heavy); font-size: var(--text-heading); line-height: 1.2; max-width: 420px; margin: 0 auto 28px; }
+  .inner h2 { font-family: var(--font-avenir-heavy); font-size: var(--text-body); margin: 26px 0 14px; }
   .inner p { margin: 0 0 24px; }
   .inner p.tight { margin-bottom: 30px; line-height: 1.4; }
   .inner a { color: inherit; }
   .inner b { font-family: var(--font-avenir-heavy); font-weight: normal; }
   .more { margin-top: 40px !important; }
   .apply-wrap { margin: 36px 0 60px !important; }
-  .apply { display: inline-flex; align-items: center; justify-content: center; width: 138px; height: 38px; background: #2ca01e; color: var(--white) !important; text-decoration: none; font-family: var(--font-avenir-light); font-size: 22px; letter-spacing: 0.12em; transition: background .2s; }
+  .apply { display: inline-flex; align-items: center; justify-content: center; width: 138px; height: 38px; background: #2ca01e; color: var(--white) !important; text-decoration: none; font-family: var(--font-avenir-light); font-size: var(--text-body); letter-spacing: 0.12em; transition: background .2s; }
   .apply:hover { background: var(--green); }
-  .faq-title { font-size: 29px !important; margin-bottom: 20px !important; }
+  .faq-title { font-size: var(--text-heading) !important; margin-bottom: 20px !important; }
   .faqs { max-width: 650px; margin: 0 auto; text-align: left; }
   .faqs p { margin-bottom: 20px; line-height: 1.25; }
 
   @media (max-width: 900px) {
     .photo-strip { height: 50vw; min-height: 220px; }
     .join { min-height: 0; padding: 30px 20px 50px; }
-    .inner { font-size: 18px; }
+    .inner { font-size: var(--text-body); }
   }
-  @media (max-width: 600px) { .inner { font-size: 16px; } .inner h1 { font-size: 24px; } }
+  @media (max-width: 600px) { .inner { font-size: var(--text-body); } .inner h1 { font-size: var(--text-heading); } }
 </style>

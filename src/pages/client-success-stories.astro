@@ -41,7 +41,7 @@ const excerpts: Record<string, string> = {
         <article class="post-card">
           <a class="cover" href={postUrl(p)} tabindex="-1" aria-hidden="true"><img src={p.cover} alt={p.title} loading="lazy" /></a>
           <div class="body">
-            <a class="author" href="/profile/login/profile"><span class="avatar" aria-hidden="true"></span>The AMI Team</a>
+            <a class="author" href="/about-us#meet-the-team"><span class="avatar" aria-hidden="true"></span>The AMI Team</a>
             <h3><a href={postUrl(p)}>{p.title}</a></h3>
             <p>{excerpts[p.slug]}</p>
           </div>
@@ -55,9 +55,9 @@ const excerpts: Record<string, string> = {
   .quotes { display: grid; grid-template-columns: repeat(3, 1fr); border-top: 1px solid var(--black); border-bottom: 1px solid var(--black); min-height: 648px; }
   .quote { border-left: 1px solid var(--black); padding: 78px 50px 40px; text-align: center; }
   .quote:first-child { border-left: 0; }
-  .mark { display: block; font-family: var(--font-avenir-heavy); font-size: 120px; line-height: 0.75; color: var(--green); height: 90px; }
-  .quote h2 { font-family: var(--font-bold); font-size: 26px; line-height: normal; margin: 40px 0 16px; }
-  .quote blockquote { margin: 0; font-family: var(--font-body); font-size: 20px; line-height: 1.4; }
+  .mark { display: block; font-family: var(--font-avenir-heavy); font-size: var(--text-display); line-height: 0.75; color: var(--green); height: 90px; }
+  .quote h2 { font-family: var(--font-bold); font-size: var(--text-heading); line-height: normal; margin: 40px 0 16px; }
+  .quote blockquote { margin: 0; font-family: var(--font-body); font-size: var(--text-body); line-height: 1.4; }
   .quote blockquote.loose { line-height: 1.8; }
 
   .posts { background: var(--grey-bg); min-height: 842px; padding: 41px 20px 70px; }
@@ -66,17 +66,17 @@ const excerpts: Record<string, string> = {
   .post-card .cover { display: block; }
   .post-card .cover img { width: 100%; height: 337px; object-fit: cover; }
   .post-card .body { padding: 34px 40px 30px 36px; font-family: var(--font-avenir-light); }
-  .author { display: inline-flex; align-items: center; gap: 8px; font-size: 12px; color: #444; text-decoration: none; margin-bottom: 18px; }
+  .author { display: inline-flex; align-items: center; gap: 8px; font-size: var(--text-label); color: #444; text-decoration: none; margin-bottom: 18px; }
   .avatar { width: 26px; height: 26px; border-radius: 50%; background: #c9c9c9; display: inline-block; }
-  .post-card h3 { font-family: var(--font-avenir-heavy); font-size: 22px; line-height: 1.3; margin-bottom: 14px; display: -webkit-box; -webkit-line-clamp: 3; -webkit-box-orient: vertical; overflow: hidden; }
+  .post-card h3 { font-family: var(--font-avenir-heavy); font-size: var(--text-body); line-height: 1.3; margin-bottom: 14px; display: -webkit-box; -webkit-line-clamp: 3; -webkit-box-orient: vertical; overflow: hidden; }
   .post-card h3 a { text-decoration: none; }
-  .post-card p { font-size: 14px; line-height: 1.5; }
+  .post-card p { font-size: var(--text-label); line-height: 1.5; }
 
   @media (max-width: 900px) {
     .quotes { grid-template-columns: 1fr; min-height: 0; }
     .quote { border-left: 0; border-top: 1px solid var(--black); padding: 40px 24px; }
     .quote:first-child { border-top: 0; }
-    .mark { font-size: 80px; height: 60px; }
+    .mark { font-size: var(--text-display); height: 60px; }
     .posts { min-height: 0; padding: 30px 16px 50px; }
     .post-card { grid-template-columns: 1fr; }
     .post-card .cover img { height: 240px; }

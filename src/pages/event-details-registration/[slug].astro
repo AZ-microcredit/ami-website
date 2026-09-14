@@ -104,36 +104,36 @@ const description = e.tagline ?? e.description?.[0] ?? `${e.title}: an Arizona M
   .ev-media { background: #fcd307; display: flex; align-items: center; justify-content: center; overflow: hidden; }
   .ev-media img { width: 100%; height: auto; max-height: 100%; object-fit: cover; }
   .ev-head { background: #fcf7e6; display: flex; flex-direction: column; align-items: center; justify-content: center; text-align: center; padding: 50px 40px; }
-  .ev-short { font-family: var(--font-body); font-size: 18px; line-height: 1.3; }
+  .ev-short { font-family: var(--font-body); font-size: var(--text-body); line-height: 1.3; }
   .ev-short .sep { margin: 0 10px; }
-  .ev-head h1 { font-family: var(--font-bold); font-size: 64px; line-height: 1.1; margin: 8px 0 0; word-wrap: break-word; max-width: 100%; }
-  .ev-tagline { font-family: var(--font-body); font-size: 16px; line-height: 1.5; margin-top: 30px; }
+  .ev-head h1 { font-family: var(--font-bold); font-size: var(--text-display); line-height: 1.1; margin: 8px 0 0; word-wrap: break-word; max-width: 100%; }
+  .ev-tagline { font-family: var(--font-body); font-size: var(--text-body); line-height: 1.5; margin-top: 30px; }
   .ev-divider { width: 100%; max-width: 484px; border: 0; border-top: 1px solid #cfcac0; margin: 44px 0 46px; }
-  .ev-state { font-family: var(--font-body); font-size: 16px; line-height: 1.5; }
+  .ev-state { font-family: var(--font-body); font-size: var(--text-body); line-height: 1.5; }
   .ev-state a { color: inherit; }
-  .ev-register, .ev-checkout { display: inline-block; background: #ddb40d; color: #fff; font-family: var(--font-body); font-size: 16px; text-decoration: none; padding: 14px 60px; margin-top: 30px; transition: background .2s; }
+  .ev-register, .ev-checkout { display: inline-block; background: #ddb40d; color: #fff; font-family: var(--font-body); font-size: var(--text-body); text-decoration: none; padding: 14px 60px; margin-top: 30px; transition: background .2s; }
   .ev-register:hover, .ev-checkout:hover { background: #c9a30a; }
 
   .ev-body { max-width: 843px; margin: 0 auto; padding: 58px 20px 30px; }
   .ev-section { margin-bottom: 56px; }
-  .ev-section h2 { font-family: var(--font-bold); font-size: 32px; line-height: 1.2; margin-bottom: 14px; }
-  .ev-lines, .ev-about { font-family: var(--font-body); font-size: 16px; line-height: 1.5; }
+  .ev-section h2 { font-family: var(--font-bold); font-size: var(--text-heading); line-height: 1.2; margin-bottom: 14px; }
+  .ev-lines, .ev-about { font-family: var(--font-body); font-size: var(--text-body); line-height: 1.5; }
   .ev-about p { margin-bottom: 0; }
   .ev-about p + p { margin-top: 0; }
   .ev-links { margin-top: 10px; }
   .ev-links a { color: var(--green-dark); }
-  .ev-map { height: 300px; background: #f1f1f1; border: 1px solid #e3e3e3; display: flex; flex-direction: column; align-items: center; justify-content: center; gap: 10px; color: #666; font-family: var(--font-body); font-size: 14px; text-align: center; padding: 20px; }
+  .ev-map { height: 300px; background: #f1f1f1; border: 1px solid #e3e3e3; display: flex; flex-direction: column; align-items: center; justify-content: center; gap: 10px; color: #666; font-family: var(--font-body); font-size: var(--text-label); text-align: center; padding: 20px; }
   .ev-map .pin { width: 22px; height: 22px; border-radius: 50% 50% 50% 0; background: #ddb40d; transform: rotate(-45deg); }
 
   .ev-tickets h2 { border-bottom: 1px solid #ccc; padding-bottom: 16px; }
   .ticket-row { display: grid; grid-template-columns: 1fr 1fr 1fr; font-family: var(--font-body); }
-  .ticket-head { font-size: 14px; padding: 10px 0 4px; }
+  .ticket-head { font-size: var(--text-label); padding: 10px 0 4px; }
   .ticket-head span:nth-child(2), .ticket-row .tp { padding-left: 32px; border-left: 1px solid #ccc; }
-  .ticket-row .tt, .ticket-row .tp { font-size: 20px; }
+  .ticket-row .tt, .ticket-row .tp { font-size: var(--text-body); }
   .ticket-row .tq { text-align: right; }
-  .ticket-row select { font: inherit; font-size: 16px; padding: 8px 14px; min-width: 100px; border: 1px solid #333; background: #fff; }
+  .ticket-row select { font: inherit; font-size: var(--text-body); padding: 8px 14px; min-width: 100px; border: 1px solid #333; background: #fff; }
   .ticket-row:not(.ticket-head) { padding: 4px 0 16px; border-bottom: 1px solid #ccc; }
-  .ticket-total { display: flex; justify-content: flex-end; gap: 220px; font-family: var(--font-body); font-size: 22px; padding: 22px 0 12px; }
+  .ticket-total { display: flex; justify-content: flex-end; gap: 220px; font-family: var(--font-body); font-size: var(--text-body); padding: 22px 0 12px; }
   .ev-checkout { display: block; width: 340px; max-width: 100%; margin-left: auto; text-align: center; margin-top: 0; padding: 14px 20px; }
 
   .share-links { display: flex; gap: 30px; align-items: center; padding-top: 4px; }
@@ -146,14 +146,14 @@ const description = e.tagline ?? e.description?.[0] ?? `${e.title}: an Arizona M
     .ev-media { padding: 24px 0; }
     .ev-media img { max-height: none; }
     .ev-head { padding: 36px 20px; }
-    .ev-head h1 { font-size: 40px; }
+    .ev-head h1 { font-size: var(--text-heading); }
     .ev-body { padding: 36px 20px 20px; }
-    .ev-section h2 { font-size: 26px; }
+    .ev-section h2 { font-size: var(--text-heading); }
     .ticket-total { gap: 60px; }
   }
   @media (max-width: 600px) {
-    .ev-head h1 { font-size: 30px; }
-    .ev-short { font-size: 15px; }
+    .ev-head h1 { font-size: var(--text-heading); }
+    .ev-short { font-size: var(--text-body); }
     .ticket-row { grid-template-columns: 1fr 1fr; }
     .ticket-head span:nth-child(3), .ticket-row .tq { grid-column: span 2; text-align: left; padding-top: 10px; }
   }

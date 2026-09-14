@@ -19,9 +19,9 @@ const hasCustom = Astro.slots.has('default');
 </p>
 
 <style>
-  .cant-find { font-family: var(--font-avenir-light); font-size: 20px; line-height: 1.2; text-align: center; width: 656px; max-width: 100%; margin: 0 auto; padding: 0 20px; }
+  .cant-find { font-family: var(--font-avenir-light); font-size: var(--text-body); line-height: 1.2; text-align: center; width: 656px; max-width: 100%; margin: 0 auto; padding: 0 20px; }
   .cant-find a { color: inherit; text-decoration: none; }
   .cant-find a.u, .cant-find :global(a.u) { text-decoration: underline; }
   .cant-find :global(b) { font-family: var(--font-avenir-heavy); font-weight: 400; }
-  @media (max-width: 600px) { .cant-find { font-size: 18px; } }
+  @media (max-width: 600px) { .cant-find { font-size: var(--text-body); } }
 </style>

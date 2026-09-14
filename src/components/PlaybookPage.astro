@@ -87,22 +87,22 @@ const { pageTitle, description, title, subtitle, items, gap = 13, boxColor = '#5
   .pb-inner { max-width: var(--content-width); margin: 0 auto; padding: 0 20px; }
 
   /* intro paragraphs passed through the slot */
-  .pb-inner :global(.pb-intro) { width: 866px; max-width: 100%; margin: 34px 0 0 46px; font-family: var(--font-avenir-light); font-size: 20px; line-height: 1.4; }
+  .pb-inner :global(.pb-intro) { width: 866px; max-width: 100%; margin: 34px 0 0 46px; font-family: var(--font-avenir-light); font-size: var(--text-body); line-height: 1.4; }
   .pb-inner :global(.pb-intro p + p) { margin-top: 24px; }
   .pb-inner :global(.pb-intro em) { font-style: italic; }
   .pb-inner :global(.pb-intro strong) { font-family: var(--font-avenir-heavy); font-weight: 400; }
-  .pb-inner :global(.pb-intro.small) { font-size: 18px; margin-left: 44px; margin-top: 30px; }
+  .pb-inner :global(.pb-intro.small) { font-size: var(--text-body); margin-left: 44px; margin-top: 30px; }
 
   /* "Build FAQs" tab + accordion */
   .pb-faq { margin: 60px 0 0 74px; width: 828px; max-width: 100%; }
-  .pb-tab { display: inline-block; min-width: 118px; text-align: center; font-family: var(--font-avenir-light); font-size: 15px; color: #ddb40d; padding: 8px 10px; border-bottom: 2px solid #ddb40d; }
+  .pb-tab { display: inline-block; min-width: 118px; text-align: center; font-family: var(--font-avenir-light); font-size: var(--text-body); color: #ddb40d; padding: 8px 10px; border-bottom: 2px solid #ddb40d; }
   .pb-acc { margin-top: 28px; }
   .pb-acc-item { border-bottom: 1px solid var(--green); }
-  .pb-acc-item summary { list-style: none; cursor: pointer; display: flex; justify-content: space-between; align-items: center; padding: 37px 12px 37px 0; font-family: var(--font-avenir-light); font-size: 18px; line-height: 1.4; }
+  .pb-acc-item summary { list-style: none; cursor: pointer; display: flex; justify-content: space-between; align-items: center; padding: 37px 12px 37px 0; font-family: var(--font-avenir-light); font-size: var(--text-body); line-height: 1.4; }
   .pb-acc-item summary::-webkit-details-marker { display: none; }
   .pb-acc-item svg { flex: none; transition: transform .2s; }
   .pb-acc-item[open] svg { transform: rotate(180deg); }
-  .pb-acc-body { min-height: 24px; padding: 0 0 24px; font-family: var(--font-avenir-light); font-size: 16px; }
+  .pb-acc-body { min-height: 24px; padding: 0 0 24px; font-family: var(--font-avenir-light); font-size: var(--text-body); }
 
   /* gallery */
   .pb-gallery { width: 903px; max-width: 100%; margin: 48px 0 0 26px; display: grid; grid-template-columns: repeat(4, minmax(0, 1fr)); gap: var(--gap); align-items: start; }
@@ -112,8 +112,8 @@ const { pageTitle, description, title, subtitle, items, gap = 13, boxColor = '#5
   .pb-tile:hover { background: #a7dea0; }
   .pb-tile img { width: 100%; max-width: 100%; height: auto; display: block; }
   .pb-cap { display: block; padding: 20px 20px 20px; }
-  .pb-cap-title { display: block; font-family: 'AMI Sans',sans-serif; font-size: 20px; line-height: 1.2; white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
-  .pb-cap-desc { display: block; margin-top: 8px; font-family: 'AMI Sans',sans-serif; font-weight: 700; font-size: 13px; line-height: 1.3; }
+  .pb-cap-title { display: block; font-family: var(--font-heading); font-size: var(--text-body); line-height: 1.2; white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
+  .pb-cap-desc { display: block; margin-top: 8px; font-family: var(--font-heading); font-weight: 700; font-size: var(--text-label); line-height: 1.3; }
 
   .pb-note { padding: 30px 0 22px; }
 
@@ -130,7 +130,7 @@ const { pageTitle, description, title, subtitle, items, gap = 13, boxColor = '#5
   @media (max-width: 600px) {
     .pb-gallery { grid-template-columns: repeat(2, minmax(0, 1fr)); }
     .pb-cap { padding: 14px; }
-    .pb-cap-title { font-size: 17px; white-space: normal; }
-    .pb-inner :global(.pb-intro) { font-size: 17px; }
+    .pb-cap-title { font-size: var(--text-body); white-space: normal; }
+    .pb-inner :global(.pb-intro) { font-size: var(--text-body); }
   }
 </style>

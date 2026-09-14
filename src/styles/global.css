@@ -13,11 +13,18 @@
   --grey-bg: #f2f2f2;
   --grey-text: #727272;
 
-  --font-body: 'AMI Serif',serif;
-  --font-bold: 'AMI Sans',sans-serif;
-  --font-avenir-light: 'AMI Serif',serif;
-  --font-avenir-heavy: 'AMI Sans',sans-serif;
-  --font-din: 'AMI Sans',sans-serif;
+  --font-body: 'AMI Serif', Georgia, serif;
+  --font-heading: 'AMI Sans', Arial, sans-serif;
+
+  /* Four shared sizes: labels, reading text, headings, display. */
+  --text-label: 0.875rem;
+  --text-body: 1.125rem;
+  --text-heading: 2.25rem;
+  --text-display: 4rem;
+  --font-bold: var(--font-heading);
+  --font-avenir-light: var(--font-body);
+  --font-avenir-heavy: var(--font-heading);
+  --font-din: var(--font-heading);
 
   --content-width: 980px;   /* Wix classic site grid width */
   --header-height: 72px;
@@ -31,8 +38,8 @@ html::-webkit-scrollbar { display: none; } /* Chrome/Safari: hide page scrollbar
 body {
   margin: 0;
   font-family: var(--font-body);
-  font-size: 14px;
-  line-height: 1.4;
+  font-size: var(--text-body);
+  line-height: 1.5;
   color: var(--black);
   background: var(--white);
   -webkit-font-smoothing: antialiased;
@@ -57,10 +64,10 @@ button { font: inherit; }
   text-transform: uppercase;
   letter-spacing: 0.45em;
   text-align: center;
-  font-size: 36px;
+  font-size: var(--text-heading);
   line-height: 1.3;
 }
-.spaced-title.small { font-size: 26px; }
+.spaced-title.small { font-size: var(--text-heading); }
 
 /* Green band with white spaced title */
 .band { background: var(--green); color: var(--white); padding: 22px 20px; }
@@ -72,7 +79,7 @@ button { font: inherit; }
   text-transform: uppercase;
   text-decoration: none;
   text-align: center;
-  font-size: 14px;
+  font-size: var(--text-label);
   letter-spacing: 0.02em;
   padding: 12px 40px;
   border: 1px solid transparent;
@@ -91,13 +98,13 @@ button { font: inherit; }
 /* Hero with full-bleed background image */
 .hero { position: relative; width: 100%; background-size: cover; background-position: center; overflow: hidden; }
 .hero .hero-inner { position: relative; max-width: 1280px; margin: 0 auto; height: 100%; }
-.hero-title { display: inline-block; background: var(--green); color: var(--white); font-family: var(--font-bold); font-size: 80px; line-height: 1.1; padding: 0 12px; text-transform: uppercase; }
-.hero-subtitle { display: inline-block; background: var(--green); color: var(--white); font-family: var(--font-body); font-size: 40px; line-height: 1.15; padding: 0 12px; text-transform: uppercase; }
+.hero-title { display: inline-block; background: var(--green); color: var(--white); font-family: var(--font-bold); font-size: var(--text-display); line-height: 1.1; padding: 0 12px; text-transform: uppercase; }
+.hero-subtitle { display: inline-block; background: var(--green); color: var(--white); font-family: var(--font-body); font-size: var(--text-heading); line-height: 1.15; padding: 0 12px; text-transform: uppercase; }
 
 /* "Why our ..." two-column intro with vertical rule */
 .why-row { display: grid; grid-template-columns: 1fr 1.5fr; gap: 40px; align-items: center; padding: 50px 20px 30px; max-width: var(--content-width); margin: 0 auto; }
-.why-row .why-title { font-family: var(--font-bold); font-size: 32px; letter-spacing: 0.4em; text-transform: uppercase; line-height: 1.3; }
-.why-row .why-text { border-left: 3px solid var(--black); padding-left: 24px; font-family: var(--font-bold); font-size: 19px; line-height: 1.3; }
+.why-row .why-title { font-family: var(--font-bold); font-size: var(--text-heading); letter-spacing: 0.4em; text-transform: uppercase; line-height: 1.3; }
+.why-row .why-text { border-left: 3px solid var(--black); padding-left: 24px; font-family: var(--font-bold); font-size: var(--text-body); line-height: 1.3; }
 .why-row .why-text .g { color: var(--green); }
 
 /* Green square tile grid (Our Expertise, Our Impact) */
@@ -105,9 +112,9 @@ button { font: inherit; }
 .tile { background: var(--green); color: var(--white); display: flex; align-items: center; justify-content: center; text-align: center; padding: 24px; }
 
 /* Rich text styles (blog posts, policy pages) */
-.rich { font-family: var(--font-body); font-size: 16px; line-height: 1.6; }
+.rich { font-family: var(--font-body); font-size: var(--text-body); line-height: 1.6; }
 .rich h1, .rich h2, .rich h3 { font-family: var(--font-bold); margin: 1.2em 0 .5em; }
-.rich h1 { font-size: 32px; } .rich h2 { font-size: 26px; } .rich h3 { font-size: 20px; }
+.rich h1 { font-size: var(--text-heading); } .rich h2 { font-size: var(--text-heading); } .rich h3 { font-size: var(--text-body); }
 .rich p { margin: 0 0 1em; }
 .rich ul, .rich ol { margin: 0 0 1em 1.5em; }
 .rich ul { list-style: disc; } .rich ol { list-style: decimal; }
@@ -117,24 +124,24 @@ button { font: inherit; }
 
 @media (max-width: 900px) {
   .why-row { grid-template-columns: 1fr; gap: 20px; }
-  .hero-title { font-size: 52px; }
-  .hero-subtitle { font-size: 26px; }
-  .spaced-title { font-size: 26px; letter-spacing: 0.3em; }
+  .hero-title { font-size: var(--text-heading); }
+  .hero-subtitle { font-size: var(--text-heading); }
+  .spaced-title { font-size: var(--text-heading); letter-spacing: 0.3em; }
 }
 @media (max-width: 600px) {
-  .hero-title { font-size: 40px; }
-  .hero-subtitle { font-size: 20px; }
-  .spaced-title { font-size: 22px; letter-spacing: 0.25em; }
-  .why-row .why-title { font-size: 24px; letter-spacing: 0.3em; }
+  .hero-title { font-size: var(--text-heading); }
+  .hero-subtitle { font-size: var(--text-body); }
+  .spaced-title { font-size: var(--text-body); letter-spacing: 0.25em; }
+  .why-row .why-title { font-size: var(--text-heading); letter-spacing: 0.3em; }
 }
 
 /* Modern shared foundations; all fonts are available locally. */
 :focus-visible { outline: 3px solid #39732b; outline-offset: 5px; }
 .sr-only:focus { position: fixed; top: 10px; left: 10px; width: auto; height: auto; clip: auto; padding: 14px; background: white; color: black; z-index: 200; }
 h1,h2,h3,h4 { letter-spacing: -.035em; }
-.spaced-title { text-transform: none; letter-spacing: -.035em; font-size: 40px; text-align: left; }
+.spaced-title { text-transform: none; letter-spacing: -.035em; font-size: var(--text-heading); text-align: left; }
 .band { color: #111; padding: 32px 24px; }
-.btn { font-family: 'AMI Sans',sans-serif; text-transform: none; padding: 16px 28px; }
+.btn { font-family: var(--font-heading); text-transform: none; padding: 16px 28px; }
 .btn-green { color: #111; }
 .btn-green:hover { color: white; }
 main img[src$=".jpg"], main img[src$=".jpeg"], main .hero-bg { filter: grayscale(1); }
@@ -150,3 +157,17 @@ main :where(button,.btn){max-width:100%}
 @media(max-width:600px){.wide{padding-inline:22px}.hero-title,.hero-subtitle{padding:10px 14px;max-width:100%}.band{padding:28px 22px}}
 
 .ami-icon{display:inline-block;width:1em;height:1em;flex:0 0 1em;vertical-align:-.125em;overflow:visible}
+
+/* Adjust the same four tiers together; components never add new sizes. */
+@media (max-width: 1100px) {
+  :root { --text-heading: 2rem; --text-display: 3.5rem; }
+}
+@media (max-width: 600px) {
+  :root { --text-heading: 1.75rem; --text-display: 2.5rem; }
+}
+small, sub, sup { font-size: var(--text-label); }
+input, select, textarea { font-family: var(--font-heading); font-size: var(--text-body); }
+
+h1 { font-size: var(--text-display); }
+h2, h3 { font-size: var(--text-heading); }
+h4, h5, h6 { font-size: var(--text-body); }

@@ -27,19 +27,19 @@ const { id, sub, url } = Astro.props;
 
 <style>
   .schedule { max-width: var(--content-width); margin: 0 auto; padding: 80px 24px 40px; }
-  .sched-title { color: #111; font-family: var(--font-bold); font-size: 50px; line-height: 1.1; letter-spacing: -0.04em; }
-  .sched-sub { margin-top: 20px; color: #39732b; font-family: var(--font-body); font-weight: bold; font-size: clamp(25px, 3.5vw, 40px); line-height: 1.15; }
-  .sched-note { margin: 32px 0 36px; max-width: 660px; text-align: left; font-family: var(--font-body); font-size: 18px; line-height: 1.65; }
+  .sched-title { color: #111; font-family: var(--font-bold); font-size: var(--text-heading); line-height: 1.1; letter-spacing: -0.04em; }
+  .sched-sub { margin-top: 20px; color: #39732b; font-family: var(--font-body); font-weight: bold; font-size: var(--text-heading); line-height: 1.15; }
+  .sched-note { margin: 32px 0 36px; max-width: 660px; text-align: left; font-family: var(--font-body); font-size: var(--text-body); line-height: 1.65; }
   .sched-note a { color: inherit; }
 
   @media (max-width: 900px) {
-    .sched-title { font-size: 36px; }
-    .sched-sub { font-size: 26px; }
-    .sched-note { margin-top: 36px; font-size: 18px; }
+    .sched-title { font-size: var(--text-heading); }
+    .sched-sub { font-size: var(--text-heading); }
+    .sched-note { margin-top: 36px; font-size: var(--text-body); }
   }
   @media (max-width: 600px) {
-    .sched-title { font-size: 28px; }
-    .sched-sub { font-size: 20px; }
-    .sched-note { font-size: 16px; }
+    .sched-title { font-size: var(--text-heading); }
+    .sched-sub { font-size: var(--text-body); }
+    .sched-note { font-size: var(--text-body); }
   }
 </style>

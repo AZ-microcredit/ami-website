@@ -44,7 +44,7 @@ const { items, height = 300, class: cls = '' } = Astro.props;
   .slide { --s: min(var(--h), 75vw); flex: 0 0 var(--s); scroll-snap-align: start; margin: 0; text-align: center; }
   .slide a { display: block; }
   .slide img { width: var(--s); height: var(--s); object-fit: contain; background: var(--white); }
-  .slide figcaption { margin-top: 12px; font-family: var(--font-bold); font-size: 16px; }
+  .slide figcaption { margin-top: 12px; font-family: var(--font-bold); font-size: var(--text-body); }
   .arrow { flex: 0 0 auto; background: none; border: 0; color: var(--black); cursor: pointer; padding: 8px; }
   .arrow:hover { color: var(--green); }
 </style>

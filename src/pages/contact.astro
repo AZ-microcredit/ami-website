@@ -42,10 +42,10 @@ const team = [
 
   .contact-form-wrap { min-height: 590px; display: flex; align-items: center; justify-content: center; padding: 40px 20px; }
   .contact-form { width: 100%; max-width: 640px; display: flex; flex-direction: column; gap: 16px; }
-  .contact-form h1 { font-family: var(--font-bold); font-size: 30px; letter-spacing: 0.3em; text-align: center; margin-bottom: 8px; }
+  .contact-form h1 { font-family: var(--font-bold); font-size: var(--text-heading); letter-spacing: 0.3em; text-align: center; margin-bottom: 8px; }
   .contact-form .row { display: grid; grid-template-columns: 1fr 1fr; gap: 16px; }
-  .contact-form label { display: flex; flex-direction: column; gap: 6px; font-family: var(--font-body); font-size: 14px; }
-  .contact-form input, .contact-form textarea { font: inherit; font-family: var(--font-body); font-size: 15px; padding: 10px 12px; border: 1px solid #8f8f8f; background: var(--white); color: var(--black); border-radius: 0; width: 100%; }
+  .contact-form label { display: flex; flex-direction: column; gap: 6px; font-family: var(--font-body); font-size: var(--text-label); }
+  .contact-form input, .contact-form textarea { font: inherit; font-family: var(--font-body); font-size: var(--text-body); padding: 10px 12px; border: 1px solid #8f8f8f; background: var(--white); color: var(--black); border-radius: 0; width: 100%; }
   .contact-form input:focus, .contact-form textarea:focus { outline: 2px solid var(--green); outline-offset: 0; border-color: var(--green); }
   .contact-form textarea { resize: vertical; min-height: 120px; }
   .contact-form .btn { align-self: flex-end; min-width: 160px; }
@@ -54,22 +54,22 @@ const team = [
   .team-cards { background: #d9d9d9; padding: 37px 0 8px; display: grid; grid-template-columns: repeat(5, 1fr); gap: 0; }
   .card { text-align: center; }
   .card img { width: 165px; height: 165px; border-radius: 50%; object-fit: cover; margin: 0 auto 44px; }
-  .card h3 { font-family: var(--font-bold); font-size: 22px; line-height: 1.25; white-space: nowrap; }
-  .card .role { font-family: var(--font-body); font-size: 17px; }
-  .card h3 a { font-family: var(--font-body); font-size: 14px; color: inherit; }
+  .card h3 { font-family: var(--font-bold); font-size: var(--text-body); line-height: 1.25; white-space: nowrap; }
+  .card .role { font-family: var(--font-body); font-size: var(--text-body); }
+  .card h3 a { font-family: var(--font-body); font-size: var(--text-label); color: inherit; }
 
   @media (max-width: 900px) {
     .contact-form-wrap { min-height: 0; }
     .team-panel { padding: 0 20px 40px; }
     .team-cards { grid-template-columns: repeat(2, 1fr); gap: 30px 10px; padding: 30px 10px 20px; }
     .card img { margin-bottom: 16px; }
-    .card h3 { font-size: 20px; white-space: normal; }
+    .card h3 { font-size: var(--text-body); white-space: normal; }
   }
   @media (max-width: 600px) {
     .contact-form .row { grid-template-columns: 1fr; }
-    .contact-form h1 { font-size: 22px; }
+    .contact-form h1 { font-size: var(--text-body); }
     .team-cards { grid-template-columns: 1fr; }
-    .card .role { font-size: 15px; }
-    .card h3 a { font-size: 13px; word-break: break-all; }
+    .card .role { font-size: var(--text-body); }
+    .card h3 a { font-size: var(--text-label); word-break: break-all; }
   }
 </style>
