@@ -4,9 +4,9 @@ import Icon from '../components/Icon.astro';
 import { PITCH_COMP_LUMA_URL } from '../data/pitchComp';
 
 const workshops = [
-  { n: '01', date: 'Thu, Oct 1', title: 'Business Model Canvas', copy: 'Map your customer, your idea, and your money on a single page.' },
-  { n: '02', date: 'Thu, Oct 8', title: 'Small Business Accounting', copy: 'Know the numbers a judge, or a lender, will ask you about.' },
-  { n: '03', date: 'Thu, Oct 15', title: 'Pitching and Q&A', copy: 'Practice your pitch and get real feedback before the real thing.' },
+  { n: '01', date: 'Thu, Oct 1', title: 'Business Model Canvas', url: 'https://luma.com/2eduhcdp', copy: 'Map your customer, your idea, and your money on a single page.' },
+  { n: '02', date: 'Thu, Oct 8', title: 'Small Business Accounting', url: 'https://luma.com/6tpws02j', copy: 'Know the numbers a judge, or a lender, will ask you about.' },
+  { n: '03', date: 'Thu, Oct 15', title: 'Pitching and Q&A', url: 'https://luma.com/4mro0z80', copy: 'Practice your pitch and get real feedback before the real thing.' },
 ];
 ---
 <Base title="West Valley Pitch Competition | Arizona Microcredit Initiative" description="Bring your business to the stage. Register for free workshops and pitch for a share of $10,000 at the West Valley Pitch Competition." mainClass="pitch-page">
@@ -49,7 +49,7 @@ const workshops = [
       {workshops.map((workshop, i) => <article class={`workshop reveal ${i ? `delay-${i}` : ''}`}>
         <div class="workshop-top"><p>Workshop {workshop.n}</p><span>Virtual</span></div>
         <h3>{workshop.date}</h3><p class="time">12 to 1 p.m.</p><h4>{workshop.title}</h4><p>{workshop.copy}</p>
-        <a class="button green-button" href={PITCH_COMP_LUMA_URL} target="_blank" rel="noopener noreferrer">Register on Luma <Icon name="arrow-up-right" /></a>
+        <a class="button green-button" href={workshop.url} target="_blank" rel="noopener noreferrer">Register on Luma <Icon name="arrow-up-right" /></a>
       </article>)}
     </div>
     <p class="workshop-note reveal">Sign up for all three if you can. Two is the minimum.</p>
@@ -72,7 +72,7 @@ const workshops = [
   <section class="closer">
     <div class="reveal"><h2>Pick two workshops.<br/>That’s all it takes.</h2><p>First one is Thursday, October 1.<br/>Pitch day is Saturday, October 24.</p></div>
     <div class="closer-links">
-      {workshops.map(workshop => <a href={PITCH_COMP_LUMA_URL} target="_blank" rel="noopener noreferrer"><small>{workshop.date.replace('Thu, ', '')}</small><span>{workshop.title}</span><Icon name="arrow-up-right" /></a>)}
+      {workshops.map(workshop => <a href={workshop.url} target="_blank" rel="noopener noreferrer"><small>{workshop.date.replace('Thu, ', '')}</small><span>{workshop.title}</span><Icon name="arrow-up-right" /></a>)}
     </div>
   </section>
   <script>
