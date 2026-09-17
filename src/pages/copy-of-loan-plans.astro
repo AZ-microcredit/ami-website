@@ -1,11 +1,7 @@
 ---
-import Base from '../layouts/Base.astro';
-import LoanPlansContent from '../components/LoanPlansContent.astro';
+// Retired page. Content now lives at /loan-plans; keep this URL
+// working via a redirect stub (meta refresh + canonical).
+import Redirect from '../layouts/Redirect.astro';
 ---
 
-<Base
-  title="Arizona Microcredit Initiative | LOANS"
-  description="Our loans up to $7,500 are tailored to fit your business needs. Let us help your business reach its fullest potential!"
->
-  <LoanPlansContent />
-</Base>
+<Redirect target="/loan-plans" label="Loan Plans" />

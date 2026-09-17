@@ -1,41 +1,7 @@
 ---
-import Base from '../layouts/Base.astro';
-import ServiceIntro from '../components/ServiceIntro.astro';
-import WhyRow from '../components/WhyRow.astro';
-import ScheduleCTA from '../components/ScheduleCTA.astro';
-import ScheduleEmbed from '../components/ScheduleEmbed.astro';
-import ExpertiseNetwork from '../components/ExpertiseNetwork.astro';
-import MethodologySection from '../components/sections/MethodologySection.astro';
-
-
+// Retired page. Content now lives at /consulting; keep this URL
+// working via a redirect stub (meta refresh + canonical).
+import Redirect from '../layouts/Redirect.astro';
 ---
 
-<Base
-  title="Arizona Microcredit Initiative | CONSULTING"
-  description="AMI offers free, one-on-one business consulting for local businesses in any phase, from startup to expansion. See our expertise, our five-step methodology, and schedule a consultation call."
->
-  <ServiceIntro label="Free consulting" title="Your ambition.|Our support." text="Big decisions feel different with someone in your corner. Get free, one-on-one business consulting, tailored to where you are and where you want to go." image="/media/ami-consulting-panel.webp" alt="Panel members reviewing presentations at AMI’s December 2025 pitch competition" href="#schedule" cta="Let’s work together" />
-
-  <WhyRow
-    title="WHY OUR<br />CONSULTING"
-    html="AMI offers <span class='g'>free, personalized consulting</span> for local businesses at any stage, with expert guidance <span class='g'>tailored to each client's needs.</span>"
-  />
-
-  <ExpertiseNetwork />
-
-  <MethodologySection id="methodology" />
-
-  <ScheduleCTA
-    title="SCHEDULE<br />A CALL"
-    text="FIND OUT HOW WE CAN HELP YOU BEST"
-    label="SCHEDULE"
-    href="#schedule"
-    buttonClass="btn-outline"
-  />
-
-  <ScheduleEmbed id="schedule" sub="to learn how we can advise your strategy" url="https://calendly.com/azmicrocredit/consulting" />
-</Base>
-
-<style>
- @media (min-width: 901px) { :global(.why-row) { grid-template-columns: 1fr 1.75fr; } }
-</style>
+<Redirect target="/consulting" label="Consulting" />

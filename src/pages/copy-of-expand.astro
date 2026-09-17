@@ -1,13 +1,7 @@
 ---
-import PlaybookPage from '../components/PlaybookPage.astro';
-import { expand } from '../data/playbookGalleries.js';
+// Retired page. Content now lives at /education#resources; keep this URL
+// working via a redirect stub (meta refresh + canonical).
+import Redirect from '../layouts/Redirect.astro';
 ---
 
-<PlaybookPage
-  pageTitle="Arizona Microcredit Initiative |  BUSINESS EDUCATION"
-  description="Grow and expand your business with AMI's free business resources."
-  title="EXPAND YOUR BUSINESS"
-  subtitle="A playbook to grow and expand your business"
-  items={expand}
-  note={false}
-/>
+<Redirect target="/education#resources" label="Business Education" />

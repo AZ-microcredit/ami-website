@@ -1,5 +1,7 @@
 ---
-import SmallBusinessGuide from '../components/SmallBusinessGuide.astro';
+// Retired page. Content now lives at /resource-index; keep this URL
+// working via a redirect stub (meta refresh + canonical).
+import Redirect from '../layouts/Redirect.astro';
 ---
 
-<SmallBusinessGuide legal={['Business Registration and Strutcure', 'Separation of Business and Personal Finances', 'Creating a Buisness Plan', 'Necessary Licenses and Permits', 'EIN Creation']} />
+<Redirect target="/resource-index" label="Resource Index" />

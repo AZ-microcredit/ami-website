@@ -1,4 +1,7 @@
 ---
-import HomePage from '../components/HomePage.astro';
+// Retired page. Content now lives at /; keep this URL
+// working via a redirect stub (meta refresh + canonical).
+import Redirect from '../layouts/Redirect.astro';
 ---
-<HomePage testimonials />
+
+<Redirect target="/" label="Home" />
