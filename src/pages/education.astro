@@ -13,9 +13,6 @@ import ScrollMotion from '../components/ScrollMotion.astro';
  <nav class="education-nav" aria-label="Explore business education"><a href="#start">Start with a guide <span>01</span></a><a href="#resources">Browse the library <span>02</span></a><a href="/pitch-comp">Pitch competition <span>03</span></a></nav>
  <section class="featured-guide" id="start"><div class="guide-note"><p class="eyebrow">Start here</p><span aria-hidden="true">A<br/>to Z.</span><p>Your first idea deserves<br/>a practical next step.</p></div><div class="guide-main"><p class="eyebrow">The business startup guide</p><h2>From a blank page<br/>to a business plan.</h2><p>Work through the foundations of starting a small business, with a guide you can return to as your idea takes shape.</p><a class="line-link" href="/business-startup-guide">Open the startup guide <span aria-hidden="true"><Icon name="arrow-up-right" /></span></a></div><a class="side-guide" href="/create-a-budget"><span class="eyebrow">Know your numbers</span><h3>Make room<br/>for a budget.</h3><p>Understand what comes in, what goes out, and what’s possible.</p><span class="side-arrow" aria-hidden="true"><Icon name="arrow-up-right" /></span></a></section>
  <LearningDial />
- <ResourceIndexSection id="resources"/>
- <section class="learning-together"><figure><img data-parallax="0.08" src="/media/ami-pitch-community.webp" width="2400" height="1800" alt="Community members listening at an AMI pitch event" loading="lazy"/></figure><div><p class="eyebrow">Bring your curiosity</p><h2>Some things<br/>are better learned<br/><em>together.</em></h2><p>Free workshops and practical resources for people building businesses in our community. Come with a question. Leave with a next step.</p><a href="/events" class="line-link">Explore workshops &amp; events <span aria-hidden="true"><Icon name="arrow-up-right" /></span></a></div></section>
-
  <section class="pitch-preview" id="pitch-competition">
   <div class="pitch-preview-copy">
    <p class="eyebrow">West Valley Pitch Competition</p>
@@ -28,6 +25,10 @@ import ScrollMotion from '../components/ScrollMotion.astro';
    <p><span>Where</span>Rio Vista Recreation Center<br/>Peoria</p>
   </div>
  </section>
+ <ResourceIndexSection id="resources"/>
+ <section class="learning-together"><figure><img data-parallax="0.08" src="/media/ami-pitch-community.webp" width="2400" height="1800" alt="Community members listening at an AMI pitch event" loading="lazy"/></figure><div><p class="eyebrow">Bring your curiosity</p><h2>Some things<br/>are better learned<br/><em>together.</em></h2><p>Free workshops and practical resources for people building businesses in our community. Come with a question. Leave with a next step.</p><a href="/events" class="line-link">Explore workshops &amp; events <span aria-hidden="true"><Icon name="arrow-up-right" /></span></a></div></section>
+
+
  <ScrollMotion/>
 </Base>
 <style>
