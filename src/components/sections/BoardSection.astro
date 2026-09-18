@@ -26,7 +26,7 @@ const advisors = [
   <div class="grid">
     {advisors.map((a) => (
       <div class="advisor">
-        <img src={a.image} alt={a.name} width="200" height="200" loading="lazy" />
+        <img src={a.image} alt={a.name} width="200" height="200" loading="eager" />
         <h3>{a.name}<br />{a.lines.map((l, i) => <><span class="role">{l}</span>{i < a.lines.length - 1 && <br />}</>)}</h3>
       </div>
     ))}
