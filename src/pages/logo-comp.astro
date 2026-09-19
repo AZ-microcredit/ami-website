@@ -1,14 +1,14 @@
 ---
 import Base from '../layouts/Base.astro';
 import Icon from '../components/Icon.astro';
-import { PENDING, heroFacts, palette, briefRequirements, enterCards, timeline, judgingPoints, boardSlots, entryPendings } from '../data/logoComp.js';
+import { PENDING, heroFacts, palette, briefRequirements, enterCards, timeline, judgingCriteria, rightsTerms, boardSlots, entryPendings } from '../data/logoComp.js';
 ---
 <Base title="Integro Bank Foundation Logo Competition | Arizona Microcredit Initiative" description="A statewide Arizona design competition to create the new logo for the Integro Bank Foundation, presented with Arizona Microcredit Initiative." mainClass="logo-page">
   <section class="hero dark">
     <div class="hero-copy reveal">
-      <p class="eyebrow gold-text">Statewide Arizona · Design competition</p>
+      <p class="eyebrow gold-text">Open call for Arizona designers</p>
       <h1>Design the<br/><em>Foundation's</em><br/>new mark.</h1>
-      <p class="lede">The Integro Bank Foundation is inviting designers across Arizona to create its new logo, in a competition presented with Arizona Microcredit Initiative.</p>
+      <p class="lede">The Integro Bank Foundation is looking for its logo, and would rather find it in Arizona than order it from a catalogue. Open to Arizona small businesses and Arizona design students, presented with Arizona Microcredit Initiative.</p>
       <div class="hero-actions">
         <span class="button ghost-button" aria-disabled="true">Entry details coming soon</span>
         <a class="text-link" href="#brief">Read the brief <Icon name="arrow-down" /></a>
@@ -25,9 +25,9 @@ import { PENDING, heroFacts, palette, briefRequirements, enterCards, timeline, j
       <figcaption>The current mark. You are designing what comes next.</figcaption>
     </figure>
     </div>
-    <div class="prize-band reveal" aria-label="$1,500 prize, pending Foundation board approval">
-      <strong>$1,500</strong>
-      <span class="prize-side">Prize<span class="status-pill">{PENDING} Foundation board approval</span></span>
+    <div class="prize-band reveal" aria-label="$3,000 first prize, plus a student award">
+      <strong>$3,000</strong>
+      <span class="prize-side">First prize<span class="status-pill">Plus a student award</span></span>
     </div>
     <dl class="facts reveal">
       {heroFacts.map(fact => <div><dt>{fact.term}</dt><dd>{fact.lines[0]}<br/>{fact.lines[1]}</dd></div>)}
@@ -78,20 +78,30 @@ import { PENDING, heroFacts, palette, briefRequirements, enterCards, timeline, j
   <section class="judging dark">
     <div class="judge-block reveal">
       <p class="eyebrow gold-text">Judging</p>
-      <h2>Ranked choice.</h2>
-      <p>The Foundation board reviews every complete entry and ranks the finalists. Most points wins, with a 51% board quorum. The board's decision is final, and the Foundation may decline to award if no entry meets the brief.</p>
-      <div class="points-row">
-        {judgingPoints.map(point => <div class="point"><strong>{point.pts}</strong><span>{point.label}</span></div>)}
-      </div>
+      <h2>Five criteria,<br/>weighted.</h2>
+      <p>The Foundation board reviews every complete entry. Its decision is final, and the Foundation may decline to award if no entry meets the brief.</p>
       <p class="pending-line"><span class="pending-token">{PENDING}</span>Judging committee membership</p>
     </div>
     <div class="prize-block reveal delay">
-      <p class="eyebrow gold-text">Prize and payment</p>
-      <h2>$1,500.</h2>
-      <p class="status-pill inline">{PENDING} Foundation board approval</p>
-      <p>The intended payment route: the Integro Bank Foundation pays AMI, and AMI pays the winner. The winner is announced in a Foundation press release and profiled in a CEO special feature by Integro Bank.</p>
-      <p class="pending-line"><span class="pending-token">{PENDING}</span>Student payment mechanics</p>
+      <p class="eyebrow gold-text">Prize</p>
+      <h2>$3,000.</h2>
+      <p class="status-pill inline">Plus a separate student award</p>
+      <p>$3,000 to the winning entrant, a press release announcing the winner and their business or school, and a CEO special feature profiling the winner by Integro Bank. The separate student award goes to the strongest entry from an Arizona design program, so students are not competing head-to-head with working studios.</p>
+      <p class="pending-line"><span class="pending-token">{PENDING}</span>Student award details</p>
     </div>
+  </section>
+
+  <section class="criteria-band light">
+    <div class="criteria-grid">
+      {judgingCriteria.map((c, i) => <div class={`criterion reveal ${i ? `delay-${Math.min(i, 2)}` : ''}`}><strong>{c.weight}<span>%</span></strong><div><h3>{c.name}</h3><p>{c.copy}</p></div></div>)}
+    </div>
+  </section>
+
+  <section class="rights dark">
+    <div class="section-head reveal"><p class="eyebrow gold-text">Rules and rights</p><h2>Read this part carefully.</h2></div>
+    <ul class="brief-list rights-list reveal">
+      {rightsTerms.map(term => <li><strong>{term.title}</strong> {term.copy}</li>)}
+    </ul>
   </section>
 
   <section class="board light">
@@ -108,8 +118,9 @@ import { PENDING, heroFacts, palette, briefRequirements, enterCards, timeline, j
 
   <section class="enter-cta" id="enter">
     <div class="reveal">
-      <h2>Entries open soon.</h2>
-      <p>Entries will be submitted by email as one packet: your presentation sheet, vector files, rationale, process evidence, and the signed entry form. Files over 20 MB go by link.<br/>The contest email address and deadline are being finalized - check back here.</p>
+      <h2>Entries are open.</h2>
+      <p>Submit one email packet: your presentation sheet, vector source files, half-page rationale, process evidence, and the signed entry form (name, business or school, email, phone, Arizona city, typeface and license, and the statement of human authorship). Files over 20 MB go by link.<br/>Deadline: 11:59 p.m. Arizona time on November 11, 2026.</p>
+      <p class="cta-contact">Send entries and questions to the contest email address, which the Foundation is finalizing. Integro Bank Foundation, 16215 N 28th Ave, Phoenix, AZ 85053. (602) 805-5088.</p>
     </div>
     <ul class="entry-pendings reveal delay">
       {entryPendings.map(item => <li><span class="pending-token">{PENDING}</span>{item}</li>)}
@@ -189,7 +200,7 @@ import { PENDING, heroFacts, palette, briefRequirements, enterCards, timeline, j
 .card-note{color:#8a8a86 !important;font-size:13px !important;margin-top:10px !important}
 .pending-list{list-style:none;margin:20px 0 0;padding:18px 0 0;border-top:1px solid #3a3a38;display:grid;gap:10px;font:13px/1.4 var(--font-body);color:#d6d6d1}
 .process{padding:96px 4vw 104px}
-.timeline{list-style:none;margin:0;padding:0;display:grid;grid-template-columns:repeat(3,1fr);gap:22px}
+.timeline{list-style:none;margin:0;padding:0;display:grid;grid-template-columns:repeat(4,1fr);gap:22px}
 .timeline li{border-top:4px solid var(--ink);padding-top:18px;transition:border-color .25s}
 .timeline li:hover{border-color:var(--gold)}
 .step-num{font:700 12px var(--font-heading);letter-spacing:.13em;color:var(--grey);margin:0}
@@ -205,6 +216,18 @@ import { PENDING, heroFacts, palette, briefRequirements, enterCards, timeline, j
 .point strong{display:block;font:700 44px/.9 var(--font-heading);color:var(--gold)}
 .point span{font:700 10px var(--font-heading);letter-spacing:.12em;text-transform:uppercase;color:#8a8a86}
 .pending-line{font:13px/1.5 var(--font-body);color:#d6d6d1}
+.criteria-band{padding:0 4vw 96px;background:var(--cream)}
+.criteria-grid{display:grid;grid-template-columns:repeat(5,1fr);gap:18px}
+.criterion{border-top:4px solid var(--ink);padding-top:16px;transition:border-color .25s}
+.criterion:hover{border-color:var(--gold)}
+.criterion>strong{font:700 40px/.9 var(--font-heading);color:var(--gold);letter-spacing:-.03em}.criterion>strong span{font-size:.55em}
+.criterion h3{font:600 19px/1.1 var(--font-heading);margin:12px 0 8px}
+.criterion p{font:13px/1.5 var(--font-body);color:var(--grey);margin:0}
+.rights{padding:92px 4vw 96px}
+.rights-list{display:grid;grid-template-columns:1fr 1fr;gap:0 6vw}
+.rights-list li{border-top:1px solid #3a3a38;color:#b9b9b4}
+.rights-list strong{color:#fff}
+.cta-contact{font-size:13px !important;opacity:.85;margin-top:14px !important}
 .board{padding:96px 4vw 90px}
 .board-grid{display:grid;grid-template-columns:repeat(4,1fr);gap:20px}
 .board-card{border:1px solid #cfc9b8;background:#fff;padding:24px 20px;text-align:center}
@@ -237,7 +260,7 @@ import { PENDING, heroFacts, palette, briefRequirements, enterCards, timeline, j
   .facts div{padding:18px 10px 20px 0}.facts div:not(:first-child){padding-left:14px}.facts dd{font-size:13px}
   .brief,.enter,.process,.judging,.board{padding:70px 22px}
   .section-head{align-items:start;flex-direction:column;margin-bottom:40px}
-  .brief-grid,.enter-grid,.timeline,.judging{grid-template-columns:1fr;gap:40px}
+  .brief-grid,.enter-grid,.timeline,.judging,.rights-list{grid-template-columns:1fr;gap:40px}.criteria-grid{grid-template-columns:1fr 1fr;gap:24px}
   .board-grid{grid-template-columns:1fr 1fr}
   .enter-cta{padding:64px 22px}
   .co-brand,.co-lockup{flex-wrap:wrap;gap:12px}.brand-x{padding:0}
@@ -246,6 +269,6 @@ import { PENDING, heroFacts, palette, briefRequirements, enterCards, timeline, j
   .hero h1{font-size:48px}
   .section-head h2{font-size:40px}
   .enter-cta h2{font-size:44px}
-  .board-grid{grid-template-columns:1fr}
+  .board-grid{grid-template-columns:1fr}.criteria-grid{grid-template-columns:1fr}
 }
 </style>
