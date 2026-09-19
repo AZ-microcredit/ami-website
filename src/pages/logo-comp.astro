@@ -1,7 +1,7 @@
 ---
 import Base from '../layouts/Base.astro';
 import Icon from '../components/Icon.astro';
-import { PENDING, heroFacts, palette, enterCards, timeline, judgingPoints, boardSlots, entryPendings } from '../data/logoComp.js';
+import { PENDING, heroFacts, palette, briefRequirements, enterCards, timeline, judgingPoints, boardSlots, entryPendings } from '../data/logoComp.js';
 ---
 <Base title="Integro Bank Foundation Logo Competition | Arizona Microcredit Initiative" description="A statewide Arizona design competition to create the new logo for the Integro Bank Foundation, presented with Arizona Microcredit Initiative." mainClass="logo-page">
   <section class="hero dark">
@@ -38,10 +38,9 @@ import { PENDING, heroFacts, palette, enterCards, timeline, judgingPoints, board
     <div class="section-head reveal"><p class="eyebrow">Creative direction</p><h2>The brief.</h2></div>
     <div class="brief-grid">
       <ul class="brief-list reveal">
-        <li><strong>Required name.</strong> The mark is for the Integro Bank Foundation.</li>
-        <li><strong>Direction.</strong> A black-and-gold wordmark, starting fresh. The leaf is not required.</li>
-        <li><strong>Latitude.</strong> Broad freedom on font and treatment.</li>
-        <li><strong>Relationship.</strong> Designers decide how closely the mark relates to the bank.</li>
+        <li><strong>Required name.</strong> The mark is for the Integro Bank Foundation, spelled in full and legible somewhere in the lockup. The circular arrow is taken by Integro360 - off limits.</li>
+        <li><strong>Direction.</strong> A black-and-gold wordmark, starting fresh. The leaf is not required, and any font or treatment may be used.</li>
+        {briefRequirements.map(req => <li><strong>{req.title}</strong> {req.copy}</li>)}
       </ul>
       <div class="swatches reveal delay" aria-label="Approximate competition palette">
         {palette.map(swatch => <div class="swatch"><span class="chip" style={`background:${swatch.hex}`}></span><p>{swatch.name}<br/><small>{swatch.hex}</small></p></div>)}
@@ -57,9 +56,9 @@ import { PENDING, heroFacts, palette, enterCards, timeline, judgingPoints, board
         <h3>{card.title}</h3>
         <p>{card.body}</p>
         {card.note && <p class="card-note">{card.note}</p>}
-        <ul class="pending-list">
+        {card.pendings.length > 0 && <ul class="pending-list">
           {card.pendings.map(item => <li><span class="pending-token">{PENDING}</span>{item}</li>)}
-        </ul>
+        </ul>}
       </article>)}
     </div>
   </section>
@@ -80,7 +79,7 @@ import { PENDING, heroFacts, palette, enterCards, timeline, judgingPoints, board
     <div class="judge-block reveal">
       <p class="eyebrow gold-text">Judging</p>
       <h2>Ranked choice.</h2>
-      <p>Foundation board members rank the finalists. Most points wins, with a 51% board quorum.</p>
+      <p>The Foundation board reviews every complete entry and ranks the finalists. Most points wins, with a 51% board quorum. The board's decision is final, and the Foundation may decline to award if no entry meets the brief.</p>
       <div class="points-row">
         {judgingPoints.map(point => <div class="point"><strong>{point.pts}</strong><span>{point.label}</span></div>)}
       </div>
@@ -90,7 +89,7 @@ import { PENDING, heroFacts, palette, enterCards, timeline, judgingPoints, board
       <p class="eyebrow gold-text">Prize and payment</p>
       <h2>$1,500.</h2>
       <p class="status-pill inline">{PENDING} Foundation board approval</p>
-      <p>The intended payment route: the Integro Bank Foundation pays AMI, and AMI pays the winner.</p>
+      <p>The intended payment route: the Integro Bank Foundation pays AMI, and AMI pays the winner. The winner is announced in a Foundation press release and profiled in a CEO special feature by Integro Bank.</p>
       <p class="pending-line"><span class="pending-token">{PENDING}</span>Student payment mechanics</p>
     </div>
   </section>
@@ -110,7 +109,7 @@ import { PENDING, heroFacts, palette, enterCards, timeline, judgingPoints, board
   <section class="enter-cta" id="enter">
     <div class="reveal">
       <h2>Entries open soon.</h2>
-      <p>Submission details are being finalized with the Foundation.<br/>Check back here for the deadline and how to enter.</p>
+      <p>Entries will be submitted by email as one packet: your presentation sheet, vector files, rationale, process evidence, and the signed entry form. Files over 20 MB go by link.<br/>The contest email address and deadline are being finalized - check back here.</p>
     </div>
     <ul class="entry-pendings reveal delay">
       {entryPendings.map(item => <li><span class="pending-token">{PENDING}</span>{item}</li>)}
