@@ -58,17 +58,17 @@ const workshops = [
     <div class="day-info reveal">
       <p class="eyebrow">Pitch day</p><h2>Saturday,<br/>October 24.</h2><p><strong>11 a.m. to 3 p.m.</strong><br/><strong>Rio Vista Recreation Center</strong><br/>Peoria, Arizona</p>
       <p class="muted">Parking details will be announced before the event.</p>
-      <a class="button black-button" href="#workshops">Choose your workshops <Icon name="arrow-down" /></a>
+      <a class="button black-button" href="#workshop-cta">Choose your workshops <Icon name="arrow-down" /></a>
       <div class="map-card"><iframe title="Map to Rio Vista Recreation Center" src="https://www.google.com/maps?q=Rio+Vista+Recreation+Center,+8866+W+Thunderbird+Rd,+Peoria,+AZ+85381&output=embed" loading="lazy" referrerpolicy="no-referrer-when-downgrade"></iframe></div>
     </div>
     <div class="pitch-gallery reveal delay" aria-label="Scenes from past AMI pitch competitions">
-      <figure class="photo-card"><img src="/media/pitch-gallery-networking.webp" alt="Guests and AMI members talking at a past pitch competition" loading="lazy" width="2400" height="1800"/></figure>
+      <figure class="photo-card"><img src="/media/pitch-gallery-networking.webp" alt="Two business owners in purple shirts seated at a past AMI event" loading="lazy" width="2400" height="1800"/></figure>
       <figure class="photo-card"><img src="/media/pitch-gallery-group.webp" alt="Entrepreneurs, guests, and AMI members gathered after a past pitch competition" loading="lazy" width="2400" height="1800"/></figure>
       <figure class="photo-card"><img src="/media/pitch-gallery-third.webp" alt="Two attendees seated together at a past AMI event" loading="lazy" width="1238" height="928"/></figure>
     </div>
   </section>
 
-  <section class="closer">
+  <section class="closer" id="workshop-cta">
     <div class="reveal"><h2>Pick two workshops.<br/>That’s all it takes.</h2><p>First one is Thursday, October 1.<br/>Pitch day is Saturday, October 24.</p></div>
     <div class="closer-links">
       {workshops.map(workshop => <a href={workshop.url} target="_blank" rel="noopener noreferrer"><small>{workshop.date.replace('Thu, ', '')}</small><span>{workshop.title}</span><Icon name="arrow-up-right" /></a>)}
