@@ -10,7 +10,7 @@ import { PENDING, heroFacts, palette, briefRequirements, enterCards, timeline, j
       <h1>Design the<br/><em>Foundation's</em><br/>new mark.</h1>
       <p class="lede">The Integro Bank Foundation is looking for its logo, and would rather find it in Arizona than order it from a catalogue. Open to Arizona small businesses and Arizona design students, presented with Arizona Microcredit Initiative.</p>
       <div class="hero-actions">
-        <span class="button ghost-button" aria-disabled="true">Entry details coming soon</span>
+        <span class="button ghost-button" aria-disabled="true">Contest email coming soon</span>
         <a class="text-link" href="#brief">Read the brief <Icon name="arrow-down" /></a>
       </div>
     </div>
@@ -64,7 +64,7 @@ import { PENDING, heroFacts, palette, briefRequirements, enterCards, timeline, j
   </section>
 
   <section class="process light">
-    <div class="section-head reveal"><p class="eyebrow">Process and dates</p><h2>Three dates to know.</h2></div>
+    <div class="section-head reveal"><p class="eyebrow">Process and dates</p><h2>Four dates to know.</h2></div>
     <ol class="timeline">
       {timeline.map((step, i) => <li class={`reveal ${i ? `delay-${i}` : ''}`}>
         <p class="step-num">{step.n}</p>
@@ -125,7 +125,7 @@ import { PENDING, heroFacts, palette, briefRequirements, enterCards, timeline, j
     <ul class="entry-pendings reveal delay">
       {entryPendings.map(item => <li><span class="pending-token">{PENDING}</span>{item}</li>)}
     </ul>
-    <span class="button black-button disabled" aria-disabled="true">Entry details coming soon</span>
+    <span class="button black-button disabled" aria-disabled="true">Contest email coming soon</span>
   </section>
 
   <section class="co-footer dark">
