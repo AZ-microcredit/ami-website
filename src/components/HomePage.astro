@@ -222,9 +222,10 @@ if(hc){
 .hc-panels{display:block;height:100%}
 .hc-panel{display:none;min-width:0}
 .hc-panel.is-active{display:block}
-:global(.is-cinematic) .hc-panels{display:grid;position:relative}
+:global(.is-cinematic) .hero-carousel{height:100%}
+:global(.is-cinematic) .hc-panels{display:grid;position:relative;height:100%}
 :global(.is-cinematic) .hc-panel{display:block;grid-area:1/1;visibility:hidden;opacity:0;transform:translateX(5%);transition:transform .6s cubic-bezier(.2,.7,.2,1),opacity .6s ease,visibility 0s .6s}
-:global(.is-cinematic) .hc-panel:not(:first-child){position:absolute;inset:0}
+:global(.is-cinematic) .hc-panel{position:absolute;inset:0}
 :global(.is-cinematic) .hc-panel.is-before{transform:translateX(-5%)}
 :global(.is-cinematic) .hc-panel.is-active{visibility:visible;opacity:1;transform:none;transition:transform .6s cubic-bezier(.2,.7,.2,1),opacity .6s ease}
 :global(.is-cinematic) .hc-arrow{top:50%}
