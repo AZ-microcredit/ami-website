@@ -47,7 +47,7 @@ const services = [
      <p class="hcp-lede">A free pitch competition for West Valley entrepreneurs, run by AMI with the economic development teams of Peoria, Goodyear, and Avondale. Learn in October, pitch on stage October 24, compete for a share of $10,000.</p>
      <div class="hcp-actions">
       <a class="hcp-button hcp-green-button" href="/pitch-comp#workshops">Sign up for a workshop <span aria-hidden="true"><Icon name="arrow-up-right" /></span></a>
-      <a class="hcp-text-link" href="/pitch-comp#how-it-works">How it works</a>
+      <a class="hcp-button hcp-outline-button" href="/pitch-comp">Learn more</a>
      </div>
     </div>
     <figure class="hcp-photo">
@@ -82,7 +82,7 @@ const services = [
      <p class="hcl-lede">The Integro Bank Foundation is looking for its logo, and would rather find it in Arizona than order it from a catalogue. Open to Arizona small businesses and Arizona design students, presented with Arizona Microcredit Initiative.</p>
      <div class="hcl-actions">
       <span class="hcl-button hcl-ghost" aria-disabled="true">Contest email coming soon</span>
-      <a class="hcl-text-link" href="/logo-comp#brief">Read the brief <span aria-hidden="true"><Icon name="arrow-down" /></span></a>
+      <a class="hcl-button hcl-outline-button" href="/logo-comp">Learn more</a>
      </div>
     </div>
     <div class="hcl-side">
@@ -148,13 +148,14 @@ if(hc){
       p.setAttribute('aria-hidden',String(k!==cur));
     });
   };
+  let scrolled=false;
   const stop=()=>{if(timer){clearInterval(timer);timer=null;}};
-  const play=()=>{if(reduced||manual||timer)return;timer=setInterval(()=>show(cur+1),5000);};
+  const play=()=>{if(reduced||manual||scrolled||timer)return;timer=setInterval(()=>show(cur+1),5000);};
+  const onScroll=()=>{const s=window.scrollY>50;if(s!==scrolled){scrolled=s;if(scrolled)stop();else play();}};
+  window.addEventListener('scroll',onScroll,{passive:true});
   const userGo=n=>{manual=true;stop();show(n);};
   hc.querySelector('.hc-prev').addEventListener('click',()=>userGo(cur-1));
   hc.querySelector('.hc-next').addEventListener('click',()=>userGo(cur+1));
-  hc.addEventListener('mouseenter',stop);
-  hc.addEventListener('mouseleave',play);
   hc.addEventListener('focusin',stop);
   hc.addEventListener('focusout',play);
   hc.addEventListener('keydown',e=>{
@@ -199,8 +200,9 @@ if(hc){
 :global(.is-cinematic) .hc-panel{display:block;grid-area:1/1;visibility:hidden;opacity:0;transform:translateX(5%);transition:transform .6s cubic-bezier(.2,.7,.2,1),opacity .6s ease,visibility 0s .6s}
 :global(.is-cinematic) .hc-panel.is-before{transform:translateX(-5%)}
 :global(.is-cinematic) .hc-panel.is-active{visibility:visible;opacity:1;transform:none;transition:transform .6s cubic-bezier(.2,.7,.2,1),opacity .6s ease}
+:global(.is-cinematic) .hc-arrow{top:50%}
 .hc-panel>.opening,.hc-panel>.hcp,.hc-panel>.hcl{height:100%}
-.hc-arrow{position:absolute;top:50%;transform:translateY(-50%);z-index:6;width:42px;height:42px;border-radius:50%;border:1px solid rgba(255,255,255,.45);background:rgba(0,0,0,.5);color:#fff;cursor:pointer;display:flex;align-items:center;justify-content:center;padding:0}
+.hc-arrow{position:absolute;top:calc(50svh - 35px);transform:translateY(-50%);z-index:6;width:42px;height:42px;border-radius:50%;border:1px solid rgba(255,255,255,.45);background:rgba(0,0,0,.5);color:#fff;cursor:pointer;display:flex;align-items:center;justify-content:center;padding:0}
 .hc-arrow:hover{background:rgba(255,255,255,.15)}
 .hc-prev{left:14px}.hc-next{right:14px}
 .hcp{background:#0B0C0B;color:#fff;padding:44px 4vw 0;display:grid;grid-template-columns:1fr .78fr;grid-template-rows:auto auto 1fr;column-gap:5vw;row-gap:30px;overflow:hidden}
@@ -211,7 +213,7 @@ if(hc){
 .hcp-button{display:inline-flex;align-items:center;justify-content:space-between;gap:24px;padding:15px 18px;font:700 13px/1 var(--font-heading);text-decoration:none;transition:transform .25s,background .25s}
 .hcp-button:hover{transform:translateY(-3px)}
 .hcp-green-button{background:var(--green);color:#071008}
-.hcp-text-link{color:#fff;text-underline-offset:6px;font:700 13px var(--font-heading)}
+.hcp-outline-button{border:1px solid #fff;color:#fff}
 .hcp-photo{margin:0;position:relative;min-height:370px;overflow:hidden}
 .hcp-photo img{width:100%;height:100%;object-fit:cover;filter:grayscale(1)}
 .hcp-prize{position:absolute;right:0;bottom:34px;width:100%;background:var(--green);color:#071008;padding:18px 24px;display:grid;grid-template-columns:auto 1fr;align-items:center;gap:18px}
@@ -238,7 +240,7 @@ if(hc){
 .hcl-actions{display:flex;align-items:center;gap:26px;margin:20px 0 6px}
 .hcl-button{display:inline-flex;align-items:center;justify-content:center;gap:14px;padding:15px 18px;font:700 13px/1 var(--font-heading)}
 .hcl-ghost{border:1px solid #555;color:#999;cursor:default}
-.hcl-text-link{color:#fff;text-underline-offset:6px;font:700 13px var(--font-heading)}
+.hcl-outline-button{border:1px solid #fff;color:#fff}
 .hcl-side{display:flex;flex-direction:column;gap:22px;align-self:start}
 .hcl-cobrand{display:flex;align-items:center;gap:10px}
 .hcl-brand-tile{display:inline-flex;align-items:center;justify-content:center}
