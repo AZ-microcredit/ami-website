@@ -1,17 +1,17 @@
 ---
 import Base from '../layouts/Base.astro';
 import Icon from '../components/Icon.astro';
-import { PENDING, heroFacts, palette, paletteNeutrals, briefRequirements, enterCards, timeline, judgingCriteria, rightsTerms, boardSlots, entryPendings, brandFoundations, brandPillars, brandImagery, brandType, brandVoice } from '../data/logoComp.js';
+import { PENDING, heroFacts, palette, paletteNeutrals, briefRequirements, enterCards, timeline, judgingCriteria, rightsTerms, boardSlots, brandFoundations, brandPillars, brandImagery, brandVoice } from '../data/logoComp.js';
 ---
 <Base title="Integro Bank Foundation Logo Competition | Arizona Microcredit Initiative" description="A statewide Arizona design competition to create the new logo for the Integro Bank Foundation, presented with Arizona Microcredit Initiative." mainClass="logo-page">
   <section class="hero dark">
     <div class="hero-copy">
       <p class="eyebrow gold-text">Open call for Arizona designers</p>
-      <h1>Design the<br/><em>Foundation's</em><br/>new mark.</h1>
+      <h1>Design the<br/><em>Foundation's</em><br/><em>New Mark.</em></h1>
       <p class="lede">The Integro Bank Foundation is looking for its logo, and would rather find it in Arizona than order it from a catalogue. Open to Arizona small businesses and Arizona design students, presented with Arizona Microcredit Initiative.</p>
       <div class="hero-actions">
-        <span class="button ghost-button" aria-disabled="true">Contest email coming soon</span>
-        <a class="text-link" href="#brief">Read the brief <Icon name="arrow-down" /></a>
+        <a class="button ghost-button" href="https://docs.google.com/forms/d/e/1FAIpQLSc2vFSkoWLZsPGwSRrQhK-gxJtnXiMM_shMnU0lFEpYlO8sDA/viewform" target="_blank" rel="noopener noreferrer">Submit your entry</a>
+        <a class="text-link hero-brief-link" href="#brief">Read the brief <Icon name="arrow-down" /></a>
       </div>
     </div>
     <div class="hero-side">
@@ -22,12 +22,12 @@ import { PENDING, heroFacts, palette, paletteNeutrals, briefRequirements, enterC
     </div>
     <figure class="hero-card">
       <div class="mark-frame"><img src="/media/pitch-partners/integro.webp" alt="The current Integro Bank Foundation logo" width="1000" height="357"/></div>
-      <figcaption>The current mark. You are designing what comes next.</figcaption>
+      <figcaption>Current Logo</figcaption>
     </figure>
     </div>
-    <div class="prize-band" aria-label="$3,000 first prize, plus a student award">
-      <strong>$3,000</strong>
-      <span class="prize-side">First prize<span class="status-pill">Plus a student award</span></span>
+    <div class="prize-band" aria-label="$1,500 first prize">
+      <strong>$1,500</strong>
+      <span class="prize-side">First prize</span>
     </div>
     <dl class="facts">
       {heroFacts.map(fact => <div><dt>{fact.term}</dt><dd>{fact.lines[0]}<br/>{fact.lines[1]}</dd></div>)}
@@ -60,13 +60,10 @@ import { PENDING, heroFacts, palette, paletteNeutrals, briefRequirements, enterC
   <section class="enter-cta" id="enter">
     <div class="reveal">
       <h2>Entries are open.</h2>
-      <p>Submit one email packet: your presentation sheet, vector source files, half-page rationale, process evidence, and the signed entry form (name, business or school, email, phone, Arizona city, typeface and license, and the statement of human authorship). Files over 20 MB go by link.<br/>Deadline: 11:59 p.m. Arizona time on November 11, 2026.</p>
-      <p class="cta-contact">Send entries and questions to the contest email address. Integro Bank Foundation, 16215 N 28th Ave, Phoenix, AZ 85053. (602) 805-5088.</p>
+      <p>Submit one ZIP file containing your full-size logo, SVG vector source, black and white contrast versions, half-page rationale, and evidence of your working process.<br/>Deadline: October 10, 2026.</p>
+      <p class="cta-contact">Google sign-in is required for the file upload. The Foundation board reviews every complete entry.</p>
     </div>
-    {entryPendings.length > 0 && <ul class="entry-pendings reveal delay">
-      {entryPendings.map(item => <li><span class="pending-token">{PENDING}</span>{item}</li>)}
-    </ul>}
-    <span class="button black-button disabled" aria-disabled="true">Contest email coming soon</span>
+    <a class="button black-button" href="https://docs.google.com/forms/d/e/1FAIpQLSc2vFSkoWLZsPGwSRrQhK-gxJtnXiMM_shMnU0lFEpYlO8sDA/viewform" target="_blank" rel="noopener noreferrer">Submit one ZIP</a>
   </section>
   <section class="judging dark">
     <div class="judge-block reveal">
@@ -77,10 +74,8 @@ import { PENDING, heroFacts, palette, paletteNeutrals, briefRequirements, enterC
     </div>
     <div class="prize-block reveal delay">
       <p class="eyebrow gold-text">Prize</p>
-      <h2>$3,000.</h2>
-      <p class="status-pill inline">Plus a separate student award</p>
-      <p>$3,000 to the winning entrant, a press release announcing the winner and their business or school, and a CEO special feature profiling the winner by Integro Bank. The separate student award goes to the strongest entry from an Arizona design program, so students are not competing head-to-head with working studios.</p>
-      <p class="pending-line"><span class="pending-token">{PENDING}</span>Student award details</p>
+      <h2>$1,500.</h2>
+      <p>$1,500 to the winning entrant, a press release announcing the winner and their business or school, and a CEO special feature profiling the winner by Integro Bank.</p>
     </div>
   </section>
   <section class="criteria-band light">
@@ -118,9 +113,7 @@ import { PENDING, heroFacts, palette, paletteNeutrals, briefRequirements, enterC
         {palette.map(swatch => <div class="swatch"><span class="chip" style={`background:${swatch.hex}`}></span><p>{swatch.name}<br/><small>{swatch.hex}</small></p></div>)}
         {paletteNeutrals.map(swatch => <div class="swatch neutral"><span class="chip" style={`background:${swatch.hex}`}></span><p>{swatch.name}<br/><small>{swatch.hex} · {swatch.use}</small></p></div>)}
         </div>
-        <ul class="brief-list">
-          {briefRequirements.slice(-2).map(req => <li><strong>{req.title}</strong> {req.copy}</li>)}
-        </ul>
+
       </div>
     </div>
   </section>
@@ -145,19 +138,6 @@ import { PENDING, heroFacts, palette, paletteNeutrals, briefRequirements, enterC
   </section>
   <section class="voice light">
     <div class="section-head reveal"><p class="eyebrow">Type and voice</p><h2>How the brand talks.</h2></div>
-    <div class="voice-grid">
-      <div class="reveal">
-        <h3 class="sub-head">Type as observed</h3>
-        <p>{brandType.summary}</p>
-        <p>{brandType.consequence}</p>
-        <p class="fine">{brandType.licensing}</p>
-      </div>
-      <div class="reveal delay">
-        <h3 class="sub-head">Voice as observed</h3>
-        <p>{brandVoice.traits}</p>
-        <p class="fine">{brandVoice.wobbles}</p>
-      </div>
-    </div>
     <div class="type-card reveal">
       <p class="eyebrow type-card-label">Observed hierarchy, web</p>
       <div class="type-row"><span class="type-tag">H1</span><p class="type-sample type-h1">Rise to the Top</p></div>
@@ -173,13 +153,10 @@ import { PENDING, heroFacts, palette, paletteNeutrals, briefRequirements, enterC
   <section class="enter-cta">
     <div class="reveal">
       <h2>Entries are open.</h2>
-      <p>Submit one email packet: your presentation sheet, vector source files, half-page rationale, process evidence, and the signed entry form (name, business or school, email, phone, Arizona city, typeface and license, and the statement of human authorship). Files over 20 MB go by link.<br/>Deadline: 11:59 p.m. Arizona time on November 11, 2026.</p>
-      <p class="cta-contact">Send entries and questions to the contest email address. Integro Bank Foundation, 16215 N 28th Ave, Phoenix, AZ 85053. (602) 805-5088.</p>
+      <p>Submit one ZIP file containing your full-size logo, SVG vector source, black and white contrast versions, half-page rationale, and evidence of your working process.<br/>Deadline: October 10, 2026.</p>
+      <p class="cta-contact">Google sign-in is required for the file upload. The Foundation board reviews every complete entry.</p>
     </div>
-    {entryPendings.length > 0 && <ul class="entry-pendings reveal delay">
-      {entryPendings.map(item => <li><span class="pending-token">{PENDING}</span>{item}</li>)}
-    </ul>}
-    <span class="button black-button disabled" aria-disabled="true">Contest email coming soon</span>
+    <a class="button black-button" href="https://docs.google.com/forms/d/e/1FAIpQLSc2vFSkoWLZsPGwSRrQhK-gxJtnXiMM_shMnU0lFEpYlO8sDA/viewform" target="_blank" rel="noopener noreferrer">Submit one ZIP</a>
   </section>
   <section class="co-footer dark">
     <div class="co-inner reveal">
@@ -396,4 +373,5 @@ import { PENDING, heroFacts, palette, paletteNeutrals, briefRequirements, enterC
   .enter-cta h2{font-size:44px}
   .board-grid{grid-template-columns:1fr}.criteria-grid{grid-template-columns:1fr}
 }
+.hero-card figcaption{font-size:clamp(16px,1.4vw,22px);font-weight:700}.hero-brief-link{font-size:clamp(16px,1.35vw,21px);font-weight:700}
 </style>

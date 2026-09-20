@@ -5,10 +5,10 @@
 export const PENDING = 'Pending';
 
 export const heroFacts = [
-  { term: 'Prize', lines: ['$3,000', 'Plus a student award'] },
+  { term: 'Prize', lines: ['$1,500', 'One winning designer'] },
   { term: 'Who', lines: ['AZ small businesses', 'and design students'] },
-  { term: 'Entries', lines: ['Open Sep 14', 'Close Nov 11'] },
-  { term: 'Winner', lines: ['December', 'Announced by the board'] },
+  { term: 'Entries', lines: ['Open Sep 21', 'Close Oct 10'] },
+  { term: 'Winner', lines: ['Oct 24', 'At the pitch competition'] },
 ];
 
 export const palette = [
@@ -30,14 +30,14 @@ export const briefRequirements = [
 export const enterCards = [
   {
     title: 'Who can enter',
-    body: 'Arizona small businesses, and students enrolled in an Arizona design program. Individuals and teams are both welcome; a team names one person to receive the prize. Entrants must be 18 or older, or have a guardian sign the entry form.',
-    note: 'No entry fee. Employees, directors and officers of Integro Bank and the Foundation, judging panel members, and their immediate families may not enter. A separate student award means students are not competing head-to-head with working studios.',
+    body: 'Arizona small businesses, students enrolled in an Arizona design program or university, and individual Arizona designers are welcome. Entrants must be 18 or older.',
+    note: 'There is no entry fee.',
     pendings: [],
   },
   {
     title: 'What to submit',
-    body: 'One presentation sheet (PDF, letter size) showing the mark at full size, at one inch wide, and as a quarter-inch square, including the one-color black and reversed white versions. Vector source files: AI, EPS, or SVG, with type converted to outlines. A half-page rationale, and evidence of your working process.',
-    note: 'Submit your strongest idea - up to two entries as separate complete submissions. Incomplete entries cannot be judged.',
+    body: 'Submit one ZIP file containing the logo at full size, an SVG vector source file, and black-contrast and white-contrast versions. Include a half-page rationale and evidence of your working process.',
+    note: 'Incomplete entries cannot be judged.',
     pendings: [],
   },
   {
@@ -49,10 +49,10 @@ export const enterCards = [
 ];
 
 export const timeline = [
-  { n: '01', title: 'Entries open', date: 'Sep 14', copy: 'The call opens to Arizona small businesses and Arizona design students.' },
-  { n: '02', title: 'Questions close', date: 'Oct 14', copy: 'Last day for questions about the brief. A question costs you nothing; a disqualification costs you the entry.' },
-  { n: '03', title: 'Entries close', date: 'Nov 11', copy: 'Submit by 11:59 p.m. Arizona time. Files over 20 MB go by link.' },
-  { n: '04', title: 'Winner announced', date: 'December', copy: 'The Foundation board reviews every complete entry and announces the winner.' },
+  { n: '01', title: 'Entries open', date: 'Sep 21', copy: 'The call opens to Arizona small businesses, individual designers, and Arizona design students.' },
+  { n: '02', title: 'Entries close', date: 'Oct 10', copy: 'Submit one complete ZIP through the entry form.' },
+  { n: '03', title: 'Finalists present', date: 'Oct 14', copy: 'Finalists present their work to the Integro Bank Foundation board.' },
+  { n: '04', title: 'Winner announced', date: 'Oct 24', copy: 'The winner is announced at the West Valley Pitch Competition.' },
 ];
 
 export const judgingCriteria = [
