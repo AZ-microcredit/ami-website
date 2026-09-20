@@ -47,7 +47,6 @@ const services = [
      <p class="hcp-lede">A free pitch competition for West Valley entrepreneurs, run by AMI with the economic development teams of Peoria, Goodyear, and Avondale. Learn in October, pitch on stage October 24, compete for a share of $10,000.</p>
      <div class="hcp-actions">
       <a class="hcp-button hcp-green-button" href="/pitch-comp#workshops">Sign up for a workshop <span aria-hidden="true"><Icon name="arrow-up-right" /></span></a>
-      <a class="hcp-button hcp-outline-button" href="/pitch-comp">Learn more</a>
      </div>
     </div>
     <figure class="hcp-photo">
@@ -81,7 +80,6 @@ const services = [
      <h2 class="hcl-h">Design the<br/><em>Foundation's</em><br/>new mark.</h2>
      <p class="hcl-lede">The Integro Bank Foundation is looking for its logo, and would rather find it in Arizona than order it from a catalogue. Open to Arizona small businesses and Arizona design students, presented with Arizona Microcredit Initiative.</p>
      <div class="hcl-actions">
-      <span class="hcl-button hcl-ghost" aria-disabled="true">Contest email coming soon</span>
       <a class="hcl-button hcl-outline-button" href="/logo-comp">Learn more</a>
      </div>
     </div>
@@ -140,13 +138,41 @@ if(hc){
   const panels=[...hc.querySelectorAll('[data-panel]')];
   const reduced=window.matchMedia('(prefers-reduced-motion: reduce)').matches;
   let cur=0,timer=null,manual=false;
-  const show=n=>{
-    cur=(n+panels.length)%panels.length;
-    panels.forEach((p,k)=>{
-      p.classList.toggle('is-active',k===cur);
-      p.classList.toggle('is-before',k<cur);
-      p.setAttribute('aria-hidden',String(k!==cur));
-    });
+  const box=hc.querySelector('.hc-panels');
+  const landing=document.querySelector('.landing-experience');
+  let cleanup=null;
+  const setAria=()=>panels.forEach((p,k)=>p.setAttribute('aria-hidden',String(k!==cur)));
+  const show=(n,instant)=>{
+    const next=(n+panels.length)%panels.length;
+    if(next===cur)return;
+    if(cleanup)cleanup();
+    const oldP=panels[cur],newP=panels[next];
+    const fwd=(next===cur+1)||(cur===panels.length-1&&next===0);
+    cur=next;
+    if(instant||reduced||(landing&&landing.classList.contains('is-cinematic'))){
+      box.style.cssText='';
+      panels.forEach((p,k)=>{p.style.cssText='';p.classList.toggle('is-active',k===cur);p.classList.toggle('is-before',k<cur);});
+      setAria();return;
+    }
+    const h0=box.offsetHeight;
+    oldP.classList.remove('is-active');
+    box.style.cssText='position:relative;height:'+h0+'px;overflow:hidden;transition:height .6s cubic-bezier(.2,.7,.2,1)';
+    oldP.style.cssText='display:block;position:absolute;top:0;left:0;width:100%;transition:transform .6s cubic-bezier(.2,.7,.2,1),opacity .6s ease';
+    newP.style.cssText='display:block;position:absolute;top:0;left:0;width:100%;transform:translateX('+(fwd?100:-100)+'%);transition:transform .6s cubic-bezier(.2,.7,.2,1)';
+    const h1=newP.offsetHeight;
+    setAria();
+    requestAnimationFrame(()=>requestAnimationFrame(()=>{
+      oldP.style.transform='translateX('+(fwd?-30:30)+'%)';oldP.style.opacity='0';
+      newP.style.transform='translateX(0)';
+      box.style.height=h1+'px';
+    }));
+    newP.classList.add('is-active');
+    cleanup=()=>{
+      oldP.style.cssText='';newP.style.cssText='';box.style.cssText='';
+      panels.forEach((p,k)=>p.classList.toggle('is-active',k===cur));
+      setAria();cleanup=null;
+    };
+    setTimeout(()=>{if(cleanup)cleanup();},650);
   };
   let scrolled=false;
   const stop=()=>{if(timer){clearInterval(timer);timer=null;}};
@@ -196,13 +222,14 @@ if(hc){
 .hc-panels{display:block;height:100%}
 .hc-panel{display:none;min-width:0}
 .hc-panel.is-active{display:block}
-:global(.is-cinematic) .hc-panels{display:grid}
+:global(.is-cinematic) .hc-panels{display:grid;position:relative}
 :global(.is-cinematic) .hc-panel{display:block;grid-area:1/1;visibility:hidden;opacity:0;transform:translateX(5%);transition:transform .6s cubic-bezier(.2,.7,.2,1),opacity .6s ease,visibility 0s .6s}
+:global(.is-cinematic) .hc-panel:not(:first-child){position:absolute;inset:0}
 :global(.is-cinematic) .hc-panel.is-before{transform:translateX(-5%)}
 :global(.is-cinematic) .hc-panel.is-active{visibility:visible;opacity:1;transform:none;transition:transform .6s cubic-bezier(.2,.7,.2,1),opacity .6s ease}
 :global(.is-cinematic) .hc-arrow{top:50%}
 .hc-panel>.opening,.hc-panel>.hcp,.hc-panel>.hcl{height:100%}
-.hc-arrow{position:absolute;top:calc(100svh - 130px);transform:translateY(-50%);z-index:6;width:42px;height:42px;border-radius:50%;border:1px solid rgba(255,255,255,.45);background:rgba(0,0,0,.5);color:#fff;cursor:pointer;display:flex;align-items:center;justify-content:center;padding:0}
+.hc-arrow{position:absolute;top:522px;transform:translateY(-50%);z-index:6;width:42px;height:42px;border-radius:50%;border:1px solid rgba(255,255,255,.45);background:rgba(0,0,0,.5);color:#fff;cursor:pointer;display:flex;align-items:center;justify-content:center;padding:0}
 .hc-arrow:hover{background:rgba(255,255,255,.15)}
 .hc-prev{left:14px}.hc-next{right:14px}
 .hcp{background:#0B0C0B;color:#fff;padding:44px 4vw 0;display:grid;grid-template-columns:1fr .78fr;grid-template-rows:auto auto 1fr;column-gap:5vw;row-gap:30px;overflow:hidden}
