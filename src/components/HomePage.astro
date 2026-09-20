@@ -229,7 +229,7 @@ if(hc){
 :global(.is-cinematic) .hc-panel.is-active{visibility:visible;opacity:1;transform:none;transition:transform .6s cubic-bezier(.2,.7,.2,1),opacity .6s ease}
 :global(.is-cinematic) .hc-arrow{top:50%}
 .hc-panel>.opening,.hc-panel>.hcp,.hc-panel>.hcl{height:100%}
-.hc-arrow{position:absolute;top:522px;transform:translateY(-50%);z-index:6;width:42px;height:42px;border-radius:50%;border:1px solid rgba(255,255,255,.45);background:rgba(0,0,0,.5);color:#fff;cursor:pointer;display:flex;align-items:center;justify-content:center;padding:0}
+.hc-arrow{position:absolute;top:calc(50svh - 35px);transform:translateY(-50%);z-index:6;width:42px;height:42px;border-radius:50%;border:1px solid rgba(255,255,255,.45);background:rgba(0,0,0,.5);color:#fff;cursor:pointer;display:flex;align-items:center;justify-content:center;padding:0}
 .hc-arrow:hover{background:rgba(255,255,255,.15)}
 .hc-prev{left:14px}.hc-next{right:14px}
 .hcp{background:#0B0C0B;color:#fff;padding:44px 4vw 0;display:grid;grid-template-columns:1fr .78fr;grid-template-rows:auto auto 1fr;column-gap:5vw;row-gap:30px;overflow:hidden}
@@ -309,7 +309,7 @@ if(hc){
 .hcp-prize strong{font-size:clamp(44px,13vw,58px)}
 .hcp-prize>span{padding-left:14px;font-size:10px}
 .hcp-sponsors{grid-column:1;margin:0 -22px}
-.hcp-actions{align-items:flex-start;flex-direction:column}
+.hcp-actions{align-items:flex-start;flex-direction:column;margin-top:84px}
 .hcp-facts{grid-template-columns:1fr 1fr;margin-top:32px}
 .hcp-facts div:nth-child(2){border-right:0}
 .hcp-facts div:nth-child(3),.hcp-facts div:nth-child(4){border-top:1px solid #444}
@@ -319,7 +319,7 @@ if(hc){
 .hcl{grid-template-columns:1fr;padding:30px 22px 0;gap:34px}
 .hcl-h{font-size:56px}
 .hcl-lede{font-size:16px}
-.hcl-actions{align-items:flex-start;flex-direction:column}
+.hcl-actions{align-items:flex-start;flex-direction:column;margin-top:72px}
 .hcl-prize{flex-direction:column;align-items:flex-start;gap:12px;padding:18px 16px}
 .hcl-prize-side{border-left:0;border-top:2px solid #0B0B0C;padding:12px 0 0}
 .hcl-card{margin-top:0}
