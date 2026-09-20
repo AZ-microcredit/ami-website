@@ -25,6 +25,9 @@ const services = [
 ---
 <Base title="AMI | Take the initiative." description="Big ideas start small. Arizona Microcredit Initiative empowers local entrepreneurs with free consulting, business education, and low-interest microloans." mainClass="modern-home">
  <LandingExperience>
+ <div class="hero-carousel" role="region" aria-roledescription="carousel" aria-label="Featured at AMI">
+  <div class="hc-panels">
+  <div class="hc-panel is-active" data-panel role="group" aria-roledescription="slide" aria-label="1 of 3: Welcome to AMI">
  <section class="opening">
   <div class="opening-copy">
    <h1>Big ideas.<br/>Small beginnings.<br/><span>Let’s do it together.</span></h1>
@@ -36,6 +39,61 @@ const services = [
    <div class="photo-note"><span>LOCAL PEOPLE. REAL POSSIBILITY.</span><span>Tempe, Arizona <Icon name="arrow-up-right" /></span></div>
   </div>
  </section>
+  </div>
+  <div class="hc-panel" data-panel role="group" aria-roledescription="slide" aria-label="2 of 3: West Valley Pitch Competition" aria-hidden="true">
+   <section class="hc-pitch">
+    <div class="hc-pitch-main">
+     <div class="hc-pitch-copy">
+      <p class="eyebrow hc-green">West Valley Pitch Competition</p>
+      <h2 class="hc-h">Bring your business<br/>to the <span>stage.</span></h2>
+      <p class="hc-sub">Saturday, October 24, Rio Vista Recreation Center, Peoria.<br/>Two free workshops, then the stage.</p>
+      <div><a class="action hc-cta" href="/pitch-comp">See the pitch competition <span aria-hidden="true"><Icon name="arrow-up-right" /></span></a></div>
+     </div>
+     <div class="hc-pitch-visual">
+      <img src="/media/pitch-gallery-networking.webp" alt="Business owners networking at a past AMI pitch competition" loading="lazy" width="2400" height="1800" />
+      <div class="hc-prize"><strong>$10,000</strong><span>In prizes</span></div>
+     </div>
+    </div>
+    <div class="hc-rail">
+     <p class="eyebrow hc-rail-label">Organized with. Supported by.</p>
+     <MotionBanner label="Pitch competition sponsors and partners" variant="partners">
+      <span class="logo-tile"><img src="/media/pitch-partners/peoria.webp" alt="City of Peoria Economic Development" loading="lazy"/></span>
+      <span class="logo-tile"><img src="/media/pitch-partners/avondale.webp" alt="City of Avondale" loading="lazy"/></span>
+      <span class="logo-tile"><img src="/media/pitch-partners/goodyear.webp" alt="City of Goodyear" loading="lazy"/></span>
+      <span class="logo-tile"><img src="/media/pitch-partners/srp.webp" alt="SRP" loading="lazy"/></span>
+      <span class="logo-tile"><img src="/media/pitch-partners/aps.webp" alt="APS" loading="lazy"/></span>
+      <span class="logo-tile"><img src="/media/pitch-partners/integro.webp" alt="Integro Bank Foundation" loading="lazy"/></span>
+      <span class="logo-tile dark-logo"><img src="/media/pitch-partners/mamacitas.png" alt="MamaCitas Mommy Dates" loading="lazy"/></span>
+     </MotionBanner>
+    </div>
+   </section>
+  </div>
+  <div class="hc-panel" data-panel role="group" aria-roledescription="slide" aria-label="3 of 3: Integro Bank Foundation logo competition" aria-hidden="true">
+   <section class="hc-logo">
+    <div class="hc-logo-copy">
+     <p class="eyebrow hc-gold">Open call for Arizona designers</p>
+     <h2 class="hc-h">Design the <em>Foundation's</em><br/>new mark.</h2>
+     <p class="hc-sub">The Integro Bank Foundation is looking for its new logo, presented with AMI. Statewide in Arizona. Entries close November 11.</p>
+     <p class="hc-logo-prize"><strong>$3,000</strong><span class="hc-pill">Plus a student award</span></p>
+     <div><span class="action hc-ghost" aria-disabled="true">Contest email coming soon</span></div>
+    </div>
+    <div class="hc-logo-visual">
+     <figure class="hc-mark-card">
+      <div class="hc-mark-frame"><img src="/media/pitch-partners/integro.webp" alt="The current Integro Bank Foundation logo" loading="lazy" width="1000" height="357" /></div>
+      <figcaption>The current mark. You are designing what comes next.</figcaption>
+     </figure>
+    </div>
+   </section>
+  </div>
+  </div>
+  <button class="hc-arrow hc-prev" type="button" aria-label="Previous panel"><svg viewBox="0 0 24 24" width="20" height="20" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><path d="M15 6l-6 6 6 6"/></svg></button>
+  <div class="hc-tabs">
+   <button class="hc-tab is-active" type="button" data-go="0" aria-current="true">AMI</button>
+   <button class="hc-tab" type="button" data-go="1" aria-current="false">Pitch Competition</button>
+   <button class="hc-tab" type="button" data-go="2" aria-current="false">Logo Competition</button>
+  </div>
+  <button class="hc-arrow hc-next" type="button" aria-label="Next panel"><svg viewBox="0 0 24 24" width="20" height="20" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><path d="M9 6l6 6-6 6"/></svg></button>
+ </div>
  </LandingExperience>
  <section class="proof-strip" aria-label="AMI impact">
   <div><CountUp value={100} suffix="+"/><span>Businesses Impacted</span></div>
@@ -58,6 +116,50 @@ const services = [
  <ScrollMotion />
  <section class="closing"><p class="eyebrow">Your ambition belongs here.</p><h2>Take the <span>Initiative.</span></h2><div><p>Let’s put your next chapter in motion.</p></div></section>
 </Base>
+<script>
+const hc=document.querySelector('.hero-carousel');
+if(hc){
+  const panels=[...hc.querySelectorAll('[data-panel]')];
+  const tabs=[...hc.querySelectorAll('.hc-tab')];
+  const reduced=window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+  let cur=0,timer=null,manual=false;
+  const show=n=>{
+    cur=(n+panels.length)%panels.length;
+    panels.forEach((p,k)=>{
+      p.classList.toggle('is-active',k===cur);
+      p.classList.toggle('is-before',k<cur);
+      p.setAttribute('aria-hidden',String(k!==cur));
+    });
+    tabs.forEach((t,k)=>{
+      t.classList.toggle('is-active',k===cur);
+      t.setAttribute('aria-current',k===cur?'true':'false');
+    });
+  };
+  const stop=()=>{if(timer){clearInterval(timer);timer=null;}};
+  const play=()=>{if(reduced||manual||timer)return;timer=setInterval(()=>show(cur+1),8000);};
+  const userGo=n=>{manual=true;stop();show(n);};
+  tabs.forEach(t=>t.addEventListener('click',()=>userGo(+t.dataset.go)));
+  hc.querySelector('.hc-prev').addEventListener('click',()=>userGo(cur-1));
+  hc.querySelector('.hc-next').addEventListener('click',()=>userGo(cur+1));
+  hc.addEventListener('mouseenter',stop);
+  hc.addEventListener('mouseleave',play);
+  hc.addEventListener('focusin',stop);
+  hc.addEventListener('focusout',play);
+  hc.addEventListener('keydown',e=>{
+    if(e.key==='ArrowRight'){e.preventDefault();userGo(cur+1);}
+    else if(e.key==='ArrowLeft'){e.preventDefault();userGo(cur-1);}
+  });
+  let tx=null;
+  hc.addEventListener('touchstart',e=>{tx=e.touches[0].clientX;},{passive:true});
+  hc.addEventListener('touchend',e=>{
+    if(tx===null)return;
+    const dx=e.changedTouches[0].clientX-tx;
+    if(Math.abs(dx)>48)userGo(cur+(dx<0?1:-1));
+    tx=null;
+  },{passive:true});
+  show(0);play();
+}
+</script>
 <style>
 .partner-heading{padding:55px 4.2vw 28px}.partner-heading h2{font:500 var(--text-heading)/1.1 var(--font-heading);letter-spacing:-.04em;margin-top:15px}
 
@@ -76,4 +178,59 @@ const services = [
 
 .opening-bottom{display:flex;align-items:center;gap:24px;flex-wrap:wrap}.primary-book{background:var(--green);color:#111;padding:19px 24px}.primary-book:hover{background:#79c763}.explore-link{font:var(--text-label)/1.6 var(--font-heading);text-underline-offset:6px}.opening-copy{padding-top:64px;padding-bottom:64px}.opening h1{font-size:var(--text-display)}.community-image{overflow:hidden}
 .service-grid{display:block;border:0}.service-card,.service-card:first-child{display:grid;grid-template-columns:.6fr 1.3fr 1fr;gap:36px;align-items:center;background:transparent;min-height:0;border:0;border-top:1px solid #aaa;padding:38px 0;transition:background .25s}.service-card:last-child{border-bottom:1px solid #aaa}.service-card:hover,.service-card:first-child:hover{background:#e8e8e4}.card-top{flex-direction:column-reverse;gap:14px}.card-top>span:last-child{font-size:var(--text-heading);color:#777;letter-spacing:-.05em}.service-card h3{font-size:var(--text-heading);margin:0}.service-card>p{font-size:var(--text-body)}.card-link{grid-column:2/4;padding-top:0;margin-top:0;justify-content:start;gap:24px}.service-card:first-child h3{color:#111}@media(max-width:700px){.opening-copy{padding:42px 22px}.service-card,.service-card:first-child{grid-template-columns:1fr;gap:22px;padding:32px 0}.card-top{flex-direction:row;align-items:center}.card-link{grid-column:auto}.service-card h3{font-size:var(--text-heading)}}
+
+.hero-carousel{position:relative;height:100%;min-height:420px;background:#111}
+.hc-panels{display:grid;height:100%}
+.hc-panel{grid-area:1/1;min-width:0;visibility:hidden;opacity:0;transform:translateX(5%);transition:transform .6s cubic-bezier(.2,.7,.2,1),opacity .6s ease,visibility 0s .6s}
+.hc-panel.is-before{transform:translateX(-5%)}
+.hc-panel.is-active{visibility:visible;opacity:1;transform:none;transition:transform .6s cubic-bezier(.2,.7,.2,1),opacity .6s ease}
+.hc-panel>.opening,.hc-panel>.hc-pitch,.hc-panel>.hc-logo{height:100%}
+.hc-pitch{background:#0B0B0C;color:#fff;display:flex;flex-direction:column}
+.hc-pitch-main{flex:1;display:grid;grid-template-columns:1.05fr .95fr;min-height:0}
+.hc-pitch-copy{padding:clamp(28px,4vh,52px) 4.2vw;display:flex;flex-direction:column;justify-content:center}
+.hc-green{color:var(--green)}
+.hc-h{font:700 var(--text-display)/1 var(--font-heading);letter-spacing:-.055em;margin:12px 0 16px}
+.hc-h span{color:var(--green)}
+.hc-h em{font-family:var(--font-body);font-weight:400;font-style:normal;color:#C2A14D}
+.hc-sub{font:var(--text-body)/1.55 var(--font-body);color:#c9c9c5;margin:0 0 24px;max-width:460px}
+.hc-cta{background:var(--green);color:#111}
+.hc-pitch-visual{position:relative;overflow:hidden;min-height:200px}
+.hc-pitch-visual>img{position:absolute;inset:0;width:100%;height:100%;object-fit:cover;filter:grayscale(1)}
+.hc-prize{position:absolute;left:0;right:0;bottom:0;background:var(--green);color:#111;display:flex;align-items:center;gap:18px;padding:12px 22px}
+.hc-prize strong{font:700 clamp(32px,3.6vw,54px)/.9 var(--font-heading);letter-spacing:-.04em}
+.hc-prize>span{font:700 var(--text-label)/1 var(--font-heading);text-transform:uppercase;letter-spacing:.12em;border-left:2px solid #111;padding-left:16px}
+.hc-rail{background:#fff;color:#111}
+.hc-rail-label{padding:10px 18px 0;margin:0;color:#111}
+.hc-logo{background:#0B0B0C;color:#fff;display:grid;grid-template-columns:1.05fr .95fr;gap:3vw;align-items:center;padding:clamp(28px,4vh,52px) 4.2vw}
+.hc-gold{color:#C2A14D}
+.hc-logo-prize{display:flex;align-items:center;gap:16px;margin:2px 0 24px}
+.hc-logo-prize>strong{font:700 clamp(36px,4vw,58px)/.9 var(--font-heading);letter-spacing:-.04em;color:#C2A14D}
+.hc-pill{border:1px solid #C2A14D;color:#C2A14D;font:700 10px/1 var(--font-heading);text-transform:uppercase;letter-spacing:.12em;padding:8px 10px}
+.hc-ghost{border:1px solid #555;color:#999;cursor:default}
+.hc-logo-visual{display:flex;justify-content:flex-end}
+.hc-mark-card{background:#fff;margin:0;padding:20px 20px 12px;max-width:440px;width:100%}
+.hc-mark-frame{border:1px solid #e2ddd0;padding:26px 18px;display:flex;align-items:center;justify-content:center}
+.hc-mark-frame img{width:100%;max-width:320px;height:auto;display:block}
+.hc-mark-card figcaption{font:13px/1.5 var(--font-body);color:#4A4E57;padding-top:12px}
+.hc-tabs{position:absolute;left:50%;bottom:14px;transform:translateX(-50%);display:flex;gap:8px;z-index:6}
+.hc-tab{border:1px solid rgba(255,255,255,.45);background:rgba(0,0,0,.5);color:#fff;font:700 11px/1 var(--font-heading);letter-spacing:.1em;text-transform:uppercase;padding:10px 13px;cursor:pointer}
+.hc-tab:hover{background:rgba(255,255,255,.15)}
+.hc-tab.is-active{background:#fff;color:#111;border-color:#fff}
+.hc-arrow{position:absolute;top:50%;transform:translateY(-50%);z-index:6;width:42px;height:42px;border-radius:50%;border:1px solid rgba(255,255,255,.45);background:rgba(0,0,0,.5);color:#fff;cursor:pointer;display:flex;align-items:center;justify-content:center;padding:0}
+.hc-arrow:hover{background:rgba(255,255,255,.15)}
+.hc-prev{left:14px}.hc-next{right:14px}
+@media(prefers-reduced-motion:reduce){.hc-panel{transition:none;transform:none}}
+@media(max-width:900px){
+.hc-pitch-main{grid-template-columns:1fr}
+.hc-pitch-visual{min-height:190px}
+.hc-logo{grid-template-columns:1fr;gap:26px;align-content:center}
+.hc-logo-visual{justify-content:flex-start}
+}
+@media(max-width:600px){
+.hc-arrow{display:none}
+.hc-pitch-copy{padding:34px 22px}
+.hc-logo{padding:34px 22px}
+.hc-tabs{bottom:10px;gap:6px}
+.hc-tab{padding:9px 10px;font-size:10px}
+}
 </style>
