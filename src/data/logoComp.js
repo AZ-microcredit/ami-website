@@ -23,7 +23,7 @@ export const briefRequirements = [
   { title: 'Answer the relationship.', copy: 'The mark can join the Integro family, share one device with the bank, or stand on its own. Any of the three can win - explain your choice in two or three sentences.' },
   { title: 'Work in one color.', copy: 'Solid black on white and solid white on black, with nothing lost. A foundation mark gets embroidered, engraved, and printed in one ink.' },
   { title: 'Survive a thumbnail.', copy: 'Most people will meet this mark as a browser tab icon or social avatar. Fine lines, thin type, and small detail disappear - test it small.' },
-  { title: 'Look like a foundation.', copy: 'Warm and human, still considered in 2036. Skip the charity cliches: cupped hands, swooshes, sunbursts, figures in a ring, hearts.' },
+  { title: 'Look like a foundation.', copy: 'Warm and human, still considered in 10 yrs. Skip the charity cliches: cupped hands, swooshes, sunbursts, figures in a ring, hearts.' },
   { title: 'Be yours to give.', copy: "Original, human-made, and free of any other party's rights. If you set the name in a licensed typeface, name it and its license." },
 ];
 
@@ -73,7 +73,7 @@ export const rightsTerms = [
 
 export const boardSlots = ['Board member', 'Board member', 'Board member', 'Board member'];
 
-export const entryPendings = ['Contest email address', 'Confirmation workflow'];
+export const entryPendings = [];
 
 export const paletteNeutrals = [
   { name: 'Gold tint', hex: '#E0C87E', use: 'Supporting tint' },

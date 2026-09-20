@@ -33,23 +33,97 @@ import { PENDING, heroFacts, palette, paletteNeutrals, briefRequirements, enterC
       {heroFacts.map(fact => <div><dt>{fact.term}</dt><dd>{fact.lines[0]}<br/>{fact.lines[1]}</dd></div>)}
     </dl>
   </section>
-
+  <section class="enter dark">
+    <div class="section-head reveal"><p class="eyebrow gold-text">Entering</p><h2>What it takes.</h2></div>
+    <div class="enter-grid">
+      {enterCards.map((card, i) => <article class={`enter-card reveal ${i ? `delay-${i}` : ''}`}>
+        <h3>{card.title}</h3>
+        <p>{card.body}</p>
+        {card.note && <p class="card-note">{card.note}</p>}
+        {card.pendings.length > 0 && <ul class="pending-list">
+          {card.pendings.map(item => <li><span class="pending-token">{PENDING}</span>{item}</li>)}
+        </ul>}
+      </article>)}
+    </div>
+  </section>
+  <section class="process light">
+    <div class="section-head reveal"><p class="eyebrow">Process and dates</p><h2>Four dates to know.</h2></div>
+    <ol class="timeline">
+      {timeline.map((step, i) => <li class={`reveal ${i ? `delay-${i}` : ''}`}>
+        <p class="step-num">{step.n}</p>
+        <h3>{step.title}</h3>
+        <p class={`step-date ${step.pending ? 'is-pending' : ''}`}>{step.date}{step.pending && <span class="pending-token">To be announced</span>}</p>
+        <p>{step.copy}</p>
+      </li>)}
+    </ol>
+  </section>
+  <section class="enter-cta" id="enter">
+    <div class="reveal">
+      <h2>Entries are open.</h2>
+      <p>Submit one email packet: your presentation sheet, vector source files, half-page rationale, process evidence, and the signed entry form (name, business or school, email, phone, Arizona city, typeface and license, and the statement of human authorship). Files over 20 MB go by link.<br/>Deadline: 11:59 p.m. Arizona time on November 11, 2026.</p>
+      <p class="cta-contact">Send entries and questions to the contest email address. Integro Bank Foundation, 16215 N 28th Ave, Phoenix, AZ 85053. (602) 805-5088.</p>
+    </div>
+    {entryPendings.length > 0 && <ul class="entry-pendings reveal delay">
+      {entryPendings.map(item => <li><span class="pending-token">{PENDING}</span>{item}</li>)}
+    </ul>}
+    <span class="button black-button disabled" aria-disabled="true">Contest email coming soon</span>
+  </section>
+  <section class="judging dark">
+    <div class="judge-block reveal">
+      <p class="eyebrow gold-text">Judging</p>
+      <h2>Five criteria,<br/>weighted.</h2>
+      <p>The Foundation board reviews every complete entry. Its decision is final, and the Foundation may decline to award if no entry meets the brief.</p>
+      <p class="pending-line"><span class="pending-token">{PENDING}</span>Judging committee membership</p>
+    </div>
+    <div class="prize-block reveal delay">
+      <p class="eyebrow gold-text">Prize</p>
+      <h2>$3,000.</h2>
+      <p class="status-pill inline">Plus a separate student award</p>
+      <p>$3,000 to the winning entrant, a press release announcing the winner and their business or school, and a CEO special feature profiling the winner by Integro Bank. The separate student award goes to the strongest entry from an Arizona design program, so students are not competing head-to-head with working studios.</p>
+      <p class="pending-line"><span class="pending-token">{PENDING}</span>Student award details</p>
+    </div>
+  </section>
+  <section class="criteria-band light">
+    <div class="criteria-grid">
+      {judgingCriteria.map((c, i) => <div class={`criterion reveal ${i ? `delay-${Math.min(i, 2)}` : ''}`}><strong>{c.weight}<span>%</span></strong><div><h3>{c.name}</h3><p>{c.copy}</p></div></div>)}
+    </div>
+  </section>
+  <section class="board light">
+    <div class="section-head reveal"><p class="eyebrow">Foundation board</p><h2>The people judging.</h2></div>
+    <div class="board-grid">
+      {boardSlots.map((slot, i) => <article class={`board-card reveal ${i ? `delay-${Math.min(i, 2)}` : ''}`}>
+        <span class="silhouette" aria-hidden="true"><svg viewBox="0 0 48 48" width="48" height="48" fill="none"><circle cx="24" cy="16" r="9" fill="#c9c4b4"/><path d="M6 44c2-10 9-15 18-15s16 5 18 15" fill="#c9c4b4"/></svg></span>
+        <h3>{PENDING}</h3>
+        <p>{slot}</p>
+      </article>)}
+    </div>
+    <p class="board-note reveal">Names, titles, and bios will be published once the Foundation supplies them.</p>
+  </section>
+  <section class="rights dark">
+    <div class="section-head reveal"><p class="eyebrow gold-text">Rules and rights</p><h2>Read this part carefully.</h2></div>
+    <ul class="brief-list rights-list reveal">
+      {rightsTerms.map(term => <li><strong>{term.title}</strong> {term.copy}</li>)}
+    </ul>
+  </section>
   <section class="brief light" id="brief">
     <div class="section-head reveal"><p class="eyebrow">Creative direction</p><h2>The brief.</h2></div>
     <div class="brief-grid">
       <ul class="brief-list reveal">
         <li><strong>Required name.</strong> The mark is for the Integro Bank Foundation, spelled in full and legible somewhere in the lockup. The circular arrow is taken by Integro360 - off limits.</li>
         <li><strong>Direction.</strong> A black-and-gold wordmark, starting fresh. The leaf is not required, and any font or treatment may be used.</li>
-        {briefRequirements.map(req => <li><strong>{req.title}</strong> {req.copy}</li>)}
+        {briefRequirements.slice(0, -2).map(req => <li><strong>{req.title}</strong> {req.copy}</li>)}
       </ul>
-      <div class="swatches reveal delay" aria-label="Approximate competition palette">
+      <div class="brief-side reveal delay">
+        <div class="swatches" aria-label="Approximate competition palette">
         {palette.map(swatch => <div class="swatch"><span class="chip" style={`background:${swatch.hex}`}></span><p>{swatch.name}<br/><small>{swatch.hex}</small></p></div>)}
         {paletteNeutrals.map(swatch => <div class="swatch neutral"><span class="chip" style={`background:${swatch.hex}`}></span><p>{swatch.name}<br/><small>{swatch.hex} · {swatch.use}</small></p></div>)}
-        <p class="swatch-note">Palette as observed in the Foundation's draft brand audit - read off published web assets, close but not official. Guide only, pending confirmed brand specifications.</p>
+        </div>
+        <ul class="brief-list">
+          {briefRequirements.slice(-2).map(req => <li><strong>{req.title}</strong> {req.copy}</li>)}
+        </ul>
       </div>
     </div>
   </section>
-
   <section class="brand dark">
     <div class="section-head reveal"><p class="eyebrow gold-text">Brand foundations</p><h2>The brand in its own words.</h2></div>
     <div class="brand-grid">
@@ -68,9 +142,7 @@ import { PENDING, heroFacts, palette, paletteNeutrals, briefRequirements, enterC
         {brandImagery.channels.map(ch => <div class="channel"><h4>{ch.name}</h4><p>{ch.copy}</p></div>)}
       </div>
     </div>
-    <p class="swatch-note brand-note">Drawn from the Foundation's draft brand audit, observed from the bank's public site and channels in August 2026. The audit's own caveat: close, not official.</p>
   </section>
-
   <section class="voice light">
     <div class="section-head reveal"><p class="eyebrow">Type and voice</p><h2>How the brand talks.</h2></div>
     <div class="voice-grid">
@@ -86,91 +158,29 @@ import { PENDING, heroFacts, palette, paletteNeutrals, briefRequirements, enterC
         <p class="fine">{brandVoice.wobbles}</p>
       </div>
     </div>
+    <div class="type-card reveal">
+      <p class="eyebrow type-card-label">Observed hierarchy, web</p>
+      <div class="type-row"><span class="type-tag">H1</span><p class="type-sample type-h1">Rise to the Top</p></div>
+      <div class="type-row"><span class="type-tag">H2</span><p class="type-sample type-h2">Core Values</p></div>
+      <div class="type-row"><span class="type-tag">H5 / eyebrow</span><p class="type-sample type-eyebrow">Our Mission</p></div>
+      <div class="type-row"><span class="type-tag">Body</span><p class="type-sample type-body">To help small business maximize growth and employment. Set in the same family, one weight lighter, with generous line height.</p></div>
+    </div>
     <blockquote class="voice-quote reveal">
       <p>&ldquo;{brandVoice.sentence}&rdquo;</p>
       <cite>{brandVoice.sentenceNote}</cite>
     </blockquote>
   </section>
-
-  <section class="enter dark">
-    <div class="section-head reveal"><p class="eyebrow gold-text">Entering</p><h2>What it takes.</h2></div>
-    <div class="enter-grid">
-      {enterCards.map((card, i) => <article class={`enter-card reveal ${i ? `delay-${i}` : ''}`}>
-        <h3>{card.title}</h3>
-        <p>{card.body}</p>
-        {card.note && <p class="card-note">{card.note}</p>}
-        {card.pendings.length > 0 && <ul class="pending-list">
-          {card.pendings.map(item => <li><span class="pending-token">{PENDING}</span>{item}</li>)}
-        </ul>}
-      </article>)}
-    </div>
-  </section>
-
-  <section class="process light">
-    <div class="section-head reveal"><p class="eyebrow">Process and dates</p><h2>Four dates to know.</h2></div>
-    <ol class="timeline">
-      {timeline.map((step, i) => <li class={`reveal ${i ? `delay-${i}` : ''}`}>
-        <p class="step-num">{step.n}</p>
-        <h3>{step.title}</h3>
-        <p class={`step-date ${step.pending ? 'is-pending' : ''}`}>{step.date}{step.pending && <span class="pending-token">To be announced</span>}</p>
-        <p>{step.copy}</p>
-      </li>)}
-    </ol>
-  </section>
-
-  <section class="judging dark">
-    <div class="judge-block reveal">
-      <p class="eyebrow gold-text">Judging</p>
-      <h2>Five criteria,<br/>weighted.</h2>
-      <p>The Foundation board reviews every complete entry. Its decision is final, and the Foundation may decline to award if no entry meets the brief.</p>
-      <p class="pending-line"><span class="pending-token">{PENDING}</span>Judging committee membership</p>
-    </div>
-    <div class="prize-block reveal delay">
-      <p class="eyebrow gold-text">Prize</p>
-      <h2>$3,000.</h2>
-      <p class="status-pill inline">Plus a separate student award</p>
-      <p>$3,000 to the winning entrant, a press release announcing the winner and their business or school, and a CEO special feature profiling the winner by Integro Bank. The separate student award goes to the strongest entry from an Arizona design program, so students are not competing head-to-head with working studios.</p>
-      <p class="pending-line"><span class="pending-token">{PENDING}</span>Student award details</p>
-    </div>
-  </section>
-
-  <section class="criteria-band light">
-    <div class="criteria-grid">
-      {judgingCriteria.map((c, i) => <div class={`criterion reveal ${i ? `delay-${Math.min(i, 2)}` : ''}`}><strong>{c.weight}<span>%</span></strong><div><h3>{c.name}</h3><p>{c.copy}</p></div></div>)}
-    </div>
-  </section>
-
-  <section class="rights dark">
-    <div class="section-head reveal"><p class="eyebrow gold-text">Rules and rights</p><h2>Read this part carefully.</h2></div>
-    <ul class="brief-list rights-list reveal">
-      {rightsTerms.map(term => <li><strong>{term.title}</strong> {term.copy}</li>)}
-    </ul>
-  </section>
-
-  <section class="board light">
-    <div class="section-head reveal"><p class="eyebrow">Foundation board</p><h2>The people judging.</h2></div>
-    <div class="board-grid">
-      {boardSlots.map((slot, i) => <article class={`board-card reveal ${i ? `delay-${Math.min(i, 2)}` : ''}`}>
-        <span class="silhouette" aria-hidden="true"><svg viewBox="0 0 48 48" width="48" height="48" fill="none"><circle cx="24" cy="16" r="9" fill="#c9c4b4"/><path d="M6 44c2-10 9-15 18-15s16 5 18 15" fill="#c9c4b4"/></svg></span>
-        <h3>{PENDING}</h3>
-        <p>{slot}</p>
-      </article>)}
-    </div>
-    <p class="board-note reveal">Names, titles, and bios will be published once the Foundation supplies them.</p>
-  </section>
-
-  <section class="enter-cta" id="enter">
+  <section class="enter-cta">
     <div class="reveal">
       <h2>Entries are open.</h2>
       <p>Submit one email packet: your presentation sheet, vector source files, half-page rationale, process evidence, and the signed entry form (name, business or school, email, phone, Arizona city, typeface and license, and the statement of human authorship). Files over 20 MB go by link.<br/>Deadline: 11:59 p.m. Arizona time on November 11, 2026.</p>
-      <p class="cta-contact">Send entries and questions to the contest email address, which the Foundation is finalizing. Integro Bank Foundation, 16215 N 28th Ave, Phoenix, AZ 85053. (602) 805-5088.</p>
+      <p class="cta-contact">Send entries and questions to the contest email address. Integro Bank Foundation, 16215 N 28th Ave, Phoenix, AZ 85053. (602) 805-5088.</p>
     </div>
-    <ul class="entry-pendings reveal delay">
+    {entryPendings.length > 0 && <ul class="entry-pendings reveal delay">
       {entryPendings.map(item => <li><span class="pending-token">{PENDING}</span>{item}</li>)}
-    </ul>
+    </ul>}
     <span class="button black-button disabled" aria-disabled="true">Contest email coming soon</span>
   </section>
-
   <section class="co-footer dark">
     <div class="co-inner reveal">
       <p class="eyebrow gold-text">Presented by</p>
@@ -182,7 +192,6 @@ import { PENDING, heroFacts, palette, paletteNeutrals, briefRequirements, enterC
       <p class="co-note">Integro Bank Foundation with Arizona Microcredit Initiative.<br/><a class="co-link" href="https://www.integrobank.com/About-Integro/Our-Commitment/Integro-Bank-Foundation" target="_blank" rel="noopener noreferrer">About the Integro Bank Foundation</a></p>
     </div>
   </section>
-
   <script>
     const reduced = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
     const items = document.querySelectorAll('.reveal');
@@ -212,7 +221,7 @@ import { PENDING, heroFacts, palette, paletteNeutrals, briefRequirements, enterC
 .hero h1{font:500 clamp(48px,5.2vw,80px)/.98 var(--font-heading);letter-spacing:-.065em;margin:14px 0 18px}.hero h1 em{font:400 .98em/.95 var(--font-body);color:var(--gold)}
 .lede{max-width:640px;color:#c9c9c5;font:18px/1.55 var(--font-body)}
 .hero-actions{display:flex;align-items:center;gap:26px;margin:20px 0 6px}
-.hero-card{margin:0;background:#fff;padding:26px 26px 18px}
+.hero-card{margin:44px 0 0;background:#fff;padding:26px 26px 18px}
 .mark-frame{border:1px solid #e2ddd0;padding:34px 22px;display:flex;align-items:center;justify-content:center}.mark-frame img{width:100%;max-width:330px;height:auto;display:block}
 .hero-card figcaption{font:13px/1.5 var(--font-body);color:var(--grey);padding-top:14px}
 .prize-band{grid-column:1/-1;background:var(--gold);color:var(--ink);display:flex;align-items:center;gap:22px;padding:18px 24px;margin-top:2px}
@@ -233,7 +242,17 @@ import { PENDING, heroFacts, palette, paletteNeutrals, briefRequirements, enterC
 .swatch{border:1px solid #cfc9b8;background:#fff;padding:14px;display:flex;align-items:center;gap:14px}
 .chip{width:44px;height:44px;flex-shrink:0;border:1px solid rgba(11,11,12,.15)}
 .swatch p{margin:0;font:700 12px/1.35 var(--font-heading)}.swatch small{color:var(--grey);font-weight:400}
-.swatch-note{grid-column:1/-1;font:12px/1.5 var(--font-body);color:var(--grey);margin:4px 0 0}
+.brief-side{display:flex;flex-direction:column;gap:26px}
+.type-card{background:#fff;border:1px solid #cfc9b8;padding:30px 34px;margin-top:52px}
+.type-card-label{margin:0 0 6px;color:var(--grey)}
+.type-row{display:grid;grid-template-columns:120px 1fr;gap:24px;align-items:baseline;border-top:1px solid #e2ddd0;padding:20px 0}
+.type-row:last-child{padding-bottom:4px}
+.type-tag{font:700 10px/1 var(--font-heading);letter-spacing:.14em;text-transform:uppercase;color:#8a6d2f}
+.type-sample{margin:0;color:var(--ink)}
+.type-h1{font:600 clamp(30px,3.4vw,44px)/1.05 var(--font-heading);letter-spacing:-.02em}
+.type-h2{font:600 24px/1.15 var(--font-heading);letter-spacing:-.01em}
+.type-eyebrow{font:700 12px/1.4 var(--font-heading);letter-spacing:.13em;text-transform:uppercase}
+.type-body{font:16px/1.7 var(--font-body);max-width:560px}
 .enter{padding:92px 4vw 96px}
 .enter-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:22px}
 .enter-card{border:1px solid #3a3a38;padding:26px 24px;display:flex;flex-direction:column;transition:border-color .25s,transform .25s}
@@ -281,7 +300,6 @@ import { PENDING, heroFacts, palette, paletteNeutrals, briefRequirements, enterC
 .channel{border-top:1px solid #3a3a38;padding:14px 0}
 .channel h4{font:600 15px/1.1 var(--font-heading);margin:0 0 6px;color:#fff}
 .channel p{font:13px/1.5 var(--font-body);color:#b9b9b4;margin:0}
-.brand-note{margin-top:40px;color:#8a8a86}
 .voice{padding:92px 4vw 96px}
 .voice-grid{display:grid;grid-template-columns:1fr 1fr;gap:6vw}
 .voice-grid p{font:16px/1.6 var(--font-body);color:#33322e;margin:0 0 14px}
@@ -335,6 +353,8 @@ import { PENDING, heroFacts, palette, paletteNeutrals, briefRequirements, enterC
   .section-head{align-items:start;flex-direction:column;margin-bottom:40px}
   .brief-grid,.enter-grid,.timeline,.judging,.rights-list,.brand-grid,.pillars,.imagery-grid,.voice-grid{grid-template-columns:1fr;gap:40px}.criteria-grid{grid-template-columns:1fr 1fr;gap:24px}
   .board-grid{grid-template-columns:1fr 1fr}
+  .type-row{grid-template-columns:1fr;gap:8px}
+  .hero-card{margin-top:0}
   .enter-cta{padding:64px 22px}
   .co-brand,.co-lockup{flex-wrap:wrap;gap:12px}.brand-x{padding:0}
 }
