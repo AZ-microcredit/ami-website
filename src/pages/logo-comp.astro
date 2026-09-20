@@ -5,7 +5,7 @@ import { PENDING, heroFacts, palette, paletteNeutrals, briefRequirements, enterC
 ---
 <Base title="Integro Bank Foundation Logo Competition | Arizona Microcredit Initiative" description="A statewide Arizona design competition to create the new logo for the Integro Bank Foundation, presented with Arizona Microcredit Initiative." mainClass="logo-page">
   <section class="hero dark">
-    <div class="hero-copy reveal">
+    <div class="hero-copy">
       <p class="eyebrow gold-text">Open call for Arizona designers</p>
       <h1>Design the<br/><em>Foundation's</em><br/>new mark.</h1>
       <p class="lede">The Integro Bank Foundation is looking for its logo, and would rather find it in Arizona than order it from a catalogue. Open to Arizona small businesses and Arizona design students, presented with Arizona Microcredit Initiative.</p>
@@ -15,21 +15,21 @@ import { PENDING, heroFacts, palette, paletteNeutrals, briefRequirements, enterC
       </div>
     </div>
     <div class="hero-side">
-    <div class="co-brand reveal delay" aria-label="Presented by Integro Bank Foundation and Arizona Microcredit Initiative">
+    <div class="co-brand" aria-label="Presented by Integro Bank Foundation and Arizona Microcredit Initiative">
       <span class="brand-tile"><img src="/media/pitch-partners/integro-white.png" alt="Integro Bank Foundation" width="200" height="71"/></span>
       <span class="brand-x" aria-hidden="true">+</span>
       <span class="brand-tile"><img src="/media/ami-official-white.png" alt="Arizona Microcredit Initiative" width="180" height="58"/></span>
     </div>
-    <figure class="hero-card reveal delay">
+    <figure class="hero-card">
       <div class="mark-frame"><img src="/media/pitch-partners/integro.webp" alt="The current Integro Bank Foundation logo" width="1000" height="357"/></div>
       <figcaption>The current mark. You are designing what comes next.</figcaption>
     </figure>
     </div>
-    <div class="prize-band reveal" aria-label="$3,000 first prize, plus a student award">
+    <div class="prize-band" aria-label="$3,000 first prize, plus a student award">
       <strong>$3,000</strong>
       <span class="prize-side">First prize<span class="status-pill">Plus a student award</span></span>
     </div>
-    <dl class="facts reveal">
+    <dl class="facts">
       {heroFacts.map(fact => <div><dt>{fact.term}</dt><dd>{fact.lines[0]}<br/>{fact.lines[1]}</dd></div>)}
     </dl>
   </section>
@@ -85,7 +85,7 @@ import { PENDING, heroFacts, palette, paletteNeutrals, briefRequirements, enterC
   </section>
   <section class="criteria-band light">
     <div class="criteria-grid">
-      {judgingCriteria.map((c, i) => <div class={`criterion reveal ${i ? `delay-${Math.min(i, 2)}` : ''}`}><strong>{c.weight}<span>%</span></strong><div><h3>{c.name}</h3><p>{c.copy}</p></div></div>)}
+      {judgingCriteria.map((c, i) => <div class={`criterion reveal ${i ? `delay-${Math.min(i, 2)}` : ''}`}><strong><span class="num">{c.weight}</span><span class="pct">%</span></strong><div><h3>{c.name}</h3><p>{c.copy}</p></div></div>)}
     </div>
   </section>
   <section class="board light">
@@ -200,6 +200,22 @@ import { PENDING, heroFacts, palette, paletteNeutrals, briefRequirements, enterC
       const observer = new IntersectionObserver(entries => entries.forEach(entry => { if (entry.isIntersecting) { entry.target.classList.add('in'); observer.unobserve(entry.target); } }), { threshold: .12 });
       items.forEach(el => observer.observe(el));
     }
+    const nums = document.querySelectorAll('.criterion .num');
+    if (!reduced && nums.length) {
+      const run = el => {
+        const target = parseInt(el.textContent, 10);
+        const dur = 900;
+        const t0 = performance.now();
+        const tick = now => {
+          const p = Math.min(1, (now - t0) / dur);
+          el.textContent = Math.round(target * (1 - Math.pow(1 - p, 3)));
+          if (p < 1) requestAnimationFrame(tick);
+        };
+        requestAnimationFrame(tick);
+      };
+      const cObs = new IntersectionObserver(entries => entries.forEach(entry => { if (entry.isIntersecting) { run(entry.target); cObs.unobserve(entry.target); } }), { threshold: .4 });
+      nums.forEach(el => cObs.observe(el));
+    }
   </script>
 </Base>
 
@@ -311,7 +327,7 @@ import { PENDING, heroFacts, palette, paletteNeutrals, briefRequirements, enterC
 .criteria-grid{display:grid;grid-template-columns:repeat(5,1fr);gap:18px}
 .criterion{border-top:4px solid var(--ink);padding-top:16px;transition:border-color .25s}
 .criterion:hover{border-color:var(--gold)}
-.criterion>strong{font:700 40px/.9 var(--font-heading);color:var(--gold);letter-spacing:-.03em}.criterion>strong span{font-size:.55em}
+.criterion>strong{font:700 40px/.9 var(--font-heading);color:var(--gold);letter-spacing:-.03em}.criterion>strong .pct{font-size:.55em}
 .criterion h3{font:600 19px/1.1 var(--font-heading);margin:12px 0 8px}
 .criterion p{font:13px/1.5 var(--font-body);color:var(--grey);margin:0}
 .rights{padding:92px 4vw 96px}
@@ -339,6 +355,22 @@ import { PENDING, heroFacts, palette, paletteNeutrals, briefRequirements, enterC
 .reveal{opacity:0;transform:translateY(28px);transition:opacity .75s ease,transform .75s cubic-bezier(.2,.7,.2,1)}
 .reveal.in{opacity:1;transform:none}
 .delay{transition-delay:.1s}.delay-1{transition-delay:.1s}.delay-2{transition-delay:.2s}
+@keyframes hero-rise{from{opacity:0;transform:translateY(26px)}to{opacity:1;transform:none}}
+@keyframes prize-slide-in{from{transform:translateX(100%)}to{transform:translateX(0)}}
+.brief-list li,.swatch,.board-card,.brand-card,.channel{transition:border-color .3s ease,transform .3s cubic-bezier(.2,.7,.2,1)}
+.brief-list li:hover,.swatch:hover,.board-card:hover,.brand-card:hover,.channel:hover{border-color:var(--gold)}
+@media(prefers-reduced-motion:no-preference){
+  :global(html){scroll-behavior:smooth}
+  .hero-copy>*{animation:hero-rise .8s cubic-bezier(.2,.7,.2,1) both}
+  .hero-copy>*:nth-child(2){animation-delay:.08s}
+  .hero-copy>*:nth-child(3){animation-delay:.16s}
+  .hero-copy>*:nth-child(4){animation-delay:.24s}
+  .hero-side>*{animation:hero-rise .8s cubic-bezier(.2,.7,.2,1) .3s both}
+  .hero-side>*:nth-child(2){animation-delay:.42s}
+  .prize-band{animation:prize-slide-in .85s .55s cubic-bezier(.2,.75,.2,1) both}
+  .facts{animation:hero-rise .8s cubic-bezier(.2,.7,.2,1) .7s both}
+  .swatch:hover,.board-card:hover{transform:translateY(-4px)}
+}
 @media(prefers-reduced-motion:reduce){.reveal{opacity:1;transform:none;transition:none}.enter-card{transition:none}}
 @media(max-width:800px){
   .hero{grid-template-columns:1fr;padding:30px 22px 0;gap:34px}
