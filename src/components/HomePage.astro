@@ -180,7 +180,7 @@ if(hc){
 .service-grid{display:block;border:0}.service-card,.service-card:first-child{display:grid;grid-template-columns:.6fr 1.3fr 1fr;gap:36px;align-items:center;background:transparent;min-height:0;border:0;border-top:1px solid #aaa;padding:38px 0;transition:background .25s}.service-card:last-child{border-bottom:1px solid #aaa}.service-card:hover,.service-card:first-child:hover{background:#e8e8e4}.card-top{flex-direction:column-reverse;gap:14px}.card-top>span:last-child{font-size:var(--text-heading);color:#777;letter-spacing:-.05em}.service-card h3{font-size:var(--text-heading);margin:0}.service-card>p{font-size:var(--text-body)}.card-link{grid-column:2/4;padding-top:0;margin-top:0;justify-content:start;gap:24px}.service-card:first-child h3{color:#111}@media(max-width:700px){.opening-copy{padding:42px 22px}.service-card,.service-card:first-child{grid-template-columns:1fr;gap:22px;padding:32px 0}.card-top{flex-direction:row;align-items:center}.card-link{grid-column:auto}.service-card h3{font-size:var(--text-heading)}}
 
 .hero-carousel{position:relative;height:100%;min-height:420px;background:#111}
-.hc-panels{display:grid;height:100%}
+.hc-panels{display:grid;height:calc(100% - 48px)}
 .hc-panel{grid-area:1/1;min-width:0;visibility:hidden;opacity:0;transform:translateX(5%);transition:transform .6s cubic-bezier(.2,.7,.2,1),opacity .6s ease,visibility 0s .6s}
 .hc-panel.is-before{transform:translateX(-5%)}
 .hc-panel.is-active{visibility:visible;opacity:1;transform:none;transition:transform .6s cubic-bezier(.2,.7,.2,1),opacity .6s ease}
@@ -212,11 +212,11 @@ if(hc){
 .hc-mark-frame{border:1px solid #e2ddd0;padding:26px 18px;display:flex;align-items:center;justify-content:center}
 .hc-mark-frame img{width:100%;max-width:320px;height:auto;display:block}
 .hc-mark-card figcaption{font:13px/1.5 var(--font-body);color:#4A4E57;padding-top:12px}
-.hc-tabs{position:absolute;left:50%;bottom:14px;transform:translateX(-50%);display:flex;gap:8px;z-index:6}
+.hc-tabs{display:flex;justify-content:center;align-items:center;gap:8px;height:48px;background:#0B0B0C}
 .hc-tab{border:1px solid rgba(255,255,255,.45);background:rgba(0,0,0,.5);color:#fff;font:700 11px/1 var(--font-heading);letter-spacing:.1em;text-transform:uppercase;padding:10px 13px;cursor:pointer}
 .hc-tab:hover{background:rgba(255,255,255,.15)}
 .hc-tab.is-active{background:#fff;color:#111;border-color:#fff}
-.hc-arrow{position:absolute;top:50%;transform:translateY(-50%);z-index:6;width:42px;height:42px;border-radius:50%;border:1px solid rgba(255,255,255,.45);background:rgba(0,0,0,.5);color:#fff;cursor:pointer;display:flex;align-items:center;justify-content:center;padding:0}
+.hc-arrow{position:absolute;top:calc(50% - 24px);transform:translateY(-50%);z-index:6;width:42px;height:42px;border-radius:50%;border:1px solid rgba(255,255,255,.45);background:rgba(0,0,0,.5);color:#fff;cursor:pointer;display:flex;align-items:center;justify-content:center;padding:0}
 .hc-arrow:hover{background:rgba(255,255,255,.15)}
 .hc-prev{left:14px}.hc-next{right:14px}
 @media(prefers-reduced-motion:reduce){.hc-panel{transition:none;transform:none}}
@@ -230,7 +230,7 @@ if(hc){
 .hc-arrow{display:none}
 .hc-pitch-copy{padding:34px 22px}
 .hc-logo{padding:34px 22px}
-.hc-tabs{bottom:10px;gap:6px}
+.hc-tabs{gap:6px}
 .hc-tab{padding:9px 10px;font-size:10px}
 }
 </style>
