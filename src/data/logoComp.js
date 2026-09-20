@@ -74,3 +74,46 @@ export const rightsTerms = [
 export const boardSlots = ['Board member', 'Board member', 'Board member', 'Board member'];
 
 export const entryPendings = ['Contest email address', 'Confirmation workflow'];
+
+export const paletteNeutrals = [
+  { name: 'Gold tint', hex: '#E0C87E', use: 'Supporting tint' },
+  { name: 'Mid grey', hex: '#8E9298', use: 'Rules, captions' },
+  { name: 'Section band', hex: '#F2F2F0', use: 'Section bands' },
+];
+
+export const brandFoundations = [
+  { k: 'Mission', v: 'To help small business maximize growth and employment.' },
+  { k: 'The why', v: 'Employment lifts people up, transforms lives and impacts communities.' },
+  { k: 'The how', v: 'We start with integrity to build trust. We evaluate risks by providing consultative advice.' },
+  { k: 'Positioning line in market', v: 'Rise to the top, with rock-solid consultative banking.', dark: true },
+];
+
+export const brandPillars = [
+  { name: 'Integrity', copy: "A foundation of trust. Called the bank's DNA." },
+  { name: 'Clarity', copy: 'Helping owners see their world from a different viewpoint.' },
+  { name: 'Learning', copy: 'Analytics, data dashboards, performance metrics.' },
+  { name: 'Growth', copy: 'Coaching and consulting dedicated to small-business growth.' },
+];
+
+export const brandImagery = {
+  copy: 'Photography is people-first and transactional: handshakes, small groups in offices, one smiling professional to camera. Neutral backgrounds, even lighting, images cut out or lightly masked. Icons are thin gold line drawings on white - growth arrows, trust, employment.',
+  gap: 'No documented photo direction, and stock-feeling imagery where real Arizona small-business owners would be stronger.',
+  channels: [
+    { name: 'Website', copy: 'Black header, white body, gold accents across the product areas and Integro360.' },
+    { name: 'LinkedIn', copy: 'The only social channel linked from the site. Event promotion, CEO Club, and article shares dominate.' },
+    { name: 'Events', copy: 'Co-branded graphics. Co-branding rules are undefined.' },
+  ],
+};
+
+export const brandType = {
+  summary: 'The bank\'s site runs on a single humanist sans across headings and body, at a fairly narrow size range. There is no documented type scale, no display face, and no editorial pairing.',
+  consequence: 'Because no type system is documented, a submitted wordmark has nothing to sit against. Name the typeface you used and supply outlines - the entry form asks for both - or the winning mark cannot be extended to a website and stationery without redrawing it.',
+  licensing: 'A logo built from a retail font usually needs an extended or logo license from the foundry. Declaring the typeface and license on the entry form keeps the Foundation from inheriting a licensing problem with the winning file.',
+};
+
+export const brandVoice = {
+  traits: 'Direct sentences. First person plural. Verbs of action - grow, lift, transform, deliver. Small business is named constantly, and community impact is the closing argument in almost every section.',
+  wobbles: 'Exclamation marks and phrases like "WOW our clients" sit against formal investor language on the same page. Some copy still references COVID-19 recovery. Trademark and service-mark symbols appear inconsistently on Integro360.',
+  sentence: 'Our focus on small business creates jobs, transforms lives, and builds strong communities.',
+  sentenceNote: "The sentence a new mark has to live up to. It serves as the brand's one-line summary in search results and link previews.",
+};
