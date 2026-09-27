@@ -1,7 +1,9 @@
 import { defineConfig } from 'astro/config';
+import sitemap from '@astrojs/sitemap';
 
 export default defineConfig({
   site: 'https://www.azmicrocredit.org',
+  integrations: [sitemap()],
   devToolbar: { enabled: false },
   trailingSlash: 'never',
   build: { format: 'file' },

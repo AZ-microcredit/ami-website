@@ -17,7 +17,36 @@ const {
 } = Astro.props;
 // build.format 'file' makes Astro.url.pathname end in .html; canonical uses the clean slug.
 const canonicalPath = Astro.url.pathname.replace(/\.html$/, '').replace(/\/$/, '') || '/';
-const canonical = new URL(canonicalPath, Astro.site ?? 'https://www.azmicrocredit.org');
+const siteBase = Astro.site ?? new URL('https://www.azmicrocredit.org');
+const canonical = new URL(canonicalPath, siteBase);
+const siteName = 'Arizona Microcredit Initiative';
+const ogImage = new URL('/media/og-image.png', siteBase);
+const orgSchema = {
+  '@context': 'https://schema.org',
+  '@type': 'NGO',
+  name: siteName,
+  alternateName: 'AMI',
+  url: 'https://www.azmicrocredit.org/',
+  logo: new URL('/media/760f7c_d1c7d1796b1d418982570c13b1747ef3.png', siteBase).href,
+  description:
+    'Arizona Microcredit Initiative is a student-run 501(c)(3) nonprofit providing low-interest microloans, free business consulting, and business education to Arizona entrepreneurs.',
+  email: 'info@azmicrocredit.org',
+  nonprofitStatus: 'Nonprofit501c3',
+  areaServed: { '@type': 'State', name: 'Arizona' },
+  sameAs: [
+    'https://www.linkedin.com/company/arizona-microcredit-initiative/',
+    'https://www.facebook.com/azmicrocredit/',
+  ],
+};
+const websiteSchema = {
+  '@context': 'https://schema.org',
+  '@type': 'WebSite',
+  name: siteName,
+  alternateName: 'AMI',
+  url: 'https://www.azmicrocredit.org/',
+  publisher: { '@type': 'NGO', name: siteName },
+};
+const isHome = canonicalPath === '/';
 ---
 
 <!doctype html>
@@ -35,6 +64,18 @@ const canonical = new URL(canonicalPath, Astro.site ?? 'https://www.azmicrocredi
     <meta property="og:description" content={description} />
     <link rel="canonical" href={canonical} />
     <meta property="og:type" content="website" />
+    <meta property="og:url" content={canonical} />
+    <meta property="og:site_name" content={siteName} />
+    <meta property="og:image" content={ogImage} />
+    <meta property="og:image:width" content="1200" />
+    <meta property="og:image:height" content="630" />
+    <meta property="og:image:alt" content="Arizona Microcredit Initiative - Take the initiative." />
+    <meta name="twitter:card" content="summary_large_image" />
+    <meta name="twitter:title" content={title} />
+    <meta name="twitter:description" content={description} />
+    <meta name="twitter:image" content={ogImage} />
+    <script type="application/ld+json" set:html={JSON.stringify(orgSchema)} />
+    {isHome && <script type="application/ld+json" set:html={JSON.stringify(websiteSchema)} />}
     <slot name="head" />
     <Analytics />
   </head>

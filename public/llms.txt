@@ -1,0 +1,37 @@
+# Arizona Microcredit Initiative (AMI)
+
+> Arizona Microcredit Initiative (AMI) is a student-run 501(c)(3) nonprofit based in Phoenix, Arizona. AMI empowers local entrepreneurs and small businesses with low-interest microloans, free one-on-one business consulting, and business education. Tagline: "Take the initiative."
+
+## What AMI does
+
+- **Microloans**: low-interest small business loans for Arizona entrepreneurs who may not qualify for traditional financing. Apply at /loan-application.
+- **Consulting**: free, one-on-one business consulting for local businesses in any phase, from startup to expansion. Book at /consulting.
+- **Education**: free practical business education - guides, resources, and workshops - at /education.
+- **Competitions**: the West Valley Pitch Competition (a share of $10,000, /pitch-comp) and the Integro Bank Foundation Logo Competition (/logo-comp).
+
+## Organization facts
+
+- Type: student-run 501(c)(3) nonprofit
+- Location: Phoenix / Tempe, Arizona (associated with Arizona State University)
+- Email: info@azmicrocredit.org
+- Donate: /donate
+- Events: /events
+- Team: /about-us
+- FAQ: /faq
+
+## Key pages
+
+- [Home](https://www.azmicrocredit.org/)
+- [Microloans](https://www.azmicrocredit.org/microloans)
+- [Consulting](https://www.azmicrocredit.org/consulting)
+- [Education](https://www.azmicrocredit.org/education)
+- [About AMI](https://www.azmicrocredit.org/about-us)
+- [Support AMI](https://www.azmicrocredit.org/donate)
+- [Loan Application](https://www.azmicrocredit.org/loan-application)
+- [Events](https://www.azmicrocredit.org/events)
+- [Contact](https://www.azmicrocredit.org/contact)
+
+## Social
+
+- [LinkedIn](https://www.linkedin.com/company/arizona-microcredit-initiative/)
+- [Facebook](https://www.facebook.com/azmicrocredit/)
