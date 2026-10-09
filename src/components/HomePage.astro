@@ -27,7 +27,7 @@ const services = [
  <LandingExperience>
  <div class="hero-carousel" role="region" aria-roledescription="carousel" aria-label="Featured at AMI">
   <div class="hc-panels">
-  <div class="hc-panel is-active" data-panel role="group" aria-roledescription="slide" aria-label="1 of 3: West Valley Pitch Competition">
+  <div class="hc-panel is-active" data-panel role="group" aria-roledescription="slide" aria-label="1 of 2: West Valley Pitch Competition">
    <section class="hcp dark">
     <div class="hcp-copy">
      <h2 class="hcp-h">Bring your<br/>business to the<br/><em>stage.</em></h2>
@@ -60,40 +60,7 @@ const services = [
     </dl>
    </section>
   </div>
-<div class="hc-panel" data-panel role="group" aria-roledescription="slide" aria-label="2 of 3: Integro Bank Foundation logo competition" aria-hidden="true">
-   <section class="hcl dark">
-    <div class="hcl-copy">
-     <p class="hcl-eyebrow">Open call for Arizona designers</p>
-     <h2 class="hcl-h">Design the<br/><em>Foundation's</em><br/>New Mark.</h2>
-     <p class="hcl-lede">The Integro Bank Foundation is looking for its logo, and would rather find it in Arizona than order it from a catalogue. Open to Arizona small businesses and Arizona design students, presented with Arizona Microcredit Initiative.</p>
-     <div class="hcl-actions">
-      <a class="hcl-button hcl-outline-button" href="/logo-comp">Read the brief</a>
-     </div>
-    </div>
-    <div class="hcl-side">
-     <div class="hcl-cobrand" aria-label="Presented by Integro Bank Foundation and Arizona Microcredit Initiative">
-      <span class="hcl-brand-tile"><img src="/media/pitch-partners/integro-white.png" alt="Integro Bank Foundation" width="200" height="71"/></span>
-      <span class="hcl-brand-x" aria-hidden="true">+</span>
-      <span class="hcl-brand-tile"><img src="/media/ami-official-white.png" alt="Arizona Microcredit Initiative" width="180" height="58"/></span>
-     </div>
-     <figure class="hcl-card">
-      <div class="hcl-mark-frame"><img src="/media/pitch-partners/integro.webp" alt="The current Integro Bank Foundation logo" width="1000" height="357" loading="lazy"/></div>
-      <figcaption>The current mark. You are designing what comes next.</figcaption>
-     </figure>
-    </div>
-    <div class="hcl-prize" aria-label="$1,500 first prize">
-     <strong>$1,500</strong>
-     <span class="hcl-prize-side">First prize</span>
-    </div>
-    <dl class="hcl-facts">
-     <div><dt>Prize</dt><dd>$1,500<br/>One winning designer</dd></div>
-     <div><dt>Who</dt><dd>AZ small businesses<br/>and design students</dd></div>
-     <div><dt>Entries</dt><dd>Open Sep 21<br/>Close Oct 10</dd></div>
-     <div><dt>Winner</dt><dd>Oct 24<br/>At the pitch competition</dd></div>
-    </dl>
-   </section>
-  </div>
-<div class="hc-panel" data-panel role="group" aria-roledescription="slide" aria-label="3 of 3: Welcome to AMI" aria-hidden="true">
+<div class="hc-panel" data-panel role="group" aria-roledescription="slide" aria-label="2 of 2: Welcome to AMI" aria-hidden="true">
  <section class="opening">
   <div class="opening-copy">
    <h1>Big ideas.<br/>Small beginnings.<br/><span>Let’s do it together.</span></h1>
@@ -229,7 +196,7 @@ if(hc){
 :global(.is-cinematic) .hc-panel.is-before{transform:translateX(-5%)}
 :global(.is-cinematic) .hc-panel.is-active{visibility:visible;opacity:1;transform:none;transition:transform .6s cubic-bezier(.2,.7,.2,1),opacity .6s ease}
 :global(.is-cinematic) .hc-arrow{top:50%}
-.hc-panel>.opening,.hc-panel>.hcp,.hc-panel>.hcl{height:100%}
+.hc-panel>.opening,.hc-panel>.hcp{height:100%}
 .hc-arrow{position:absolute;top:calc(50svh - 56px);transform:translateY(-50%);z-index:6;width:42px;height:42px;border-radius:50%;border:1px solid rgba(255,255,255,.45);background:rgba(0,0,0,.5);color:#fff;cursor:pointer;display:flex;align-items:center;justify-content:center;padding:0}
 .hc-arrow:hover{background:rgba(255,255,255,.15)}
 .hc-prev{left:14px}.hc-next{right:14px}
@@ -260,45 +227,15 @@ if(hc){
 .hcp-facts div:not(:first-child){padding-left:22px}
 .hcp-facts dt{color:#888;font:700 10px var(--font-heading);letter-spacing:.13em;text-transform:uppercase;margin-bottom:12px}
 .hcp-facts dd{margin:0;font:15px/1.4 var(--font-body);color:#eee}
-.hcl{background:#0B0B0C;color:#fff;padding:30px 4vw 0;display:grid;grid-template-columns:1fr .78fr;grid-template-rows:auto auto 1fr;column-gap:5vw;row-gap:28px;overflow:hidden}
-.hcl-eyebrow{font:700 11px/1.4 var(--font-heading);letter-spacing:.13em;text-transform:uppercase;margin:0;color:#C2A14D}
-.hcl-h{font:500 clamp(48px,5.2vw,80px)/.98 var(--font-heading);letter-spacing:-.065em;margin:14px 0 18px;color:#fff}
-.hcl-h em{font:400 .98em/.95 var(--font-body);color:#C2A14D}
-.hcl-lede{max-width:640px;color:#c9c9c5;font:18px/1.55 var(--font-body);margin:0}
-.hcl-actions{display:flex;align-items:center;gap:26px;margin:20px 0 6px}
-.hcl-button{display:inline-flex;align-items:center;justify-content:center;gap:14px;padding:15px 18px;font:700 13px/1 var(--font-heading)}
-.hcl-ghost{border:1px solid #555;color:#999;cursor:default}
-.hcl-outline-button{border:1px solid #fff;color:#fff}
-.hcl-side{display:flex;flex-direction:column;gap:22px;align-self:start}
-.hcl-cobrand{display:flex;align-items:center;gap:10px}
-.hcl-brand-tile{display:inline-flex;align-items:center;justify-content:center}
-.hcl-brand-tile img{max-width:170px;height:auto;display:block}
-.hcl-brand-x{color:#C2A14D;font:600 22px var(--font-heading);padding:0 18px}
-.hcl-card{margin:44px 0 0;background:#fff;padding:26px 26px 18px}
-.hcl-mark-frame{border:1px solid #e2ddd0;padding:34px 22px;display:flex;align-items:center;justify-content:center}
-.hcl-mark-frame img{width:100%;max-width:330px;height:auto;display:block}
-.hcl-card figcaption{font:13px/1.5 var(--font-body);color:#4A4E57;padding-top:14px}
-.hcl-prize{grid-column:1/-1;background:#C2A14D;color:#0B0B0C;display:flex;align-items:center;gap:22px;padding:18px 24px;margin-top:2px}
-.hcl-prize strong{white-space:nowrap;font:700 clamp(46px,5vw,74px)/.8 var(--font-heading);letter-spacing:-.05em}
-.hcl-prize-side{display:flex;align-items:center;gap:16px;border-left:2px solid #0B0B0C;padding-left:20px;font:800 12px/1 var(--font-heading);letter-spacing:.12em;text-transform:uppercase}
-.hcl-pill{display:inline-block;border:1px solid #0B0B0C;font:700 10px/1 var(--font-heading);letter-spacing:.12em;text-transform:uppercase;padding:7px 10px}
-.hcl-facts{grid-column:1/-1;display:grid;grid-template-columns:repeat(4,1fr);margin:34px 0 0;border-top:1px solid #3a3a38;align-self:end}
-.hcl-facts div{padding:22px 20px 26px 0;border-right:1px solid #3a3a38}
-.hcl-facts div:not(:first-child){padding-left:20px}
-.hcl-facts dt{color:#8a8a86;font:700 10px var(--font-heading);letter-spacing:.13em;text-transform:uppercase;margin-bottom:10px}
-.hcl-facts dd{margin:0;font:15px/1.4 var(--font-body);color:#eee}
 @keyframes hc-rise{from{opacity:0;transform:translateY(26px)}to{opacity:1;transform:none}}
 @keyframes hc-prize-in{from{transform:translateX(100%)}to{transform:translateX(0)}}
 @media(prefers-reduced-motion:no-preference){
-.hc-panel.is-active .hcp-copy>*,.hc-panel.is-active .hcl-copy>*{animation:hc-rise .8s cubic-bezier(.2,.7,.2,1) both}
-.hc-panel.is-active .hcp-copy>*:nth-child(2),.hc-panel.is-active .hcl-copy>*:nth-child(2){animation-delay:.08s}
-.hc-panel.is-active .hcp-copy>*:nth-child(3),.hc-panel.is-active .hcl-copy>*:nth-child(3){animation-delay:.16s}
-.hc-panel.is-active .hcp-copy>*:nth-child(4),.hc-panel.is-active .hcl-copy>*:nth-child(4){animation-delay:.24s}
-.hc-panel.is-active .hcl-side>*{animation:hc-rise .8s cubic-bezier(.2,.7,.2,1) .3s both}
-.hc-panel.is-active .hcl-side>*:nth-child(2){animation-delay:.42s}
+.hc-panel.is-active .hcp-copy>*{animation:hc-rise .8s cubic-bezier(.2,.7,.2,1) both}
+.hc-panel.is-active .hcp-copy>*:nth-child(2){animation-delay:.08s}
+.hc-panel.is-active .hcp-copy>*:nth-child(3){animation-delay:.16s}
+.hc-panel.is-active .hcp-copy>*:nth-child(4){animation-delay:.24s}
 .hc-panel.is-active .hcp-prize{animation:hc-prize-in .85s .35s cubic-bezier(.2,.75,.2,1) both}
-.hc-panel.is-active .hcl-prize{animation:hc-prize-in .85s .55s cubic-bezier(.2,.75,.2,1) both}
-.hc-panel.is-active .hcp-facts,.hc-panel.is-active .hcl-facts{animation:hc-rise .8s cubic-bezier(.2,.7,.2,1) .7s both}
+.hc-panel.is-active .hcp-facts{animation:hc-rise .8s cubic-bezier(.2,.7,.2,1) .7s both}
 }
 @media(prefers-reduced-motion:reduce){:global(.is-cinematic) .hc-panel{transition:none;transform:none}}
 @media(max-width:800px){
@@ -317,25 +254,9 @@ if(hc){
 .hcp-facts div{padding:20px 10px 22px 0}
 .hcp-facts div:not(:first-child){padding-left:15px}
 .hcp-facts dd{font-size:13px}
-.hcl{grid-template-columns:1fr;padding:30px 22px 0;gap:34px}
-.hcl-h{font-size:56px}
-.hcl-lede{font-size:16px}
-.hcl-actions{align-items:flex-start;flex-direction:column;margin-top:88px}
-.hcl-prize{flex-direction:column;align-items:flex-start;gap:12px;padding:18px 16px}
-.hcl-prize-side{border-left:0;border-top:2px solid #0B0B0C;padding:12px 0 0}
-.hcl-card{margin-top:0}
-.hcl-cobrand{flex-wrap:wrap;gap:12px}
-.hcl-brand-x{padding:0}
-.hcl-facts{grid-template-columns:1fr 1fr;margin-top:28px}
-.hcl-facts div:nth-child(2){border-right:0}
-.hcl-facts div:nth-child(3),.hcl-facts div:nth-child(4){border-top:1px solid #3a3a38}
-.hcl-facts div{padding:18px 10px 20px 0}
-.hcl-facts div:not(:first-child){padding-left:14px}
-.hcl-facts dd{font-size:13px}
 }
 @media(max-width:430px){
 .hcp-h{font-size:52px}
 .hcp-photo{min-height:300px}
-.hcl-h{font-size:48px}
 }
 </style>

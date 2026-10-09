@@ -7,7 +7,7 @@
 - **Microloans**: low-interest small business loans for Arizona entrepreneurs who may not qualify for traditional financing. Apply at /loan-application.
 - **Consulting**: free, one-on-one business consulting for local businesses in any phase, from startup to expansion. Book at /consulting.
 - **Education**: free practical business education - guides, resources, and workshops - at /education.
-- **Competitions**: the West Valley Pitch Competition (a share of $10,000, /pitch-comp) and the Integro Bank Foundation Logo Competition (/logo-comp).
+- **Pitch Competition**: the West Valley Pitch Competition (a share of $10,000, /pitch-comp).
 
 ## Organization facts
 
