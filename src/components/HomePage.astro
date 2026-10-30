@@ -25,42 +25,6 @@ const services = [
 ---
 <Base title="AMI | Take the initiative." description="Big ideas start small. Arizona Microcredit Initiative empowers local entrepreneurs with free consulting, business education, and low-interest microloans." mainClass="modern-home">
  <LandingExperience>
- <div class="hero-carousel" role="region" aria-roledescription="carousel" aria-label="Featured at AMI">
-  <div class="hc-panels">
-  <div class="hc-panel is-active" data-panel role="group" aria-roledescription="slide" aria-label="1 of 2: West Valley Pitch Competition">
-   <section class="hcp dark">
-    <div class="hcp-copy">
-     <h2 class="hcp-h">Bring your<br/>business to the<br/><em>stage.</em></h2>
-     <p class="hcp-lede">A free pitch competition for West Valley entrepreneurs, run by AMI with the economic development teams of Peoria, Goodyear, and Avondale. Learn in October, pitch on stage October 24, compete for a share of $10,000.</p>
-     <div class="hcp-actions">
-      <a class="hcp-button hcp-green-button" href="/pitch-comp#workshops">Sign up for a workshop <span aria-hidden="true"><Icon name="arrow-up-right" /></span></a>
-     </div>
-    </div>
-    <figure class="hcp-photo">
-     <img src="/media/pitch-winners-2026.jpg" alt="Entrepreneurs and community members at an AMI pitch competition" width="5712" height="4284" loading="lazy"/>
-     <div class="hcp-prize" aria-label="$10,000 in prizes on October 24"><strong>$10,000</strong><span>In prizes</span></div>
-    </figure>
-    <div class="hcp-sponsors">
-     <p class="hcp-eyebrow">Organized with. Supported by.</p>
-     <MotionBanner label="Pitch competition sponsors and partners" variant="partners">
-      <span class="logo-tile"><img src="/media/pitch-partners/peoria.webp" alt="City of Peoria Economic Development" loading="lazy"/></span>
-      <span class="logo-tile"><img src="/media/pitch-partners/avondale.webp" alt="City of Avondale" loading="lazy"/></span>
-      <span class="logo-tile"><img src="/media/pitch-partners/goodyear.webp" alt="City of Goodyear" loading="lazy"/></span>
-      <span class="logo-tile"><img src="/media/pitch-partners/srp.webp" alt="SRP" loading="lazy"/></span>
-      <span class="logo-tile"><img src="/media/pitch-partners/aps.webp" alt="APS" loading="lazy"/></span>
-      <span class="logo-tile"><img src="/media/pitch-partners/integro.webp" alt="Integro Bank Foundation" loading="lazy"/></span>
-      <span class="logo-tile dark-logo"><img src="/media/pitch-partners/mamacitas.png" alt="MamaCitas Mommy Dates" loading="lazy"/></span>
-     </MotionBanner>
-    </div>
-    <dl class="hcp-facts">
-     <div><dt>When</dt><dd>Sat, Oct 24<br/>11 a.m. to 3 p.m.</dd></div>
-     <div><dt>Where</dt><dd>Rio Vista Recreation Center<br/>Peoria</dd></div>
-     <div><dt>Cost</dt><dd>Free<br/>Workshops and entry</dd></div>
-     <div><dt>Who</dt><dd>West Valley business owners<br/>and founders</dd></div>
-    </dl>
-   </section>
-  </div>
-<div class="hc-panel" data-panel role="group" aria-roledescription="slide" aria-label="2 of 2: Welcome to AMI" aria-hidden="true">
  <section class="opening">
   <div class="opening-copy">
    <h1>Big ideas.<br/>Small beginnings.<br/><span>Let’s do it together.</span></h1>
@@ -72,11 +36,6 @@ const services = [
    <div class="photo-note"><span>LOCAL PEOPLE. REAL POSSIBILITY.</span><span>Tempe, Arizona <Icon name="arrow-up-right" /></span></div>
   </div>
  </section>
-  </div>
-  </div>
-  <button class="hc-arrow hc-prev" type="button" aria-label="Previous panel"><svg viewBox="0 0 24 24" width="20" height="20" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><path d="M15 6l-6 6 6 6"/></svg></button>
-  <button class="hc-arrow hc-next" type="button" aria-label="Next panel"><svg viewBox="0 0 24 24" width="20" height="20" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><path d="M9 6l6 6-6 6"/></svg></button>
- </div>
  </LandingExperience>
  <section class="proof-strip" aria-label="AMI impact">
   <div><CountUp value={100} suffix="+"/><span>Businesses Impacted</span></div>
@@ -99,73 +58,6 @@ const services = [
  <ScrollMotion />
  <section class="closing"><p class="eyebrow">Your ambition belongs here.</p><h2>Take the <span>Initiative.</span></h2><div><p>Let’s put your next chapter in motion.</p></div></section>
 </Base>
-<script>
-const hc=document.querySelector('.hero-carousel');
-if(hc){
-  const panels=[...hc.querySelectorAll('[data-panel]')];
-  const reduced=window.matchMedia('(prefers-reduced-motion: reduce)').matches;
-  let cur=0,timer=null,manual=false;
-  const box=hc.querySelector('.hc-panels');
-  const landing=document.querySelector('.landing-experience');
-  let cleanup=null;
-  const setAria=()=>panels.forEach((p,k)=>p.setAttribute('aria-hidden',String(k!==cur)));
-  const show=(n,instant)=>{
-    const next=(n+panels.length)%panels.length;
-    if(next===cur)return;
-    if(cleanup)cleanup();
-    const oldP=panels[cur],newP=panels[next];
-    const fwd=(next===cur+1)||(cur===panels.length-1&&next===0);
-    cur=next;
-    if(instant||reduced||(landing&&landing.classList.contains('is-cinematic'))){
-      box.style.cssText='';
-      panels.forEach((p,k)=>{p.style.cssText='';p.classList.toggle('is-active',k===cur);p.classList.toggle('is-before',k<cur);});
-      setAria();return;
-    }
-    const h0=box.offsetHeight;
-    oldP.classList.remove('is-active');
-    box.style.cssText='position:relative;height:'+h0+'px;overflow:hidden;transition:height .6s cubic-bezier(.2,.7,.2,1)';
-    oldP.style.cssText='display:block;position:absolute;top:0;left:0;width:100%;transition:transform .6s cubic-bezier(.2,.7,.2,1),opacity .6s ease';
-    newP.style.cssText='display:block;position:absolute;top:0;left:0;width:100%;transform:translateX('+(fwd?100:-100)+'%);transition:transform .6s cubic-bezier(.2,.7,.2,1)';
-    const h1=newP.offsetHeight;
-    setAria();
-    requestAnimationFrame(()=>requestAnimationFrame(()=>{
-      oldP.style.transform='translateX('+(fwd?-30:30)+'%)';oldP.style.opacity='0';
-      newP.style.transform='translateX(0)';
-      box.style.height=h1+'px';
-    }));
-    newP.classList.add('is-active');
-    cleanup=()=>{
-      oldP.style.cssText='';newP.style.cssText='';box.style.cssText='';
-      panels.forEach((p,k)=>p.classList.toggle('is-active',k===cur));
-      setAria();cleanup=null;
-    };
-    setTimeout(()=>{if(cleanup)cleanup();},650);
-  };
-  let scrolled=false;
-  const stop=()=>{if(timer){clearInterval(timer);timer=null;}};
-  const play=()=>{if(reduced||manual||scrolled||timer)return;timer=setInterval(()=>show(cur+1),5000);};
-  const onScroll=()=>{const s=window.scrollY>50;if(s!==scrolled){scrolled=s;if(scrolled)stop();else play();}};
-  window.addEventListener('scroll',onScroll,{passive:true});
-  const userGo=n=>{manual=true;stop();show(n);};
-  hc.querySelector('.hc-prev').addEventListener('click',()=>userGo(cur-1));
-  hc.querySelector('.hc-next').addEventListener('click',()=>userGo(cur+1));
-  hc.addEventListener('focusin',stop);
-  hc.addEventListener('focusout',play);
-  hc.addEventListener('keydown',e=>{
-    if(e.key==='ArrowRight'){e.preventDefault();userGo(cur+1);}
-    else if(e.key==='ArrowLeft'){e.preventDefault();userGo(cur-1);}
-  });
-  let tx=null;
-  hc.addEventListener('touchstart',e=>{tx=e.touches[0].clientX;},{passive:true});
-  hc.addEventListener('touchend',e=>{
-    if(tx===null)return;
-    const dx=e.changedTouches[0].clientX-tx;
-    if(Math.abs(dx)>48)userGo(cur+(dx<0?1:-1));
-    tx=null;
-  },{passive:true});
-  show(0);play();
-}
-</script>
 <style>
 .partner-heading{padding:55px 4.2vw 28px}.partner-heading h2{font:500 var(--text-heading)/1.1 var(--font-heading);letter-spacing:-.04em;margin-top:15px}
 
@@ -185,78 +77,4 @@ if(hc){
 .opening-bottom{display:flex;align-items:center;gap:24px;flex-wrap:wrap}.primary-book{background:var(--green);color:#111;padding:19px 24px}.primary-book:hover{background:#79c763}.explore-link{font:var(--text-label)/1.6 var(--font-heading);text-underline-offset:6px}.opening-copy{padding-top:64px;padding-bottom:64px}.opening h1{font-size:var(--text-display)}.community-image{overflow:hidden}
 .service-grid{display:block;border:0}.service-card,.service-card:first-child{display:grid;grid-template-columns:.6fr 1.3fr 1fr;gap:36px;align-items:center;background:transparent;min-height:0;border:0;border-top:1px solid #aaa;padding:38px 0;transition:background .25s}.service-card:last-child{border-bottom:1px solid #aaa}.service-card:hover,.service-card:first-child:hover{background:#e8e8e4}.card-top{flex-direction:column-reverse;gap:14px}.card-top>span:last-child{font-size:var(--text-heading);color:#777;letter-spacing:-.05em}.service-card h3{font-size:var(--text-heading);margin:0}.service-card>p{font-size:var(--text-body)}.card-link{grid-column:2/4;padding-top:0;margin-top:0;justify-content:start;gap:24px}.service-card:first-child h3{color:#111}@media(max-width:700px){.opening-copy{padding:42px 22px}.service-card,.service-card:first-child{grid-template-columns:1fr;gap:22px;padding:32px 0}.card-top{flex-direction:row;align-items:center}.card-link{grid-column:auto}.service-card h3{font-size:var(--text-heading)}}
 
-.hero-carousel{position:relative;height:100%;min-height:420px;background:#111}
-.hc-panels{display:block;height:100%}
-.hc-panel{display:none;min-width:0}
-.hc-panel.is-active{display:block}
-:global(.is-cinematic) .hero-carousel{height:100%}
-:global(.is-cinematic) .hc-panels{display:grid;position:relative;height:100%}
-:global(.is-cinematic) .hc-panel{display:block;grid-area:1/1;visibility:hidden;opacity:0;transform:translateX(5%);transition:transform .6s cubic-bezier(.2,.7,.2,1),opacity .6s ease,visibility 0s .6s}
-:global(.is-cinematic) .hc-panel{position:absolute;inset:0}
-:global(.is-cinematic) .hc-panel.is-before{transform:translateX(-5%)}
-:global(.is-cinematic) .hc-panel.is-active{visibility:visible;opacity:1;transform:none;transition:transform .6s cubic-bezier(.2,.7,.2,1),opacity .6s ease}
-:global(.is-cinematic) .hc-arrow{top:50%}
-.hc-panel>.opening,.hc-panel>.hcp{height:100%}
-.hc-arrow{position:absolute;top:calc(50svh - 56px);transform:translateY(-50%);z-index:6;width:42px;height:42px;border-radius:50%;border:1px solid rgba(255,255,255,.45);background:rgba(0,0,0,.5);color:#fff;cursor:pointer;display:flex;align-items:center;justify-content:center;padding:0}
-.hc-arrow:hover{background:rgba(255,255,255,.15)}
-.hc-prev{left:14px}.hc-next{right:14px}
-.hcp{background:#0B0C0B;color:#fff;padding:44px 4vw 0;display:grid;grid-template-columns:1fr .78fr;grid-template-rows:auto auto 1fr;column-gap:5vw;row-gap:30px;overflow:hidden}
-.hcp-h{font:500 clamp(52px,6vw,88px)/.88 var(--font-heading);letter-spacing:-.07em;margin:8px 0 16px;color:#fff}
-.hcp-h em{font:400 1.05em/.85 var(--font-body);color:var(--green)}
-.hcp-lede{max-width:690px;color:#c9c9c5;font:18px/1.55 var(--font-body);margin:0}
-.hcp-actions{display:flex;align-items:center;gap:28px;margin:18px 0}
-.hcp-button{display:inline-flex;align-items:center;justify-content:space-between;gap:24px;padding:15px 18px;font:700 13px/1 var(--font-heading);text-decoration:none;transition:transform .25s,background .25s}
-.hcp-button:hover{transform:translateY(-3px)}
-.hcp-green-button{background:var(--green);color:#071008}
-.hcp-outline-button{border:1px solid #fff;color:#fff}
-.hcp-photo{margin:0;position:relative;min-height:370px;overflow:hidden}
-.hcp-photo img{width:100%;height:100%;object-fit:cover;filter:grayscale(1)}
-.hcp-prize{position:absolute;right:0;bottom:34px;width:100%;background:var(--green);color:#071008;padding:18px 24px;display:grid;grid-template-columns:auto 1fr;align-items:center;gap:18px}
-.hcp-prize strong{white-space:nowrap;font:700 clamp(48px,5.2vw,78px)/.8 var(--font-heading);letter-spacing:-.055em}
-.hcp-prize>span{border-left:2px solid #071008;padding-left:18px;font:800 12px/1 var(--font-heading);letter-spacing:.12em;text-transform:uppercase}
-.hcp-sponsors{grid-column:1/-1;margin:0 -4vw;background:#fff;color:#111}
-.hcp-sponsors>.hcp-eyebrow{padding:10px 18px 0;margin:0;font:700 11px/1.4 var(--font-heading);letter-spacing:.13em;text-transform:uppercase}
-.hcp-sponsors :global(.motion-banner.partners){padding:8px 0;border-top:0}
-.hcp-sponsors :global(.partners .banner-group){gap:24px;padding-right:24px}
-.hcp-sponsors :global(.partners :is(a,.logo-tile)){width:138px;height:49px}
-.hcp-sponsors :global(.partners :is(a,.logo-tile) img){max-width:126px;max-height:43px}
-.hcp-sponsors :global(.dark-logo){background:#111;padding:8px 16px}
-.hcp-sponsors :global(.dark-logo img){filter:none}
-.hcp-facts{grid-column:1/-1;display:grid;grid-template-columns:repeat(4,1fr);margin:40px 0 0;border-top:1px solid #444;align-self:end}
-.hcp-facts div{padding:23px 22px 28px 0;border-right:1px solid #444}
-.hcp-facts div:not(:first-child){padding-left:22px}
-.hcp-facts dt{color:#888;font:700 10px var(--font-heading);letter-spacing:.13em;text-transform:uppercase;margin-bottom:12px}
-.hcp-facts dd{margin:0;font:15px/1.4 var(--font-body);color:#eee}
-@keyframes hc-rise{from{opacity:0;transform:translateY(26px)}to{opacity:1;transform:none}}
-@keyframes hc-prize-in{from{transform:translateX(100%)}to{transform:translateX(0)}}
-@media(prefers-reduced-motion:no-preference){
-.hc-panel.is-active .hcp-copy>*{animation:hc-rise .8s cubic-bezier(.2,.7,.2,1) both}
-.hc-panel.is-active .hcp-copy>*:nth-child(2){animation-delay:.08s}
-.hc-panel.is-active .hcp-copy>*:nth-child(3){animation-delay:.16s}
-.hc-panel.is-active .hcp-copy>*:nth-child(4){animation-delay:.24s}
-.hc-panel.is-active .hcp-prize{animation:hc-prize-in .85s .35s cubic-bezier(.2,.75,.2,1) both}
-.hc-panel.is-active .hcp-facts{animation:hc-rise .8s cubic-bezier(.2,.7,.2,1) .7s both}
-}
-@media(prefers-reduced-motion:reduce){:global(.is-cinematic) .hc-panel{transition:none;transform:none}}
-@media(max-width:800px){
-.hcp{grid-template-columns:1fr;padding:38px 22px 0;gap:42px}
-.hcp-h{font-size:60px}
-.hcp-lede{font-size:16px}
-.hcp-photo{min-height:340px}
-.hcp-prize{bottom:18px;padding:15px 16px;gap:14px}
-.hcp-prize strong{font-size:clamp(44px,13vw,58px)}
-.hcp-prize>span{padding-left:14px;font-size:10px}
-.hcp-sponsors{grid-column:1;margin:0 -22px}
-.hcp-actions{align-items:flex-start;flex-direction:column;margin-top:100px}
-.hcp-facts{grid-template-columns:1fr 1fr;margin-top:32px}
-.hcp-facts div:nth-child(2){border-right:0}
-.hcp-facts div:nth-child(3),.hcp-facts div:nth-child(4){border-top:1px solid #444}
-.hcp-facts div{padding:20px 10px 22px 0}
-.hcp-facts div:not(:first-child){padding-left:15px}
-.hcp-facts dd{font-size:13px}
-}
-@media(max-width:430px){
-.hcp-h{font-size:52px}
-.hcp-photo{min-height:300px}
-}
 </style>
