@@ -5,11 +5,16 @@
  * replaced with the standard spaced-title section header.
  *
  * Card design (Executive Board + Staff) follows Dorm Room Fund's "Our Team" partner
- * cards: https://www.dormroomfund.com/our-team: grayscale photo, name + title, and
+ * cards: https://www.dormroomfund.com/our-team: photo, name + title, and
  * a solid-color panel that wipes in diagonally from the bottom-left corner on hover
  * (CSS ::before, translate(-105%,105%) -> translate(0,0)). Recolored to AMI's
  * bright --green instead of DRF's orange; everything else (fonts, base colors) is
  * unchanged from the rest of the site.
+ *
+ * 2026-11-19: staff/member photos show in COLOR at rest (Atharva: "make the pictures
+ * colored instead of black and white but keep the green colored thingy when hovering"),
+ * with DRF's larger card/photo corner radius on the member grid; the exec board keeps
+ * the original grayscale-at-rest treatment.
  */
 interface Props { id?: string }
 const { id } = Astro.props;
@@ -193,6 +198,12 @@ const staff = [
     transform: translate3d(0, 0, 0);
     will-change: transform;
   }
+  /* Member cards: color photo at rest (grayscale hover-reset above is a no-op for
+     these), and DRF's larger corner radius scaled to the compact grid. */
+  .staff .person-card { border-radius: 20px; }
+  .staff .person-card__avatar-wrap { border-radius: 14px; }
+  .staff .person-card__avatar { filter: none; }
+
   .person-card:hover .person-card__avatar,
   .person-card:focus-within .person-card__avatar {
     filter: grayscale(0);
