@@ -21,6 +21,32 @@ import MethodologySection from '../components/sections/MethodologySection.astro'
     html="AMI offers <span class='g'>free, personalized consulting</span> for local businesses at any stage, with expert guidance <span class='g'>tailored to each client's needs.</span>"
   />
 
+  <section class="expo-section" id="expo" aria-label="AMI Small Business Expo">
+    <div class="expo-grid">
+      <div class="expo-text">
+        <p class="eyebrow">Upcoming event · Free</p>
+        <h2>Meet us at the<br/><span>Small Business Expo.</span></h2>
+        <p class="expo-lede">Thinking about starting a business, or in your first two years? Join AMI, StartUpPHX, and the Phoenix Public Library for a free expo: meet local partners, hear from entrepreneurs, and leave with resources to grow.</p>
+        <div class="expo-meta">
+          <div><strong>Friday, December 4, 2026</strong><span>11:00 AM – 2:00 PM</span></div>
+          <div><strong>StartUpPHX</strong><span>Downtown Phoenix</span></div>
+        </div>
+        <ul class="expo-expect">
+          <li>Keynote speaker</li>
+          <li>Breakout sessions</li>
+          <li>Entrepreneur spotlight</li>
+          <li>Partner resource tables</li>
+          <li>Panel with Q&amp;A</li>
+          <li>Networking and food</li>
+        </ul>
+        <a class="expo-register" href="https://luma.com/dt6dfdem" target="_blank" rel="noopener">Register now</a>
+      </div>
+      <figure class="expo-photo">
+        <img src="/media/ami-expo-photo.webp" width="1600" height="1063" alt="Attendees talking with an AMI member at an AMI small business event" loading="lazy"/>
+      </figure>
+    </div>
+  </section>
+
   <ExpertiseNetwork />
 
   <MethodologySection id="methodology" />
@@ -35,6 +61,27 @@ import MethodologySection from '../components/sections/MethodologySection.astro'
 
   <ScheduleEmbed id="schedule" sub="to learn how we can advise your strategy" url="https://calendly.com/azmicrocredit/consulting" />
 </Base>
+
+<style>
+ .expo-section{padding:100px 4.2vw;background:#111;color:#fff}
+ .expo-grid{display:grid;grid-template-columns:1.2fr 1fr;gap:70px;align-items:center;max-width:1500px;margin:0 auto}
+ .expo-text .eyebrow{font:var(--text-label) var(--font-heading);text-transform:uppercase;letter-spacing:.12em;line-height:1.6;color:#aaa}
+ .expo-text h2{font:700 var(--text-heading)/1.05 var(--font-heading);letter-spacing:-.045em;margin:22px 0 22px}
+ .expo-text h2 span{color:var(--green)}
+ .expo-lede{font:var(--text-body)/1.65 var(--font-body);color:#ccc;max-width:560px}
+ .expo-meta{display:flex;gap:44px;margin:32px 0 26px;flex-wrap:wrap}
+ .expo-meta>div{display:grid;gap:6px;border-left:1px solid #444;padding-left:16px}
+ .expo-meta strong{font:700 20px/1.2 var(--font-heading);letter-spacing:-.02em}
+ .expo-meta span{font:var(--text-label)/1.5 var(--font-heading);color:#999;text-transform:uppercase;letter-spacing:.08em}
+ .expo-expect{list-style:none;display:flex;flex-wrap:wrap;gap:10px;margin:0 0 36px;padding:0}
+ .expo-expect li{font:var(--text-label)/1 var(--font-heading);text-transform:uppercase;letter-spacing:.08em;color:#ddd;border:1px solid #444;border-radius:999px;padding:10px 16px}
+ .expo-register{display:inline-block;background:var(--green);color:#111;text-decoration:none;font:var(--text-label) var(--font-heading);padding:17px 26px;transition:background .2s,transform .2s}
+ .expo-register:hover{background:#79c763;transform:translateY(-3px)}
+ .expo-photo{margin:0}
+ .expo-photo img{width:100%;height:460px;object-fit:cover;display:block;filter:grayscale(1)}
+ @media(max-width:900px){.expo-section{padding:70px 25px}.expo-grid{grid-template-columns:1fr;gap:44px}.expo-photo img{height:340px}}
+ @media(max-width:600px){.expo-section{padding:60px 22px}.expo-meta{gap:24px}}
+</style>
 
 <style>
  @media (min-width: 901px) { :global(.why-row) { grid-template-columns: 1fr 1.75fr; } }

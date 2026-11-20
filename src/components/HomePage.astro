@@ -25,17 +25,36 @@ const services = [
 ---
 <Base title="AMI | Take the initiative." description="Big ideas start small. Arizona Microcredit Initiative empowers local entrepreneurs with free consulting, business education, and low-interest microloans." mainClass="modern-home">
  <LandingExperience>
- <section class="opening">
-  <div class="opening-copy">
-   <h1>Big ideas.<br/>Small beginnings.<br/><span>Let’s do it together.</span></h1>
-   <p class="serif-copy">Starting a business takes courage. Finding support shouldn’t be the hard part. We’re Arizona Microcredit Initiative, a 501(c)(3) nonprofit helping entrepreneurs start and grow through accessible capital, free consulting, and business education.</p>
-   <div class="opening-bottom"><a class="action primary-book" href="#book-a-call">Book a conversation <span aria-hidden="true"><Icon name="arrow-up-right" /></span></a></div>
+ <div class="hero-carousel">
+  <div class="hero-track">
+   <section class="opening panel-expo">
+    <div class="opening-copy">
+     <p class="eyebrow expo-eyebrow">Free event · Hosted by AMI</p>
+     <h2 class="expo-title">Small Business<br/><span>Expo.</span></h2>
+     <p class="serif-copy">Thinking about starting a business, or in your first two years? Meet local partners, hear from entrepreneurs, and leave with resources to grow.</p>
+     <p class="expo-hero-facts">Friday, December 4 · 11 AM – 2 PM · StartUpPHX, Downtown Phoenix</p>
+     <div class="opening-bottom"><a class="action primary-book" href="https://luma.com/dt6dfdem" target="_blank" rel="noopener">Register now <span aria-hidden="true"><Icon name="arrow-up-right" /></span></a></div>
+    </div>
+    <div class="opening-visual">
+     <img src="/media/ami-expo-photo.webp" alt="Attendees talking with an AMI member at an AMI small business event" width="1600" height="1063" />
+     <div class="photo-note"><span>SMALL BUSINESS EXPO</span><span>Dec 4 · StartUpPHX <Icon name="arrow-up-right" /></span></div>
+    </div>
+   </section>
+   <section class="opening">
+    <div class="opening-copy">
+     <h1>Big ideas.<br/>Small beginnings.<br/><span>Let’s do it together.</span></h1>
+     <p class="serif-copy">Starting a business takes courage. Finding support shouldn’t be the hard part. We’re Arizona Microcredit Initiative, a 501(c)(3) nonprofit helping entrepreneurs start and grow through accessible capital, free consulting, and business education.</p>
+     <div class="opening-bottom"><a class="action primary-book" href="#book-a-call">Book a conversation <span aria-hidden="true"><Icon name="arrow-up-right" /></span></a></div>
+    </div>
+    <div class="opening-visual">
+     <img data-parallax="0.18" src="/media/ami-community.webp" alt="AMI community members at the December 2025 pitch competition" fetchpriority="high" width="1200" height="1600" />
+     <div class="photo-note"><span>LOCAL PEOPLE. REAL POSSIBILITY.</span><span>Tempe, Arizona <Icon name="arrow-up-right" /></span></div>
+    </div>
+   </section>
   </div>
-  <div class="opening-visual">
-   <img data-parallax="0.18" src="/media/ami-community.webp" alt="AMI community members at the December 2025 pitch competition" fetchpriority="high" width="1200" height="1600" />
-   <div class="photo-note"><span>LOCAL PEOPLE. REAL POSSIBILITY.</span><span>Tempe, Arizona <Icon name="arrow-up-right" /></span></div>
-  </div>
- </section>
+  <button class="hero-arrow prev" type="button" aria-label="Previous slide">‹</button>
+  <button class="hero-arrow next" type="button" aria-label="Next slide">›</button>
+ </div>
  </LandingExperience>
  <section class="proof-strip" aria-label="AMI impact">
   <div><CountUp value={100} suffix="+"/><span>Businesses Impacted</span></div>
@@ -58,6 +77,25 @@ const services = [
  <ScrollMotion />
  <section class="closing"><p class="eyebrow">Your ambition belongs here.</p><h2>Take the <span>Initiative.</span></h2><div><p>Let’s put your next chapter in motion.</p></div></section>
 </Base>
+<script>
+ const heroCarousel=document.querySelector<HTMLElement>('.hero-carousel');
+ if(heroCarousel){
+  const heroTrack=heroCarousel.querySelector<HTMLElement>('.hero-track')!;
+  const slideCount=heroTrack.children.length;
+  let slide=0, heroInView=true, touchX:number|null=null;
+  const heroReduced=window.matchMedia('(prefers-reduced-motion: reduce)');
+  const goTo=(j:number)=>{slide=((j%slideCount)+slideCount)%slideCount;heroTrack.style.transform=`translateX(-${slide*100}%)`;};
+  let heroTimer:number|undefined;
+  const stopAuto=()=>{if(heroTimer!==undefined)window.clearInterval(heroTimer);heroTimer=undefined;};
+  const startAuto=()=>{stopAuto();if(heroReduced.matches)return;heroTimer=window.setInterval(()=>{if(heroInView)goTo(slide+1);},5000);};
+  heroCarousel.querySelector('.hero-arrow.prev')!.addEventListener('click',()=>{goTo(slide-1);startAuto();});
+  heroCarousel.querySelector('.hero-arrow.next')!.addEventListener('click',()=>{goTo(slide+1);startAuto();});
+  new IntersectionObserver(entries=>{heroInView=entries[0].isIntersecting;}).observe(heroCarousel);
+  heroTrack.addEventListener('touchstart',e=>{touchX=e.touches[0].clientX;},{passive:true});
+  heroTrack.addEventListener('touchend',e=>{if(touchX===null)return;const dx=e.changedTouches[0].clientX-touchX;if(Math.abs(dx)>40)goTo(slide+(dx<0?1:-1));touchX=null;startAuto();},{passive:true});
+  startAuto();
+ }
+</script>
 <style>
 .partner-heading{padding:55px 4.2vw 28px}.partner-heading h2{font:500 var(--text-heading)/1.1 var(--font-heading);letter-spacing:-.04em;margin-top:15px}
 
@@ -73,6 +111,9 @@ const services = [
 @media(min-width:1700px){.opening{min-height:560px}.opening-copy{padding-left:max(4.2vw,calc((100vw - 1600px)/2))}}
 @media(max-width:900px){.opening{grid-template-columns:1fr 1fr}.opening h1{font-size:var(--text-heading)}.opening-copy{padding:44px 25px}.photo-note{flex-direction:column;gap:8px}.proof-strip{grid-template-columns:1fr 1fr;gap:30px}.proof-strip>div{padding-left:20px}.section-space{padding:70px 25px}.section-heading{align-items:start}.community-copy{padding:55px 25px}.community-image{min-height:510px}}
 @media(max-width:600px){.opening{grid-template-columns:1fr}.opening-copy{padding:40px 22px 44px}.opening h1{font-size:var(--text-display);margin:0 0 20px}.opening-visual{min-height:400px}.opening-visual>img{object-position:center 42%}.photo-note{flex-direction:row}.proof-strip{padding:30px 22px;gap:30px 15px}.proof-strip strong{font-size:var(--text-heading)}.proof-strip span{font-size:var(--text-label);line-height:1.5}.proof-strip>p{font-size:var(--text-body)}.proof-strip>div{padding-left:14px}.section-space{padding:60px 22px}.section-heading{flex-direction:column;gap:25px;margin-bottom:32px}.serif-copy{font-size:var(--text-body)}.service-grid,.community-section{grid-template-columns:1fr}.resource-links{grid-template-columns:1fr;gap:0}.service-card{padding:26px;min-height:340px}.service-card h3{font-size:var(--text-heading)}.community-image{min-height:380px}.community-copy{padding:50px 22px}.community-copy h2{margin-top:30px}.quote-section>div{flex-direction:column}.closing{padding:44px 22px}.closing>div{align-items:start;flex-direction:column}.closing>div>p{font-size:var(--text-body)}.closing h2{font-size:var(--text-display)}}
+
+.hero-carousel{position:relative;overflow:hidden;height:100%}.hero-track{display:flex;height:100%;transition:transform .65s cubic-bezier(.6,.05,.25,1);will-change:transform}.hero-track>.opening{flex:0 0 100%;min-width:0}.hero-arrow{position:absolute;bottom:78px;z-index:6;width:46px;height:46px;border-radius:50%;border:1px solid rgba(255,255,255,.4);background:rgba(17,17,17,.45);color:#fff;font-size:24px;line-height:1;cursor:pointer;display:flex;align-items:center;justify-content:center;transition:background .2s}.hero-arrow:hover{background:rgba(17,17,17,.8)}.hero-arrow.prev{right:86px}.hero-arrow.next{right:25px}.expo-eyebrow{color:#999;margin:0 0 18px}.opening .expo-title{font-size:var(--text-display);line-height:.99;letter-spacing:-.065em;margin:0 0 24px;font-weight:700;color:#fff}.opening .expo-title span{color:var(--green)}.expo-hero-facts{font:var(--text-label)/1.7 var(--font-heading);text-transform:uppercase;letter-spacing:.1em;color:#bbb;margin:24px 0 0}@media(max-width:900px){.opening .expo-title{font-size:var(--text-heading)}.hero-arrow{width:38px;height:38px;font-size:19px;bottom:70px}.hero-arrow.prev{right:70px}.hero-arrow.next{right:18px}}@media(max-width:600px){.opening .expo-title{font-size:var(--text-display)}}
+@media(prefers-reduced-motion:reduce){.hero-track{transition:none}}
 
 .opening-bottom{display:flex;align-items:center;gap:24px;flex-wrap:wrap}.primary-book{background:var(--green);color:#111;padding:19px 24px}.primary-book:hover{background:#79c763}.explore-link{font:var(--text-label)/1.6 var(--font-heading);text-underline-offset:6px}.opening-copy{padding-top:64px;padding-bottom:64px}.opening h1{font-size:var(--text-display)}.community-image{overflow:hidden}
 .service-grid{display:block;border:0}.service-card,.service-card:first-child{display:grid;grid-template-columns:.6fr 1.3fr 1fr;gap:36px;align-items:center;background:transparent;min-height:0;border:0;border-top:1px solid #aaa;padding:38px 0;transition:background .25s}.service-card:last-child{border-bottom:1px solid #aaa}.service-card:hover,.service-card:first-child:hover{background:#e8e8e4}.card-top{flex-direction:column-reverse;gap:14px}.card-top>span:last-child{font-size:var(--text-heading);color:#777;letter-spacing:-.05em}.service-card h3{font-size:var(--text-heading);margin:0}.service-card>p{font-size:var(--text-body)}.card-link{grid-column:2/4;padding-top:0;margin-top:0;justify-content:start;gap:24px}.service-card:first-child h3{color:#111}@media(max-width:700px){.opening-copy{padding:42px 22px}.service-card,.service-card:first-child{grid-template-columns:1fr;gap:22px;padding:32px 0}.card-top{flex-direction:row;align-items:center}.card-link{grid-column:auto}.service-card h3{font-size:var(--text-heading)}}
